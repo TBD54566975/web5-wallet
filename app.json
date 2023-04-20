@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "web5wallet",
+    "slug": "web5wallet",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
