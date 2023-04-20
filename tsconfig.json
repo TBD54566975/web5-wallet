@@ -2,25 +2,10 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React Native",
   "compilerOptions": {
-    "target": "ESNext",
-    "noEmit": true,
-    "lib": ["DOM", "ESNext"],
-    "allowJs": true,
-    "jsx": "react-native",
     "isolatedModules": true,
-    "noImplicitAny": false,
+    "strict": false,
     "strictNullChecks": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "forceConsistentCasingInFileNames": true
   },
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js"
-  ]
+  "extends": "expo/tsconfig.base"
 }
