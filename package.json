@@ -14,6 +14,7 @@
     "expo-status-bar": "1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.7",
+    "react-native-ssi": "../ssi-sdk-mobile/react-native-ssi/",
     "typescript": "4.9.4"
   },
   "devDependencies": {

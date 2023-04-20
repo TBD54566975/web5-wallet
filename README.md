@@ -2,7 +2,7 @@
 
 Built with React Native and Expo
 
-# Setup
+# Application Setup
 
 Note that most things are not installed using Homewbrew. Homebrew is nice for personal projects but doesn't scale well for teams.
 
@@ -28,6 +28,19 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 
 - `rvm list` should include `=* ruby-2.7.4 [ arm64 ]`
 
-### Further troubleshooting
+## Further troubleshooting
 
 - Run `npx expo-env-info@latest`
+
+# SSI SDK Development Setup
+
+While this app is in initial development it is expected that [ssi-sdk-mobile.git](https://github.com/TBD54566975/ssi-sdk-mobile) is cloned as a sibling next to web5wallet. This allows rapid iteration and development of both this app and the SSI SDK without publishing versions.
+
+Your folder structure should look like this:
+
+```
+./ssi-sdk-mobile/
+./wallet/
+```
+
+For active development on `ssi-sdk-mobile` consult the docs of `ssi-sdk-mobile`. This app will use whatever branch or tag you've currently checked out from `ssi-sdk-mobile`.
