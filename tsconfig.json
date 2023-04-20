@@ -2,10 +2,9 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React Native",
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ESNext",
     "noEmit": true,
-    "noEmitOnError": true,
-    "lib": ["esnext"],
+    "lib": ["DOM", "ESNext"],
     "allowJs": true,
     "jsx": "react-native",
     "isolatedModules": true,
