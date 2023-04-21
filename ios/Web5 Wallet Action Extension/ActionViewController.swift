@@ -10,6 +10,8 @@ class ActionViewController: UIViewController {
 
   static let exampleMessageTypeIdentifier = "com.example.message"
 
+  @IBOutlet weak var messageLabel: UILabel!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     guard let items = extensionContext?.inputItems as? [NSExtensionItem] else { return }
@@ -21,8 +23,15 @@ class ActionViewController: UIViewController {
 
           provider.loadDataRepresentation(
             forTypeIdentifier: Self.exampleMessageTypeIdentifier
-          ) { _, _ in
-            print("Loaded data from other app")
+          ) { [weak self] data, error in
+            var messageReceived: String?
+            if let data {
+              messageReceived = try? JSONDecoder().decode(String.self, from: data)
+            }
+
+            Task { @MainActor in
+              self?.messageLabel.text = messageReceived ?? "Error parsing message"
+            }
           }
         }
       }
