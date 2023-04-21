@@ -30,6 +30,7 @@ import PolyfillCrypto from "react-native-webview-crypto";
 //   let shortFormURI = await did.getURI("short");
 // }
 
+// foo
 export default function App() {
   return (
     <View style={styles.container}>
