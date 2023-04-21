@@ -1,4 +1,5 @@
 import { registerRootComponent } from "expo";
+import "fastestsmallesttextencoderdecoder";
 
 import App from "./src/App";
 
