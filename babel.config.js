@@ -3,6 +3,7 @@ module.exports = function (api) {
   return {
     presets: ["babel-preset-expo"],
     plugins: [
+      "react-native-paper/babel",
       ["@babel/plugin-proposal-private-methods", { loose: true }],
       [
         "module-resolver",
