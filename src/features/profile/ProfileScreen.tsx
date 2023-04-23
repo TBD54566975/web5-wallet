@@ -8,7 +8,7 @@ export const ProfileScreen = (props) => {
   const [profileInput, setProfileInput] = useState("");
 
   const onPressCreateProfile = async () => {
-    let did = await createDID();
+    const did = await createDID();
 
     props.navigation.navigate("CredentialScreen", {
       did: did,
@@ -17,8 +17,8 @@ export const ProfileScreen = (props) => {
   };
 
   const createDID = async () => {
-    let authnKeys = await generateKeyPair();
-    let did = new DID({
+    const authnKeys = await generateKeyPair();
+    const did = new DID({
       content: {
         publicKeys: [
           {
@@ -38,7 +38,7 @@ export const ProfileScreen = (props) => {
       },
     });
 
-    let shortFormURI: string = await did.getURI("short");
+    const shortFormURI: string = await did.getURI("short");
 
     return shortFormURI;
   };
@@ -51,7 +51,6 @@ export const ProfileScreen = (props) => {
       <Text variant="titleMedium">
         Welcome to wallet. To continue, please create a profile.
       </Text>
-
       <TextInput
         value={profileInput}
         label="Username"
@@ -67,5 +66,4 @@ export const ProfileScreen = (props) => {
 
 const styles = StyleSheet.create({
   pageContainer: { flex: 1, padding: 16, gap: 16 },
-  profilesTableRow: { flexDirection: "row" },
 });

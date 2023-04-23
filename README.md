@@ -49,14 +49,14 @@ For active development on `ssi-sdk-mobile` consult the docs of `ssi-sdk-mobile`.
 
 | Package                           | Description                                                                 |
 | --------------------------------- | --------------------------------------------------------------------------- |
-| @craftzdog/react-native-buffer    | Buffer is used for crypto in Node.js. Polyfill polyfilled using native C++  |
-| react-native-quick-base64         | Base64 atoa/btoa is used for crypto in Node.js. Polyfilled using native C++ |
+| @craftzdog/react-native-buffer    | The `Buffer` module from Node.js. Polyfilled using native C++               |
+| react-native-quick-base64         | Base64 atoa/btoa used for crypto in Node.js. Polyfilled using native C++    |
 | react-native-bignumber            | Also known as bn.js used for crypto in Node.js. Polyfilled using native C++ |
-| react-native-quick-crypto         | The `crpyto` module from Node.js. Polyfilled using native C++               |
+| react-native-quick-crypto         | The `crypto` module from Node.js. Polyfilled using native C++               |
 | fastestsmallesttextencoderdecoder | The `TextEnder` & `TextDecoder` module from Node.js. Polyfilled with JS     |
 | stream-browserify                 | The `stream` module from Node.js. Polyfilled with JS                        |
 | react-native-webview-crypto       | Borrows the implementation of WebCrypto from a webview. Polyfills WebCrypto |
-| react-native-webview              | Allows to spin up a WKWebWebview (and Android equivalent) for react native  |
+| react-native-webview              | Allows to spin up a WKWebView (and Android equivalent) for react native     |
 | react-native-safe-area-context    | Used to provide safe area dimensions at top and bottom of screen            |
 | @decentralized-identity/ion-tools | Provides `did:ion` support using Javascript                                 |
 | @react-navigation/native          | Provides navigation (concepts of screens and animations) for rn             |
