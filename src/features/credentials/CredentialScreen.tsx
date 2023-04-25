@@ -12,8 +12,10 @@ export const CredentialScreen = ({ route }) => {
       contentInsetAdjustmentBehavior="automatic"
     >
       <Text variant="titleMedium">
-        Welcome, {route.params.name}. Your DID is: {route.params.did}. Click the
-        below button to apply for credentials.
+        Welcome, {route.params.name + "\n\n"}
+        Your DID ION is: {route.params.didIon + "\n\n"}
+        Your DID Key is: {route.params.didKey + "\n\n"}
+        Click the below button to apply for credentials.
       </Text>
       <Button mode="contained" onPress={onPressGetCredentials}>
         Apply for Credentials

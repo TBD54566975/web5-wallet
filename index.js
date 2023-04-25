@@ -1,3 +1,4 @@
+import "./src/config/polyfills";
 import { registerRootComponent } from "expo";
 import "fastestsmallesttextencoderdecoder";
 

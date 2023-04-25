@@ -17,7 +17,6 @@
     "expo-splash-screen": "0.18.1",
     "expo-status-bar": "1.4.4",
     "fastestsmallesttextencoderdecoder": "1.0.22",
-    "isomorphic-webcrypto": "2.3.8",
     "react": "18.2.0",
     "react-native": "0.71.7",
     "react-native-bignumber": "0.2.1",
@@ -30,7 +29,8 @@
     "react-native-webview": "12.0.2",
     "react-native-webview-crypto": "0.0.25",
     "stream-browserify": "3.0.0",
-    "typescript": "4.9.4"
+    "typescript": "4.9.4",
+    "verite": "0.0.6"
   },
   "devDependencies": {
     "@babel/core": "7.21.4",

@@ -1,4 +1,6 @@
 import { DID, generateKeyPair } from "@decentralized-identity/ion-tools";
+import { randomDidKey } from "verite";
+import crypto from "crypto";
 import React, { useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
@@ -8,15 +10,17 @@ export const ProfileScreen = (props) => {
   const [profileInput, setProfileInput] = useState("");
 
   const onPressCreateProfile = async () => {
-    const did = await createDID();
+    const didIon = await createDidIon();
+    const didKey = createDidKey();
 
     props.navigation.navigate("CredentialScreen", {
-      did: did,
+      didIon: didIon,
+      didKey: didKey,
       name: profileInput,
     });
   };
 
-  const createDID = async () => {
+  const createDidIon = async () => {
     const authnKeys = await generateKeyPair();
     const did = new DID({
       content: {
@@ -41,6 +45,12 @@ export const ProfileScreen = (props) => {
     const shortFormURI: string = await did.getURI("short");
 
     return shortFormURI;
+  };
+
+  const createDidKey = () => {
+    const issuerDidKey = randomDidKey(crypto.randomBytes);
+    console.log(issuerDidKey.id);
+    return issuerDidKey.id;
   };
 
   return (
