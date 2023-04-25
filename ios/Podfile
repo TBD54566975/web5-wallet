@@ -76,6 +76,7 @@ target 'web5wallet' do
       target.build_configurations.each do |config|
              config.build_settings['SWIFT_VERSION'] = '5.0'
              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+             config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
       end
     end
 
@@ -98,4 +99,10 @@ target 'web5wallet' do
       Pod::UI.warn e
     end
   end
+
+  target 'ActionExtension' do
+    inherit! :complete
+    use_native_modules!
+  end
+
 end
