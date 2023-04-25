@@ -48,9 +48,9 @@ export const ProfileScreen = (props) => {
   };
 
   const createDidKey = () => {
-    const issuerDidKey = randomDidKey(crypto.randomBytes);
-    console.log(issuerDidKey.id);
-    return issuerDidKey.id;
+    const didKey = randomDidKey(crypto.randomBytes);
+
+    return didKey.id;
   };
 
   return (
