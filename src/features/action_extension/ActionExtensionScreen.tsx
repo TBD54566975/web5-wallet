@@ -1,32 +1,58 @@
 import React, { useEffect, useState } from "react";
-import { NativeModules, Pressable, SafeAreaView, Text } from "react-native";
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+} from "react-native";
+import ActionExtension from "./ActionExtension";
 
 export const ActionExtensionScreen = () => {
-  const { dismiss, getData } = NativeModules.ActionExtension;
-  const [message, setMessage] = useState("");
+  const [requestValue, setRequestValue] = useState("");
 
   const onDismissTapped = () => {
-    dismiss();
+    ActionExtension.dismiss();
   };
 
   useEffect(() => {
-    const getDataFromExtension = async () => {
+    const getWalletRequestFromExtension = async () => {
       try {
-        const extensionMessage = await getData();
-        setMessage(extensionMessage);
+        const request = await ActionExtension.getWalletRequest();
+        switch (request.kind) {
+          case "PresentationDefinition":
+            setRequestValue(JSON.stringify(request.value, null, 2));
+        }
       } catch (error) {
         console.log(error);
       }
     };
-    getDataFromExtension();
+    getWalletRequestFromExtension();
   }, []);
 
   return (
     <SafeAreaView>
-      <Text>Provided message: {message}</Text>
-      <Pressable onPress={onDismissTapped}>
-        <Text>Dismiss</Text>
-      </Pressable>
+      <ScrollView>
+        <Text>{requestValue}</Text>
+        <Pressable style={styles.button} onPress={onDismissTapped}>
+          <Text style={styles.buttonText}>Dismiss</Text>
+        </Pressable>
+      </ScrollView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: "blue",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+});
