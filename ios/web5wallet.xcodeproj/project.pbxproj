@@ -15,6 +15,9 @@
 		96905EF65AED1B983A6B3ABC /* libPods-web5wallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-web5wallet.a */; };
 		A46DC75E29F71BC300AFEF36 /* ActionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46DC75D29F71BC300AFEF36 /* ActionExtension.swift */; };
 		A46DC76029F7201900AFEF36 /* ActionExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DC75F29F7201900AFEF36 /* ActionExtension.m */; };
+		A46DC77029FC603600AFEF36 /* WalletRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46DC76F29FC603600AFEF36 /* WalletRequest.swift */; };
+		A46DC77229FC603D00AFEF36 /* WalletResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46DC77129FC603D00AFEF36 /* WalletResponse.swift */; };
+		A470AD572A015BDC00D8CC64 /* JSONMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A470AD562A015BDC00D8CC64 /* JSONMessage.swift */; };
 		A4E0F36D29F3126B00CFB45D /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E0F36C29F3126B00CFB45D /* UniformTypeIdentifiers.framework */; };
 		A4E0F37029F3126B00CFB45D /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E0F36F29F3126B00CFB45D /* Media.xcassets */; };
 		A4E0F37229F3126B00CFB45D /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E0F37129F3126B00CFB45D /* ActionViewController.swift */; };
@@ -91,6 +94,11 @@
 		A46DC75929F6F8CE00AFEF36 /* ActionExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ActionExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		A46DC75D29F71BC300AFEF36 /* ActionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtension.swift; sourceTree = "<group>"; };
 		A46DC75F29F7201900AFEF36 /* ActionExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActionExtension.m; sourceTree = "<group>"; };
+		A46DC76F29FC603600AFEF36 /* WalletRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRequest.swift; sourceTree = "<group>"; };
+		A46DC77129FC603D00AFEF36 /* WalletResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletResponse.swift; sourceTree = "<group>"; };
+		A470AD562A015BDC00D8CC64 /* JSONMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONMessage.swift; sourceTree = "<group>"; };
+		A470AD582A0164A500D8CC64 /* web5wallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = web5wallet.entitlements; path = web5wallet/web5wallet.entitlements; sourceTree = "<group>"; };
+		A470AD592A0164C200D8CC64 /* ActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ActionExtension.entitlements; sourceTree = "<group>"; };
 		A4E0F36B29F3126B00CFB45D /* ActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E0F36C29F3126B00CFB45D /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		A4E0F36F29F3126B00CFB45D /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -127,6 +135,7 @@
 		13B07FAE1A68108700A75B9A /* web5wallet */ = {
 			isa = PBXGroup;
 			children = (
+				A470AD582A0164A500D8CC64 /* web5wallet.entitlements */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -227,10 +236,14 @@
 		A4E0F36E29F3126B00CFB45D /* ActionExtension */ = {
 			isa = PBXGroup;
 			children = (
+				A470AD592A0164C200D8CC64 /* ActionExtension.entitlements */,
 				A4E0F36F29F3126B00CFB45D /* Media.xcassets */,
 				A4E0F37129F3126B00CFB45D /* ActionViewController.swift */,
 				A46DC75D29F71BC300AFEF36 /* ActionExtension.swift */,
 				A46DC75F29F7201900AFEF36 /* ActionExtension.m */,
+				A46DC76F29FC603600AFEF36 /* WalletRequest.swift */,
+				A46DC77129FC603D00AFEF36 /* WalletResponse.swift */,
+				A470AD562A015BDC00D8CC64 /* JSONMessage.swift */,
 				A4E0F37629F3126B00CFB45D /* Info.plist */,
 				A46DC75929F6F8CE00AFEF36 /* ActionExtension-Bridging-Header.h */,
 			);
@@ -547,6 +560,9 @@
 			files = (
 				A4E0F37229F3126B00CFB45D /* ActionViewController.swift in Sources */,
 				A46DC75E29F71BC300AFEF36 /* ActionExtension.swift in Sources */,
+				A46DC77029FC603600AFEF36 /* WalletRequest.swift in Sources */,
+				A46DC77229FC603D00AFEF36 /* WalletResponse.swift in Sources */,
+				A470AD572A015BDC00D8CC64 /* JSONMessage.swift in Sources */,
 				C3B8E5ADBF005F392A336FF2 /* ExpoModulesProvider.swift in Sources */,
 				A46DC76029F7201900AFEF36 /* ActionExtension.m in Sources */,
 			);
@@ -570,7 +586,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = web5wallet/web5wallet.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -601,7 +619,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = web5wallet/web5wallet.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = web5wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -740,9 +760,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ActionExtension/ActionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ActionExtension/Info.plist;
@@ -783,10 +805,12 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ActionExtension/ActionExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ActionExtension/Info.plist;

@@ -8,7 +8,6 @@ import MobileCoreServices
 @objc(ActionExtension)
 class ActionExtension: NSObject {
 
-  static let exampleMessageTypeIdentifier = "com.example.message"
   static var viewController: ActionViewController?
 
   @objc
@@ -20,7 +19,10 @@ class ActionExtension: NSObject {
   }
 
   @objc
-  func getWalletRequest(_ resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
+  func getWalletRequest(
+    _ resolver: @escaping RCTPromiseResolveBlock,
+    rejecter: @escaping RCTPromiseRejectBlock
+  ) {
     func resolve(_ value: Any?) {
       Task { @MainActor in
         resolver(value)
@@ -49,8 +51,8 @@ class ActionExtension: NSObject {
       return
     }
 
-    if itemProvider.hasItemConformingToTypeIdentifier(Self.exampleMessageTypeIdentifier) {
-      itemProvider.loadDataRepresentation(forTypeIdentifier: Self.exampleMessageTypeIdentifier) { data, error in
+    if itemProvider.hasItemConformingToTypeIdentifier(WalletRequest.typeIdentifier) {
+      itemProvider.loadDataRepresentation(forTypeIdentifier: WalletRequest.typeIdentifier) { data, error in
         guard let data else {
           reject("error", "Loading Message Failed", error)
           return
@@ -66,6 +68,51 @@ class ActionExtension: NSObject {
     } else {
       reject("error", "Unsupported Type", nil)
     }
+  }
+
+  @objc
+  func sendPresentationSubmission(
+    _ jwt: String,
+    resolver: @escaping RCTPromiseResolveBlock,
+    rejecter: @escaping RCTPromiseRejectBlock
+  ) {
+    sendWalletResponse(
+      response: WalletResponse(
+        kind: .PresentationSubmission,
+        value: jwt
+      ),
+      resolver:resolver,
+      rejecter: rejecter
+    )
+  }
+
+  func sendWalletResponse(
+    response: WalletResponse,
+    resolver: @escaping RCTPromiseResolveBlock,
+    rejecter: @escaping RCTPromiseRejectBlock
+  ) {
+    if let viewController = ActionExtension.viewController,
+       let extensionContext = viewController.extensionContext {
+
+      let data: Data
+      do {
+        data = try JSONSerialization.data(withJSONObject: response.jsonObject)
+      } catch {
+        return rejecter("error", "Error serializing JSON", error)
+      }
+
+      let item = NSExtensionItem()
+      item.attachments = [
+        NSItemProvider(
+          item: NSData(data: data),
+          typeIdentifier: WalletResponse.typeIdentifier
+        )
+      ]
+
+      extensionContext.completeRequest(returningItems: [item])
+    }
+
+    resolver(())
   }
 
   @objc
