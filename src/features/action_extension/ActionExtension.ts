@@ -2,7 +2,7 @@
  * This exposes the native ActionExtension module as a JS module.
  */
 import { NativeModules } from "react-native";
-import { WalletRequest } from "./WalletRequest";
+import { WalletRequest } from "./WalletRequestTypes";
 const { ActionExtension } = NativeModules;
 
 interface ActionExtensionInterface {
