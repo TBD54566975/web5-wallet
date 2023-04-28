@@ -1,21 +1,19 @@
-import { DID, generateKeyPair } from "@decentralized-identity/ion-tools";
-import { randomDidKey } from "verite";
-import crypto from "crypto";
 import React, { useState } from "react";
-import { StyleSheet, ScrollView } from "react-native";
-import { Text } from "react-native-paper";
-import { Button, TextInput } from "react-native-paper";
+import { StyleSheet, ScrollView, View } from "react-native";
+import crypto from "crypto";
+import { DID, generateKeyPair } from "@decentralized-identity/ion-tools";
+import { Text, Button, TextInput } from "react-native-paper";
+import { randomDidKey } from "verite";
+import { didStore } from "./store";
 
 export const ProfileScreen = (props) => {
   const [profileInput, setProfileInput] = useState("");
 
   const onPressCreateProfile = async () => {
-    const didIon = await createDidIon();
-    const didKey = createDidKey();
+    didStore.didIon = await createDidIon();
+    didStore.didKey = createDidKey();
 
     props.navigation.navigate("CredentialScreen", {
-      didIon: didIon,
-      didKey: didKey,
       name: profileInput,
     });
   };
@@ -50,26 +48,25 @@ export const ProfileScreen = (props) => {
   const createDidKey = () => {
     const didKey = randomDidKey(crypto.randomBytes);
 
-    return didKey.id;
+    return didKey;
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.pageContainer}
-      contentInsetAdjustmentBehavior="automatic"
-    >
-      <Text variant="titleMedium">
-        Welcome to wallet. To continue, please create a profile.
-      </Text>
-      <TextInput
-        value={profileInput}
-        label="Username"
-        onChangeText={setProfileInput}
-        mode="outlined"
-      />
-      <Button mode="contained" onPress={onPressCreateProfile}>
-        Create Profile
-      </Button>
+    <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <View style={styles.pageContainer}>
+        <Text variant="titleMedium">
+          Welcome to wallet. To continue, please create a profile.
+        </Text>
+        <TextInput
+          value={profileInput}
+          label="Username"
+          onChangeText={setProfileInput}
+          mode="outlined"
+        />
+        <Button mode="contained" onPress={onPressCreateProfile}>
+          Create Profile
+        </Button>
+      </View>
     </ScrollView>
   );
 };
