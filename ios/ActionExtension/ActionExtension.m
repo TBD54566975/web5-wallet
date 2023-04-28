@@ -4,7 +4,7 @@
 
 RCT_EXTERN_METHOD(dismiss)
 
-RCT_EXTERN_METHOD(getData: (RCTPromiseResolveBlock)resolve
-                  rejecter: (RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(getWalletRequest:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 
 @end
