@@ -20,6 +20,7 @@
     "react": "18.2.0",
     "react-native": "0.71.7",
     "react-native-bignumber": "0.2.1",
+    "react-native-mmkv": "2.8.0",
     "react-native-paper": "5.7.0",
     "react-native-quick-base64": "2.0.5",
     "react-native-quick-crypto": "0.6.1",
