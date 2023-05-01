@@ -1,0 +1,351 @@
+diff --git a/node_modules/react-native-mmkv/patch.txt b/node_modules/react-native-mmkv/patch.txt
+new file mode 100644
+index 0000000..1476c4a
+--- /dev/null
++++ b/node_modules/react-native-mmkv/patch.txt
+@@ -0,0 +1,345 @@
++From e960113593536423559efa618c6a0a27aaae9142 Mon Sep 17 00:00:00 2001
++From: Rahmat Zulfikri <me@rahmatzulfikri.xyz>
++Date: Thu, 2 Jun 2022 15:17:36 +0700
++Subject: [PATCH 1/6] add appgroup options for ios
++
++---
++ ios/MmkvHostObject.h  | 2 +-
++ ios/MmkvHostObject.mm | 4 +++-
++ ios/MmkvModule.mm     | 3 ++-
++ 3 files changed, 6 insertions(+), 3 deletions(-)
++
++diff --git a/ios/MmkvHostObject.h b/ios/MmkvHostObject.h
++index d4c6f489..78957b0c 100644
++--- a/ios/MmkvHostObject.h
+++++ b/ios/MmkvHostObject.h
++@@ -16,7 +16,7 @@ using namespace facebook;
++ 
++ class JSI_EXPORT MmkvHostObject: public jsi::HostObject {
++ public:
++-  MmkvHostObject(NSString* instanceId, NSString* path, NSString* cryptKey);
+++  MmkvHostObject(NSString* instanceId, NSString* path, NSString* cryptKey, NSString* appGroup);
++ 
++ public:
++   jsi::Value get(jsi::Runtime&, const jsi::PropNameID& name) override;
++diff --git a/ios/MmkvHostObject.mm b/ios/MmkvHostObject.mm
++index e0a8b92f..a42c1e79 100644
++--- a/ios/MmkvHostObject.mm
+++++ b/ios/MmkvHostObject.mm
++@@ -10,9 +10,11 @@
++ #import "MmkvHostObject.h"
++ #import "JSIUtils.h"
++ 
++-MmkvHostObject::MmkvHostObject(NSString* instanceId, NSString* path, NSString* cryptKey)
+++MmkvHostObject::MmkvHostObject(NSString* instanceId, NSString* path, NSString* cryptKey, NSString* appGroup)
++ {
+++  NSString *groupDir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroup].path;
++   NSData* cryptData = cryptKey == nil ? nil : [cryptKey dataUsingEncoding:NSUTF8StringEncoding];
+++  [MMKV initializeMMKV:nil groupDir:groupDir logLevel:MMKVLogNone];
++   instance = [MMKV mmkvWithID:instanceId cryptKey:cryptData rootPath:path];
++ 
++   if (instance == nil) {
++diff --git a/ios/MmkvModule.mm b/ios/MmkvModule.mm
++index 45b15496..d92ffefc 100644
++--- a/ios/MmkvModule.mm
+++++ b/ios/MmkvModule.mm
++@@ -60,8 +60,9 @@ + (NSString*)getPropertyAsStringOrNilFromObject:(jsi::Object&)object
++         NSString* instanceId = [MmkvModule getPropertyAsStringOrNilFromObject:config propertyName:"id" runtime:runtime];
++         NSString* path = [MmkvModule getPropertyAsStringOrNilFromObject:config propertyName:"path" runtime:runtime];
++         NSString* encryptionKey = [MmkvModule getPropertyAsStringOrNilFromObject:config propertyName:"encryptionKey" runtime:runtime];
+++        NSString* appGroup = [MmkvModule getPropertyAsStringOrNilFromObject:config propertyName:"appGroup" runtime:runtime];
++         
++-        auto instance = std::make_shared<MmkvHostObject>(instanceId, path, encryptionKey);
+++        auto instance = std::make_shared<MmkvHostObject>(instanceId, path, encryptionKey, appGroup);
++         return jsi::Object::createFromHostObject(runtime, instance);
++     });
++     runtime.global().setProperty(runtime, "mmkvCreateNewInstance", std::move(mmkvCreateNewInstance));
++
++From daabe5a89de8c6544605362c2b8379a2756a53c8 Mon Sep 17 00:00:00 2001
++From: Rahmat Zulfikri <me@rahmatzulfikri.xyz>
++Date: Thu, 2 Jun 2022 15:38:48 +0700
++Subject: [PATCH 2/6] add multiprocess mode for appgroup
++
++---
++ ios/MmkvHostObject.mm | 20 +++++++++++++-------
++ 1 file changed, 13 insertions(+), 7 deletions(-)
++
++diff --git a/ios/MmkvHostObject.mm b/ios/MmkvHostObject.mm
++index a42c1e79..2571b11e 100644
++--- a/ios/MmkvHostObject.mm
+++++ b/ios/MmkvHostObject.mm
++@@ -14,8 +14,12 @@
++ {
++   NSString *groupDir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroup].path;
++   NSData* cryptData = cryptKey == nil ? nil : [cryptKey dataUsingEncoding:NSUTF8StringEncoding];
++-  [MMKV initializeMMKV:nil groupDir:groupDir logLevel:MMKVLogNone];
++-  instance = [MMKV mmkvWithID:instanceId cryptKey:cryptData rootPath:path];
+++  if (appGroup == nil) {
+++    instance = [MMKV mmkvWithID:instanceId cryptKey:cryptData rootPath:path];
+++  } else {
+++    [MMKV initializeMMKV:nil groupDir:groupDir logLevel:MMKVLogNone];
+++    instance = [MMKV mmkvWithID:instanceId cryptKey:cryptData mode:MMKVMultiProcess];
+++  }
++ 
++   if (instance == nil) {
++     // Check if instanceId is invalid
++@@ -28,11 +32,13 @@
++       throw std::runtime_error("Failed to create MMKV instance! `encryptionKey` cannot be longer than 16 bytes!");
++     }
++ 
++-    // Check if path is invalid
++-    NSFileManager* fileManager = [[NSFileManager alloc] init];
++-    bool pathExists = [fileManager fileExistsAtPath:path isDirectory:nil];
++-    if (!pathExists) {
++-      throw std::runtime_error("Failed to create MMKV instance! The given Storage Path does not exist!");
+++    if (appGroup == nil) {
+++      // Check if path is invalid
+++      NSFileManager* fileManager = [[NSFileManager alloc] init];
+++      bool pathExists = [fileManager fileExistsAtPath:path isDirectory:nil];
+++      if (!pathExists) {
+++        throw std::runtime_error("Failed to create MMKV instance! The given Storage Path does not exist!");
+++      }
++     }
++ 
++     throw std::runtime_error("Failed to create MMKV instance!");
++
++From 0e92990ee40e8245bdcf86e032f61371438d31d0 Mon Sep 17 00:00:00 2001
++From: Rahmat Zulfikri <me@rahmatzulfikri.xyz>
++Date: Mon, 13 Jun 2022 17:47:09 +0700
++Subject: [PATCH 3/6] feat: types & documention
++
++---
++ README.md   | 4 +++-
++ src/MMKV.ts | 9 +++++++++
++ 2 files changed, 12 insertions(+), 1 deletion(-)
++
++diff --git a/README.md b/README.md
++index 62e0620d..a07432cb 100644
++--- a/README.md
+++++ b/README.md
++@@ -104,7 +104,8 @@ import { MMKV } from 'react-native-mmkv'
++ export const storage = new MMKV({
++   id: `user-${userId}-storage`,
++   path: `${USER_DIRECTORY}/storage`,
++-  encryptionKey: 'hunter2'
+++  encryptionKey: 'hunter2',
+++  appGroup: 'group.mmkv-example' // App Groups name (IOS Only)
++ })
++ ```
++ 
++@@ -115,6 +116,7 @@ The following values can be configured:
++ * `id`: The MMKV instance's ID. If you want to use multiple instances, use different IDs. For example, you can separte the global app's storage and a logged-in user's storage. (required if `path` or `encryptionKey` fields are specified, otherwise defaults to: `'mmkv.default'`)
++ * `path`: The MMKV instance's root path. By default, MMKV stores file inside `$(Documents)/mmkv/`. You can customize MMKV's root directory on MMKV initialization (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_advance#customize-location) / [Android](https://github.com/Tencent/MMKV/wiki/android_advance#customize-location))
++ * `encryptionKey`: The MMKV instance's encryption/decryption key. By default, MMKV stores all key-values in plain text on file, relying on iOS's/Android's sandbox to make sure the file is encrypted. Should you worry about information leaking, you can choose to encrypt MMKV. (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_advance#encryption) / [Android](https://github.com/Tencent/MMKV/wiki/android_advance#encryption))
+++* `appGroup`: The MMKV instance's app group name `(IOS Only)`. It is used to share MMKV instances between apps and extensions within the app group. (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_tutorial#configuration))
++ 
++ ### Set
++ 
++diff --git a/src/MMKV.ts b/src/MMKV.ts
++index 2e3e7cd7..424465fe 100644
++--- a/src/MMKV.ts
+++++ b/src/MMKV.ts
++@@ -42,6 +42,15 @@ export interface MMKVConfiguration {
++    * ```
++    */
++   encryptionKey?: string;
+++  /**
+++   * The MMKV instance's app group name `(IOS Only)`. It is used to share MMKV instances between apps and extensions within the app group. Check this https://github.com/Tencent/MMKV/wiki/iOS_tutorial#configuration
+++   * 
+++   * @example
+++   * ```ts
+++   * const mmkvInstance = new MMKV({appGroup: 'group.mmkv-example'})
+++   * ```
+++   */
+++   appGroup?: string;
++ }
++ 
++ /**
++
++From b23bff2cf93d03798c60554407c8d365fcabb258 Mon Sep 17 00:00:00 2001
++From: Rahmat Zulfikri <me@rahmatzulfikri.xyz>
++Date: Wed, 15 Jun 2022 07:11:43 +0700
++Subject: [PATCH 4/6] change appgroup from JS to Info.Plist
++
++---
++ README.md             |  3 +--
++ ios/MmkvHostObject.h  |  2 +-
++ ios/MmkvHostObject.mm | 13 +++++++------
++ ios/MmkvModule.mm     | 13 ++++++++++---
++ src/MMKV.ts           |  9 ---------
++ 5 files changed, 19 insertions(+), 21 deletions(-)
++
++diff --git a/README.md b/README.md
++index a07432cb..47d982aa 100644
++--- a/README.md
+++++ b/README.md
++@@ -105,7 +105,6 @@ export const storage = new MMKV({
++   id: `user-${userId}-storage`,
++   path: `${USER_DIRECTORY}/storage`,
++   encryptionKey: 'hunter2',
++-  appGroup: 'group.mmkv-example' // App Groups name (IOS Only)
++ })
++ ```
++ 
++@@ -116,7 +115,6 @@ The following values can be configured:
++ * `id`: The MMKV instance's ID. If you want to use multiple instances, use different IDs. For example, you can separte the global app's storage and a logged-in user's storage. (required if `path` or `encryptionKey` fields are specified, otherwise defaults to: `'mmkv.default'`)
++ * `path`: The MMKV instance's root path. By default, MMKV stores file inside `$(Documents)/mmkv/`. You can customize MMKV's root directory on MMKV initialization (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_advance#customize-location) / [Android](https://github.com/Tencent/MMKV/wiki/android_advance#customize-location))
++ * `encryptionKey`: The MMKV instance's encryption/decryption key. By default, MMKV stores all key-values in plain text on file, relying on iOS's/Android's sandbox to make sure the file is encrypted. Should you worry about information leaking, you can choose to encrypt MMKV. (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_advance#encryption) / [Android](https://github.com/Tencent/MMKV/wiki/android_advance#encryption))
++-* `appGroup`: The MMKV instance's app group name `(IOS Only)`. It is used to share MMKV instances between apps and extensions within the app group. (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_tutorial#configuration))
++ 
++ ### Set
++ 
++@@ -190,6 +188,7 @@ A mocked MMKV instance is automatically used when testing with Jest, so you will
++ * [Using MMKV with mobx-persist](./docs/WRAPPER_MOBXPERSIST.md)
++ * [Using MMKV with zustand persist-middleware](./docs/WRAPPER_ZUSTAND_PERSIST_MIDDLEWARE.md)
++ * [How is this library different from **react-native-mmkv-storage**?](https://github.com/mrousavy/react-native-mmkv/issues/100#issuecomment-886477361)
+++* [IOS App Group](https://github.com/mrousavy/react-native-mmkv/pull/402)
++ 
++ ## Limitations
++ 
++diff --git a/ios/MmkvHostObject.h b/ios/MmkvHostObject.h
++index 78957b0c..d4c6f489 100644
++--- a/ios/MmkvHostObject.h
+++++ b/ios/MmkvHostObject.h
++@@ -16,7 +16,7 @@ using namespace facebook;
++ 
++ class JSI_EXPORT MmkvHostObject: public jsi::HostObject {
++ public:
++-  MmkvHostObject(NSString* instanceId, NSString* path, NSString* cryptKey, NSString* appGroup);
+++  MmkvHostObject(NSString* instanceId, NSString* path, NSString* cryptKey);
++ 
++ public:
++   jsi::Value get(jsi::Runtime&, const jsi::PropNameID& name) override;
++diff --git a/ios/MmkvHostObject.mm b/ios/MmkvHostObject.mm
++index 2571b11e..fb60c28e 100644
++--- a/ios/MmkvHostObject.mm
+++++ b/ios/MmkvHostObject.mm
++@@ -10,15 +10,16 @@
++ #import "MmkvHostObject.h"
++ #import "JSIUtils.h"
++ 
++-MmkvHostObject::MmkvHostObject(NSString* instanceId, NSString* path, NSString* cryptKey, NSString* appGroup)
+++MmkvHostObject::MmkvHostObject(NSString* instanceId, NSString* path, NSString* cryptKey)
++ {
++-  NSString *groupDir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroup].path;
++   NSData* cryptData = cryptKey == nil ? nil : [cryptKey dataUsingEncoding:NSUTF8StringEncoding];
++-  if (appGroup == nil) {
++-    instance = [MMKV mmkvWithID:instanceId cryptKey:cryptData rootPath:path];
++-  } else {
++-    [MMKV initializeMMKV:nil groupDir:groupDir logLevel:MMKVLogNone];
+++
+++  // Get appGroup value from info.plist using key "AppGroup"
+++  NSString *appGroup = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppGroup"];
+++  if (appGroup != nil) {
++     instance = [MMKV mmkvWithID:instanceId cryptKey:cryptData mode:MMKVMultiProcess];
+++  } else {
+++    instance = [MMKV mmkvWithID:instanceId cryptKey:cryptData rootPath:path];
++   }
++ 
++   if (instance == nil) {
++diff --git a/ios/MmkvModule.mm b/ios/MmkvModule.mm
++index d92ffefc..c46df733 100644
++--- a/ios/MmkvModule.mm
+++++ b/ios/MmkvModule.mm
++@@ -40,8 +40,16 @@ + (NSString*)getPropertyAsStringOrNilFromObject:(jsi::Object&)object
++     }
++     auto& runtime = *jsiRuntime;
++     
+++    
++     RCTUnsafeExecuteOnMainQueueSync(^{
++-      [MMKV initializeMMKV:storageDirectory];
+++      // Get appGroup value from info.plist using key "AppGroup"
+++      NSString *appGroup = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppGroup"];
+++      if (appGroup == nil) {
+++          [MMKV initializeMMKV:storageDirectory];
+++      } else {
+++          NSString *groupDir = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:appGroup].path;
+++          [MMKV initializeMMKV:nil groupDir:groupDir logLevel:MMKVLogNone];
+++      }
++     });
++     
++     // MMKV.createNewInstance()
++@@ -60,9 +68,8 @@ + (NSString*)getPropertyAsStringOrNilFromObject:(jsi::Object&)object
++         NSString* instanceId = [MmkvModule getPropertyAsStringOrNilFromObject:config propertyName:"id" runtime:runtime];
++         NSString* path = [MmkvModule getPropertyAsStringOrNilFromObject:config propertyName:"path" runtime:runtime];
++         NSString* encryptionKey = [MmkvModule getPropertyAsStringOrNilFromObject:config propertyName:"encryptionKey" runtime:runtime];
++-        NSString* appGroup = [MmkvModule getPropertyAsStringOrNilFromObject:config propertyName:"appGroup" runtime:runtime];
++         
++-        auto instance = std::make_shared<MmkvHostObject>(instanceId, path, encryptionKey, appGroup);
+++        auto instance = std::make_shared<MmkvHostObject>(instanceId, path, encryptionKey);
++         return jsi::Object::createFromHostObject(runtime, instance);
++     });
++     runtime.global().setProperty(runtime, "mmkvCreateNewInstance", std::move(mmkvCreateNewInstance));
++diff --git a/src/MMKV.ts b/src/MMKV.ts
++index 424465fe..2e3e7cd7 100644
++--- a/src/MMKV.ts
+++++ b/src/MMKV.ts
++@@ -42,15 +42,6 @@ export interface MMKVConfiguration {
++    * ```
++    */
++   encryptionKey?: string;
++-  /**
++-   * The MMKV instance's app group name `(IOS Only)`. It is used to share MMKV instances between apps and extensions within the app group. Check this https://github.com/Tencent/MMKV/wiki/iOS_tutorial#configuration
++-   * 
++-   * @example
++-   * ```ts
++-   * const mmkvInstance = new MMKV({appGroup: 'group.mmkv-example'})
++-   * ```
++-   */
++-   appGroup?: string;
++ }
++ 
++ /**
++
++From 26d10affed3a5d40dd24abcee1bae82e79d0ee66 Mon Sep 17 00:00:00 2001
++From: Rahmat Zulfikri <me@rahmatzulfikri.xyz>
++Date: Wed, 15 Jun 2022 07:17:27 +0700
++Subject: [PATCH 5/6] fix minor
++
++---
++ README.md | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/README.md b/README.md
++index 47d982aa..e052c1c8 100644
++--- a/README.md
+++++ b/README.md
++@@ -104,7 +104,7 @@ import { MMKV } from 'react-native-mmkv'
++ export const storage = new MMKV({
++   id: `user-${userId}-storage`,
++   path: `${USER_DIRECTORY}/storage`,
++-  encryptionKey: 'hunter2',
+++  encryptionKey: 'hunter2'
++ })
++ ```
++ 
++
++From 18dadf8034f86268b69272b7b0eb39651becdf52 Mon Sep 17 00:00:00 2001
++From: theLaurensS <theLaurensS@users.noreply.github.com>
++Date: Wed, 1 Mar 2023 11:03:10 +0100
++Subject: [PATCH 6/6] Update documentation
++
++---
++ README.md | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/README.md b/README.md
++index e052c1c8..c613165a 100644
++--- a/README.md
+++++ b/README.md
++@@ -115,6 +115,7 @@ The following values can be configured:
++ * `id`: The MMKV instance's ID. If you want to use multiple instances, use different IDs. For example, you can separte the global app's storage and a logged-in user's storage. (required if `path` or `encryptionKey` fields are specified, otherwise defaults to: `'mmkv.default'`)
++ * `path`: The MMKV instance's root path. By default, MMKV stores file inside `$(Documents)/mmkv/`. You can customize MMKV's root directory on MMKV initialization (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_advance#customize-location) / [Android](https://github.com/Tencent/MMKV/wiki/android_advance#customize-location))
++ * `encryptionKey`: The MMKV instance's encryption/decryption key. By default, MMKV stores all key-values in plain text on file, relying on iOS's/Android's sandbox to make sure the file is encrypted. Should you worry about information leaking, you can choose to encrypt MMKV. (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_advance#encryption) / [Android](https://github.com/Tencent/MMKV/wiki/android_advance#encryption))
+++* `appGroup`: The MMKV instance's app group name (iOS only). It is used to share MMKV instances between apps and extensions within the same app group. (documentation: [iOS](https://github.com/Tencent/MMKV/wiki/iOS_tutorial#configuration))
++ 
++ ### Set
++ 
++@@ -188,7 +189,6 @@ A mocked MMKV instance is automatically used when testing with Jest, so you will
++ * [Using MMKV with mobx-persist](./docs/WRAPPER_MOBXPERSIST.md)
++ * [Using MMKV with zustand persist-middleware](./docs/WRAPPER_ZUSTAND_PERSIST_MIDDLEWARE.md)
++ * [How is this library different from **react-native-mmkv-storage**?](https://github.com/mrousavy/react-native-mmkv/issues/100#issuecomment-886477361)
++-* [IOS App Group](https://github.com/mrousavy/react-native-mmkv/pull/402)
++ 
++ ## Limitations
++ 
