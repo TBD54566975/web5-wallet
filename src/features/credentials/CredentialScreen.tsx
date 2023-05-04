@@ -16,9 +16,9 @@ export const CredentialScreen = ({ route }) => {
 
   const navigatedProfile = useMemo(
     () =>
-      profilesAtom.profiles.find(
-        (profile) => profile.name === route.params.name
-      ),
+      profilesAtom.profiles
+        .peek()
+        .find((profile) => profile.name === route.params.name),
     []
   );
 
