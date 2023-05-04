@@ -86,7 +86,9 @@ const mockManifest = buildCreditScoreManifest({
 // };
 
 // get credentials without application flow
-const issueCredentials = async (applicantDidKey: DidKey) => {
+const issueCredentials = async (
+  applicantDidKey: DidKey
+): Promise<Verifiable<W3CCredential>> => {
   const mockIssuer = buildIssuer(issuerDidKey.id, issuerDidKey.privateKey);
 
   // Stubbed out credential data
