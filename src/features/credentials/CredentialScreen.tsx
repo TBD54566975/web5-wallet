@@ -64,7 +64,7 @@ export const CredentialScreen = ({ route }) => {
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={styles.pageContainer}>
         <Text variant="titleMedium">
-          Welcome, {route.params.name + "\n\n"}
+          Welcome, {navigatedProfile?.name + "\n\n"}
           Your DID ION is: {navigatedProfile?.didIon + "\n\n"}
           Your DID Key is: {navigatedProfile?.didKey?.id + "\n\n"}
         </Text>
