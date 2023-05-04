@@ -4,17 +4,19 @@ import crypto from "crypto";
 import { DID, generateKeyPair } from "@decentralized-identity/ion-tools";
 import { Text, Button, TextInput } from "react-native-paper";
 import { randomDidKey } from "verite";
-import { didStore } from "./store";
+import { profilesAtom } from "./atoms";
 
 export const ProfileScreen = (props) => {
-  const [profileInput, setProfileInput] = useState("");
+  const [name, setName] = useState("");
 
   const onPressCreateProfile = async () => {
-    didStore.didIon = await createDidIon();
-    didStore.didKey = createDidKey();
+    const didIon = await createDidIon();
+    const didKey = createDidKey();
+
+    profilesAtom.profiles.push({ id: didKey.id, didIon, didKey, name });
 
     props.navigation.navigate("CredentialScreen", {
-      name: profileInput,
+      name: name,
     });
   };
 
@@ -58,9 +60,9 @@ export const ProfileScreen = (props) => {
           Welcome to wallet. To continue, please create a profile.
         </Text>
         <TextInput
-          value={profileInput}
+          value={name}
           label="Username"
-          onChangeText={setProfileInput}
+          onChangeText={setName}
           mode="outlined"
         />
         <Button mode="contained" onPress={onPressCreateProfile}>

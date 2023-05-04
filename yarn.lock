@@ -1907,6 +1907,11 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@legendapp/state@0.23.4":
+  version "0.23.4"
+  resolved "https://registry.yarnpkg.com/@legendapp/state/-/state-0.23.4.tgz#ace2f7805cd0279f1bda7f1734c14dabca84ba1f"
+  integrity sha512-9N4HIG+RIyIfdbb7B9i6wW1B+8SO/zSno2lu6ztj48Vz6UixFPsn8dNgJv/qC1B9YjXp8f5Lh0gKhgudX0jDhA==
+
 "@multiformats/base-x@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@multiformats/base-x/-/base-x-4.0.1.tgz#95ff0fa58711789d53aefb2590a8b7a4e715d121"

@@ -3,6 +3,9 @@ import { Provider as PaperProvider, MD3DarkTheme } from "react-native-paper";
 import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { AppNavigator } from "./navigation/AppNavigator";
 import PolyfillCrypto from "react-native-webview-crypto";
+import { enableLegendStateReact } from "@legendapp/state/react";
+
+enableLegendStateReact();
 
 const theme: typeof MD3DarkTheme = {
   ...MD3DarkTheme,

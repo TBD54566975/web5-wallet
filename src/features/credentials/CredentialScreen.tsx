@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Text, Button } from "react-native-paper";
-import { type Verifiable, type W3CCredential } from "verite";
-import { didStore } from "../profile/store";
 import { MockIssuerUtils } from "../mock-issuer/utils";
 import { StorageService } from "../../config/storageService";
 import { CredentialCard } from "./CredentialCard";
+import { profilesAtom } from "../profile/atoms";
+import type { Verifiable, W3CCredential } from "verite";
 import type { PrettyCredential } from "../../types/models";
 
 export const CredentialScreen = ({ route }) => {
@@ -14,23 +14,33 @@ export const CredentialScreen = ({ route }) => {
   );
   const [prettyFields, setPrettyFields] = useState<PrettyCredential[]>([]);
 
+  const navigatedProfile = useMemo(
+    () =>
+      profilesAtom.profiles.find(
+        (profile) => profile.name === route.params.name
+      ),
+    []
+  );
+
   const onPressGetCredentials = async () => {
-    const issuedCredentials = await MockIssuerUtils.issueCredentials(
-      didStore?.didKey!
-    );
+    if (navigatedProfile) {
+      const issuedCredentials = await MockIssuerUtils.issueCredentials(
+        navigatedProfile?.didKey
+      );
 
-    setCredentials((previousCredentials) => [
-      ...previousCredentials,
-      issuedCredentials,
-    ]);
+      setCredentials((previousCredentials) => [
+        ...previousCredentials,
+        issuedCredentials,
+      ]);
 
-    StorageService.setObjectOrArray("credentials", credentials);
+      StorageService.setObjectOrArray("credentials", credentials);
 
-    // derive some nicely formatted data
-    const prettyFields = extractPrettyData(issuedCredentials);
+      // derive some nicely formatted data
+      const prettyFields = extractPrettyData(issuedCredentials);
 
-    if (prettyFields) {
-      setPrettyFields((previousFields) => [...previousFields, prettyFields]);
+      if (prettyFields) {
+        setPrettyFields((previousFields) => [...previousFields, prettyFields]);
+      }
     }
   };
 
@@ -55,8 +65,8 @@ export const CredentialScreen = ({ route }) => {
       <View style={styles.pageContainer}>
         <Text variant="titleMedium">
           Welcome, {route.params.name + "\n\n"}
-          Your DID ION is: {didStore.didIon + "\n\n"}
-          Your DID Key is: {didStore?.didKey?.id + "\n\n"}
+          Your DID ION is: {navigatedProfile?.didIon + "\n\n"}
+          Your DID Key is: {navigatedProfile?.didKey?.id + "\n\n"}
         </Text>
         {hasCredentials && (
           <>
