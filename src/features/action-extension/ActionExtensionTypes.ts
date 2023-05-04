@@ -1,7 +1,4 @@
-import {
-  PresentationDefinition as VeritePresentationDefinition,
-  PresentationSubmission as VeritePresentationSubmission,
-} from "verite";
+import { PresentationDefinition as VeritePresentationDefinition } from "verite";
 
 export interface PresentationDefinition {
   kind: "PresentationDefinition";
@@ -9,10 +6,3 @@ export interface PresentationDefinition {
 }
 
 export type WalletRequest = PresentationDefinition;
-
-export interface PresentationSubmission {
-  kind: "PresentationSubmission";
-  value: VeritePresentationSubmission;
-}
-
-export type WalletResonse = PresentationSubmission;
