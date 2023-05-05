@@ -42,7 +42,7 @@ export const JsonComponent = ({ jsonObject }) => {
 
 const styles = StyleSheet.create({
   jsonContainer: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
+    backgroundColor: "rgba(255, 255, 0, 0.05)",
     borderRadius: 10,
     padding: 10,
     margin: 5,

@@ -8,20 +8,28 @@ import {
   PresentationDefinition as pd,
   PresentationDefinition,
   randomDidKey,
-  validateVerificationSubmission,
   Verifiable,
   W3CCredential,
 } from "verite";
 import { StorageService } from "../../config/storageService";
 import { JsonComponent } from "./JsonComponent";
+import { RouteProp } from "@react-navigation/native";
+import { ActionExtensionStackParamList } from "../../navigation/ActionExtensionNavigator";
 
-interface PresentationDefinitionComponentProps {
-  pd: PresentationDefinition;
+type PresentationRequestScreenRouteProp = RouteProp<
+  ActionExtensionStackParamList,
+  "PresentationRequestScreen"
+>;
+
+interface Props {
+  route: PresentationRequestScreenRouteProp;
 }
 
-export const PresentationDefinitionComponent: React.FC<
-  PresentationDefinitionComponentProps
-> = ({ pd }) => {
+export const PresentationRequestScreen: React.FC<Props> = ({
+  route,
+}: Props) => {
+  const { pd } = route.params;
+
   const onPressSendSubmission = async () => {
     // TODO: pull DID from local storage when available
     const didKey = randomDidKey(crypto.randomBytes);
@@ -44,8 +52,9 @@ export const PresentationDefinitionComponent: React.FC<
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Text style={styles.title}>Presentation Request</Text>
-        <Text>VerifierApp has sent the following Presentation Request:</Text>
+        <Text variant="titleMedium" style={styles.description}>
+          VerifierApp has sent the following Presentation Request:
+        </Text>
         <JsonComponent jsonObject={pd} />
       </ScrollView>
       <Button
@@ -67,10 +76,8 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 5,
   },
-  title: {
-    fontSize: 36,
-    fontWeight: "bold",
-    marginBottom: 10,
+  description: {
+    paddingTop: 10,
   },
   button: {
     marginVertical: 5,

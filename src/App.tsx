@@ -7,7 +7,7 @@ import { enableLegendStateReact } from "@legendapp/state/react";
 
 enableLegendStateReact();
 
-const theme: typeof MD3DarkTheme = {
+export const theme: typeof MD3DarkTheme = {
   ...MD3DarkTheme,
   colors: {
     ...MD3DarkTheme.colors,

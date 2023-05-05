@@ -2,6 +2,6 @@ import "./src/config/polyfills";
 import "fastestsmallesttextencoderdecoder";
 import { AppRegistry } from "react-native";
 
-import { ActionExtensionScreen } from "./src/features/action-extension/ActionExtensionScreen";
+import { ActionExtensionEntry } from "./src/features/action-extension/ActionExtensionEntry";
 
-AppRegistry.registerComponent("ActionExtension", () => ActionExtensionScreen);
+AppRegistry.registerComponent("ActionExtension", () => ActionExtensionEntry);
