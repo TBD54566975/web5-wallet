@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Text, Button } from "react-native-paper";
 import { MockIssuerUtils } from "../mock-issuer/utils";
@@ -13,6 +13,10 @@ export const CredentialScreen = ({ route }) => {
     []
   );
   const [prettyFields, setPrettyFields] = useState<PrettyCredential[]>([]);
+
+  useEffect(() => {
+    StorageService.setObjectOrArray("credentials", credentials);
+  }, [credentials]);
 
   const navigatedProfile = useMemo(
     () =>
@@ -32,8 +36,6 @@ export const CredentialScreen = ({ route }) => {
         ...previousCredentials,
         issuedCredentials,
       ]);
-
-      StorageService.setObjectOrArray("credentials", credentials);
 
       // derive some nicely formatted data
       const prettyFields = extractPrettyData(issuedCredentials);
