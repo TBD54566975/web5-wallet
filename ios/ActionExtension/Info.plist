@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AppGroup</key>
-	<string>group.org.name.web5wallet</string>
+	<string>group.website.tbd.wallet</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -42,10 +42,10 @@
 			<key>NSExtensionServiceTouchBarIconName</key>
 			<string>NSActionTemplate</string>
 		</dict>
-		<key>NSExtensionPrincipalClass</key>
-		<string>ActionViewController</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.ui-services</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>ActionViewController</string>
 	</dict>
 </dict>
 </plist>

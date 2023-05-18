@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.org.name.web5wallet</string>
+		<string>group.website.tbd.wallet</string>
 	</array>
 </dict>
 </plist>
