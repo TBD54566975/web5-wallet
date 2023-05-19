@@ -1,30 +1,20 @@
 import crypto from "crypto";
 import {
-  type CredentialOffer,
   type DidKey,
-  type DecodedCredentialFulfillment,
-  type VerificationOffer,
   type KYCAMLAttestation,
   buildIssuer,
-  buildCredentialApplication,
   randomDidKey,
-  buildCreditScoreManifest,
-  decodeCredentialApplication,
-  decodeVerifiablePresentation,
-  buildAndSignFulfillment,
   attestationToCredentialType,
   buildAndSignVerifiableCredential,
-  validateCredentialApplication,
   decodeVerifiableCredential,
-  RevocableCredential,
   Verifiable,
   W3CCredential,
-  buildPresentationSubmission,
+  buildKycAmlManifest,
 } from "verite";
 
 const issuerDidKey = randomDidKey(crypto.randomBytes);
 
-const mockManifest = buildCreditScoreManifest({
+const mockManifest = buildKycAmlManifest({
   id: issuerDidKey.controller,
 });
 
