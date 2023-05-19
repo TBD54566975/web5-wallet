@@ -13,7 +13,14 @@ export const ProfileScreen = (props) => {
     const didIon = await createDidIon();
     const didKey = createDidKey();
 
-    profilesAtom.profiles.push({ id: didKey.id, didIon, didKey, name });
+    // right now there's only one profile until we add support for more profiles
+    profilesAtom.push({
+      id: didKey.id,
+      didIon,
+      didKey,
+      name,
+      credentials: [],
+    });
 
     props.navigation.navigate("CredentialScreen", {
       name: name,

@@ -1,29 +1,17 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+import React from "react";
+import { StyleSheet, ScrollView, View, DevSettings } from "react-native";
 import { Text, Button } from "react-native-paper";
 import { MockIssuerUtils } from "../mock-issuer/utils";
-import { StorageService } from "../../config/storageService";
-import { CredentialCard } from "./CredentialCard";
 import { profilesAtom } from "../profile/atoms";
-import type { Verifiable, W3CCredential } from "verite";
-import type { PrettyCredential } from "../../types/models";
+import { CredentialList } from "./CredentialList";
+import { useSelector } from "@legendapp/state/react";
 
 export const CredentialScreen = ({ route }) => {
-  const [credentials, setCredentials] = useState<Verifiable<W3CCredential>[]>(
-    []
-  );
-  const [prettyFields, setPrettyFields] = useState<PrettyCredential[]>([]);
+  // replace with route params once we have multiple profiles
+  const navigatedProfile = useSelector(() => profilesAtom[0].get());
 
-  useEffect(() => {
-    StorageService.setObjectOrArray("credentials", credentials);
-  }, [credentials]);
-
-  const navigatedProfile = useMemo(
-    () =>
-      profilesAtom.profiles
-        .peek()
-        .find((profile) => profile.name === route.params.name),
-    []
+  const hasCredentials = useSelector(
+    () => !!profilesAtom[0]?.credentials.get().length
   );
 
   const onPressGetCredentials = async () => {
@@ -31,36 +19,17 @@ export const CredentialScreen = ({ route }) => {
       const issuedCredentials = await MockIssuerUtils.issueCredentials(
         navigatedProfile?.didKey
       );
+      const normalized = { ...issuedCredentials, id: String(Math.random()) };
 
-      setCredentials((previousCredentials) => [
-        ...previousCredentials,
-        issuedCredentials,
-      ]);
-
-      // derive some nicely formatted data
-      const prettyFields = extractPrettyData(issuedCredentials);
-
-      if (prettyFields) {
-        setPrettyFields((previousFields) => [...previousFields, prettyFields]);
-      }
+      // there's only one profile until we add support for more profiles. so im not using the route params.
+      profilesAtom[0].credentials.push(normalized);
     }
   };
 
-  const extractPrettyData = (credential: Verifiable<W3CCredential>) => {
-    for (const [key, values] of Object.entries(credential?.credentialSubject)) {
-      if (key !== "id") {
-        const type = values.type;
-        const date = new Date(values.approvalDate).toLocaleString();
-        const issuer =
-          Math.floor(Math.random() * 2) % 2 === 0
-            ? "Silicon Valley Bank"
-            : "FTX Inc.";
-        return { type, date, issuer };
-      }
-    }
+  const onPressWipeState = async () => {
+    profilesAtom.set([]);
+    DevSettings.reload();
   };
-
-  const hasCredentials = !!credentials.length;
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -70,20 +39,12 @@ export const CredentialScreen = ({ route }) => {
           Your DID ION is: {navigatedProfile?.didIon + "\n\n"}
           Your DID Key is: {navigatedProfile?.didKey?.id + "\n\n"}
         </Text>
-        {hasCredentials && (
-          <>
-            {prettyFields?.map((cred, index) => (
-              <CredentialCard
-                key={index}
-                type={cred.type}
-                date={cred.date}
-                issuer={cred.issuer}
-              />
-            ))}
-          </>
-        )}
+        {hasCredentials && <CredentialList />}
         <Button mode="contained" onPress={onPressGetCredentials}>
           Apply for Credential
+        </Button>
+        <Button mode="contained" onPress={onPressWipeState}>
+          Wipe State
         </Button>
       </View>
     </ScrollView>
