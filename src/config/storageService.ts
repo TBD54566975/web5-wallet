@@ -1,6 +1,6 @@
 import { MMKV } from "react-native-mmkv";
 
-export const storage = new MMKV();
+const storage = new MMKV();
 
 const setObjectOrArray = (
   key: string,
