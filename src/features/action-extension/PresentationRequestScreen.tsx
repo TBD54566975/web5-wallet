@@ -1,12 +1,11 @@
 import crypto from "crypto";
-import React, { useState } from "react";
+import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import ActionExtension from "./ActionExtension";
 import {
   buildPresentationSubmission,
   PresentationDefinition as pd,
-  PresentationDefinition,
   randomDidKey,
   Verifiable,
   W3CCredential,
@@ -33,9 +32,12 @@ export const PresentationRequestScreen: React.FC<Props> = ({
   const onPressSendSubmission = async () => {
     // TODO: pull DID from local storage when available
     const didKey = randomDidKey(crypto.randomBytes);
-    const credentials = StorageService.getObjectOrArray(
-      "credentials"
-    ) as Verifiable<W3CCredential>[];
+    const credentials =
+      StorageService.getObjectOrArray<Verifiable<W3CCredential>[]>(
+        "credentials"
+      );
+
+    if (!credentials) return;
 
     const jwt = await buildPresentationSubmission(didKey, pd, credentials);
     try {

@@ -1,6 +1,11 @@
 import { observable } from "@legendapp/state";
+import { persistObservable } from "@legendapp/state/persist";
+import { ObservablePersistMMKV } from "@legendapp/state/persist-plugins/mmkv";
 import type { Profile } from "../../types/models";
 
-type ProfilesAtom = { profiles: Profile[] };
+export const profilesAtom = observable<Profile[]>([]);
 
-export const profilesAtom = observable<ProfilesAtom>({ profiles: [] });
+persistObservable(profilesAtom, {
+  local: "profiles",
+  persistLocal: ObservablePersistMMKV,
+});

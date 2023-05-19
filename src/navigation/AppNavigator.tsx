@@ -5,12 +5,16 @@ import {
 } from "@react-navigation/native-stack";
 import { ProfileScreen } from "../features/profile/ProfileScreen";
 import { CredentialScreen } from "../features/credentials/CredentialScreen";
+import { profilesAtom } from "../features/profile/atoms";
 
 const Stack = createNativeStackNavigator();
 
 export const AppNavigator = () => {
+  const getInitialRouteName = () =>
+    profilesAtom.peek().length ? "CredentialScreen" : "ProfileScreen";
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName={getInitialRouteName()}>
       <Stack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
