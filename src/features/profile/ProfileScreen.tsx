@@ -5,6 +5,7 @@ import { DID, generateKeyPair } from "@decentralized-identity/ion-tools";
 import { Text, Button, TextInput } from "react-native-paper";
 import { randomDidKey } from "verite";
 import { profilesAtom } from "./atoms";
+import { StorageService } from "../../config/storageService";
 
 export const ProfileScreen = (props) => {
   const [name, setName] = useState("");
@@ -21,6 +22,8 @@ export const ProfileScreen = (props) => {
       name,
       credentials: [],
     });
+
+    StorageService.setBuffer("privateKey", didKey.privateKey);
 
     props.navigation.navigate("CredentialScreen", {
       name: name,

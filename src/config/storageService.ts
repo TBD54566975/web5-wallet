@@ -1,6 +1,6 @@
 import { MMKV } from "react-native-mmkv";
 
-const storage = new MMKV();
+export const storage = new MMKV();
 
 const setObjectOrArray = (
   key: string,
@@ -27,12 +27,37 @@ const getObjectOrArray = <T>(key: string) => {
   }
 };
 
-const setString = storage.set;
-const getString = storage.getString;
+const setString = (key: string, params: string) => {
+  storage.set(key, params);
+};
+
+const getString = (key: string) => {
+  return storage.getString(key);
+};
+
+const setNumber = (key: string, params: number) => {
+  storage.set(key, params);
+};
+
+const getNumber = (key: string) => {
+  return storage.getString(key);
+};
+
+const setBuffer = (key: string, params: Uint8Array) => {
+  storage.set(key, params);
+};
+
+const getBuffer = (key: string) => {
+  return storage.getBuffer(key);
+};
 
 export const StorageService = {
-  setObjectOrArray,
   setString,
   getString,
+  getNumber,
+  setNumber,
+  setObjectOrArray,
   getObjectOrArray,
+  getBuffer,
+  setBuffer,
 };

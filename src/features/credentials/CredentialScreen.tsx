@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, ScrollView, View, DevSettings } from "react-native";
+import { useSelector } from "@legendapp/state/react";
 import { Text, Button } from "react-native-paper";
 import { MockIssuerUtils } from "../mock-issuer/utils";
 import { profilesAtom } from "../profile/atoms";
 import { CredentialList } from "./CredentialList";
-import { useSelector } from "@legendapp/state/react";
 
 export const CredentialScreen = ({ route }) => {
   // replace with route params once we have multiple profiles

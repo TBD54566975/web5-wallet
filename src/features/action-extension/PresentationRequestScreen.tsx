@@ -1,19 +1,13 @@
-import crypto from "crypto";
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { Button, Text } from "react-native-paper";
-import ActionExtension from "./ActionExtension";
-import {
-  buildPresentationSubmission,
-  PresentationDefinition as pd,
-  randomDidKey,
-  Verifiable,
-  W3CCredential,
-} from "verite";
-import { StorageService } from "../../config/storageService";
-import { JsonComponent } from "./JsonComponent";
 import { RouteProp } from "@react-navigation/native";
-import { ActionExtensionStackParamList } from "../../navigation/ActionExtensionNavigator";
+import { buildPresentationSubmission, randomDidKey } from "verite";
+import ActionExtension from "./ActionExtension";
+import { JsonComponent } from "./JsonComponent";
+import { profilesAtom } from "../profile/atoms";
+import type { ActionExtensionStackParamList } from "../../navigation/ActionExtensionNavigator";
+import { StorageService } from "../../config/storageService";
 
 type PresentationRequestScreenRouteProp = RouteProp<
   ActionExtensionStackParamList,
@@ -24,26 +18,33 @@ interface Props {
   route: PresentationRequestScreenRouteProp;
 }
 
-export const PresentationRequestScreen: React.FC<Props> = ({
-  route,
-}: Props) => {
+export const PresentationRequestScreen = ({ route }: Props) => {
   const { pd } = route.params;
 
   const onPressSendSubmission = async () => {
-    // TODO: pull DID from local storage when available
-    const didKey = randomDidKey(crypto.randomBytes);
-    const credentials =
-      StorageService.getObjectOrArray<Verifiable<W3CCredential>[]>(
-        "credentials"
-      );
+    // TODO: Handle multiple Profiles? Would probably need a selection UI?
+    const didKey = profilesAtom[0].didKey.get();
 
-    if (!credentials) return;
+    /**
+     * TODO: Replace with keychain stuff
+     * The privatekey is not serializable so this is just a quick hack for our hack that will get replaced down the road
+     * This wont be compatible with multiple profiles but thats ok because its just a mock anyways
+     */
+    const buf = StorageService.getBuffer("privateKey")!;
+    didKey.privateKey = buf;
+
+    const credentials = profilesAtom[0].get().credentials;
+
+    if (!credentials) {
+      console.warn("Wallet Credentials not found. Check state or persistence.");
+      return;
+    }
 
     const jwt = await buildPresentationSubmission(didKey, pd, credentials);
     try {
       await ActionExtension.sendPresentationSubmission(jwt);
     } catch (e) {
-      console.error("Error sending wallet response: " + e);
+      console.warn("Error sending wallet response: " + e);
     }
   };
 
