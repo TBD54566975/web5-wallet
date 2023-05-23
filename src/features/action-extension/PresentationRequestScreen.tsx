@@ -29,6 +29,7 @@ export const PresentationRequestScreen = ({ route }: Props) => {
      */
     const didKey = randomDidKey(crypto.randomBytes);
 
+    // TODO: no ui to select which credentials to transfer... yet.
     const credentials = profilesAtom[0].get().credentials;
 
     if (!credentials) {

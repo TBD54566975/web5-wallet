@@ -8,20 +8,18 @@ import { Verifiable, W3CCredential } from "verite";
 import { CredentialCard } from "./CredentialCard";
 
 export const CredentialScreen = ({ route }) => {
-  const navigatedProfileIndex = useMemo(() => {
-    return profilesAtom
-      .peek()
-      .findIndex((profile) => profile.name === route.params.name);
+  const navigatedProfile = useMemo(() => {
+    return profilesAtom.find(
+      (profile) => profile.name.peek() === route.params.name
+    );
   }, []);
 
-  const navigatedProfile = profilesAtom[navigatedProfileIndex].peek();
-
   const onPressGetCredentials = async () => {
-    if (navigatedProfile.didKey) {
+    const didKey = navigatedProfile?.didKey.peek();
+
+    if (didKey) {
       // create the mock credential
-      const issuedCredentials = await MockIssuerUtils.issueCredentials(
-        navigatedProfile.didKey
-      );
+      const issuedCredentials = await MockIssuerUtils.issueCredentials(didKey);
 
       // assign a random uuid for the credential because verite isnt doing it
       const normalizedCredential = {
@@ -30,9 +28,7 @@ export const CredentialScreen = ({ route }) => {
       };
 
       // push the new credential to state
-      profilesAtom[navigatedProfileIndex].credentials.push(
-        normalizedCredential
-      );
+      navigatedProfile?.credentials.push(normalizedCredential);
     }
   };
 
@@ -54,11 +50,11 @@ export const CredentialScreen = ({ route }) => {
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={styles.pageContainer}>
         <Text variant="titleMedium">
-          Welcome, {navigatedProfile?.name + "\n\n"}
-          Your DID ION is: {navigatedProfile?.didIon + "\n\n"}
-          Your DID Key is: {navigatedProfile?.didKey?.id + "\n\n"}
+          Welcome, {navigatedProfile?.name?.peek() + "\n\n"}
+          Your DID ION is: {navigatedProfile?.didIon?.peek() + "\n\n"}
+          Your DID Key is: {navigatedProfile?.didKey?.id.peek() + "\n\n"}
         </Text>
-        <For optimized each={profilesAtom[navigatedProfileIndex].credentials}>
+        <For optimized each={navigatedProfile?.credentials}>
           {(cred) => {
             const { type, date, issuer } = extractPrettyData(cred.peek()!)!;
 
