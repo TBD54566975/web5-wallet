@@ -5,7 +5,6 @@ import { DID, generateKeyPair } from "@decentralized-identity/ion-tools";
 import { Text, Button, TextInput } from "react-native-paper";
 import { randomDidKey } from "verite";
 import { profilesAtom } from "./atoms";
-import { StorageService } from "../../config/storageService";
 
 export const CreateProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
@@ -21,9 +20,6 @@ export const CreateProfileScreen = ({ navigation, route }) => {
       name,
       credentials: [],
     });
-
-    // TODO: replace this hack when we get the private key for a profile from a proper place
-    StorageService.setBuffer("privateKey", didKey.privateKey);
 
     if (navigation.canGoBack()) {
       navigation.goBack();
