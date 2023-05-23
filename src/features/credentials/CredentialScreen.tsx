@@ -1,34 +1,53 @@
-import React from "react";
-import { StyleSheet, ScrollView, View, DevSettings } from "react-native";
-import { useSelector } from "@legendapp/state/react";
+import React, { useMemo } from "react";
+import { StyleSheet, ScrollView, View } from "react-native";
+import { For, useSelector } from "@legendapp/state/react";
 import { Text, Button } from "react-native-paper";
 import { MockIssuerUtils } from "../mock-issuer/utils";
 import { profilesAtom } from "../profile/atoms";
-import { CredentialList } from "./CredentialList";
+import { Verifiable, W3CCredential } from "verite";
+import { CredentialCard } from "./CredentialCard";
 
 export const CredentialScreen = ({ route }) => {
-  // replace with route params once we have multiple profiles
-  const navigatedProfile = useSelector(() => profilesAtom[0].get());
+  const navigatedProfileIndex = useMemo(() => {
+    return profilesAtom
+      .peek()
+      .findIndex((profile) => profile.name === route.params.name);
+  }, []);
 
-  const hasCredentials = useSelector(
-    () => !!profilesAtom[0]?.credentials.get().length
-  );
+  const navigatedProfile = profilesAtom[navigatedProfileIndex].peek();
 
   const onPressGetCredentials = async () => {
-    if (navigatedProfile) {
+    if (navigatedProfile.didKey) {
+      // create the mock credential
       const issuedCredentials = await MockIssuerUtils.issueCredentials(
-        navigatedProfile?.didKey
+        navigatedProfile.didKey
       );
-      const normalized = { ...issuedCredentials, id: String(Math.random()) };
 
-      // there's only one profile until we add support for more profiles. so im not using the route params.
-      profilesAtom[0].credentials.push(normalized);
+      // assign a random uuid for the credential because verite isnt doing it
+      const normalizedCredential = {
+        ...issuedCredentials,
+        id: String(Math.random()),
+      };
+
+      // push the new credential to state
+      profilesAtom[navigatedProfileIndex].credentials.push(
+        normalizedCredential
+      );
     }
   };
 
-  const onPressWipeState = async () => {
-    profilesAtom.set([]);
-    DevSettings.reload();
+  const extractPrettyData = (credential: Verifiable<W3CCredential>) => {
+    for (const [key, values] of Object.entries(credential?.credentialSubject)) {
+      if (key !== "id") {
+        const type = values.type;
+        const date = new Date(values.approvalDate).toLocaleString();
+        const issuer =
+          Math.floor(Math.random() * 2) % 2 === 0
+            ? "Silicon Valley Bank"
+            : "FTX Inc.";
+        return { type, date, issuer };
+      }
+    }
   };
 
   return (
@@ -39,12 +58,15 @@ export const CredentialScreen = ({ route }) => {
           Your DID ION is: {navigatedProfile?.didIon + "\n\n"}
           Your DID Key is: {navigatedProfile?.didKey?.id + "\n\n"}
         </Text>
-        {hasCredentials && <CredentialList />}
+        <For optimized each={profilesAtom[navigatedProfileIndex].credentials}>
+          {(cred) => {
+            const { type, date, issuer } = extractPrettyData(cred.peek()!)!;
+
+            return <CredentialCard type={type} date={date} issuer={issuer} />;
+          }}
+        </For>
         <Button mode="contained" onPress={onPressGetCredentials}>
           Apply for Credential
-        </Button>
-        <Button mode="contained" onPress={onPressWipeState}>
-          Wipe State
         </Button>
       </View>
     </ScrollView>

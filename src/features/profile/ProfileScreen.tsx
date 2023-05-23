@@ -1,82 +1,48 @@
-import React, { useState } from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
-import crypto from "crypto";
-import { DID, generateKeyPair } from "@decentralized-identity/ion-tools";
-import { Text, Button, TextInput } from "react-native-paper";
-import { randomDidKey } from "verite";
+import React from "react";
+import { StyleSheet, ScrollView, View, DevSettings } from "react-native";
+import { Text, Button, List } from "react-native-paper";
 import { profilesAtom } from "./atoms";
-import { StorageService } from "../../config/storageService";
+import { For } from "@legendapp/state/react";
 
-export const ProfileScreen = (props) => {
-  const [name, setName] = useState("");
-
-  const onPressCreateProfile = async () => {
-    const didIon = await createDidIon();
-    const didKey = createDidKey();
-
-    // right now there's only one profile until we add support for more profiles
-    profilesAtom.push({
-      id: didKey.id,
-      didIon,
-      didKey,
-      name,
-      credentials: [],
-    });
-
-    StorageService.setBuffer("privateKey", didKey.privateKey);
-
-    props.navigation.navigate("CredentialScreen", {
-      name: name,
-    });
+export const ProfilesScreen = ({ navigation }) => {
+  const onPressCreateMoreProfiles = () => {
+    navigation.navigate("CreateProfileScreen");
   };
 
-  const createDidIon = async () => {
-    const authnKeys = await generateKeyPair();
-    const did = new DID({
-      content: {
-        publicKeys: [
-          {
-            id: "key-1",
-            type: "EcdsaSecp256k1VerificationKey2019",
-            publicKeyJwk: authnKeys.publicJwk,
-            purposes: ["authentication"],
-          },
-        ],
-        services: [
-          {
-            id: "domain-1",
-            type: "LinkedDomains",
-            serviceEndpoint: "https://foo.example.com",
-          },
-        ],
-      },
-    });
-
-    const shortFormURI: string = await did.getURI("short");
-
-    return shortFormURI;
-  };
-
-  const createDidKey = () => {
-    const didKey = randomDidKey(crypto.randomBytes);
-
-    return didKey;
+  const onPressWipeState = async () => {
+    profilesAtom.set([]);
+    DevSettings.reload();
   };
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={styles.pageContainer}>
         <Text variant="titleMedium">
-          Welcome to wallet. To continue, please create a profile.
+          Each profile contains your credentials
         </Text>
-        <TextInput
-          value={name}
-          label="Username"
-          onChangeText={setName}
-          mode="outlined"
-        />
-        <Button mode="contained" onPress={onPressCreateProfile}>
-          Create Profile
+        <For each={profilesAtom}>
+          {(profile) => (
+            <List.Item
+              title={`Name: ${profile?.get()?.name}`}
+              description={`Credentials stored: ${
+                profile?.get()?.credentials.length
+              }`}
+              left={(props) => (
+                <List.Icon {...props} icon="account-circle-outline" />
+              )}
+              onPress={() => {
+                navigation.navigate("CredentialScreen", {
+                  name: profile?.get()?.name,
+                });
+              }}
+            />
+          )}
+        </For>
+        <Button mode="contained" onPress={onPressCreateMoreProfiles}>
+          Create Another Profile
+        </Button>
+        <Button mode="contained" onPress={onPressWipeState}>
+          Wipe State
         </Button>
       </View>
     </ScrollView>

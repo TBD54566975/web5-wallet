@@ -8,6 +8,7 @@ import { JsonComponent } from "./JsonComponent";
 import { profilesAtom } from "../profile/atoms";
 import type { ActionExtensionStackParamList } from "../../navigation/ActionExtensionNavigator";
 import { StorageService } from "../../config/storageService";
+import crypto from "crypto";
 
 type PresentationRequestScreenRouteProp = RouteProp<
   ActionExtensionStackParamList,
@@ -22,16 +23,11 @@ export const PresentationRequestScreen = ({ route }: Props) => {
   const { pd } = route.params;
 
   const onPressSendSubmission = async () => {
-    // TODO: Handle multiple Profiles? Would probably need a selection UI?
-    const didKey = profilesAtom[0].didKey.get();
-
     /**
-     * TODO: Replace with keychain stuff
-     * The privatekey is not serializable so this is just a quick hack for our hack that will get replaced down the road
-     * This wont be compatible with multiple profiles but thats ok because its just a mock anyways
+     * TODO: Pull a persisted did. Replace private key with keychain stuff
+     * The privatekey is not serializable so this is just a hack that will get replaced down the road
      */
-    const buf = StorageService.getBuffer("privateKey")!;
-    didKey.privateKey = buf;
+    const didKey = randomDidKey(crypto.randomBytes);
 
     const credentials = profilesAtom[0].get().credentials;
 
