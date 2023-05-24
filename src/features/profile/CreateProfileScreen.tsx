@@ -24,7 +24,7 @@ export const CreateProfileScreen = ({ navigation, route }) => {
     if (navigation.canGoBack()) {
       navigation.goBack();
     } else {
-      navigation.replace("ProfilesScreen");
+      navigation.replace("Home");
     }
   };
 
