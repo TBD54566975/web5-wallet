@@ -13,6 +13,7 @@
     "@craftzdog/react-native-buffer": "6.0.5",
     "@decentralized-identity/ion-tools": "1.0.7",
     "@legendapp/state": "1.1.0",
+    "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "6.1.6",
     "@react-navigation/native-stack": "6.9.12",
     "expo": "48.0.17",

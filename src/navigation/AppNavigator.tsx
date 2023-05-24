@@ -3,50 +3,39 @@ import {
   type NativeStackNavigationOptions,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
-import { CredentialScreen } from "../features/credentials/CredentialScreen";
 import { profilesAtom } from "../features/profile/atoms";
-import { ProfilesScreen } from "../features/profile/ProfileScreen";
 import { CreateProfileScreen } from "../features/profile/CreateProfileScreen";
+import { TabNavigator } from "./TabNavigator";
 
 const Stack = createNativeStackNavigator();
 
 export const AppNavigator = () => {
   const getInitialRouteName = () =>
-    profilesAtom.peek().length ? "ProfilesScreen" : "CreateProfileScreen";
+    profilesAtom.peek().length ? "Home" : "CreateProfileScreen";
 
   return (
-    <Stack.Navigator initialRouteName={getInitialRouteName()}>
+    <Stack.Navigator
+      initialRouteName={getInitialRouteName()}
+      screenOptions={StackNavigatorOptions}
+    >
       <Stack.Screen
         name="CreateProfileScreen"
         component={CreateProfileScreen}
         options={CreateProfileScreenOptions}
       />
-      <Stack.Screen
-        name="ProfilesScreen"
-        component={ProfilesScreen}
-        options={ProfilesScreenOptions}
-      />
-      <Stack.Screen
-        name="CredentialScreen"
-        component={CredentialScreen}
-        options={CredentialScreenOptions}
-      />
+
+      <Stack.Screen name="Home" component={TabNavigator} />
     </Stack.Navigator>
   );
 };
 
+const StackNavigatorOptions: NativeStackNavigationOptions = {
+  headerShown: false,
+};
+
 const CreateProfileScreenOptions: NativeStackNavigationOptions = {
   title: "Create Profile",
+  headerShown: true,
   headerLargeTitle: true,
   animation: "slide_from_bottom",
-};
-
-const ProfilesScreenOptions: NativeStackNavigationOptions = {
-  title: "Profiles",
-  headerLargeTitle: true,
-};
-
-const CredentialScreenOptions: NativeStackNavigationOptions = {
-  title: "Get Credentials",
-  headerLargeTitle: true,
 };
