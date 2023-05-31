@@ -13,6 +13,8 @@ module.exports = function (api) {
             stream: "stream-browserify",
             buffer: "@craftzdog/react-native-buffer",
             "bn.js": "react-native-bignumber",
+            https: "https-browserify",
+            zlib: "browserify-zlib",
           },
         },
       ],

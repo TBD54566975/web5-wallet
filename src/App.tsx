@@ -3,6 +3,7 @@ import { Provider as PaperProvider, MD3DarkTheme } from "react-native-paper";
 import { DarkTheme, NavigationContainer } from "@react-navigation/native";
 import { AppNavigator } from "./navigation/AppNavigator";
 import PolyfillCrypto from "react-native-webview-crypto";
+import { WasmExperiment } from "./features/wasm/WasmScreen";
 import { enableLegendStateReact } from "@legendapp/state/react";
 
 enableLegendStateReact();
@@ -21,6 +22,7 @@ export default function App() {
       <PaperProvider theme={theme}>
         <PolyfillCrypto />
         <AppNavigator />
+        <WasmExperiment />
       </PaperProvider>
     </NavigationContainer>
   );
