@@ -16,6 +16,7 @@
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "6.1.6",
     "@react-navigation/native-stack": "6.9.12",
+    "@tbd54566975/web5": "^0.7.9",
     "expo": "48.0.17",
     "expo-splash-screen": "0.18.2",
     "expo-status-bar": "1.4.4",
