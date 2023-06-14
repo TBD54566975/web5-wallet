@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import crypto from "crypto";
-import { DID, generateKeyPair } from "@decentralized-identity/ion-tools";
 import { Text, Button, TextInput } from "react-native-paper";
 import { randomDidKey } from "verite";
 import { profilesAtom } from "./atoms";
+import { Web5 } from "@tbd54566975/web5";
 
 export const CreateProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
@@ -29,35 +29,12 @@ export const CreateProfileScreen = ({ navigation, route }) => {
   };
 
   const createDidIon = async () => {
-    const authnKeys = await generateKeyPair();
-    const did = new DID({
-      content: {
-        publicKeys: [
-          {
-            id: "key-1",
-            type: "EcdsaSecp256k1VerificationKey2019",
-            publicKeyJwk: authnKeys.publicJwk,
-            purposes: ["authentication"],
-          },
-        ],
-        services: [
-          {
-            id: "domain-1",
-            type: "LinkedDomains",
-            serviceEndpoint: "https://foo.example.com",
-          },
-        ],
-      },
-    });
-
-    const shortFormURI: string = await did.getURI("short");
-
-    return shortFormURI;
+    const didState = await Web5.did.create("ion");
+    return didState.id;
   };
 
   const createDidKey = () => {
     const didKey = randomDidKey(crypto.randomBytes);
-
     return didKey;
   };
 
