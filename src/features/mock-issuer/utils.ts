@@ -11,6 +11,7 @@ import {
   W3CCredential,
   buildKycAmlManifest,
 } from "verite";
+import { DidState } from "@tbd54566975/dids";
 
 const issuerDidKey = randomDidKey(crypto.randomBytes);
 
@@ -77,7 +78,7 @@ const mockManifest = buildKycAmlManifest({
 
 // get credentials without application flow
 const issueCredentials = async (
-  applicantDidKey: DidKey
+  applicantDid: DidState
 ): Promise<Verifiable<W3CCredential>> => {
   const mockIssuer = buildIssuer(issuerDidKey.id, issuerDidKey.privateKey);
 
@@ -93,7 +94,7 @@ const issueCredentials = async (
   // Generate the signed, encoded credential
   const encoded = await buildAndSignVerifiableCredential(
     mockIssuer,
-    applicantDidKey,
+    applicantDid.id,
     mockAttestation,
     mockAttestationType
   );

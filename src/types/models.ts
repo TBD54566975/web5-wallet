@@ -1,11 +1,12 @@
-import type { DidKey, Verifiable, W3CCredential } from "verite";
+import { DidState } from "@tbd54566975/dids";
+import type { Verifiable, W3CCredential } from "verite";
 
 export type Credential = Verifiable<W3CCredential> & { id: string };
 
 export type Profile = {
   id: string;
-  didKey: DidKey;
-  didIon: string;
+  didKey: DidState;
+  didIon: DidState;
   name: string;
   credentials: Credential[];
 };

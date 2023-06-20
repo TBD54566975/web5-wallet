@@ -51,7 +51,7 @@ export const CredentialScreen = ({ route }) => {
       <View style={styles.pageContainer}>
         <Text variant="titleMedium">
           Welcome, {navigatedProfile?.name?.peek() + "\n\n"}
-          Your DID ION is: {navigatedProfile?.didIon?.peek() + "\n\n"}
+          Your DID ION is: {navigatedProfile?.didIon?.id.peek() + "\n\n"}
           Your DID Key is: {navigatedProfile?.didKey?.id.peek() + "\n\n"}
         </Text>
         <For optimized each={navigatedProfile?.credentials}>

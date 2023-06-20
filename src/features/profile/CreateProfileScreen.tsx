@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
-import crypto from "crypto";
 import { Text, Button, TextInput } from "react-native-paper";
-import { randomDidKey } from "verite";
 import { profilesAtom } from "./atoms";
 import { Web5 } from "@tbd54566975/web5";
+import { DidState } from "@tbd54566975/dids";
 
 export const CreateProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
 
   const onPressCreateProfile = async () => {
     const didIon = await createDidIon();
-    const didKey = createDidKey();
+    const didKey = await createDidKey();
 
     profilesAtom.push({
       id: didKey.id,
@@ -28,14 +27,12 @@ export const CreateProfileScreen = ({ navigation, route }) => {
     }
   };
 
-  const createDidIon = async () => {
-    const didState = await Web5.did.create("ion");
-    return didState.id;
+  const createDidIon = async (): Promise<DidState> => {
+    return await Web5.did.create("ion");
   };
 
-  const createDidKey = () => {
-    const didKey = randomDidKey(crypto.randomBytes);
-    return didKey;
+  const createDidKey = async (): Promise<DidState> => {
+    return await Web5.did.create("key");
   };
 
   return (
