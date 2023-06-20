@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar, Card, Text } from "react-native-paper";
 import type { PrettyCredential } from "../../types/models";
 
+// test
 export const CredentialCard = ({ type, date, issuer }: PrettyCredential) => {
   return (
     <Card>
