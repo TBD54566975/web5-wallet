@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Text, Button, TextInput } from "react-native-paper";
-import { profilesAtom } from "./atoms";
-import { Web5 } from "@tbd54566975/web5";
-import { DidState } from "@tbd54566975/dids";
+import ProfileApi from "./ProfileApi";
 
 export const CreateProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
 
   const onPressCreateProfile = async () => {
-    const didIon = await createDidIon();
-    const didKey = await createDidKey();
-
-    profilesAtom.push({
-      id: didKey.id,
-      didIon,
-      didKey,
-      name,
-      credentials: [],
+    ProfileApi.createProfile({
+      name: name,
+      didMethod: "ion",
     });
 
     if (navigation.canGoBack()) {
@@ -25,14 +17,6 @@ export const CreateProfileScreen = ({ navigation, route }) => {
     } else {
       navigation.replace("Home");
     }
-  };
-
-  const createDidIon = async (): Promise<DidState> => {
-    return await Web5.did.create("ion");
-  };
-
-  const createDidKey = async (): Promise<DidState> => {
-    return await Web5.did.create("key");
   };
 
   return (

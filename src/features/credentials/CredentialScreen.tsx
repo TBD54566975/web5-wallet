@@ -15,11 +15,11 @@ export const CredentialScreen = ({ route }) => {
   }, []);
 
   const onPressGetCredentials = async () => {
-    const didKey = navigatedProfile?.didKey.peek();
+    const did = navigatedProfile?.did.peek();
 
-    if (didKey) {
+    if (did) {
       // create the mock credential
-      const issuedCredentials = await MockIssuerUtils.issueCredentials(didKey);
+      const issuedCredentials = await MockIssuerUtils.issueCredentials(did);
 
       // assign a random uuid for the credential because verite isnt doing it
       const normalizedCredential = {
@@ -51,8 +51,7 @@ export const CredentialScreen = ({ route }) => {
       <View style={styles.pageContainer}>
         <Text variant="titleMedium">
           Welcome, {navigatedProfile?.name?.peek() + "\n\n"}
-          Your DID ION is: {navigatedProfile?.didIon?.id.peek() + "\n\n"}
-          Your DID Key is: {navigatedProfile?.didKey?.id.peek() + "\n\n"}
+          Your DID is: {navigatedProfile?.did?.id.peek() + "\n\n"}
         </Text>
         <For optimized each={navigatedProfile?.credentials}>
           {(cred) => {

@@ -1,13 +1,9 @@
-import { DidState } from "@tbd54566975/dids";
+import { Profile as Web5Profile } from "@tbd54566975/web5-user-agent";
 import type { Verifiable, W3CCredential } from "verite";
 
 export type Credential = Verifiable<W3CCredential> & { id: string };
 
-export type Profile = {
-  id: string;
-  didKey: DidState;
-  didIon: DidState;
-  name: string;
+export type Profile = Web5Profile & {
   credentials: Credential[];
 };
 
