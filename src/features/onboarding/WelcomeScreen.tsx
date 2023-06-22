@@ -4,11 +4,11 @@ import { Button, Text } from "react-native-paper";
 import { ProfileManager } from "../profile/ProfileManager";
 
 export const WelcomeScreen = ({ navigation }) => {
-  const onPressImport = async () => {
+  const onPressImport = () => {
     console.warn("Import not implemented");
   };
 
-  const onPressStartFresh = async () => {
+  const onPressStartFresh = () => {
     ProfileManager.createProfile({ name: "Personal", didMethod: "ion" });
     ProfileManager.createProfile({ name: "Social", didMethod: "ion" });
     ProfileManager.createProfile({ name: "Career", didMethod: "ion" });
