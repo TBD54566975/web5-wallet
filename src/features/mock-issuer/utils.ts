@@ -1,6 +1,6 @@
+import { DidState } from "@tbd54566975/dids";
 import crypto from "crypto";
 import {
-  type DidKey,
   type KYCAMLAttestation,
   buildIssuer,
   randomDidKey,
@@ -77,7 +77,7 @@ const mockManifest = buildKycAmlManifest({
 
 // get credentials without application flow
 const issueCredentials = async (
-  applicantDidKey: DidKey
+  applicantDid: DidState
 ): Promise<Verifiable<W3CCredential>> => {
   const mockIssuer = buildIssuer(issuerDidKey.id, issuerDidKey.privateKey);
 
@@ -93,7 +93,7 @@ const issueCredentials = async (
   // Generate the signed, encoded credential
   const encoded = await buildAndSignVerifiableCredential(
     mockIssuer,
-    applicantDidKey,
+    applicantDid.id,
     mockAttestation,
     mockAttestationType
   );

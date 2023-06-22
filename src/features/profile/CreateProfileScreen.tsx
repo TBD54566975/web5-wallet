@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Text, Button, TextInput } from "react-native-paper";
-import { profilesAtom } from "./atoms";
-import { DidService } from "./did-service";
+import ProfileApi from "./ProfileApi";
 
 export const CreateProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
 
   const onPressCreateProfile = async () => {
-    const didIon = await DidService.createDidIon();
-    const didKey = DidService.createDidKey();
-
-    profilesAtom.push({
-      id: didKey.id,
-      didIon,
-      didKey,
-      name,
-      credentials: [],
-    });
+    ProfileApi.createProfile({ name: name, didMethod: "ion" });
 
     if (navigation.canGoBack()) {
       navigation.goBack();
