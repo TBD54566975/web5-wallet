@@ -4,7 +4,7 @@ import {
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import { profilesAtom } from "../features/profile/atoms";
-import { CreateProfileScreen } from "../features/profile/CreateProfileScreen";
+import { WelcomeScreen } from "../features/onboarding/WelcomeScreen";
 import { TabNavigator } from "./TabNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -19,9 +19,9 @@ export const AppNavigator = () => {
       screenOptions={StackNavigatorOptions}
     >
       <Stack.Screen
-        name="CreateProfileScreen"
-        component={CreateProfileScreen}
-        options={CreateProfileScreenOptions}
+        name="WelcomeScreen"
+        component={WelcomeScreen}
+        options={WelcomeScreenOptions}
       />
 
       <Stack.Screen name="Home" component={TabNavigator} />
@@ -33,8 +33,8 @@ const StackNavigatorOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-const CreateProfileScreenOptions: NativeStackNavigationOptions = {
-  title: "Create Profile",
+const WelcomeScreenOptions: NativeStackNavigationOptions = {
+  title: "Welcome",
   headerShown: true,
   headerLargeTitle: true,
   animation: "slide_from_bottom",
