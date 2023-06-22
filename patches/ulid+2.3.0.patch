@@ -1,0 +1,42 @@
+diff --git a/node_modules/ulid/dist/index.esm.js b/node_modules/ulid/dist/index.esm.js
+index b686de4..768587e 100644
+--- a/node_modules/ulid/dist/index.esm.js
++++ b/node_modules/ulid/dist/index.esm.js
+@@ -98,7 +98,8 @@ function detectPrng() {
+     if (!root) {
+         root = typeof window !== "undefined" ? window : null;
+     }
+-    var browserCrypto = root && (root.crypto || root.msCrypto);
++    // force using node crypto for rn
++    const browserCrypto = undefined;
+     if (browserCrypto) {
+         return function () {
+             var buffer = new Uint8Array(1);
+diff --git a/node_modules/ulid/dist/index.js b/node_modules/ulid/dist/index.js
+index ad91831..5c3bffd 100644
+--- a/node_modules/ulid/dist/index.js
++++ b/node_modules/ulid/dist/index.js
+@@ -99,7 +99,8 @@ export function detectPrng(allowInsecure = false, root) {
+     if (!root) {
+         root = typeof window !== "undefined" ? window : null;
+     }
+-    const browserCrypto = root && (root.crypto || root.msCrypto);
++    // force using node crypto for rn
++    const browserCrypto = undefined;
+     if (browserCrypto) {
+         return () => {
+             const buffer = new Uint8Array(1);
+diff --git a/node_modules/ulid/dist/index.umd.js b/node_modules/ulid/dist/index.umd.js
+index 3da6271..5877c35 100644
+--- a/node_modules/ulid/dist/index.umd.js
++++ b/node_modules/ulid/dist/index.umd.js
+@@ -104,7 +104,8 @@ function detectPrng() {
+     if (!root) {
+         root = typeof window !== "undefined" ? window : null;
+     }
+-    var browserCrypto = root && (root.crypto || root.msCrypto);
++    // force using node crypto for rn
++    const browserCrypto = undefined;
+     if (browserCrypto) {
+         return function () {
+             var buffer = new Uint8Array(1);

@@ -295,6 +295,8 @@ PODS:
     - React-callinvoker
     - React-Core
     - ReactCommon/turbomodule/core
+  - react-native-leveldb (3.3.1):
+    - React-Core
   - react-native-mmkv (2.8.0):
     - MMKV (>= 1.2.13)
     - React-Core
@@ -438,6 +440,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-bignumber (from `../node_modules/react-native-bignumber`)
+  - react-native-leveldb (from `../node_modules/react-native-leveldb`)
   - react-native-mmkv (from `../node_modules/react-native-mmkv`)
   - react-native-quick-base64 (from `../node_modules/react-native-quick-base64`)
   - react-native-quick-crypto (from `../node_modules/react-native-quick-crypto`)
@@ -528,6 +531,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-bignumber:
     :path: "../node_modules/react-native-bignumber"
+  react-native-leveldb:
+    :path: "../node_modules/react-native-leveldb"
   react-native-mmkv:
     :path: "../node_modules/react-native-mmkv"
   react-native-quick-base64:
@@ -608,6 +613,7 @@ SPEC CHECKSUMS:
   React-jsinspector: c712f9e3bb9ba4122d6b82b4f906448b8a281580
   React-logger: 342f358b8decfbf8f272367f4eacf4b6154061be
   react-native-bignumber: 9850896db4534ea31e89dfd88182e7412eace199
+  react-native-leveldb: 2abee90737d7bba6399adf7767482ab5d84caa66
   react-native-mmkv: 7da5e18e55c04a9af9a7e0ab9792a1e8d33765a1
   react-native-quick-base64: 62290829c619fbabca4c41cfec75ae759d08fc1c
   react-native-quick-crypto: 455c1b411db006dba1026a30681ececb19180187
