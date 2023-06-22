@@ -2,8 +2,8 @@
 const { getDefaultConfig } = require("expo/metro-config");
 const config = getDefaultConfig(__dirname);
 
-// strip out "browser" so crazy browser bundles dont corrupt our project
-config.resolver.resolverMainFields = ["react-native", "main"];
+// strip out "browser"
+// config.resolver.resolverMainFields = ["react-native", "main"];
 
 config.transformer.getTransformOptions = async () => ({
   transform: {
@@ -14,6 +14,12 @@ config.transformer.getTransformOptions = async () => ({
 
 config.resolver.resolveRequest = (context, moduleName, platform) => {
   // dwn
+  if (moduleName === "@decentralized-identity/ion-tools") {
+    return {
+      filePath: `${__dirname}/node_modules/@decentralized-identity/ion-tools/dist/esm/src/index.js`,
+      type: "sourceFile",
+    };
+  }
   if (moduleName === "@ipld/dag-cbor") {
     return {
       filePath: `${__dirname}/node_modules/@ipld/dag-cbor/src/index.js`,
@@ -279,40 +285,46 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
       type: "sourceFile",
     };
   }
+  if (moduleName === "ulid") {
+    return {
+      filePath: `${__dirname}/node_modules/ulid/dist/index.esm.js`,
+      type: "sourceFile",
+    };
+  }
 
   // use "browser" for a few specific packages as needed
-  if (moduleName === "fastestsmallesttextencoderdecoder") {
-    return {
-      filePath: `${__dirname}/node_modules/fastestsmallesttextencoderdecoder/EncoderDecoderTogether.min.js`,
-      type: "sourceFile",
-    };
-  }
-  if (moduleName === "secp256k1") {
-    return {
-      filePath: `${__dirname}/node_modules/secp256k1/elliptic.js`,
-      type: "sourceFile",
-    };
-  }
+  // if (moduleName === "fastestsmallesttextencoderdecoder") {
+  //   return {
+  //     filePath: `${__dirname}/node_modules/fastestsmallesttextencoderdecoder/EncoderDecoderTogether.min.js`,
+  //     type: "sourceFile",
+  //   };
+  // }
+  // if (moduleName === "secp256k1") {
+  //   return {
+  //     filePath: `${__dirname}/node_modules/secp256k1/elliptic.js`,
+  //     type: "sourceFile",
+  //   };
+  // }
 
   // WIP here
-  if (moduleName === "readable-stream") {
-    console.log(context.originModulePath);
-    return {
-      filePath: `${__dirname}/node_modules/readable-stream/readable-browser.js`,
-      type: "sourceFile",
-    };
-  }
+  // if (moduleName === "readable-stream") {
+  //   console.log(context.originModulePath);
+  //   return {
+  //     filePath: `${__dirname}/node_modules/readable-stream/readable-browser.js`,
+  //     type: "sourceFile",
+  //   };
+  // }
 
   // NOOPs are WIP
   // if (moduleName === "assert") {
   //   return { type: "empty" };
   // }
-  if (moduleName === "classic-level") {
-    return { type: "empty" };
-  }
-  if (moduleName === "worker_threads") {
-    return { type: "empty" };
-  }
+  // if (moduleName === "classic-level") {
+  //   return { type: "empty" };
+  // }
+  // if (moduleName === "worker_threads") {
+  //   return { type: "empty" };
+  // }
   // if (moduleName === "fs") {
   //   return { type: "empty" };
   // }
