@@ -8,7 +8,7 @@ import { Profile } from "../../types/models";
 import { profilesAtom } from "./atoms";
 
 export default new (class implements ProfileManager {
-  async createProfile(options: CreateProfileOptions): Promise<Profile> {
+  async createProfile(options: CreateProfileOptions) {
     if (!options.did && !options.didMethod) {
       throw new Error("must provide did or didMethod");
     }
@@ -44,13 +44,11 @@ export default new (class implements ProfileManager {
     return profile;
   }
 
-  getProfile(id: string): Promise<Profile | undefined> {
-    return Promise.resolve(
-      profilesAtom.find((profile) => profile.id.peek() === id)?.get()
-    );
+  async getProfile(id: string) {
+    return profilesAtom.find((profile) => profile.id.peek() === id)?.get();
   }
 
-  listProfiles(): Promise<Profile[]> {
-    return Promise.resolve(profilesAtom.get());
+  async listProfiles() {
+    return profilesAtom.get();
   }
 })();
