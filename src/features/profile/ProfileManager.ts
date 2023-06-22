@@ -1,13 +1,13 @@
 import {
   CreateProfileOptions,
-  ProfileManager,
+  ProfileManager as Web5ProfileManager,
 } from "@tbd54566975/web5-user-agent";
 import { DidState } from "@tbd54566975/dids";
 import { Web5 } from "@tbd54566975/web5";
 import { Profile } from "../../types/models";
 import { profilesAtom } from "./atoms";
 
-export default new (class implements ProfileManager {
+export const ProfileManager: Web5ProfileManager = {
   async createProfile(options: CreateProfileOptions) {
     if (!options.did && !options.didMethod) {
       throw new Error("must provide did or didMethod");
@@ -42,13 +42,11 @@ export default new (class implements ProfileManager {
 
     profilesAtom.push(profile);
     return profile;
-  }
-
+  },
   async getProfile(id: string) {
     return profilesAtom.find((profile) => profile.id.peek() === id)?.get();
-  }
-
+  },
   async listProfiles() {
     return profilesAtom.get();
-  }
-})();
+  },
+};

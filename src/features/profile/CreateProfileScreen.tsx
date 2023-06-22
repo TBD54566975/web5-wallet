@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import { Text, Button, TextInput } from "react-native-paper";
-import ProfileApi from "./ProfileApi";
+import { ProfileManager } from "./ProfileManager";
 
 export const CreateProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
 
   const onPressCreateProfile = async () => {
-    ProfileApi.createProfile({ name: name, didMethod: "ion" });
+    ProfileManager.createProfile({ name: name, didMethod: "ion" });
 
     if (navigation.canGoBack()) {
       navigation.goBack();
