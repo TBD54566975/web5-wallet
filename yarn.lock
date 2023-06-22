@@ -2648,11 +2648,6 @@
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.3.8.tgz#5b9ecf4ee480ca00f1ffbc2d1a5d4eed0d1afe81"
   integrity sha512-aWItSZvJj4+GI6FWkjZR13xPNPctq2RRakzo+O6vN7bC2yjwdg5EFpgaSAUn95b7BGSgcflvzVDPoKmJv24IOg==
 
-"@tbd54566975/common@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@tbd54566975/common/-/common-0.1.0.tgz#cf33fdc8c895af57175e5a8043a0734e8360b2fd"
-  integrity sha512-SfEqe41nZSw+YJ9zoBqlt6s0CkEGESGnb+T1z39zd3DTb1vURHuAruRZNOSgeCSAt+AyKstwTOP9uux+BPABHQ==
-
 "@tbd54566975/crypto@0.1.4":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/@tbd54566975/crypto/-/crypto-0.1.4.tgz#6c197efcedff91c4984bb8c542d6453390023b29"
@@ -2667,17 +2662,6 @@
   integrity sha512-JDrjalFDei+az1sGAjAFiyJLojlH1xb0QJR2PgVp+tH6DO8O28RH9ByxEQteWy5T7jcDbSSD5RHzbA5laPHr2w==
   dependencies:
     "@decentralized-identity/ion-tools" "1.0.7"
-    "@tbd54566975/crypto" "0.1.4"
-    "@tbd54566975/dwn-sdk-js" "0.0.33"
-    cross-fetch "3.1.5"
-
-"@tbd54566975/dids@0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@tbd54566975/dids/-/dids-0.1.7.tgz#184c57b1077648fc1f41c6a01425b294ecb0943d"
-  integrity sha512-fmk7IOhUDOJj+PHKjc5+6vLpQ4h6Ypxdg0q1Fj2b5cLdM8E4Pz9fhiB6RibZhDoaU/rEk2JBbDZ7elr1KzDN4g==
-  dependencies:
-    "@decentralized-identity/ion-tools" "1.0.7"
-    "@tbd54566975/common" "0.1.0"
     "@tbd54566975/crypto" "0.1.4"
     "@tbd54566975/dwn-sdk-js" "0.0.33"
     cross-fetch "3.1.5"
