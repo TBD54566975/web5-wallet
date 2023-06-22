@@ -104,7 +104,7 @@ const checkDwnStatus = async () => {
 
   console.info("Checking RecordsWrite result:");
   const writeResult = await dwn.processMessage(did, record.message, dataStream);
-  console.info(writeResult);
+  console.info(JSON.stringify(writeResult));
 
   const query = await RecordsQuery.create({
     filter: {
@@ -118,7 +118,7 @@ const checkDwnStatus = async () => {
 
   console.info("Checking RecordsQuery result:");
   const queryResult = await dwn.processMessage(did, query.message);
-  console.info(queryResult);
+  console.info(JSON.stringify(queryResult));
 };
 
 const getDwn = () => {
