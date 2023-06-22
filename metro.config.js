@@ -2,9 +2,6 @@
 const { getDefaultConfig } = require("expo/metro-config");
 const config = getDefaultConfig(__dirname);
 
-// strip out "browser"
-// config.resolver.resolverMainFields = ["react-native", "main"];
-
 config.transformer.getTransformOptions = async () => ({
   transform: {
     experimentalImportSupport: true,
@@ -13,7 +10,6 @@ config.transformer.getTransformOptions = async () => ({
 });
 
 config.resolver.resolveRequest = (context, moduleName, platform) => {
-  // dwn
   if (moduleName === "@decentralized-identity/ion-tools") {
     return {
       filePath: `${__dirname}/node_modules/@decentralized-identity/ion-tools/dist/esm/src/index.js`,
@@ -292,71 +288,25 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
     };
   }
 
-  // use "browser" for a few specific packages as needed
-  // if (moduleName === "fastestsmallesttextencoderdecoder") {
-  //   return {
-  //     filePath: `${__dirname}/node_modules/fastestsmallesttextencoderdecoder/EncoderDecoderTogether.min.js`,
-  //     type: "sourceFile",
-  //   };
-  // }
-  // if (moduleName === "secp256k1") {
-  //   return {
-  //     filePath: `${__dirname}/node_modules/secp256k1/elliptic.js`,
-  //     type: "sourceFile",
-  //   };
-  // }
-
-  // WIP here
-  // if (moduleName === "readable-stream") {
-  //   console.log(context.originModulePath);
-  //   return {
-  //     filePath: `${__dirname}/node_modules/readable-stream/readable-browser.js`,
-  //     type: "sourceFile",
-  //   };
-  // }
-
-  // NOOPs are WIP
+  //* reference: NOOP a package
   // if (moduleName === "assert") {
   //   return { type: "empty" };
   // }
-  // if (moduleName === "classic-level") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "worker_threads") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "fs") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "http") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "https") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "module") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "net") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "os") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "path") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "tls") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "url") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "util") {
-  //   return { type: "empty" };
-  // }
-  // if (moduleName === "zlib") {
-  //   return { type: "empty" };
+
+  //* reference: manually resolve submodules
+  // if (context.originModulePath.search("ipfs-unixfs-importer")) {
+  //   if (moduleName === "hamt-sharding") {
+  //     return {
+  //       filePath: `${__dirname}/node_modules/ipfs-unixfs-importer/node_modules/hamt-sharding/dist/src/index.js`,
+  //       type: "sourceFile",
+  //     };
+  //   }
+  //   if (moduleName === "ipfs-unixfs") {
+  //     return {
+  //       filePath: `${__dirname}/node_modules/ipfs-unixfs-importer/node_modules/ipfs-unixfs/dist/src/index.js`,
+  //       type: "sourceFile",
+  //     };
+  //   }
   // }
 
   // fallback to the default resolver
@@ -364,73 +314,3 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
 };
 
 module.exports = config;
-
-// old
-// if (context.originModulePath.search("@decentralized-identity/ion-tools")) {
-//   if (moduleName === "multiformats/hashes/sha2") {
-//     return {
-//       filePath: `${__dirname}/node_modules/multiformats/src/hashes/sha2.js`,
-//       type: "sourceFile",
-//     };
-//   }
-// }
-
-// if (context.originModulePath.search("ipfs-unixfs-importer")) {
-//   if (moduleName === "multiformats/hashes/hasher") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-importer/node_modules/@multiformats/murmur3/src/index.js`,
-//       type: "sourceFile",
-//     };
-//   }
-//   if (moduleName === "@multiformats/murmur3") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-importer/node_modules/@multiformats/murmur3/src/index.js`,
-//       type: "sourceFile",
-//     };
-//   }
-//   if (moduleName === "hamt-sharding") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-importer/node_modules/hamt-sharding/dist/src/index.js`,
-//       type: "sourceFile",
-//     };
-//   }
-//   if (moduleName === "ipfs-unixfs") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-importer/node_modules/ipfs-unixfs/dist/src/index.js`,
-//       type: "sourceFile",
-//     };
-//   }
-// }
-
-// if (context.originModulePath.search("ipfs-unixfs-exporter")) {
-//   if (moduleName === "multiformats/bases/base32") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-exporter/node_modules/multiformats/esm/src/bases/base32.js`,
-//       type: "sourceFile",
-//     };
-//   }
-//   if (moduleName === "multiformats/bases/base58") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-exporter/node_modules/multiformats/esm/src/bases/base58.js`,
-//       type: "sourceFile",
-//     };
-//   }
-//   if (moduleName === "multiformats/bases/base64") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-exporter/node_modules/multiformats/esm/src/bases/base64.js`,
-//       type: "sourceFile",
-//     };
-//   }
-//   if (moduleName === "multiformats/block") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-exporter/node_modules/multiformats/esm/src/block.js`,
-//       type: "sourceFile",
-//     };
-//   }
-//   if (moduleName === "multiformats/cid") {
-//     return {
-//       filePath: `${__dirname}/node_modules/ipfs-unixfs-exporter/node_modules/multiformats/esm/src/cid.js`,
-//       type: "sourceFile",
-//     };
-//   }
-// }
