@@ -5,6 +5,7 @@ import { AppNavigator } from "./navigation/AppNavigator";
 import { DwnService } from "./features/dwn/dwn-service";
 import { enableLegendStateReact } from "@legendapp/state/react";
 import PolyfillCrypto from "react-native-webview-crypto";
+import { StatusBar } from "expo-status-bar";
 
 enableLegendStateReact();
 
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <NavigationContainer theme={DarkTheme}>
+      <StatusBar style="light" />
       <PaperProvider theme={theme}>
         <PolyfillCrypto />
         <AppNavigator />
