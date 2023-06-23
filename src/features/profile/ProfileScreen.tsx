@@ -21,22 +21,27 @@ export const ProfilesScreen = ({ navigation }) => {
           Each profile contains your credentials
         </Text>
         <For each={profilesAtom}>
-          {(profile) => (
-            <List.Item
-              title={`Name: ${profile?.get()?.name}`}
-              description={`Credentials stored: ${
-                profile?.get()?.credentials.length
-              }`}
-              left={(props) => (
-                <List.Icon {...props} icon="account-circle-outline" />
-              )}
-              onPress={() => {
-                navigation.navigate("CredentialScreen", {
-                  name: profile?.get()?.name,
-                });
-              }}
-            />
-          )}
+          {(profile) => {
+            const profileData = profile?.get();
+            if (!profileData) {
+              return <></>;
+            }
+
+            return (
+              <List.Item
+                title={profileData.name}
+                description={`Credentials stored: ${profileData.credentials.length}`}
+                left={(props) => (
+                  <List.Icon {...props} icon={profileData.icon} />
+                )}
+                onPress={() => {
+                  navigation.navigate("CredentialScreen", {
+                    name: profileData.name,
+                  });
+                }}
+              />
+            );
+          }}
         </For>
         <Button mode="contained" onPress={onPressCreateMoreProfiles}>
           Create Another Profile

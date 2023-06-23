@@ -9,9 +9,21 @@ export const WelcomeScreen = ({ navigation }) => {
   };
 
   const onPressStartFresh = () => {
-    ProfileManager.createProfile({ name: "Personal", didMethod: "ion" });
-    ProfileManager.createProfile({ name: "Social", didMethod: "ion" });
-    ProfileManager.createProfile({ name: "Career", didMethod: "ion" });
+    ProfileManager.createProfile({
+      name: "Personal",
+      icon: "account-circle-outline",
+      didMethod: "ion",
+    });
+    ProfileManager.createProfile({
+      name: "Social",
+      icon: "pound",
+      didMethod: "ion",
+    });
+    ProfileManager.createProfile({
+      name: "Career",
+      icon: "briefcase-outline",
+      didMethod: "ion",
+    });
 
     navigation.replace("Home");
   };

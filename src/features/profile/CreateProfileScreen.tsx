@@ -7,7 +7,11 @@ export const CreateProfileScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
 
   const onPressCreateProfile = async () => {
-    ProfileManager.createProfile({ name: name, didMethod: "ion" });
+    ProfileManager.createProfile({
+      name: name,
+      icon: "account-circle-outline",
+      didMethod: "ion",
+    });
 
     if (navigation.canGoBack()) {
       navigation.goBack();
