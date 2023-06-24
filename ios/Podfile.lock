@@ -313,9 +313,6 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
-  - react-native-ssi (0.1.0):
-    - React-Core
-    - ssi
   - react-native-webview (12.0.2):
     - React-Core
   - React-perflogger (0.71.8)
@@ -445,7 +442,6 @@ DEPENDENCIES:
   - react-native-quick-base64 (from `../node_modules/react-native-quick-base64`)
   - react-native-quick-crypto (from `../node_modules/react-native-quick-crypto`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
-  - react-native-ssi (from `../node_modules/react-native-ssi`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -541,8 +537,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-quick-crypto"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
-  react-native-ssi:
-    :path: "../node_modules/react-native-ssi"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-perflogger:
@@ -618,7 +612,6 @@ SPEC CHECKSUMS:
   react-native-quick-base64: 62290829c619fbabca4c41cfec75ae759d08fc1c
   react-native-quick-crypto: 455c1b411db006dba1026a30681ececb19180187
   react-native-safe-area-context: b8979f5eda6ed5903d4dbc885be3846ea3daa753
-  react-native-ssi: abacedbab0596ea2c4b009823915720ce40d9afc
   react-native-webview: 203b6a1c7507737f777c91d7e10c30e7e67c1a17
   React-perflogger: d21f182895de9d1b077f8a3cd00011095c8c9100
   React-RCTActionSheet: 0151f83ef92d2a7139bba7dfdbc8066632a6d47b
