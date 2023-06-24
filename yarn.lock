@@ -7666,9 +7666,6 @@ react-native-screens@3.20.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-ssi@../ssi-sdk-mobile/react-native-ssi/:
-  version "0.1.0"
-
 react-native-webview-crypto@0.0.25:
   version "0.0.25"
   resolved "https://registry.yarnpkg.com/react-native-webview-crypto/-/react-native-webview-crypto-0.0.25.tgz#c35506e1f092f7633db684f388f2b449667a05a2"
