@@ -10,45 +10,9 @@ config.transformer.getTransformOptions = async () => ({
 });
 
 config.resolver.resolveRequest = (context, moduleName, platform) => {
-  if (moduleName === "@tbd54566975/web5") {
-    return {
-      filePath: `${__dirname}/node_modules/@tbd54566975/web5/dist/esm/main.mjs`,
-      type: "sourceFile",
-    };
-  }
-  if (moduleName === "@tbd54566975/crypto") {
-    return {
-      filePath: `${__dirname}/node_modules/@tbd54566975/crypto/dist/esm/main.mjs`,
-      type: "sourceFile",
-    };
-  }
-  if (moduleName === "@tbd54566975/dids") {
-    return {
-      filePath: `${__dirname}/node_modules/@tbd54566975/dids/dist/esm/main.mjs`,
-      type: "sourceFile",
-    };
-  }
-  if (moduleName === "@tbd54566975/web5-agent") {
-    return {
-      filePath: `${__dirname}/node_modules/@tbd54566975/web5-agent/dist/esm/main.mjs`,
-      type: "sourceFile",
-    };
-  }
-  if (moduleName === "@tbd54566975/web5-user-agent") {
-    return {
-      filePath: `${__dirname}/node_modules/@tbd54566975/web5-user-agent/dist/esm/main.mjs`,
-      type: "sourceFile",
-    };
-  }
-  if (moduleName === "@tbd54566975/web5-proxy-agent") {
-    return {
-      filePath: `${__dirname}/node_modules/@tbd54566975/web5-proxy-agent/dist/esm/main.mjs`,
-      type: "sourceFile",
-    };
-  }
   if (moduleName === "@decentralized-identity/ion-tools") {
     return {
-      filePath: `${__dirname}/node_modules/@decentralized-identity/ion-tools/dist/esm/src/index.js`,
+      filePath: `${__dirname}/node_modules/@decentralized-identity/ion-tools/dist/esm/index.js`,
       type: "sourceFile",
     };
   }
@@ -325,9 +289,9 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
   }
 
   //* reference: NOOP a package
-  // if (moduleName === "assert") {
-  //   return { type: "empty" };
-  // }
+  if (moduleName === "node:crypto") {
+    return { type: "empty" };
+  }
 
   //* reference: manually resolve submodules
   // if (context.originModulePath.search("ipfs-unixfs-importer")) {
