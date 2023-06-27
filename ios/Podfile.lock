@@ -34,10 +34,10 @@ PODS:
     - hermes-engine/Pre-built (= 0.71.8)
   - hermes-engine/Pre-built (0.71.8)
   - libevent (2.1.12)
-  - MMKV (1.2.16):
-    - MMKVCore (~> 1.2.16)
-  - MMKVCore (1.2.16)
-  - OpenSSL-Universal (1.1.2000)
+  - MMKV (1.3.0):
+    - MMKVCore (~> 1.3.0)
+  - MMKVCore (1.3.0)
+  - OpenSSL-Universal (1.1.2100)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -589,9 +589,9 @@ SPEC CHECKSUMS:
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 47986d26692ae75ee7a17ab049caee8864f855de
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  MMKV: 784471ce430a2e2d16afef9053d63fab1b357d9e
-  MMKVCore: 9cfef4c48c6c46f66226fc2e4634d78490206a48
-  OpenSSL-Universal: 708e3d1e616a2c40f09a880aafc4b14d2f2a61ec
+  MMKV: 9c6c3fa4ddd849f28c7b9a5c9d23aab84f14ee35
+  MMKVCore: 9bb7440b170181ac5b81f542ac258103542e693d
+  OpenSSL-Universal: 96db2ea04174c0e3d50d93b74f0e198f980e2aa9
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: 8af6a32dfc2b65ec82193c2dee6e1011ff22ac2a
   RCTTypeSafety: bee9dd161c175896c680d47ef1d9eaacf2b587f4
