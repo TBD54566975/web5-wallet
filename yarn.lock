@@ -1916,15 +1916,7 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@ipld/dag-cbor@9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@ipld/dag-cbor/-/dag-cbor-9.0.1.tgz#fc7c76af284b74b3a67b003a768d2c4758841272"
-  integrity sha512-tImDka4akO7cuD24+nRLOU1kYXoai3VZ1cMeWCFUzwhKrRXyOLfVd9RZGI6aTsE/PYvHmkFobKvTeK9NPVtajA==
-  dependencies:
-    cborg "^1.10.0"
-    multiformats "^11.0.0"
-
-"@ipld/dag-cbor@^9.0.0":
+"@ipld/dag-cbor@9.0.1", "@ipld/dag-cbor@^9.0.0", "@ipld/dag-cbor@^9.0.3":
   version "9.0.3"
   resolved "https://registry.yarnpkg.com/@ipld/dag-cbor/-/dag-cbor-9.0.3.tgz#9d9206f1e72cbbb953760daf654d9fb847ea3147"
   integrity sha512-A2UFccS0+sARK9xwXiVZIaWbLbPxLGP3UZOjBeOMWfDY04SXi8h1+t4rHBzOlKYF/yWNm3RbFLyclWO7hZcy4g==
@@ -3589,11 +3581,6 @@ catering@^2.1.0, catering@^2.1.1:
   resolved "https://registry.yarnpkg.com/catering/-/catering-2.1.1.tgz#66acba06ed5ee28d5286133982a927de9a04b510"
   integrity sha512-K7Qy8O9p76sL3/3m7/zLKbRkyOlSZAgzEaLhyj2mXS8PsCud2Eo4hAb8aLtZqHh0QGqLcb9dlJSu6lHRVENm1w==
 
-cborg@^1.10.0:
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/cborg/-/cborg-1.10.2.tgz#83cd581b55b3574c816f82696307c7512db759a1"
-  integrity sha512-b3tFPA9pUr2zCUiCfRd2+wok2/LBSNUMKOuRRok+WlvvAgEt/PlbgPTsZUcwCOs53IJvLgTp0eotwtosE6njug==
-
 cborg@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/cborg/-/cborg-2.0.1.tgz#f7136d2999b6ba2228f48af6caeaff2028cfdbc7"
@@ -4305,11 +4292,6 @@ emoji-regex@^8.0.0:
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-8.0.0.tgz#e818fd69ce5ccfcb404594f842963bf53164cc37"
   integrity sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
 
-encode-utf8@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/encode-utf8/-/encode-utf8-1.0.3.tgz#f30fdd31da07fb596f281beb2f6b027851994cda"
-  integrity sha512-ucAnuBEhUK4boH2HjVYG5Q2mQyPorvv0u/ocS+zhdw0S8AlHYY+GOFhP1Gio5z4icpP2ivFSvhtFjQi8+T9ppw==
-
 encodeurl@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
@@ -4659,11 +4641,6 @@ extglob@^2.0.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
-
-fast-base64-encode@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/fast-base64-encode/-/fast-base64-encode-1.0.0.tgz#883945eb67e139dbf5a877bcca57a89e6824c7d4"
-  integrity sha512-z2XCzVK4fde2cuTEHu2QGkLD6BPtJNKJPn0Z7oINvmhq/quUuIIVPYKUdN0gYeZqOyurjJjBH/bUzK5gafyHvw==
 
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
@@ -6058,11 +6035,6 @@ lodash@4.17.21, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.21, lodash@^4.17.
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
-lodash@4.17.3:
-  version "4.17.3"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.3.tgz#557ed7d2a9438cac5fd5a43043ca60cb455e01f7"
-  integrity sha512-H+sg4+uBLOBrw9833P6gCURJjV+puWPbxM8S3H4ORlhVCmQpF5yCE50bc4Exaqm9U5Nhjw83Okq1azyb1U7mxw==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -7732,15 +7704,6 @@ react-native-screens@3.22.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-webview-crypto@0.0.25:
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/react-native-webview-crypto/-/react-native-webview-crypto-0.0.25.tgz#c35506e1f092f7633db684f388f2b449667a05a2"
-  integrity sha512-H1kn5FFk0tBq5JDpkopyonAQTFEDAGoVJG+9Ip84jx4QmHmh5hxaJ5PkOXsMeNb2wHnwuvsg5p3krCOYNf20+A==
-  dependencies:
-    encode-utf8 "^1.0.2"
-    fast-base64-encode "^1.0.0"
-    webview-crypto "^0.1.13"
-
 react-native-webview@13.2.2:
   version "13.2.2"
   resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-13.2.2.tgz#06b04db8e1f4ed57a9dc92f4094aa0e41271b89b"
@@ -8188,17 +8151,17 @@ send@0.18.0, send@^0.18.0:
     range-parser "~1.2.1"
     statuses "2.0.1"
 
-serialize-error@2.1.0, serialize-error@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
-  integrity sha512-ghgmKt5o4Tly5yEG/UJp8qTd0AN7Xalw4XBtDEKP655B699qMEtra1WlXeE6WIvdEG481JvRxULKsInq/iNysw==
-
 serialize-error@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-6.0.0.tgz#ccfb887a1dd1c48d6d52d7863b92544331fd752b"
   integrity sha512-3vmBkMZLQO+BR4RPHcyRGdE09XCF6cvxzk2N2qn8Er3F91cy8Qt7VvEbZBOpaL53qsBbe2cFOefU6tRY6WDelA==
   dependencies:
     type-fest "^0.12.0"
+
+serialize-error@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
+  integrity sha512-ghgmKt5o4Tly5yEG/UJp8qTd0AN7Xalw4XBtDEKP655B699qMEtra1WlXeE6WIvdEG481JvRxULKsInq/iNysw==
 
 serve-static@^1.13.1:
   version "1.15.0"
@@ -9168,14 +9131,6 @@ webidl-conversions@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
   integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
-
-webview-crypto@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/webview-crypto/-/webview-crypto-0.1.13.tgz#290243e1d3b45712b358d2f8a69952de63c06ee2"
-  integrity sha512-8nRkNvvYchoFi32tooLX6qZzG4iCoxOBGsamZnZ1BnN4Nl6cATiIOUzwWDjUpfMu8Mvf+t3Dn0p9cSLrnZfwtg==
-  dependencies:
-    lodash "4.17.3"
-    serialize-error "2.1.0"
 
 whatwg-fetch@^3.0.0:
   version "3.6.2"
