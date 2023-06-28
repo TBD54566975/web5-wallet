@@ -6,6 +6,7 @@ import {
 import { profilesAtom } from "../features/profile/atoms";
 import { WelcomeScreen } from "../features/onboarding/WelcomeScreen";
 import { TabNavigator } from "./TabNavigator";
+import { PermissionRequestScreen } from "../features/deep-links/PermissionRequestScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,11 @@ export const AppNavigator = () => {
       />
 
       <Stack.Screen name="Home" component={TabNavigator} />
+      <Stack.Screen
+        name="PermissionRequestScreen"
+        component={PermissionRequestScreen}
+        options={PermissionRequestScreenOptions}
+      />
     </Stack.Navigator>
   );
 };
@@ -37,5 +43,10 @@ const WelcomeScreenOptions: NativeStackNavigationOptions = {
   title: "Welcome",
   headerShown: true,
   headerLargeTitle: true,
+  animation: "slide_from_bottom",
+};
+
+const PermissionRequestScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
   animation: "slide_from_bottom",
 };
