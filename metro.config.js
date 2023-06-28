@@ -10,6 +10,15 @@ config.transformer.getTransformOptions = async () => ({
 });
 
 config.resolver.resolveRequest = (context, moduleName, platform) => {
+  //  cherrypick node bundle
+  if (moduleName === "eccrypto") {
+    return {
+      filePath: `${__dirname}/node_modules/eccrypto/index.js`,
+      type: "sourceFile",
+    };
+  }
+
+  // provide the omitted entrypoints
   if (moduleName === "@decentralized-identity/ion-tools") {
     return {
       filePath: `${__dirname}/node_modules/@decentralized-identity/ion-tools/dist/esm/index.js`,

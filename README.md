@@ -55,7 +55,6 @@ For active development on `ssi-sdk-mobile` consult the docs of `ssi-sdk-mobile`.
 | react-native-quick-crypto         | The `crypto` module from Node.js. Polyfilled using native C++                                             |
 | fastestsmallesttextencoderdecoder | The `TextEnder` & `TextDecoder` module from Node.js. Polyfilled with JS                                   |
 | stream-browserify                 | The `stream` module from Node.js. Polyfilled with JS                                                      |
-| react-native-webview-crypto       | Borrows the implementation of WebCrypto from a webview. Polyfills WebCrypto                               |
 | react-native-webview              | Allows to spin up a WKWebView (and Android equivalent) for react native                                   |
 | react-native-safe-area-context    | Used to provide safe area dimensions at top and bottom of screen                                          |
 | @decentralized-identity/ion-tools | Provides `did:ion` support using Javascript                                                               |
