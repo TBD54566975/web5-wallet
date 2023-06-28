@@ -4,7 +4,7 @@ export const linking: LinkingOptions<ReactNavigation.RootParamList> = {
   prefixes: ["web5://"],
   config: {
     screens: {
-      PermissionRequestScreen: ":app/permission",
+      PermissionRequestScreen: ":host/permission",
     },
   },
 };

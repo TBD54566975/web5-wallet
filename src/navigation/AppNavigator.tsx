@@ -47,6 +47,8 @@ const WelcomeScreenOptions: NativeStackNavigationOptions = {
 };
 
 const PermissionRequestScreenOptions: NativeStackNavigationOptions = {
-  headerShown: false,
+  title: "Permission Request",
+  headerShown: true,
   animation: "slide_from_bottom",
+  presentation: "modal",
 };
