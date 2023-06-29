@@ -25,7 +25,7 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
       resp: encodedAcceptResponse(),
     });
 
-    navigation.pop();
+    navigation.goBack();
     if (await Linking.canOpenURL(successURL)) {
       Linking.openURL(successURL);
     } else {
@@ -36,7 +36,7 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
   const handleReject = async () => {
     const errorURL = params["x-error"];
 
-    navigation.pop();
+    navigation.goBack();
     if (await Linking.canOpenURL(errorURL)) {
       Linking.openURL(errorURL);
     } else {
