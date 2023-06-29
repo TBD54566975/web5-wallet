@@ -26,7 +26,8 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
     });
 
     navigation.goBack();
-    if (await Linking.canOpenURL(successURL)) {
+    const canOpen = await Linking.canOpenURL(successURL);
+    if (canOpen) {
       Linking.openURL(successURL);
     } else {
       console.error("Cannot launch successURL");
@@ -37,7 +38,8 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
     const errorURL = params["x-error"];
 
     navigation.goBack();
-    if (await Linking.canOpenURL(errorURL)) {
+    const canOpen = await Linking.canOpenURL(errorURL);
+    if (canOpen) {
       Linking.openURL(errorURL);
     } else {
       console.error("Cannot open errorURL");
