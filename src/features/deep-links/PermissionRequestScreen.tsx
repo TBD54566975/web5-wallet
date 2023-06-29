@@ -47,28 +47,38 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContainer}
       >
-        <Text variant="headlineMedium">From</Text>
-        <Text variant="bodyLarge">{params.host}</Text>
+        <View style={styles.contentBlock}>
+          <Text variant="headlineMedium">From</Text>
+          <Text variant="bodyLarge">{params.host}</Text>
+          <Text variant="bodyLarge">
+            {permissionRequest.descriptor.description}
+          </Text>
+        </View>
 
-        <Text variant="bodyLarge">
-          {permissionRequest.descriptor.description}
-        </Text>
-        <Text variant="bodyLarge">
-          Granted by: {permissionRequest.descriptor.grantedBy}
-        </Text>
-        <Text variant="bodyLarge">
-          Granted to: {permissionRequest.descriptor.grantedTo}
-        </Text>
-        <Text variant="bodyLarge">
-          Scope: {permissionRequest.descriptor.scope.interface}:
-          {permissionRequest.descriptor.scope.method}
-        </Text>
-        <Text variant="bodySmall">
-          Scope: {permissionRequest.descriptor.scope.schema}
-        </Text>
-        <Text variant="bodyLarge">
-          Payload: {permissionRequest.authorization.payload}
-        </Text>
+        <View style={styles.contentBlock}>
+          <Text variant="bodyLarge">
+            Granted by: {permissionRequest.descriptor.grantedBy}
+          </Text>
+          <Text variant="bodyLarge">
+            Granted to: {permissionRequest.descriptor.grantedTo}
+          </Text>
+        </View>
+
+        <View style={styles.contentBlock}>
+          <Text variant="bodyLarge">
+            Scope: {permissionRequest.descriptor.scope.interface}:
+            {permissionRequest.descriptor.scope.method}
+          </Text>
+          <Text variant="bodySmall">
+            Scope: {permissionRequest.descriptor.scope.schema}
+          </Text>
+        </View>
+
+        <View style={styles.contentBlock}>
+          <Text variant="bodyLarge">
+            Payload: {permissionRequest.authorization.payload}
+          </Text>
+        </View>
       </ScrollView>
       <View style={styles.footer}>
         <Button
@@ -96,8 +106,14 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    paddingHorizontal: 10,
   },
   scrollViewContainer: {
+    alignItems: "center",
+  },
+  contentBlock: {
+    paddingTop: 10,
+    paddingBottom: 10,
     alignItems: "center",
   },
   footer: {
