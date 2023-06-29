@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, Text } from "react-native-paper";
 import { Linking, ScrollView, StyleSheet, View } from "react-native";
-import { PermissionRequest } from "./permission-request";
+import { PermissionRequest } from "./PermissionRequest";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { URLUtils } from "../../utils/url";
 
 type Params = {
   host: string;
@@ -18,27 +19,28 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
   const permissionRequest = PermissionRequest.fromBase64(params.req);
 
   const handleAccept = async () => {
-    const successUrl = createUrlWithParams(params["x-success"], {
+    const baseURL = params["x-success"];
+    const successURL = URLUtils.baseURLWithParams(baseURL, {
       // TODO: Build actual accept response instead of hard-coding
       resp: encodedAcceptResponse(),
     });
 
     navigation.pop();
-    if (await Linking.canOpenURL(successUrl)) {
-      Linking.openURL(successUrl);
+    if (await Linking.canOpenURL(successURL)) {
+      Linking.openURL(successURL);
     } else {
-      console.error("Cannot launch successUrl");
+      console.error("Cannot launch successURL");
     }
   };
 
   const handleReject = async () => {
-    const errorUrl = params["x-error"];
+    const errorURL = params["x-error"];
 
     navigation.pop();
-    if (await Linking.canOpenURL(errorUrl)) {
-      Linking.openURL(errorUrl);
+    if (await Linking.canOpenURL(errorURL)) {
+      Linking.openURL(errorURL);
     } else {
-      console.error("Cannot open errorUrl");
+      console.error("Cannot open errorURL");
     }
   };
 
@@ -172,13 +174,3 @@ const encodedAcceptResponse = () => {
     `
   ).toString("base64");
 };
-
-function createUrlWithParams(
-  baseUrl: string,
-  params: { [key: string]: string }
-): string {
-  let queryString = Object.entries(params)
-    .map(([key, value]) => `${key}=${value}`)
-    .join("&");
-  return `${baseUrl}?${queryString}`;
-}
