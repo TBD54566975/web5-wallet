@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "clean:rn": "watchman watch-del-all; rm -rf $TMPDIR/react-*; rm -rf $TMPDIR/react-native-packager-cache-*; rm -rf $TMPDIR/metro-cache; rm -rf $TMPDIR/haste-map-react-native-packager-*",
     "clean:yarn": "rm -rf node_modules/; yarn cache clean; yarn install",
-    "clean:system": "rm -rf ~/.cocoapods; rm -rf /Library/Developer/Xcode/DerivedData; rm -rf ~/.gradle/caches; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache; rm -fr ~/Library/Caches/com.apple.dt.Xcode/",
+    "clean:system": "rm -rf ~/.cocoapods; rm -rf /Library/Developer/Xcode/DerivedData; rm -rf ~/.gradle/; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache; rm -fr ~/Library/Caches/com.apple.dt.Xcode/",
     "clean:android": "cd android;./gradlew clean;./gradlew --stop",
     "clean:ios": "rm -rf ios/build; pod cache clean --all; rm -rf ios/Pods; cd ios; xcodebuild -alltargets clean",
     "clean": "yarn run clean:rn; yarn run clean:yarn; yarn run clean:system; yarn run clean:android; yarn run clean:ios; npx pod-install@latest",
