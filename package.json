@@ -31,6 +31,7 @@
     "@tbd54566975/web5": "0.7.10",
     "event-target-polyfill": "0.0.3",
     "expo": "48.0.17",
+    "expo-barcode-scanner": "^12.3.2",
     "expo-splash-screen": "0.18.2",
     "expo-status-bar": "1.4.4",
     "fastestsmallesttextencoderdecoder": "1.0.22",
