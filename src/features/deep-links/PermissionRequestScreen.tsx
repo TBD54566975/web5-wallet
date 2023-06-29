@@ -19,6 +19,7 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
 
   const handleAccept = async () => {
     const successUrl = createUrlWithParams(params["x-success"], {
+      // TODO: Build actual accept response instead of hard-coding
       resp: encodedAcceptResponse(),
     });
 
