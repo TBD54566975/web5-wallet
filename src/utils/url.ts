@@ -1,11 +1,10 @@
+import queryString from "query-string";
+
 function urlWithParams(
   baseURL: string,
   params: { [key: string]: string }
 ): string {
-  let queryString = Object.entries(params)
-    .map(([key, value]) => `${key}=${value}`)
-    .join("&");
-  return `${baseURL}?${queryString}`;
+  return `${baseURL}?${queryString.stringify(params)}`;
 }
 
 export const URLUtils = {
