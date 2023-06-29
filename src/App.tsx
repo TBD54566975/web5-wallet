@@ -5,7 +5,7 @@ import { AppNavigator } from "./navigation/AppNavigator";
 import { DwnService } from "./features/dwn/dwn-service";
 import { enableLegendStateReact } from "@legendapp/state/react";
 import { StatusBar } from "expo-status-bar";
-import { linking } from "./features/deep-links/linking";
+import { linking } from "./navigation/deep-links";
 
 enableLegendStateReact();
 

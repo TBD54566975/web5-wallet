@@ -1,4 +1,4 @@
-function baseURLWithParams(
+function urlWithParams(
   baseURL: string,
   params: { [key: string]: string }
 ): string {
@@ -9,5 +9,5 @@ function baseURLWithParams(
 }
 
 export const URLUtils = {
-  baseURLWithParams,
+  urlWithParams,
 };

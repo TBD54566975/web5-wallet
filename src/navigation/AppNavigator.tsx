@@ -6,7 +6,7 @@ import {
 import { profilesAtom } from "../features/profile/atoms";
 import { WelcomeScreen } from "../features/onboarding/WelcomeScreen";
 import { TabNavigator } from "./TabNavigator";
-import { PermissionRequestScreen } from "../features/deep-links/PermissionRequestScreen";
+import { PermissionRequestScreen } from "../features/permissions/PermissionRequestScreen";
 
 const Stack = createNativeStackNavigator();
 

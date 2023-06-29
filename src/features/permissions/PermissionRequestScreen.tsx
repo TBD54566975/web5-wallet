@@ -19,8 +19,8 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
   const permissionRequest = PermissionRequest.fromBase64(params.req);
 
   const handleAccept = async () => {
-    const baseURL = params["x-success"];
-    const successURL = URLUtils.baseURLWithParams(baseURL, {
+    const successBaseURL = params["x-success"];
+    const successURL = URLUtils.urlWithParams(successBaseURL, {
       // TODO: Build actual accept response instead of hard-coding
       resp: encodedAcceptResponse(),
     });
