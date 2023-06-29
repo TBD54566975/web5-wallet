@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { StyleSheet, ScrollView, View, DevSettings } from "react-native";
-import { Text, Button, List } from "react-native-paper";
+import { Text, Button, List, IconButton } from "react-native-paper";
 import { profilesAtom } from "./atoms";
 import { For } from "@legendapp/state/react";
 
@@ -13,6 +13,17 @@ export const ProfilesScreen = ({ navigation }) => {
     profilesAtom.set([]);
     DevSettings.reload();
   };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconButton
+          icon="qrcode-scan"
+          onPress={() => navigation.navigate("QRScannerScreen")}
+        />
+      ),
+    });
+  }, []);
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">

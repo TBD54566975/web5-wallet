@@ -6,6 +6,7 @@ import {
 import { ProfilesScreen } from "../features/profile/ProfileScreen";
 import { CredentialScreen } from "../features/credentials/CredentialScreen";
 import { CreateProfileScreen } from "../features/profile/CreateProfileScreen";
+import { QRScannerScreen } from "../features/qr-scanner/QRScannerScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,11 @@ export const SsiStackNavigator = () => {
         component={CreateProfileScreen}
         options={CreateProfileScreenOptions}
       />
+      <Stack.Screen
+        name="QRScannerScreen"
+        component={QRScannerScreen}
+        options={QRScannerScreenOptions}
+      />
     </Stack.Navigator>
   );
 };
@@ -45,4 +51,10 @@ const CreateProfileScreenOptions: NativeStackNavigationOptions = {
   title: "Create Profile",
   headerShown: true,
   headerLargeTitle: true,
+};
+
+const QRScannerScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
+  animation: "slide_from_bottom",
+  presentation: "fullScreenModal",
 };
