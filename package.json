@@ -12,7 +12,8 @@
     "clean:system": "rm -rf ~/.cocoapods; rm -rf /Library/Developer/Xcode/DerivedData; rm -rf ~/.gradle/; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache; rm -fr ~/Library/Caches/com.apple.dt.Xcode/",
     "clean:android": "cd android;./gradlew clean;./gradlew --stop",
     "clean:ios": "rm -rf ios/build; pod cache clean --all; rm -rf ios/Pods; cd ios; xcodebuild -alltargets clean",
-    "clean": "yarn run clean:rn; yarn run clean:yarn; yarn run clean:system; yarn run clean:android; yarn run clean:ios; npx pod-install@latest",
+    "clean": "yarn run clean:rn; yarn run clean:yarn; yarn run clean:android; yarn run clean:ios; npx pod-install@latest",
+    "deep-clean": "yarn run clean:rn; yarn run clean:yarn; yarn run clean:system; yarn run clean:android; yarn run clean:ios; npx pod-install@latest",
     "postinstall": "patch-package"
   },
   "@comment resolutions": "enforce de-duping even if upstream wont. this will need to be maintained.",
