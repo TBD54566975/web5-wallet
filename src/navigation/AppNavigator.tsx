@@ -50,5 +50,5 @@ const PermissionRequestScreenOptions: NativeStackNavigationOptions = {
   title: "Permission Request",
   headerShown: true,
   animation: "slide_from_bottom",
-  presentation: "modal",
+  presentation: "fullScreenModal",
 };
