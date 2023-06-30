@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { StyleSheet, ScrollView, View, DevSettings } from "react-native";
-import { Text, Button, List } from "react-native-paper";
+import { Text, Button, List, IconButton } from "react-native-paper";
 import { profilesAtom } from "./atoms";
 import { For } from "@legendapp/state/react";
 

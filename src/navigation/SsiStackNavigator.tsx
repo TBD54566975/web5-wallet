@@ -1,4 +1,5 @@
 import React from "react";
+import { IconButton } from "react-native-paper";
 import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
@@ -6,6 +7,7 @@ import {
 import { ProfilesScreen } from "../features/profile/ProfileScreen";
 import { CredentialScreen } from "../features/credentials/CredentialScreen";
 import { CreateProfileScreen } from "../features/profile/CreateProfileScreen";
+import { QRScannerScreen } from "../features/qr-scanner/QRScannerScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,13 +29,26 @@ export const SsiStackNavigator = () => {
         component={CreateProfileScreen}
         options={CreateProfileScreenOptions}
       />
+      <Stack.Screen
+        name="QRScannerScreen"
+        component={QRScannerScreen}
+        options={QRScannerScreenOptions}
+      />
     </Stack.Navigator>
   );
 };
 
-const ProfilesScreenOptions: NativeStackNavigationOptions = {
-  title: "Profiles",
-  headerLargeTitle: true,
+const ProfilesScreenOptions = ({ navigation }) => {
+  return {
+    title: "Profiles",
+    headerLargeTitle: true,
+    headerRight: () => (
+      <IconButton
+        icon="qrcode-scan"
+        onPress={() => navigation.navigate("QRScannerScreen")}
+      />
+    ),
+  };
 };
 
 const CredentialScreenOptions: NativeStackNavigationOptions = {
@@ -45,4 +60,10 @@ const CreateProfileScreenOptions: NativeStackNavigationOptions = {
   title: "Create Profile",
   headerShown: true,
   headerLargeTitle: true,
+};
+
+const QRScannerScreenOptions: NativeStackNavigationOptions = {
+  headerShown: false,
+  animation: "slide_from_bottom",
+  presentation: "fullScreenModal",
 };
