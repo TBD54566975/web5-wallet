@@ -18,10 +18,6 @@ export const QRScannerScreen = ({ navigation }) => {
     getCameraPermissions();
   }, []);
 
-  const onPressClose = () => {
-    navigation.goBack();
-  };
-
   const onBarCodeScanned = async ({ type, data }: BarCodeScannerResult) => {
     const deeplinkPrefix = linking.prefixes.find((prefix) =>
       data.startsWith(prefix)
@@ -46,7 +42,11 @@ export const QRScannerScreen = ({ navigation }) => {
           style={StyleSheet.absoluteFillObject}
         >
           <SafeAreaView>
-            <IconButton icon="close" iconColor="white" onPress={onPressClose} />
+            <IconButton
+              icon="close"
+              iconColor="white"
+              onPress={navigation.goBack()}
+            />
           </SafeAreaView>
         </BarCodeScanner>
       </View>
