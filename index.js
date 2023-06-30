@@ -1,4 +1,4 @@
-import "./src/config/polyfills";
+import "@tbd54566975/web5-react-native-polyfills";
 import { registerRootComponent } from "expo";
 
 import App from "./src/App";

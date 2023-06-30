@@ -20,7 +20,7 @@
   resolved "https://registry.yarnpkg.com/@assemblyscript/loader/-/loader-0.9.4.tgz#a483c54c1253656bb33babd464e3154a173e1577"
   integrity sha512-HazVq9zwTVwGmqdwYzu7WyQ6FQVZ7SwET0KKQuKm55jD0IfUpZgN0OPIiZG3zV1iSrVYcN0bdwLRXI/VNCYsUA==
 
-"@azure/core-asynciterator-polyfill@1.0.2":
+"@azure/core-asynciterator-polyfill@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@azure/core-asynciterator-polyfill/-/core-asynciterator-polyfill-1.0.2.tgz#0dd3849fb8d97f062a39db0e5cadc9ffaf861fec"
   integrity sha512-3rkP4LnnlWawl0LZptJOdXNrT/fHp2eQMadoasa6afspXdpGrtPZuAQc2PD0cpgyuoXtUWyC3tv7xfntjGS5Dw==
@@ -2079,7 +2079,7 @@
   resolved "https://registry.yarnpkg.com/@noble/ed25519/-/ed25519-2.0.0.tgz#5964c8190a4b4b804985717ca566113b93379e43"
   integrity sha512-/extjhkwFupyopDrt80OMWKdLgP429qLZj+z6sYJz90rF2Iz0gjZh2ArMKPImUl13Kx+0EXI2hN9T/KJV0/Zng==
 
-"@noble/hashes@1.3.1":
+"@noble/hashes@1.3.1", "@noble/hashes@^1.3.1":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.1.tgz#8831ef002114670c603c458ab8b11328406953a9"
   integrity sha512-EbqwksQwz9xDRGfDST86whPBgM65E0OH/pCgqW0GBVzO22bNE+NuIbeTb714+IfSjU3aRk47EUvXIb5bTsenKA==
@@ -2668,6 +2668,22 @@
   integrity sha512-TYTNK6aIeZiqCXUyyH4I2Tlkkg+9J2cOhFOw8tX7HEeaI/6C7rbFLzKw5j3M8iY1X0kZfVc/JWNYyhstPycJBQ==
   dependencies:
     "@tbd54566975/web5-agent" "0.1.6"
+
+"@tbd54566975/web5-react-native-metro-config@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@tbd54566975/web5-react-native-metro-config/-/web5-react-native-metro-config-0.1.0.tgz#e0251cbecf8c99790f66dfd12d7533c5fde0b30d"
+  integrity sha512-6YDURH0HkMDxFAmMFJS585plGMYrfg27oggrFvfpiFLIZLiWSNnHToJEpvEaIQ1mvzvmTiclqlDwsxUh02aFWA==
+
+"@tbd54566975/web5-react-native-polyfills@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@tbd54566975/web5-react-native-polyfills/-/web5-react-native-polyfills-0.1.0.tgz#960fa538353e5c683975e70b40fc190fa9841e0b"
+  integrity sha512-2J/+ANPWUd1bdrT3K6Pm8zf0Fv5ga9WqNKyo7UT6vGrdyPW6bt5FVwEie1tBXiEeDDhhtUE6Ze4i5YU7Lsm43w==
+  dependencies:
+    "@azure/core-asynciterator-polyfill" "^1.0.2"
+    "@noble/hashes" "^1.3.1"
+    event-target-polyfill "^0.0.3"
+    fastestsmallesttextencoderdecoder "^1.0.22"
+    stream-browserify "^3.0.0"
 
 "@tbd54566975/web5-user-agent@0.1.9":
   version "0.1.9"
@@ -4449,7 +4465,7 @@ ethers@^5.4.4:
     "@ethersproject/web" "5.7.1"
     "@ethersproject/wordlists" "5.7.0"
 
-event-target-polyfill@0.0.3:
+event-target-polyfill@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/event-target-polyfill/-/event-target-polyfill-0.0.3.tgz#ed373295f3b257774b5d75afb2599331d9f3406c"
   integrity sha512-ZMc6UuvmbinrCk4RzGyVmRyIsAyxMRlp4CqSrcQRO8Dy0A9ldbiRy5kdtBj4OtP7EClGdqGfIqo9JmOClMsGLQ==
@@ -4670,7 +4686,7 @@ fast-xml-parser@^4.0.12:
   dependencies:
     strnum "^1.0.5"
 
-fastestsmallesttextencoderdecoder@1.0.22:
+fastestsmallesttextencoderdecoder@^1.0.22:
   version "1.0.22"
   resolved "https://registry.yarnpkg.com/fastestsmallesttextencoderdecoder/-/fastestsmallesttextencoderdecoder-1.0.22.tgz#59b47e7b965f45258629cc6c127bf783281c5e93"
   integrity sha512-Pb8d48e+oIuY4MaM64Cd7OW1gt4nxCHs7/ddPPZ/Ic3sg8yVGM7O9wDvZ7us6ScaUupzM+pfBolwtYhN1IxBIw==
@@ -8450,7 +8466,7 @@ statuses@~1.5.0:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-browserify@3.0.0, stream-browserify@^3.0.0:
+stream-browserify@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-3.0.0.tgz#22b0a2850cdf6503e73085da1fc7b7d0c2122f2f"
   integrity sha512-H73RAHsVBapbim0tU2JwwOiXUj+fikfiaoYAKHF3VJfA0pe2BCzkhAHBlLG6REzE+2WNZcxOXjK7lkso+9euLA==
