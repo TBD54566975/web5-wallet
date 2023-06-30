@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import { Linking, StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import { IconButton, Text } from "react-native-paper";
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
 import { useLinkTo } from "@react-navigation/native";
+import { linking } from "../../navigation/deep-links";
 
 export const QRScannerScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState<Boolean | null>(null);
@@ -26,12 +23,15 @@ export const QRScannerScreen = ({ navigation }) => {
   };
 
   const onBarCodeScanned = async ({ type, data }: BarCodeScannerResult) => {
-    setScanned(true);
-    const cleanedUrl = data.replace(/^web5:\/\//i, "/");
-    console.log("I see a qr code: " + data);
-    console.log("cleanedUrl: " + cleanedUrl);
-
-    linkTo(cleanedUrl);
+    const deeplinkPrefix = linking.prefixes.find((prefix) =>
+      data.startsWith(prefix)
+    );
+    if (deeplinkPrefix) {
+      setScanned(true);
+      const linkURL = data.replace(deeplinkPrefix, "/");
+      navigation.goBack();
+      linkTo(linkURL);
+    }
   };
 
   if (hasPermission === null) {
