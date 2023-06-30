@@ -18,7 +18,7 @@ export const QRScannerScreen = ({ navigation }) => {
     getCameraPermissions();
   }, []);
 
-  const onBarCodeScanned = async ({ type, data }: BarCodeScannerResult) => {
+  const onBarCodeScanned = async ({ data }: BarCodeScannerResult) => {
     const deeplinkPrefix = linking.prefixes.find((prefix) =>
       data.startsWith(prefix)
     );
@@ -31,9 +31,17 @@ export const QRScannerScreen = ({ navigation }) => {
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return (
+      <SafeAreaView>
+        <Text>Requesting for camera permission</Text>
+      </SafeAreaView>
+    );
   } else if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return (
+      <SafeAreaView>
+        <Text>No access to camera</Text>;
+      </SafeAreaView>
+    );
   } else {
     return (
       <View style={styles.container}>
@@ -45,7 +53,7 @@ export const QRScannerScreen = ({ navigation }) => {
             <IconButton
               icon="close"
               iconColor="white"
-              onPress={navigation.goBack()}
+              onPress={navigation.goBack}
             />
           </SafeAreaView>
         </BarCodeScanner>

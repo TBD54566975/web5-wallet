@@ -1,4 +1,5 @@
 import React from "react";
+import { IconButton } from "react-native-paper";
 import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
@@ -37,9 +38,17 @@ export const SsiStackNavigator = () => {
   );
 };
 
-const ProfilesScreenOptions: NativeStackNavigationOptions = {
-  title: "Profiles",
-  headerLargeTitle: true,
+const ProfilesScreenOptions = ({ navigation }) => {
+  return {
+    title: "Profiles",
+    headerLargeTitle: true,
+    headerRight: () => (
+      <IconButton
+        icon="qrcode-scan"
+        onPress={() => navigation.navigate("QRScannerScreen")}
+      />
+    ),
+  };
 };
 
 const CredentialScreenOptions: NativeStackNavigationOptions = {

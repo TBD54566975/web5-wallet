@@ -14,17 +14,6 @@ export const ProfilesScreen = ({ navigation }) => {
     DevSettings.reload();
   };
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <IconButton
-          icon="qrcode-scan"
-          onPress={() => navigation.navigate("QRScannerScreen")}
-        />
-      ),
-    });
-  }, []);
-
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={styles.pageContainer}>
