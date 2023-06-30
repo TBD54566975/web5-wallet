@@ -5,6 +5,7 @@ import { AppNavigator } from "./navigation/AppNavigator";
 import { DwnService } from "./features/dwn/dwn-service";
 import { enableLegendStateReact } from "@legendapp/state/react";
 import { StatusBar } from "expo-status-bar";
+import { linking } from "./navigation/deep-links";
 
 enableLegendStateReact();
 
@@ -22,7 +23,7 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer theme={DarkTheme} linking={linking}>
       <StatusBar style="light" />
       <PaperProvider theme={theme}>
         <AppNavigator />
