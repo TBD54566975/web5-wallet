@@ -23,7 +23,6 @@
   "dependencies": {
     "@craftzdog/react-native-buffer": "6.0.5",
     "@legendapp/state": "1.2.11",
-    "@noble/hashes": "1.3.1",
     "@react-navigation/bottom-tabs": "6.5.8",
     "@react-navigation/native": "6.1.7",
     "@react-navigation/native-stack": "6.9.13",
