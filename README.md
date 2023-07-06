@@ -9,8 +9,8 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 - nvm (installed without brew)
 - rvm (installed without brew)
 - ruby-2.7.4 installed inside of rvm and selected
-- node v16.18.0 installed inside of nvm and selected
-- npm v9.4.2 installed inside of node v16.18.0 and selected
+- node v18.16.0 installed inside of nvm and selected
+- npm v9.4.2 installed inside of node v18.16.0 and selected
 - yarn v1.22.19 (installed without brew)
 - watchman (via homebrew)
 
@@ -20,30 +20,17 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 
 - `which rvm` should be `/Users/{USER}/.rvm/bin/rvm`
 
-- `which node` should be `/Users/{USER}/.nvm/versions/node/v16.18.0/bin/node`
+- `which node` should be `/Users/{USER}/.nvm/versions/node/v18.16.0/bin/node`
 
-- `which npm` should be `/Users/{USER}/.nvm/versions/node/v16.18.0/bin/npm`
+- `which npm` should be `/Users/{USER}/.nvm/versions/node/v18.16.0/bin/npm`
 
-- `nvm list` should include `->     v16.18.0`
+- `nvm list` should include `->     v18.16.0`
 
 - `rvm list` should include `=* ruby-2.7.4 [ arm64 ]`
 
 ## Further troubleshooting
 
 - Run `npx expo-env-info@latest`
-
-# SSI SDK Development Setup
-
-While this app is in initial development it is expected that [ssi-sdk-mobile.git](https://github.com/TBD54566975/ssi-sdk-mobile) is cloned as a sibling next to web5wallet. This allows rapid iteration and development of both this app and the SSI SDK without publishing versions.
-
-Your folder structure should look like this:
-
-```
-./ssi-sdk-mobile/
-./wallet/
-```
-
-For active development on `ssi-sdk-mobile` consult the docs of `ssi-sdk-mobile`. This app will use whatever branch or tag you've currently checked out from `ssi-sdk-mobile`.
 
 # Dependencies
 
@@ -70,4 +57,3 @@ For active development on `ssi-sdk-mobile` consult the docs of `ssi-sdk-mobile`.
 # Considerations
 
 - Three packages are polyfilled using JS rather than native. C++ polyfills could be created for higher performance.
-- `did:ion` relies on WebCrypto because of the way `ion-tools` is written. Is there an implementation of `did:ion` that instead relies on Node crypto? Should we write one?
