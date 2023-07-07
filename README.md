@@ -42,7 +42,6 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 | react-native-quick-crypto         | The `crypto` module from Node.js. Polyfilled using native C++                                             |
 | fastestsmallesttextencoderdecoder | The `TextEnder` & `TextDecoder` module from Node.js. Polyfilled with JS                                   |
 | stream-browserify                 | The `stream` module from Node.js. Polyfilled with JS                                                      |
-| react-native-webview              | Allows to spin up a WKWebView (and Android equivalent) for react native                                   |
 | react-native-safe-area-context    | Used to provide safe area dimensions at top and bottom of screen                                          |
 | @decentralized-identity/ion-tools | Provides `did:ion` support using Javascript                                                               |
 | @react-navigation/native          | Provides navigation (concepts of screens and animations) for rn                                           |

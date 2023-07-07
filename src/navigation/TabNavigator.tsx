@@ -4,7 +4,6 @@ import {
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { SsiStackNavigator } from "./SsiStackNavigator";
-import { BrowserScreen } from "../features/browser/BrowserScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
@@ -18,15 +17,6 @@ export const TabNavigator = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="card-outline" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Browser"
-        component={BrowserScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="globe-outline" color={color} size={size} />
           ),
         }}
       />
