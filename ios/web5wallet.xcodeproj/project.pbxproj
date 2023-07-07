@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -54,7 +54,6 @@
 		A4523CFC29F6F6BB003B1FA9 /* libreact-native-quick-crypto.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-quick-crypto.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4523CFE29F6F6BB003B1FA9 /* libreact-native-safe-area-context.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-safe-area-context.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4523D0029F6F6BB003B1FA9 /* libreact-native-ssi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-ssi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4523D0229F6F6BB003B1FA9 /* libreact-native-webview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-webview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4523D0429F6F6BB003B1FA9 /* libReact-perflogger.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-perflogger.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4523D0629F6F6BB003B1FA9 /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4523D0829F6F6BB003B1FA9 /* libReact-RCTAppDelegate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAppDelegate.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,7 +118,6 @@
 				A4523CFC29F6F6BB003B1FA9 /* libreact-native-quick-crypto.a */,
 				A4523CFE29F6F6BB003B1FA9 /* libreact-native-safe-area-context.a */,
 				A4523D0029F6F6BB003B1FA9 /* libreact-native-ssi.a */,
-				A4523D0229F6F6BB003B1FA9 /* libreact-native-webview.a */,
 				A4523D0429F6F6BB003B1FA9 /* libReact-perflogger.a */,
 				A4523D0629F6F6BB003B1FA9 /* libReact-RCTAnimation.a */,
 				A4523D0829F6F6BB003B1FA9 /* libReact-RCTAppDelegate.a */,
@@ -423,7 +421,10 @@
 				);
 				INFOPLIST_FILE = web5wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -451,7 +452,10 @@
 				DEVELOPMENT_TEAM = EYF346PHUG;
 				INFOPLIST_FILE = web5wallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -515,7 +519,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -568,7 +575,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "$(inherited)";

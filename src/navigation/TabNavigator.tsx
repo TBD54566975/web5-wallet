@@ -21,15 +21,6 @@ export const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="Browser"
-        component={BrowserScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="globe-outline" color={color} size={size} />
-          ),
-        }}
-      />
     </Tab.Navigator>
   );
 };
