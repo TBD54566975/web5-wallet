@@ -4,7 +4,6 @@ import {
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { SsiStackNavigator } from "./SsiStackNavigator";
-import { BrowserScreen } from "../features/browser/BrowserScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
