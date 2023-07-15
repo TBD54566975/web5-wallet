@@ -1,6 +1,6 @@
-import { LinkingOptions } from "@react-navigation/native";
+import { type LinkingOptions } from "@react-navigation/native";
 
-export const linking: LinkingOptions<ReactNavigation.RootParamList> = {
+export const linking: LinkingOptions<any> = {
   prefixes: ["web5://"],
   config: {
     screens: {

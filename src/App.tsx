@@ -19,7 +19,7 @@ export const theme: typeof MD3DarkTheme = {
 
 export default function App() {
   useEffect(() => {
-    DwnService.initMemoryDwn();
+    void DwnService.initMemoryDwn();
   }, []);
 
   return (

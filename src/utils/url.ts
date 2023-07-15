@@ -2,7 +2,7 @@ import queryString from "query-string";
 
 function urlWithParams(
   baseURL: string,
-  params: { [key: string]: string }
+  params: Record<string, string>
 ): string {
   return `${baseURL}?${queryString.stringify(params)}`;
 }

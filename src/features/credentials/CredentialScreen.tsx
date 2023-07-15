@@ -12,7 +12,7 @@ export const CredentialScreen = ({ route }) => {
     return profilesAtom.find(
       (profile) => profile.name.peek() === route.params.name
     );
-  }, []);
+  }, [route.params.name]);
 
   const onPressGetCredentials = async () => {
     const did = navigatedProfile?.did.peek();

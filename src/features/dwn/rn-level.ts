@@ -26,7 +26,7 @@ export class RNLevel extends LevelDB {
    *
    * @param operations an array of either "type" del or put operations
    */
-  batch(operations: Array<any>) {
+  batch(operations: any[]) {
     for (const operation of operations) {
       operation.type === "del"
         ? super.delete(operation.key)

@@ -1,6 +1,6 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import { StyleSheet, ScrollView, View, DevSettings } from "react-native";
-import { Text, Button, List, IconButton } from "react-native-paper";
+import { Text, Button, List } from "react-native-paper";
 import { profilesAtom } from "./atoms";
 import { For } from "@legendapp/state/react";
 
@@ -9,7 +9,7 @@ export const ProfilesScreen = ({ navigation }) => {
     navigation.navigate("CreateProfileScreen");
   };
 
-  const onPressWipeState = async () => {
+  const onPressWipeState = () => {
     profilesAtom.set([]);
     DevSettings.reload();
   };
@@ -23,6 +23,7 @@ export const ProfilesScreen = ({ navigation }) => {
         <For each={profilesAtom}>
           {(profile) => {
             const profileData = profile?.get();
+
             if (!profileData) {
               return <></>;
             }
@@ -31,6 +32,7 @@ export const ProfilesScreen = ({ navigation }) => {
               <List.Item
                 title={profileData.name}
                 description={`Credentials stored: ${profileData.credentials.length}`}
+                // eslint-disable-next-line react/no-unstable-nested-components
                 left={(props) => (
                   <List.Icon {...props} icon={profileData.icon} />
                 )}

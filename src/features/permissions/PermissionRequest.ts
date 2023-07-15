@@ -1,3 +1,5 @@
+import { Buffer } from "buffer";
+
 export class PermissionRequest {
   descriptor: Descriptor;
   authorization: Authorization;
@@ -7,10 +9,5 @@ export class PermissionRequest {
   }
 }
 // TODO: Once permission request format is more solidified, define the types below properly
-type Descriptor = {
-  [key: string]: any;
-};
-
-type Authorization = {
-  [key: string]: any;
-};
+type Descriptor = Record<string, any>;
+type Authorization = Record<string, any>;

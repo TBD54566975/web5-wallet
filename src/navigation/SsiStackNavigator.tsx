@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton } from "react-native-paper";
 import {
-  NativeStackNavigationOptions,
+  type NativeStackNavigationOptions,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import { ProfilesScreen } from "../features/profile/ProfileScreen";

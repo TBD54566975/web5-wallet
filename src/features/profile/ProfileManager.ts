@@ -13,7 +13,7 @@ export const ProfileManager: Web5ProfileManager = {
       throw new Error("must provide did or didMethod");
     }
 
-    var did: DidState;
+    let did: DidState;
     if (options.did) {
       did = options.did;
     } else {
@@ -43,10 +43,12 @@ export const ProfileManager: Web5ProfileManager = {
     profilesAtom.push(profile);
     return profile;
   },
-  async getProfile(id: string) {
-    return profilesAtom.find((profile) => profile.id.peek() === id)?.get();
+  getProfile(id: string) {
+    return Promise.resolve(
+      profilesAtom.find((profile) => profile.id.peek() === id)?.get()
+    );
   },
-  async listProfiles() {
-    return profilesAtom.get();
+  listProfiles() {
+    return Promise.resolve(profilesAtom.get());
   },
 };

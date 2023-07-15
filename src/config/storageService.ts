@@ -4,7 +4,7 @@ const storage = new MMKV();
 
 const setObjectOrArray = (
   key: string,
-  object: Record<string, unknown> | Array<unknown>
+  object: Record<string, unknown> | unknown[]
 ) => {
   try {
     const objectAsString = JSON.stringify(object);
