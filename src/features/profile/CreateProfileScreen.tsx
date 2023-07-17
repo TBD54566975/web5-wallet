@@ -3,11 +3,11 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import { Text, Button, TextInput } from "react-native-paper";
 import { ProfileManager } from "./ProfileManager";
 
-export const CreateProfileScreen = ({ navigation, route }) => {
+export const CreateProfileScreen = ({ navigation }) => {
   const [name, setName] = useState("");
 
   const onPressCreateProfile = async () => {
-    ProfileManager.createProfile({
+    await ProfileManager.createProfile({
       name: name,
       icon: "account-circle-outline",
       didMethod: "ion",

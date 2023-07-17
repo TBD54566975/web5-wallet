@@ -4,6 +4,7 @@ import { Linking, ScrollView, StyleSheet, View } from "react-native";
 import { PermissionRequest } from "./PermissionRequest";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { URLUtils } from "../../utils/url";
+import { Buffer } from "buffer";
 
 type Params = {
   host: string;
@@ -28,7 +29,7 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
     navigation.goBack();
     const canOpen = await Linking.canOpenURL(successURL);
     if (canOpen) {
-      Linking.openURL(successURL);
+      await Linking.openURL(successURL);
     } else {
       console.error("Cannot launch successURL");
     }
@@ -40,7 +41,7 @@ export const PermissionRequestScreen = ({ navigation, route }) => {
     navigation.goBack();
     const canOpen = await Linking.canOpenURL(errorURL);
     if (canOpen) {
-      Linking.openURL(errorURL);
+      await Linking.openURL(errorURL);
     } else {
       console.error("Cannot open errorURL");
     }

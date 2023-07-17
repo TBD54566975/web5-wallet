@@ -8,18 +8,18 @@ export const WelcomeScreen = ({ navigation }) => {
     console.warn("Import not implemented");
   };
 
-  const onPressStartFresh = () => {
-    ProfileManager.createProfile({
+  const onPressStartFresh = async () => {
+    await ProfileManager.createProfile({
       name: "Personal",
       icon: "account-circle-outline",
       didMethod: "ion",
     });
-    ProfileManager.createProfile({
+    await ProfileManager.createProfile({
       name: "Social",
       icon: "pound",
       didMethod: "ion",
     });
-    ProfileManager.createProfile({
+    await ProfileManager.createProfile({
       name: "Career",
       icon: "briefcase-outline",
       didMethod: "ion",
@@ -32,8 +32,8 @@ export const WelcomeScreen = ({ navigation }) => {
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       <View style={styles.pageContainer}>
         <Text variant="bodyLarge">
-          First things first, let's get your identity setup. Are you importing
-          your existing identity, or starting from scratch?
+          First things first, let&apos;s get your identity setup. Are you
+          importing your existing identity, or starting from scratch?
         </Text>
         <Button mode="contained" onPress={onPressImport}>
           Import

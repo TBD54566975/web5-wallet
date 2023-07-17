@@ -19,17 +19,17 @@ const initRNLevelDwn = async () => {
   if (!dwn) {
     const messageStore = new MessageStoreLevel({
       //@ts-expect-error currently not working, poc code
-      createLevelDatabase: async (_, options?: any) => new RNLevel(options),
+      createLevelDatabase: (_, options?: any) => new RNLevel(options),
     });
 
     const dataStore = new DataStoreLevel({
       //@ts-expect-error currently not working, poc code
-      createLevelDatabase: async (_, options?) => new RNLevel(options),
+      createLevelDatabase: (_, options?) => new RNLevel(options),
     });
 
     const eventLog = new EventLogLevel({
       //@ts-expect-error currently not working, poc code
-      createLevelDatabase: async (_, options?) => new RNLevel(options),
+      createLevelDatabase: (_, options?) => new RNLevel(options),
       location: "EVENTLOG",
     });
 
@@ -56,15 +56,18 @@ const initRNLevelDwn = async () => {
 const initMemoryDwn = async () => {
   if (!dwn) {
     const messageStore = new MessageStoreLevel({
-      createLevelDatabase: async (_, options?: any) => new MemoryLevel(options),
+      createLevelDatabase: (_, options?: any) =>
+        Promise.resolve(new MemoryLevel(options)),
     });
 
     const dataStore = new DataStoreLevel({
-      createLevelDatabase: async (_, options?) => new MemoryLevel(options),
+      createLevelDatabase: (_, options?) =>
+        Promise.resolve(new MemoryLevel(options)),
     });
 
     const eventLog = new EventLogLevel({
-      createLevelDatabase: async (_, options?) => new MemoryLevel(options),
+      createLevelDatabase: (_, options?) =>
+        Promise.resolve(new MemoryLevel(options)),
       location: "EVENTLOG",
     });
 
