@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "christian-kohler.npm-intellisense",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "expo.vscode-expo-tools",
+    "ionutvmi.path-autocomplete",
+    "Orta.vscode-ios-common-files",
+    "wangtao0101.vscode-js-import",
+  ]
+}
