@@ -15,9 +15,6 @@ ENV['EX_DEV_CLIENT_NETWORK_INSPECTOR'] = '1' if podfile_properties['EX_DEV_CLIEN
 
 platform :ios, podfile_properties['ios.deploymentTarget'] || '13.0'
 
-# TBD: hack that lets us develop SSI locally
-pod 'ssi', :path => '../../ssi-sdk-mobile/sdk/'
-
 install! 'cocoapods',
   :deterministic_uuids => false
 
