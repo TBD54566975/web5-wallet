@@ -19,15 +19,17 @@
   },
   "@comment resolutions": "enforce de-duping even if upstream wont. this will need to be maintained.",
   "resolutions": {
-    "@ipld/dag-cbor": "^9.0.3"
+    "@ipld/dag-cbor": "^9.0.3",
+    "level": "file:./src/rn-async-storage-level"
   },
   "dependencies": {
     "@craftzdog/react-native-buffer": "6.0.5",
+    "@decentralized-identity/ion-tools": "1.0.7",
     "@legendapp/state": "1.3.6",
+    "@react-native-async-storage/async-storage": "^1.19.1",
     "@react-navigation/bottom-tabs": "6.5.8",
     "@react-navigation/native": "6.1.7",
     "@react-navigation/native-stack": "6.9.13",
-    "@tbd54566975/dwn-sdk-js": "0.1.0",
     "@tbd54566975/dwn-sql-store": "0.0.3",
     "@tbd54566975/web5": "0.7.11",
     "@tbd54566975/web5-react-native-metro-config": "0.1.2",

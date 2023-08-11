@@ -1,0 +1,11 @@
+{
+  "name": "rn-async-storage-level",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pax-k <andrei@hyphen.id> (https://github.com/pax-k)",
+  "license": "SEE LICENSE IN LICENSE"
+}
