@@ -6,6 +6,7 @@ import { DwnService } from "./features/dwn/dwn-service";
 import { enableLegendStateReact } from "@legendapp/state/react";
 import { StatusBar } from "expo-status-bar";
 import { linking } from "./navigation/deep-links";
+import { Web5 } from "@tbd54566975/web5";
 
 enableLegendStateReact();
 
@@ -19,7 +20,12 @@ export const theme: typeof MD3DarkTheme = {
 
 export default function App() {
   useEffect(() => {
-    void DwnService.initSqliteDwn();
+    async function init() {
+      void DwnService.initMemoryDwn();
+      const { web5, did: myDid } = await Web5.connect();
+      console.log("myDid", myDid);
+    }
+    void init();
   }, []);
 
   return (
