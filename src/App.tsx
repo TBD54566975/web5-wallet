@@ -19,7 +19,7 @@ export const theme: typeof MD3DarkTheme = {
 
 export default function App() {
   useEffect(() => {
-    void DwnService.initSqliteDwn();
+    void DwnService.initExpoLevelDwn();
   }, []);
 
   return (
