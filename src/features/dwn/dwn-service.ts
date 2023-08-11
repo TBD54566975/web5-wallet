@@ -1,15 +1,11 @@
 import {
   Dwn,
-  EventLogLevel,
-  MessageStoreLevel,
-  DataStoreLevel,
   RecordsWrite,
   DataStream,
   DidKeyResolver,
   RecordsQuery,
 } from "@tbd54566975/dwn-sdk-js";
 import { MemoryLevel } from "memory-level";
-import { RNLevel } from "./rn-level";
 import {
   DataStoreSql,
   EventLogSql,
@@ -17,27 +13,30 @@ import {
   SqliteDialect,
 } from "@tbd54566975/dwn-sql-store";
 import { SqliteDatabase } from "./sqlite-config";
+import {
+  MessageStoreLevel,
+  DataStoreLevel,
+  EventLogLevel,
+} from "@tbd54566975/dwn-sdk-js/dist/esm/src/index-stores";
+import { AbstractDatabaseOptions } from "abstract-level";
+import { ExpoLevel } from "expo-level";
 
 // singleton
 let dwn: Dwn;
 
 // TODO: figure out which dwn urls we want to use. i imagine we want to use current host
-const initRNLevelDwn = async () => {
+const initExpoLevelDwn = async () => {
   if (!dwn) {
     const messageStore = new MessageStoreLevel({
-      //@ts-expect-error currently not working, poc code
-      createLevelDatabase: (_, options?: any) => new RNLevel(options),
+      createLevelDatabase: createExpoLevelDatabase,
     });
 
     const dataStore = new DataStoreLevel({
-      //@ts-expect-error currently not working, poc code
-      createLevelDatabase: (_, options?) => new RNLevel(options),
+      createLevelDatabase: createExpoLevelDatabase,
     });
 
     const eventLog = new EventLogLevel({
-      //@ts-expect-error currently not working, poc code
-      createLevelDatabase: (_, options?) => new RNLevel(options),
-      location: "EVENTLOG",
+      createLevelDatabase: createExpoLevelDatabase,
     });
 
     dwn = await Dwn.create({
@@ -58,6 +57,13 @@ const initRNLevelDwn = async () => {
   );
 
   return dwn;
+};
+
+const createExpoLevelDatabase = (
+  location: string,
+  options?: AbstractDatabaseOptions<unknown, unknown>
+): ExpoLevel<unknown, unknown> => {
+  return new ExpoLevel(location, options);
 };
 
 const initMemoryDwn = async () => {
@@ -162,7 +168,7 @@ const getDwn = () => {
 };
 
 export const DwnService = {
-  initRNLevelDwn,
+  initExpoLevelDwn,
   initMemoryDwn,
   initSqliteDwn,
   checkDwnStatus,
