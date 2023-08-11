@@ -34,7 +34,7 @@
     "@tbd54566975/web5-react-native-polyfills": "0.1.3",
     "expo": "49.0.3",
     "expo-barcode-scanner": "12.5.3",
-    "expo-level": "^0.3.2",
+    "expo-level": "file:assets/expo-level",
     "expo-splash-screen": "0.20.4",
     "expo-status-bar": "1.6.0",
     "memory-level": "1.0.0",
