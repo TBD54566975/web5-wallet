@@ -3295,7 +3295,7 @@ abort-controller@^3.0.0:
   dependencies:
     event-target-shim "^5.0.0"
 
-abstract-level@1.0.3, abstract-level@^1.0.0, abstract-level@^1.0.2:
+abstract-level@1.0.3, abstract-level@^1.0.0, abstract-level@^1.0.2, abstract-level@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abstract-level/-/abstract-level-1.0.3.tgz#78a67d3d84da55ee15201486ab44c09560070741"
   integrity sha512-t6jv+xHy+VYwc4xqZMn2Pa9DjcdzvzZmQGRjTFc8spIbRGHgBrEKbPq+rYXc7CCo0lxgYvSgKVg9qZAhpVQSjA==
@@ -5338,6 +5338,14 @@ expo-keep-awake@~12.3.0:
   version "12.3.0"
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-12.3.0.tgz#c42449ae19c993274ddc43aafa618792b6aec408"
   integrity sha512-ujiJg1p9EdCOYS05jh5PtUrfiZnK0yyLy+UewzqrjUqIT8eAGMQbkfOn3C3fHE7AKd5AefSMzJnS3lYZcZYHDw==
+
+expo-level@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/expo-level/-/expo-level-0.3.2.tgz#7128f318cb6fbf9163e7bb8b40becde352580131"
+  integrity sha512-5j0N5owW/oB7rvQ5Xty+FFIL3fMkS9N7GZUVxII700tzhuLsSLqdDnIC+YlefYLJcAh7+abUeOSc7EIJhLQgMA==
+  dependencies:
+    abstract-level "^1.0.3"
+    events "^3.3.0"
 
 expo-modules-autolinking@1.5.0:
   version "1.5.0"
