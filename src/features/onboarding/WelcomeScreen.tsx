@@ -25,7 +25,7 @@ export const WelcomeScreen = ({ navigation }) => {
       didMethod: "ion",
     });
 
-    navigation.replace("Home");
+    navigation.replace("Tabs");
   };
 
   return (
