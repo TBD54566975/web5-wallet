@@ -4,7 +4,7 @@ import {
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { HomeScreen } from "../features/home/HomeScreen";
-import { ProfilesScreen } from "../features/profile/ProfileScreen";
+import { ProfilesScreen } from "../features/profile/ProfilesScreen";
 import { CredentialsScreen } from "../features/credentials/CredentialsScreen";
 import { ConnectionsScreen } from "../features/connections/ConnectionsScreen";
 import { ActivityScreen } from "../features/activity/ActivityScreen";

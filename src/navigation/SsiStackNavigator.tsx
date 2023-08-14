@@ -4,7 +4,7 @@ import {
   type NativeStackNavigationOptions,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
-import { ProfilesScreen } from "../features/profile/ProfileScreen";
+import { ProfilesScreen } from "../features/profile/ProfilesScreen";
 import { CredentialScreen } from "../features/credentials/CredentialScreen";
 import { CreateProfileScreen } from "../features/profile/CreateProfileScreen";
 import { QRScannerScreen } from "../features/qr-scanner/QRScannerScreen";
