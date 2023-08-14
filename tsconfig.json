@@ -3,7 +3,7 @@
   "display": "React Native",
   "compilerOptions": {
     "isolatedModules": true,
-    "strict": false,
+    "strict": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true
   },
