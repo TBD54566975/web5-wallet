@@ -8,7 +8,8 @@ import { ProfilesScreen } from "../features/profile/ProfileScreen";
 import { CredentialsScreen } from "../features/credentials/CredentialsScreen";
 import { ConnectionsScreen } from "../features/connections/ConnectionsScreen";
 import { ActivityScreen } from "../features/activity/ActivityScreen";
-import { TabBarIcon } from "./tab-bar-icon";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,24 +50,39 @@ const TabNavigatorOptions: BottomTabNavigationOptions = {
 };
 
 const HomeScreenOptions: BottomTabNavigationOptions = {
-  tabBarIcon: TabBarIcon.ionicons("home-outline", "home"),
+  tabBarIcon: (props) => {
+    return (
+      <Ionicons name={props.focused ? "home-outline" : "home"} {...props} />
+    );
+  },
 };
 
 const ProfilesScreenOptions: BottomTabNavigationOptions = {
-  tabBarIcon: TabBarIcon.ionicons("person-outline", "person"),
+  tabBarIcon: (props) => (
+    <Ionicons name={props.focused ? "person-outline" : "person"} {...props} />
+  ),
 };
 
 const CredentialsScreenOptions: BottomTabNavigationOptions = {
-  tabBarIcon: TabBarIcon.ionicons("card-outline", "card"),
+  tabBarIcon: (props) => (
+    <Ionicons name={props.focused ? "card-outline" : "card"} {...props} />
+  ),
 };
 
 const ConnectionsScreenOptions: BottomTabNavigationOptions = {
-  tabBarIcon: TabBarIcon.materialCommunity("graph-outline", "graph"),
+  tabBarIcon: (props) => (
+    <MaterialCommunityIcons
+      name={props.focused ? "graph-outline" : "graph"}
+      {...props}
+    />
+  ),
 };
 
 const ActivityScreenOptions: BottomTabNavigationOptions = {
-  tabBarIcon: TabBarIcon.materialCommunity(
-    "clock-time-three-outline",
-    "clock-time-three"
+  tabBarIcon: (props) => (
+    <MaterialCommunityIcons
+      name={props.focused ? "clock-time-three-outline" : "clock-time-three"}
+      {...props}
+    />
   ),
 };
