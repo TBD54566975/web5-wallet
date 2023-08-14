@@ -52,27 +52,27 @@ const TabNavigatorOptions: BottomTabNavigationOptions = {
 const HomeScreenOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props) => {
     return (
-      <Ionicons name={props.focused ? "home-outline" : "home"} {...props} />
+      <Ionicons name={props.focused ? "home" : "home-outline"} {...props} />
     );
   },
 };
 
 const ProfilesScreenOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props) => (
-    <Ionicons name={props.focused ? "person-outline" : "person"} {...props} />
+    <Ionicons name={props.focused ? "person" : "person-outline"} {...props} />
   ),
 };
 
 const CredentialsScreenOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props) => (
-    <Ionicons name={props.focused ? "card-outline" : "card"} {...props} />
+    <Ionicons name={props.focused ? "card" : "card-outline"} {...props} />
   ),
 };
 
 const ConnectionsScreenOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props) => (
     <MaterialCommunityIcons
-      name={props.focused ? "graph-outline" : "graph"}
+      name={props.focused ? "graph" : "graph-outline"}
       {...props}
     />
   ),
@@ -81,7 +81,7 @@ const ConnectionsScreenOptions: BottomTabNavigationOptions = {
 const ActivityScreenOptions: BottomTabNavigationOptions = {
   tabBarIcon: (props) => (
     <MaterialCommunityIcons
-      name={props.focused ? "clock-time-three-outline" : "clock-time-three"}
+      name={props.focused ? "clock-time-three" : "clock-time-three-outline"}
       {...props}
     />
   ),
