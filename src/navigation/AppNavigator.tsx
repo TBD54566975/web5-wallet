@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 
 export const AppNavigator = () => {
   const getInitialRouteName = () =>
-    profilesAtom.peek().length ? "Home" : "CreateProfileScreen";
+    profilesAtom.peek().length ? "Tabs" : "CreateProfileScreen";
 
   return (
     <Stack.Navigator
@@ -25,7 +25,7 @@ export const AppNavigator = () => {
         options={WelcomeScreenOptions}
       />
 
-      <Stack.Screen name="Home" component={TabNavigator} />
+      <Stack.Screen name="Tabs" component={TabNavigator} />
       <Stack.Screen
         name="PermissionRequestScreen"
         component={PermissionRequestScreen}

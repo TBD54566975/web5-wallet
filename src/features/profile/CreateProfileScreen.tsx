@@ -16,7 +16,7 @@ export const CreateProfileScreen = ({ navigation }) => {
     if (navigation.canGoBack()) {
       navigation.goBack();
     } else {
-      navigation.replace("Home");
+      navigation.replace("Tabs");
     }
   };
 
