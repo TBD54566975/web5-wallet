@@ -7,13 +7,6 @@ import {
 } from "@tbd54566975/dwn-sdk-js";
 import { MemoryLevel } from "memory-level";
 import {
-  DataStoreSql,
-  EventLogSql,
-  MessageStoreSql,
-  SqliteDialect,
-} from "@tbd54566975/dwn-sql-store";
-import { SqliteDatabase } from "./sqlite-config";
-import {
   MessageStoreLevel,
   DataStoreLevel,
   EventLogLevel,
@@ -100,32 +93,6 @@ const initMemoryDwn = async () => {
   return dwn;
 };
 
-const initSqliteDwn = async () => {
-  if (!dwn) {
-    const sqliteDialect = new SqliteDialect({
-      database: (): Promise<SqliteDatabase> => {
-        return Promise.resolve(new SqliteDatabase({ name: "dwn.sqlite" }));
-      },
-    });
-
-    const messageStore = new MessageStoreSql(sqliteDialect);
-    const dataStore = new DataStoreSql(sqliteDialect);
-    const eventLog = new EventLogSql(sqliteDialect);
-
-    dwn = await Dwn.create({ messageStore, dataStore, eventLog });
-    console.info("Sqlite DWN initialized");
-    await checkDwnStatus();
-
-    return dwn;
-  }
-
-  console.warn(
-    "initDwn was called but the dwn was already initialized. This has been no-oped so it's harmless. But check your code and make sure you aren't running initialization twice."
-  );
-
-  return dwn;
-};
-
 const checkDwnStatus = async () => {
   const { did, keyPair } = await DidKeyResolver.generate();
   const privateJwk = keyPair.privateJwk;
@@ -170,7 +137,6 @@ const getDwn = () => {
 export const DwnService = {
   initExpoLevelDwn,
   initMemoryDwn,
-  initSqliteDwn,
   checkDwnStatus,
   getDwn,
 };
