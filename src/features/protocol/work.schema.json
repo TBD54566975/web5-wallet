@@ -1,0 +1,13 @@
+{
+  "title": "Work",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "companyName": { "type": "string" },
+    "current": { "type": "boolean" },
+    "dateStarted": { "type": "string", "format": "date" },
+    "dateEnded": { "type": "string", "format": "date" },
+    "address": { "$ref": "./address.schema.json" },
+    "description": { "type": "string" }
+  }
+}

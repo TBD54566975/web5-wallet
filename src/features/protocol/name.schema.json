@@ -1,0 +1,14 @@
+{
+  "title": "Name",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents all of the ways someone can name themselves",
+  "properties": {
+    "first": { "type": "string" },
+    "last": { "type": "string" },
+    "middle": { "type": "string" },
+    "patronymic": { "type": "string" },
+    "nickname": { "type": "string" },
+    "maiden": { "type": "string" }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Phone",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "countryCode": { "type": "string" },
+    "areaCode": { "type": "string" },
+    "localNumber": { "type": "string" }
+  }
+}

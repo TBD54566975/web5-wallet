@@ -1,0 +1,14 @@
+{
+  "title": "Address",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "street": { "type": "string" },
+    "street2": { "type": "string" },
+    "locality": { "type": "string" },
+    "region": { "type": "string" },
+    "country": { "type": "string" },
+    "countryCode": { "type": "string" },
+    "postalCode": { "type": "string" }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "description": "Appropriate for an About Me page in a social media app",
+  "properties": {
+    "sex": { "type": "string", "enum": ["male", "female"] },
+    "age": { "type": "number" },
+    "bio": { "type": "string" },
+    "website": { "type": "string", "format": "uri" },
+    "hometown": { "type": "string" },
+    "socials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "site": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}
