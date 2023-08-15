@@ -4,7 +4,7 @@ import {
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { HomeScreen } from "../features/home/HomeScreen";
-import { ProfilesScreen } from "../features/profile/ProfileScreen";
+import { ProfilesScreen } from "../features/profile/ProfilesScreen";
 import { CredentialsScreen } from "../features/credentials/CredentialsScreen";
 import { ConnectionsScreen } from "../features/connections/ConnectionsScreen";
 import { ActivityScreen } from "../features/activity/ActivityScreen";
@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 
 export const TabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={TabNavigatorOptions}>
+    <Tab.Navigator>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -43,10 +43,6 @@ export const TabNavigator = () => {
       />
     </Tab.Navigator>
   );
-};
-
-const TabNavigatorOptions: BottomTabNavigationOptions = {
-  headerShown: false,
 };
 
 const HomeScreenOptions: BottomTabNavigationOptions = {
