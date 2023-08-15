@@ -1,5 +1,5 @@
 export type AboutProtocolType = {
-  sex?: "male" | "female";
+  gender?: string;
   age?: number;
   bio?: string;
   hometown?: string;
