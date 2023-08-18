@@ -6,6 +6,7 @@ import { DwnService } from "./features/dwn/dwn-service";
 import { enableLegendStateReact } from "@legendapp/state/react";
 import { StatusBar } from "expo-status-bar";
 import { linking } from "./navigation/deep-links";
+import { bootstrapIdentityAgent } from "./features/identity/identity-agent";
 
 enableLegendStateReact();
 
@@ -19,7 +20,15 @@ export const theme: typeof MD3DarkTheme = {
 
 export default function App() {
   useEffect(() => {
-    void DwnService.initExpoLevelDwn();
+    const startupTasks = async () => {
+      await DwnService.initExpoLevelDwn();
+      await bootstrapIdentityAgent(
+        "passphrase",
+        "Personal",
+        DwnService.getDwn()
+      );
+    };
+    void startupTasks();
   }, []);
 
   return (
