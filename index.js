@@ -3,8 +3,7 @@ import { registerRootComponent } from "expo";
 import { polyfillBlob } from "./blob-polyfill";
 
 if (!global.structuredClone) {
-  var structuredClone = require("realistic-structured-clone");
-  global.structuredClone = structuredClone;
+  global.structuredClone = require("realistic-structured-clone");
 }
 
 polyfillBlob();
