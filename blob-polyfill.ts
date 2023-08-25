@@ -73,8 +73,12 @@ function polyfillBlobStream() {
  * until it is ultimately available via the JSI.
  */
 async function getArrayBuffer(blob: Blob): Promise<Uint8Array> {
-  const arrayBuffer = getArrayBufferForBlob(blob);
-  if (arrayBuffer.length === blob.size) {
+  let arrayBuffer: Uint8Array | undefined = undefined;
+  try {
+    arrayBuffer = getArrayBufferForBlob(blob);
+  } catch {}
+
+  if (arrayBuffer && arrayBuffer.length === blob.size) {
     return arrayBuffer;
   } else {
     // The buffer isn't available yet from the JSI.
