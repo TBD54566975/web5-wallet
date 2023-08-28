@@ -18,7 +18,7 @@ export type NameProtocolType = {
 export const profileProtocol = {
   profile: {
     definition: {
-      protocol: "./",
+      protocol: "https://www.npmjs.com/package/@web5/profile-protocol",
       types: {
         name: {
           schema: "./name.schema.json",
