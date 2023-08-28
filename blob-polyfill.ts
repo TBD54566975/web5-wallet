@@ -22,6 +22,7 @@ function monkeyPatchBlobConstructor() {
 
       if (blobParts) {
         for (const [index, element] of blobParts.entries()) {
+          // TODO #64: Investigate performance here, and see if we can make an upstream change to fix.
           if (element instanceof Uint8Array) {
             blobParts[index] = decoder.decode(element);
           }
@@ -33,7 +34,7 @@ function monkeyPatchBlobConstructor() {
   };
 
   const blobProxy = new Proxy(OriginalBlob, blobProxyHandler);
-  (global as any).Blob = blobProxy;
+  global.Blob = blobProxy;
 }
 
 /**
@@ -88,8 +89,7 @@ async function getArrayBuffer(blob: Blob): Promise<Uint8Array> {
   }
 }
 
-// eslint-disable-next-line require-await
-async function sleep(ms: number) {
+function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
