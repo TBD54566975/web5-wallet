@@ -11,6 +11,9 @@ const AddCredentialDetailScreen = ({ navigation }) => {
   const navigateToAddCredentialOptions = () => {
     navigation.navigate("AddCredentialOptions");
   };
+  const navigateToAddCredentialDetail = () => {
+    navigation.push("AddCredentialDetail");
+  };
   return (
     <SafeAreaView>
       <View style={Layouts.container}>
@@ -32,35 +35,37 @@ const AddCredentialDetailScreen = ({ navigation }) => {
             Accepted by law everywhere your physical passport is required
           </Text>
         </View>
-        <View style={[Layouts.row, style.callout, style.danger]}>
+        <View style={[Layouts.row, Checklist.callout, Checklist.danger]}>
           <Text style={[Typography.body4, { color: ColorTheme.REDUCED }]}>
             Credentials required
           </Text>
           <View style={FlexLayouts.row}>
-            <View style={[style.checkbox, style.success]}>
+            <View style={[Checklist.checkbox, Checklist.success]}>
               <Octicons name="check" size={16} color={ColorTheme.SUCCESS} />
             </View>
             <View>
               <Text style={Typography.body1}>KYC Credential</Text>
-              <Text style={[Typography.body4, style.success]}>
+              <Text style={[Typography.body4, Checklist.success]}>
                 You have this credential
               </Text>
             </View>
           </View>
-          <View style={style.row}>
-            <View style={[FlexLayouts.row, style.textContainer]}>
-              <View style={[style.checkbox, style.danger]}>
+          <View style={Checklist.row}>
+            <View style={[FlexLayouts.row, Checklist.textContainer]}>
+              <View style={[Checklist.checkbox, Checklist.danger]}>
                 <Octicons name="x" size={16} color={ColorTheme.DANGER} />
               </View>
               <View>
                 <Text style={Typography.body1}>Foreign Passport</Text>
-                <Text style={[Typography.body4, style.danger]}>
+                <Text style={[Typography.body4, Checklist.danger]}>
                   You don&apos;t have this credential
                 </Text>
               </View>
             </View>
-            <View style={style.buttonContainer}>
-              <Button kind="primary">Get</Button>
+            <View style={Checklist.buttonContainer}>
+              <Button kind="primary" onPress={navigateToAddCredentialDetail}>
+                Get
+              </Button>
             </View>
           </View>
         </View>
@@ -74,7 +79,7 @@ const AddCredentialDetailScreen = ({ navigation }) => {
 
 export default AddCredentialDetailScreen;
 
-const style = StyleSheet.create({
+const Checklist = StyleSheet.create({
   callout: {
     borderWidth: 4,
     borderRadius: 20,
@@ -101,7 +106,6 @@ const style = StyleSheet.create({
   //TODO: this is a shared style with Item/Tappable styles
   row: {
     flexDirection: "row",
-    // alignContent: "flex-start",
   },
   textContainer: {
     flexBasis: "67%",

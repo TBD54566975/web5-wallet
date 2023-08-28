@@ -16,6 +16,7 @@ import {
 const AddCredentialOptionsScreen = ({ navigation }) => {
   const profiles = ["My social profile", "My professional profile"];
   const [selectedProfile, setSelectedProfile] = useState(profiles[0]);
+
   const addCredential = () => {
     Alert.alert(
       "Not yet implemented",
@@ -59,8 +60,8 @@ const AddCredentialOptionsScreen = ({ navigation }) => {
               onPress={() => setSelectedProfile(profile)}
               accessibilityRole="radio"
             >
-              <View style={style.row}>
-                <View style={[FlexLayouts.row, style.textContainer]}>
+              <View style={Selections.row}>
+                <View style={[FlexLayouts.row, Selections.textContainer]}>
                   <Item
                     heading={profile}
                     subtitle="Alex Aardvark"
@@ -69,10 +70,10 @@ const AddCredentialOptionsScreen = ({ navigation }) => {
                     badgeName="feed-person"
                   />
                 </View>
-                <View style={style.buttonContainer}>
-                  <View style={style.radioOuter}>
+                <View style={Selections.buttonContainer}>
+                  <View style={Selections.radioOuter}>
                     {selectedProfile === profile && (
-                      <View style={style.radioInner} />
+                      <View style={Selections.radioInner} />
                     )}
                   </View>
                 </View>
@@ -90,7 +91,7 @@ const AddCredentialOptionsScreen = ({ navigation }) => {
 
 export default AddCredentialOptionsScreen;
 
-const style = StyleSheet.create({
+const Selections = StyleSheet.create({
   //TODO: this is a shared style with Item/Tappable styles
   row: {
     flexDirection: "row",
