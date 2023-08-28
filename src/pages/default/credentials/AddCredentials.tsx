@@ -1,4 +1,4 @@
-import { ItemProps } from "@/components/Item";
+import { BadgeNames, ItemProps } from "@/components/Item";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { For } from "@legendapp/state/react";
@@ -6,10 +6,11 @@ import React from "react";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import { Tappable } from "../Tappable";
 import { observable } from "@legendapp/state";
+import { mockCredentials } from "@/services/mocks";
 
 const AddCredentialsScreen = ({ navigation }) => {
-  const navigateToAddCredentialDetail = () => {
-    navigation.navigate("AddCredentialDetail");
+  const navigateToAddCredentialDetail = (credential) => {
+    navigation.navigate("AddCredentialDetail", { credential });
   };
 
   return (
@@ -25,11 +26,16 @@ const AddCredentialsScreen = ({ navigation }) => {
               if (!credential) {
                 return <></>;
               }
-              const options: ItemProps = credential; //will transform this
+              const options: ItemProps = {
+                heading: credential.name,
+                subtitle: `Issued by ${credential.issuer}`,
+                iconName: credential.icon as ItemProps["iconName"],
+                badgeName: BadgeNames.CREDENTIAL,
+              };
               return (
                 <Tappable
                   options={options}
-                  onPress={navigateToAddCredentialDetail}
+                  onPress={() => navigateToAddCredentialDetail(credential)}
                 />
               );
             }}
@@ -41,25 +47,6 @@ const AddCredentialsScreen = ({ navigation }) => {
 };
 
 export default AddCredentialsScreen;
-
-//TODO: Move this to common place - also consumed in Discovery
-
-const mockCredentials: ItemProps[] = [
-  {
-    heading: "U.S. Passport",
-    subtitle: "U.S. State Department",
-    body: "Accepted by law everywhere your physical passport is required",
-    iconName: "archive",
-    badgeName: "id-badge",
-  },
-  {
-    heading: "KYC Credential",
-    subtitle: "TBD (Block Inc.)",
-    body: "Meets KYC requirements of most PFIs in the tbDEX network",
-    iconName: "issue-closed",
-    badgeName: "id-badge",
-  },
-];
 
 const availableCredentials =
   observable<typeof mockCredentials>(mockCredentials);

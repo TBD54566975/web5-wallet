@@ -6,7 +6,7 @@ import { For } from "@legendapp/state/react";
 import { ScrollView, View } from "react-native";
 import { Button } from "@/components/Button";
 import { FlexLayouts } from "@/theme/layouts";
-import { ItemProps } from "@/components/Item";
+import { BadgeNames, ItemProps } from "@/components/Item";
 import { formatDID } from "@/util/formatters";
 
 const ProfilesScreen = ({ navigation }) => {
@@ -34,7 +34,7 @@ const ProfilesScreen = ({ navigation }) => {
                 body: formatDID(profile.id),
                 // TODO: Remove this type casting
                 iconName: profile.icon as ItemProps["iconName"],
-                badgeName: "feed-person",
+                badgeName: BadgeNames.PROFILE,
               };
               return (
                 <Tappable

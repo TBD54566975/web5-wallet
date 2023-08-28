@@ -113,11 +113,7 @@ export const ItemStyles = StyleSheet.create({
 
 export type ItemAvatarProps = Partial<ImageProps> & {
   iconName?: keyof typeof Octicons.glyphMap;
-  badgeName?:
-    | keyof typeof Octicons.glyphMap
-    | "feed-person"
-    | "webhook"
-    | "id-badge";
+  badgeName?: BadgeNames;
 };
 
 export type ItemBodyProps = {
@@ -130,3 +126,9 @@ export type ItemBodyProps = {
 export type ItemProps = ItemAvatarProps & ItemBodyProps;
 
 export type ItemStackProps = { images: ItemAvatarProps[] } & ItemBodyProps;
+
+export enum BadgeNames {
+  PROFILE = "feed-person",
+  CREDENTIAL = "id-badge",
+  CONNECTION = "webhook",
+}

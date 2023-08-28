@@ -1,4 +1,4 @@
-import { ItemProps } from "@/components/Item";
+import { BadgeNames, ItemProps } from "@/components/Item";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import React, { useState } from "react";
@@ -7,6 +7,7 @@ import { Tappable } from "../Tappable";
 import { LabelValueItem } from "@/components/LabelValue";
 import { formatDID, formatDate } from "@/util/formatters";
 import { MenuPageLayout } from "../MenuPageLayout";
+import { mockConnections } from "@/services/mocks";
 
 const ProfileDetailScreen = ({ navigation, route }) => {
   const tabLabels = ["About", "Connections", "Activity"];
@@ -21,21 +22,18 @@ const ProfileDetailScreen = ({ navigation, route }) => {
     name: profileName,
     displayName,
     icon,
-    // connections,
     dateCreated,
-    // credentials,
-    // did,
     id,
   } = route.params.profile;
 
   //TODO: Sub this out for real connections
-  const connections: ItemProps[] = [
-    {
-      heading: "DIDPay",
-      iconName: "credit-card",
-      badgeName: "webhook",
-    },
-  ];
+  const connections: ItemProps[] = mockConnections.map((connection) => {
+    return {
+      heading: connection.name,
+      iconName: connection.icon as ItemProps["iconName"],
+      badgeName: BadgeNames.CONNECTION,
+    };
+  });
 
   return (
     <MenuPageLayout
@@ -43,7 +41,7 @@ const ProfileDetailScreen = ({ navigation, route }) => {
         heading: profileName,
         subtitle: displayName,
         iconName: icon,
-        badgeName: "feed-person",
+        badgeName: BadgeNames.PROFILE,
       }}
       menuTabs={tabLabels.map((label) => {
         return {

@@ -1,39 +1,42 @@
 import { Button } from "@/components/Button";
-import { ItemAvatar } from "@/components/Item";
+import { BadgeNames, ItemAvatar } from "@/components/Item";
 import { ColorTheme } from "@/theme/colors";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
+import { mockCredentials } from "@/services/mocks";
 
-const AddCredentialDetailScreen = ({ navigation }) => {
+const AddCredentialDetailScreen = ({ navigation, route }) => {
+  const credential = route.params.credential;
   const navigateToAddCredentialOptions = () => {
-    navigation.navigate("AddCredentialOptions");
+    navigation.navigate("AddCredentialOptions", { credential });
   };
-  const navigateToAddCredentialDetail = () => {
-    navigation.push("AddCredentialDetail");
+  const navigateToAddCredentialDetail = (secondaryCredential) => {
+    navigation.push("AddCredentialDetail", { credential: secondaryCredential });
   };
+
+  //TODO: Replace mockCredentials with real profile credentials
+
   return (
     <SafeAreaView>
       <View style={Layouts.container}>
         <View style={[Layouts.row, FlexLayouts.containerHorizontalCenter]}>
           <ItemAvatar
             iconName="note"
-            badgeName="id-badge"
+            badgeName={BadgeNames.CREDENTIAL}
             style={Typography.textCenter}
           />
           <Text style={[Typography.heading2, Typography.textCenter]}>
-            US Passport
+            {credential.name}
           </Text>
           <Text style={[Typography.body3, Typography.textCenter]}>
-            Issued by U.S. State Department
+            Issued by {credential.issuer}
           </Text>
         </View>
         <View style={Layouts.row}>
-          <Text style={Typography.body4}>
-            Accepted by law everywhere your physical passport is required
-          </Text>
+          <Text style={Typography.body4}>{credential.description}</Text>
         </View>
         <View style={[Layouts.row, Checklist.callout, Checklist.danger]}>
           <Text style={[Typography.body4, { color: ColorTheme.REDUCED }]}>
@@ -44,7 +47,7 @@ const AddCredentialDetailScreen = ({ navigation }) => {
               <Octicons name="check" size={16} color={ColorTheme.SUCCESS} />
             </View>
             <View>
-              <Text style={Typography.body1}>KYC Credential</Text>
+              <Text style={Typography.body1}>{mockCredentials[1].name}</Text>
               <Text style={[Typography.body4, Checklist.success]}>
                 You have this credential
               </Text>
@@ -56,14 +59,19 @@ const AddCredentialDetailScreen = ({ navigation }) => {
                 <Octicons name="x" size={16} color={ColorTheme.DANGER} />
               </View>
               <View>
-                <Text style={Typography.body1}>Foreign Passport</Text>
+                <Text style={Typography.body1}>{mockCredentials[2].name}</Text>
                 <Text style={[Typography.body4, Checklist.danger]}>
                   You don&apos;t have this credential
                 </Text>
               </View>
             </View>
             <View style={Checklist.buttonContainer}>
-              <Button kind="primary" onPress={navigateToAddCredentialDetail}>
+              <Button
+                kind="primary"
+                onPress={() =>
+                  navigateToAddCredentialDetail(mockCredentials[2])
+                }
+              >
                 Get
               </Button>
             </View>

@@ -6,7 +6,7 @@ import { observable } from "@legendapp/state";
 import { Tappable } from "@/pages/default/Tappable";
 import { Button } from "@/components/Button";
 import { FlexLayouts } from "@/theme/layouts";
-import { ItemProps } from "@/components/Item";
+import { BadgeNames, ItemProps } from "@/components/Item";
 
 const CredentialsScreen = ({ navigation }) => {
   const navigateToItem = (credential) => {
@@ -53,23 +53,24 @@ const mockProfileCredentials: ItemProps[] = [
     subtitle: "All profiles",
     body: "Valid",
     iconName: "note",
-    badgeName: "id-badge",
+    badgeName: BadgeNames.CREDENTIAL,
   },
   {
     heading: "Gym membership",
     subtitle: "Social profile",
     body: "Expired",
     iconName: "zap",
-    badgeName: "id-badge",
+    badgeName: BadgeNames.CREDENTIAL,
   },
   {
     heading: "Employer ID",
     subtitle: "Professional profile",
     body: "Valid",
     iconName: "organization",
-    badgeName: "id-badge",
+    badgeName: BadgeNames.CREDENTIAL,
   },
 ];
+
 const profileCredentials = observable<typeof mockProfileCredentials>(
   mockProfileCredentials
 );

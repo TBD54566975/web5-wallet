@@ -7,7 +7,8 @@ import { Tappable } from "@/pages/default/Tappable";
 import { Button } from "@/components/Button";
 import { For } from "@legendapp/state/react";
 import { observable } from "@legendapp/state";
-import { ItemProps } from "@/components/Item";
+import { BadgeNames, ItemProps } from "@/components/Item";
+import { mockConnections, mockCredentials } from "@/services/mocks";
 
 const DiscoverScreen = ({ navigation }) => {
   const resetProfiles = () => {
@@ -15,12 +16,12 @@ const DiscoverScreen = ({ navigation }) => {
     DevSettings.reload();
   };
 
-  const navigateToAddCredentialDetail = () => {
-    navigation.navigate("AddCredentialDetail");
+  const navigateToAddCredentialDetail = (credential) => {
+    navigation.navigate("AddCredentialDetail", { credential });
   };
 
-  const navigateToConnectionDetail = () => {
-    navigation.navigate("ConnectionDetail");
+  const navigateToConnectionDetail = (connection) => {
+    navigation.navigate("ConnectionDetail", { connection });
   };
 
   return (
@@ -33,27 +34,37 @@ const DiscoverScreen = ({ navigation }) => {
             if (!credential) {
               return <></>;
             }
-            const options: ItemProps = credential; //will transform this
+            const options: ItemProps = {
+              heading: credential.name,
+              subtitle: `Issued by ${credential.issuer}`,
+              body: credential.description,
+              iconName: credential.icon as ItemProps["iconName"],
+              badgeName: BadgeNames.CREDENTIAL,
+            };
             return (
               <Tappable
                 options={options}
-                onPress={navigateToAddCredentialDetail}
+                onPress={() => navigateToAddCredentialDetail(credential)}
               />
             );
           }}
         </For>
         <Text style={Typography.heading4}>Our favorite Web5 Apps</Text>
-        <For each={availableWeb5Apps}>
-          {(availableWeb5App) => {
-            const web5App = availableWeb5App.get();
-            if (!web5App) {
+        <For each={availableConnections}>
+          {(availableConnection) => {
+            const connection = availableConnection.get();
+            if (!connection) {
               return <></>;
             }
-            const options: ItemProps = web5App; //will transform this
+            const options: ItemProps = {
+              heading: connection.name,
+              iconName: connection.icon as ItemProps["iconName"],
+              badgeName: BadgeNames.CONNECTION,
+            };
             return (
               <Tappable
                 options={options}
-                onPress={navigateToConnectionDetail}
+                onPress={() => navigateToConnectionDetail(connection)}
               />
             );
           }}
@@ -68,32 +79,7 @@ const DiscoverScreen = ({ navigation }) => {
 
 export default DiscoverScreen;
 
-const mockCredentials: ItemProps[] = [
-  {
-    heading: "U.S. Passport",
-    subtitle: "U.S. State Department",
-    body: "Accepted by law everywhere your physical passport is required",
-    iconName: "archive",
-    badgeName: "id-badge",
-  },
-  {
-    heading: "KYC Credential",
-    subtitle: "TBD (Block Inc.)",
-    body: "Meets KYC requirements of most PFIs in the tbDEX network",
-    iconName: "issue-closed",
-    badgeName: "id-badge",
-  },
-];
-
-const mockWeb5Apps: ItemProps[] = [
-  {
-    heading: "DIDPay",
-    subtitle: "did:ion:...8471",
-    iconName: "credit-card",
-    badgeName: "webhook",
-  },
-];
-
 const availableCredentials =
   observable<typeof mockCredentials>(mockCredentials);
-const availableWeb5Apps = observable<typeof mockWeb5Apps>(mockWeb5Apps);
+const availableConnections =
+  observable<typeof mockConnections>(mockConnections);

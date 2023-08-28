@@ -1,8 +1,10 @@
 import { Button } from "@/components/Button";
-import { Item, ItemAvatar } from "@/components/Item";
+import { BadgeNames, Item, ItemAvatar, ItemProps } from "@/components/Item";
+import { userProfiles } from "@/services/profile.service";
 import { ColorTheme } from "@/theme/colors";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
+import { formatDID } from "@/util/formatters";
 import React, { useState } from "react";
 import {
   Alert,
@@ -13,8 +15,9 @@ import {
   Pressable,
 } from "react-native";
 
-const AddCredentialOptionsScreen = ({ navigation }) => {
-  const profiles = ["My social profile", "My professional profile"];
+const AddCredentialOptionsScreen = ({ navigation, route }) => {
+  const credential = route.params.credential;
+  const profiles = userProfiles.map((userProfile) => userProfile.get());
   const [selectedProfile, setSelectedProfile] = useState(profiles[0]);
 
   const addCredential = () => {
@@ -35,15 +38,15 @@ const AddCredentialOptionsScreen = ({ navigation }) => {
       <View style={Layouts.container}>
         <View style={[Layouts.row, FlexLayouts.containerHorizontalCenter]}>
           <ItemAvatar
-            iconName="note"
-            badgeName="id-badge"
+            iconName={credential.icon}
+            badgeName={BadgeNames.CREDENTIAL}
             style={Typography.textCenter}
           />
           <Text style={[Typography.heading2, Typography.textCenter]}>
-            US Passport
+            {credential.name}
           </Text>
           <Text style={[Typography.body3, Typography.textCenter]}>
-            Issued by U.S. State Department
+            Issued by {credential.issuer}
           </Text>
         </View>
         <View style={Layouts.row}>
@@ -63,11 +66,11 @@ const AddCredentialOptionsScreen = ({ navigation }) => {
               <View style={Selections.row}>
                 <View style={[FlexLayouts.row, Selections.textContainer]}>
                   <Item
-                    heading={profile}
-                    subtitle="Alex Aardvark"
-                    body="did:ion:123...890"
-                    iconName="hash"
-                    badgeName="feed-person"
+                    heading={profile.name}
+                    subtitle={profile.displayName}
+                    body={formatDID(profile.id)}
+                    iconName={profile.icon as ItemProps["iconName"]}
+                    badgeName={BadgeNames.PROFILE}
                   />
                 </View>
                 <View style={Selections.buttonContainer}>

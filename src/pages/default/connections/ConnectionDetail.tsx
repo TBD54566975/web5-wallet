@@ -6,39 +6,37 @@ import { formatDID } from "@/util/formatters";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "../Tappable";
-import { ItemProps } from "@/components/Item";
+import { BadgeNames, ItemProps } from "@/components/Item";
+import { mockConnections } from "@/services/mocks";
+import { userProfiles } from "@/services/profile.service";
 
 const ConnectionDetailScreen = ({ navigation, route }) => {
+  const { heading: connectionName, iconName: icon } = route.params.connection;
   const tabLabels = ["About", "Connections", "Activity"];
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
-  const navigateToReviewConnection = (connection) => {
-    //TODO: update to `connectionSet`
-    navigation.navigate("ReviewConnection", { connection });
+  const navigateToReviewConnection = (connectionPair) => {
+    navigation.navigate("ReviewConnection", { connectionPair });
   };
 
-  const { heading: connectionName, iconName: icon } = route.params.connection;
-
   //TODO: Sub this out for real connections
-  const profiles: ItemProps[] = [
-    {
-      heading: "My social profile",
-      iconName: "hash",
-      badgeName: "feed-person",
-    },
-  ];
+  const profiles: ItemProps[] = userProfiles.map((userProfile) => {
+    const profile = userProfile.get();
+    return {
+      heading: profile.name,
+      iconName: profile.icon as ItemProps["iconName"],
+      badgeName: BadgeNames.PROFILE,
+    };
+  });
 
-  const id = "did:ion:1234567890123456789012345678901234567890";
-  const developer = "Block Inc.";
-  const description =
-    "A simple messaging app, inspired by Signal and built on Web5 principles.";
+  const connection = mockConnections[0];
 
   return (
     <MenuPageLayout
       headerItem={{
         heading: connectionName,
         iconName: icon,
-        badgeName: "webhook",
+        badgeName: BadgeNames.CONNECTION,
       }}
       menuTabs={tabLabels.map((label) => {
         return {
@@ -50,9 +48,9 @@ const ConnectionDetailScreen = ({ navigation, route }) => {
     >
       {activeTab === tabLabels[0] && (
         <>
-          <LabelValueItem label="DID" value={formatDID(id)} />
-          <LabelValueItem label="Developer" value={developer} />
-          <LabelValueItem label="Description" value={description} />
+          <LabelValueItem label="DID" value={formatDID(connection.id)} />
+          <LabelValueItem label="Developer" value={connection.developer} />
+          <LabelValueItem label="Description" value={connection.description} />
         </>
       )}
       {activeTab === tabLabels[1] && (
@@ -67,7 +65,13 @@ const ConnectionDetailScreen = ({ navigation, route }) => {
             <Tappable
               key={index}
               options={profile}
-              onPress={() => navigateToReviewConnection(profile)}
+              onPress={() =>
+                navigateToReviewConnection({
+                  connection,
+                  profile,
+                  dateCreated: "Thu Jan 1 2023",
+                })
+              }
             />
           ))}
         </>

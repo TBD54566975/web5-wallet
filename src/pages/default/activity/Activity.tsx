@@ -3,7 +3,7 @@ import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
 import { ScrollView, View } from "react-native";
 import { For } from "@legendapp/state/react";
 import { observable } from "@legendapp/state";
-import { ItemStackProps, ItemStack } from "@/components/Item";
+import { ItemStackProps, ItemStack, BadgeNames } from "@/components/Item";
 import { Layouts } from "@/theme/layouts";
 
 const ActivityScreen = () => {
@@ -38,11 +38,11 @@ const mockProfileActivity: ItemStackProps[] = [
     images: [
       {
         iconName: "hash",
-        badgeName: "feed-person",
+        badgeName: BadgeNames.PROFILE,
       },
       {
         iconName: "credit-card",
-        badgeName: "webhook",
+        badgeName: BadgeNames.CONNECTION,
       },
     ],
   },
@@ -52,7 +52,7 @@ const mockProfileActivity: ItemStackProps[] = [
     images: [
       {
         source: { uri: "https://reactnative.dev/img/tiny_logo.png" },
-        badgeName: "feed-person",
+        badgeName: BadgeNames.PROFILE,
       },
     ],
   },
@@ -62,7 +62,7 @@ const mockProfileActivity: ItemStackProps[] = [
     images: [
       {
         iconName: "briefcase",
-        badgeName: "feed-person",
+        badgeName: BadgeNames.PROFILE,
       },
     ],
   },

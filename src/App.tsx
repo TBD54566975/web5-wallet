@@ -52,6 +52,7 @@ const App = () => {
             headerShown: true,
             headerTitle: () => false,
             headerShadowVisible: false,
+            headerBackTitleVisible: false,
             // headerBackImageSource: TODO: add arrow image source here
           }}
         >

@@ -1,5 +1,5 @@
 import { Button } from "@/components/Button";
-import { Item } from "@/components/Item";
+import { BadgeNames, Item } from "@/components/Item";
 import { LabelValueItem } from "@/components/LabelValue";
 import { ColorTheme } from "@/theme/colors";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
@@ -9,6 +9,7 @@ import React from "react";
 import { View, SafeAreaView, Text } from "react-native";
 
 const ReviewConnectionScreen = ({ route }) => {
+  //TODO Sub out with real connectionSets
   const { connection, profile, dateCreated } = route.params.connectionSet || {
     connection: {
       name: "Dignal",
@@ -31,13 +32,13 @@ const ReviewConnectionScreen = ({ route }) => {
             subtitle={profile.displayName}
             body={formatDID(profile.id)}
             iconName={profile.icon}
-            badgeName="feed-person"
+            badgeName={BadgeNames.PROFILE}
             headingSize="heading3"
           />
           <Item
             heading={connection.name}
             iconName={connection.icon}
-            badgeName="webhook"
+            badgeName={BadgeNames.CONNECTION}
             headingSize="heading3"
           />
         </View>
