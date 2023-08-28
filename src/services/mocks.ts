@@ -37,3 +37,10 @@ export const mockConnections = [
     id: "did:ion:1234567890123456789012345678901234567890",
   },
 ];
+
+// TODO: Clean up mocks elsewhere:
+// @/pages/default/credentials/Credentials.tsx
+// @/pages/default/credentials/CredentialDetail.tsx
+// @/pages/default/connections/Connections.tsx
+// @/pages/default/connections/ReviewConnections.tsx
+// @/pages/default/activity/Activity.tsx
