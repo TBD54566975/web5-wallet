@@ -13,9 +13,9 @@ export const Button = (
   }
 ) => {
   const { kind, children, style, ...pressableProps } = props;
-  const ButtonStyle = StyleSheet.compose(style, ButtonThemes[kind]);
+  const ButtonStyle = StyleSheet.compose(ButtonThemes[kind], style);
   return (
-    <Pressable {...pressableProps} style={[ButtonStyle, ButtonLayouts.default]}>
+    <Pressable {...pressableProps} style={[ButtonLayouts.default, ButtonStyle]}>
       <Text style={[Typography.body3, ButtonStyle]}>{children}</Text>
     </Pressable>
   );
@@ -26,7 +26,6 @@ export const ButtonLayouts = StyleSheet.create({
     borderRadius: 999,
     padding: Space.SMALL,
     alignItems: "center",
-    // marginVertical: Space.SMALL,
   },
 });
 

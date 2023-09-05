@@ -1,5 +1,5 @@
 import { ColorTheme } from "@/theme/colors";
-import { Layouts } from "@/theme/layouts";
+import { Layouts, Space } from "@/theme/layouts";
 import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 
@@ -18,10 +18,10 @@ const ParentPageLayoutTheme = StyleSheet.create({
   },
   inner: {
     backgroundColor: ColorTheme.DEFAULT_CONTRAST,
-    paddingTop: 48,
+    paddingTop: Space.XXLARGE,
     flex: 1,
-    borderTopLeftRadius: 48,
-    borderTopRightRadius: 48,
+    borderTopLeftRadius: Space.XXLARGE,
+    borderTopRightRadius: Space.XXLARGE,
     ...Layouts.container,
   },
 });
