@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { BadgeNames, Item, ItemAvatar, ItemProps } from "@/components/Item";
-import { userProfiles } from "@/features/identity/ProfileManager";
+import { profilesAtom } from "@/features/identity/atoms";
 import { ColorTheme } from "@/theme/colors";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
@@ -17,7 +17,7 @@ import {
 
 const AddCredentialOptionsScreen = ({ navigation, route }) => {
   const credential = route.params.credential;
-  const profiles = userProfiles.map((userProfile) => userProfile.get());
+  const profiles = profilesAtom.map((userProfile) => userProfile.get());
   const [selectedProfile, setSelectedProfile] = useState(profiles[0]);
 
   const addCredential = () => {

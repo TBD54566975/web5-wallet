@@ -1,6 +1,5 @@
 import React from "react";
 import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
-import { userProfiles } from "@/features/identity/ProfileManager";
 import { Tappable } from "@/pages/default/Tappable";
 import { For } from "@legendapp/state/react";
 import { ScrollView, View } from "react-native";
@@ -8,6 +7,7 @@ import { Button } from "@/components/Button";
 import { FlexLayouts } from "@/theme/layouts";
 import { BadgeNames, ItemProps } from "@/components/Item";
 import { formatDID } from "@/util/formatters";
+import { profilesAtom } from "@/features/identity/atoms";
 
 const ProfilesScreen = ({ navigation }) => {
   const navigateToItem = (profile) => {
@@ -22,7 +22,7 @@ const ProfilesScreen = ({ navigation }) => {
     <ParentPageLayout>
       <View style={FlexLayouts.containerButtonBottom}>
         <ScrollView>
-          <For each={userProfiles}>
+          <For each={profilesAtom}>
             {(userProfile) => {
               const profile = userProfile.get();
               if (!profile) {

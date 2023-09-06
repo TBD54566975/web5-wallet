@@ -8,7 +8,7 @@ import { Typography } from "@/theme/typography";
 import { Tappable } from "../Tappable";
 import { BadgeNames, ItemProps } from "@/components/Item";
 import { mockConnections } from "@/services/mocks";
-import { userProfiles } from "@/features/identity/ProfileManager";
+import { profilesAtom } from "@/features/identity/atoms";
 
 const ConnectionDetailScreen = ({ navigation, route }) => {
   const { heading: connectionName, iconName: icon } = route.params.connection;
@@ -20,7 +20,7 @@ const ConnectionDetailScreen = ({ navigation, route }) => {
   };
 
   //TODO: Sub this out for real connections
-  const profiles: ItemProps[] = userProfiles.map((userProfile) => {
+  const profiles: ItemProps[] = profilesAtom.map((userProfile) => {
     const profile = userProfile.get();
     return {
       heading: profile.name,

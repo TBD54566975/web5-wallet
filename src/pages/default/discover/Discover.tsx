@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, DevSettings, ScrollView } from "react-native";
-import { userProfiles } from "@/features/identity/ProfileManager";
 import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "@/pages/default/Tappable";
@@ -9,10 +8,11 @@ import { For } from "@legendapp/state/react";
 import { observable } from "@legendapp/state";
 import { BadgeNames, ItemProps } from "@/components/Item";
 import { mockConnections, mockCredentials } from "@/services/mocks";
+import { profilesAtom } from "@/features/identity/atoms";
 
 const DiscoverScreen = ({ navigation }) => {
   const resetProfiles = () => {
-    userProfiles.set([]);
+    profilesAtom.set([]);
     DevSettings.reload();
   };
 

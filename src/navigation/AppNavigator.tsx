@@ -5,8 +5,6 @@ import {
 } from "@react-navigation/native-stack";
 import { TabNavigator } from "./TabNavigator";
 
-import { profilesAtom } from "@/features/identity/atoms";
-
 import WelcomeScreen from "@/pages/onboarding/welcome/Welcome";
 import ConnectionDetailScreen from "@/pages/default/connections/ConnectionDetail";
 import ReviewConnectionScreen from "@/pages/default/connections/ReviewConnection";
@@ -21,17 +19,16 @@ import ImportScreen from "@/pages/onboarding/import/Import";
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
 import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
 import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
+import { profilesAtom } from "@/features/identity/atoms";
 
 const Stack = createNativeStackNavigator();
+const initialRoute = profilesAtom.peek().length ? "Default" : "Onboarding";
 
 export const AppNavigator = () => {
-  const getInitialRouteName = () =>
-    profilesAtom.peek().length ? "Tabs" : "WelcomeScreen";
-
   return (
     <Stack.Navigator
       screenOptions={AppNavigatorOptions}
-      initialRouteName={getInitialRouteName()}
+      initialRouteName={initialRoute}
     >
       {/* Onboarding */}
       <Stack.Screen name="Onboarding" component={WelcomeScreen} />
