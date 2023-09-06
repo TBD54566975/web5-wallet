@@ -1,20 +1,11 @@
-import { observable } from "@legendapp/state";
-import { persistObservable } from "@legendapp/state/persist";
-import { ObservablePersistMMKV } from "@legendapp/state/persist-plugins/mmkv";
-import type { Profile } from "../../types/models";
 import {
   CreateProfileOptions,
   ProfileManager as Web5ProfileManager,
 } from "@tbd54566975/web5-user-agent";
 import { DidState } from "@tbd54566975/dids";
 import { Web5 } from "@tbd54566975/web5";
-
-export const userProfiles = observable<Profile[]>([]);
-
-persistObservable(userProfiles, {
-  local: "profiles",
-  persistLocal: ObservablePersistMMKV,
-});
+import { profilesAtom } from "@/features/identity/atoms";
+import type { Profile } from "../../types/models";
 
 export const ProfileManager: Web5ProfileManager = {
   async createProfile(
@@ -41,7 +32,7 @@ export const ProfileManager: Web5ProfileManager = {
         credentials: [],
       };
 
-      userProfiles.push(profile);
+      profilesAtom.push(profile);
       return profile;
     } catch (e) {
       throw new Error(
@@ -51,10 +42,10 @@ export const ProfileManager: Web5ProfileManager = {
   },
   getProfile(id: string) {
     return Promise.resolve(
-      userProfiles.find((profile) => profile.id.peek() === id)?.get()
+      profilesAtom.find((profile) => profile.id.peek() === id)?.get()
     );
   },
   listProfiles() {
-    return Promise.resolve(userProfiles.get());
+    return Promise.resolve(profilesAtom.get());
   },
 };
