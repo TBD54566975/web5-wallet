@@ -18,8 +18,8 @@ import CreateScreen from "@/pages/onboarding/create/Create";
 import ImportScreen from "@/pages/onboarding/import/Import";
 
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
-import AddCredentialDetailScreen from "../pages/default/credentials/AddCredentialDetail";
-import AddCredentialOptionsScreen from "../pages/default/credentials/AddCredentialOptions";
+import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
+import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
 
 const Stack = createNativeStackNavigator();
 
