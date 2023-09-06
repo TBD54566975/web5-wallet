@@ -4,7 +4,7 @@ import { Typography } from "@/theme/typography";
 import React from "react";
 import { View, Text, SafeAreaView, Alert } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
-import { ProfileManager } from "@/services/profile.service";
+import { ProfileManager } from "@/features/identity/ProfileManager";
 import { Item } from "@/components/Item";
 
 const CreateScreen = ({ navigation }) => {

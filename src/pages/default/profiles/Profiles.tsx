@@ -1,6 +1,6 @@
 import React from "react";
 import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
-import { userProfiles } from "@/services/profile.service";
+import { userProfiles } from "@/features/identity/ProfileManager";
 import { Tappable } from "@/pages/default/Tappable";
 import { For } from "@legendapp/state/react";
 import { ScrollView, View } from "react-native";

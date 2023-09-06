@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
-import { ProfileManager } from "@/services/profile.service";
+import { ProfileManager } from "@/features/identity/ProfileManager";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import React, { useState } from "react";

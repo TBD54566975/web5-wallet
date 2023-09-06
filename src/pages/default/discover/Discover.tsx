@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, DevSettings, ScrollView } from "react-native";
-import { userProfiles } from "@/services/profile.service";
+import { userProfiles } from "@/features/identity/ProfileManager";
 import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "@/pages/default/Tappable";

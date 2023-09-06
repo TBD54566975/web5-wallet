@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/native-stack";
 import { TabNavigator } from "./TabNavigator";
 
-import { userProfiles } from "@/services/profile.service";
+import { userProfiles } from "@/features/identity/ProfileManager";
 import WelcomeScreen from "@/pages/onboarding/welcome/Welcome";
 import ConnectionDetailScreen from "@/pages/default/connections/ConnectionDetail";
 import ReviewConnectionScreen from "@/pages/default/connections/ReviewConnection";

@@ -8,7 +8,7 @@ import { Typography } from "@/theme/typography";
 import { Tappable } from "../Tappable";
 import { BadgeNames, ItemProps } from "@/components/Item";
 import { mockConnections } from "@/services/mocks";
-import { userProfiles } from "@/services/profile.service";
+import { userProfiles } from "@/features/identity/ProfileManager";
 
 const ConnectionDetailScreen = ({ navigation, route }) => {
   const { heading: connectionName, iconName: icon } = route.params.connection;

@@ -1,7 +1,7 @@
 import { observable } from "@legendapp/state";
 import { persistObservable } from "@legendapp/state/persist";
 import { ObservablePersistMMKV } from "@legendapp/state/persist-plugins/mmkv";
-import type { Profile } from "../types/models";
+import type { Profile } from "../../types/models";
 import {
   CreateProfileOptions,
   ProfileManager as Web5ProfileManager,

@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { BadgeNames, Item, ItemAvatar, ItemProps } from "@/components/Item";
-import { userProfiles } from "@/services/profile.service";
+import { userProfiles } from "@/features/identity/ProfileManager";
 import { ColorTheme } from "@/theme/colors";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
