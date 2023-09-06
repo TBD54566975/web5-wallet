@@ -12,5 +12,6 @@
     "strict": true
   },
   "extends": "expo/tsconfig.base",
-  "include": [".eslintrc.js", "**/*"]
+  "include": [".eslintrc.js", "**/*"],
+  "exclude": ["./src/reference/**/*"]
 }
