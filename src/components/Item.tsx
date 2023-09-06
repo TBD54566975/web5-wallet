@@ -65,7 +65,7 @@ export const ItemBody = (props) => {
   );
 };
 
-export const ItemStyles = StyleSheet.create({
+const ItemStyles = StyleSheet.create({
   row: {
     flexDirection: "row",
     gap: 12,
@@ -111,12 +111,12 @@ export const ItemStyles = StyleSheet.create({
   },
 });
 
-export type ItemAvatarProps = Partial<ImageProps> & {
+type ItemAvatarProps = Partial<ImageProps> & {
   iconName?: keyof typeof Octicons.glyphMap;
   badgeName?: BadgeNames;
 };
 
-export type ItemBodyProps = {
+type ItemBodyProps = {
   heading;
   subtitle?;
   body?;

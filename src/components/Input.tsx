@@ -27,7 +27,7 @@ export const Input = (
   );
 };
 
-export const InputStyles = StyleSheet.create({
+const InputStyles = StyleSheet.create({
   input: {
     borderWidth: 1,
     padding: 12,

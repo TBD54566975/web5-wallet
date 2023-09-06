@@ -21,7 +21,7 @@ export const Button = (
   );
 };
 
-export const ButtonLayouts = StyleSheet.create({
+const ButtonLayouts = StyleSheet.create({
   default: {
     borderRadius: 999,
     padding: Space.SMALL,
@@ -29,7 +29,7 @@ export const ButtonLayouts = StyleSheet.create({
   },
 });
 
-export const ButtonThemes = StyleSheet.create({
+const ButtonThemes = StyleSheet.create({
   primary: {
     backgroundColor: ColorTheme.PRIMARY,
     color: ColorTheme.DEFAULT,
