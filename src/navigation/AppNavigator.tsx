@@ -3,76 +3,77 @@ import {
   type NativeStackNavigationOptions,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
-import { profilesAtom } from "../features/profile/atoms";
-import { WelcomeScreen } from "../features/onboarding/WelcomeScreen";
 import { TabNavigator } from "./TabNavigator";
-import { PermissionRequestScreen } from "../features/permissions/PermissionRequestScreen";
-import { CreateProfileScreen } from "../features/profile/CreateProfileScreen";
-import { CredentialScreen } from "../features/credentials/CredentialScreen";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+
+import WelcomeScreen from "@/pages/onboarding/welcome/Welcome";
+import ConnectionDetailScreen from "@/pages/default/connections/ConnectionDetail";
+import ReviewConnectionScreen from "@/pages/default/connections/ReviewConnection";
+import AddCredentialsScreen from "@/pages/default/credentials/AddCredentials";
+import CredentialDetailScreen from "@/pages/default/credentials/CredentialDetail";
+
+import ProfileDetailScreen from "@/pages/default/profiles/ProfileDetail";
+import AuthScreen from "@/pages/onboarding/auth/Auth";
+import CreateScreen from "@/pages/onboarding/create/Create";
+import ImportScreen from "@/pages/onboarding/import/Import";
+
+import AddProfileScreen from "@/pages/default/profiles/AddProfile";
+import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
+import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
+import { profilesAtom } from "@/features/identity/atoms";
 
 const Stack = createNativeStackNavigator();
+const initialRoute = profilesAtom.peek().length ? "Default" : "Onboarding";
 
 export const AppNavigator = () => {
-  const getInitialRouteName = () =>
-    profilesAtom.peek().length ? "Tabs" : "WelcomeScreen";
-
   return (
     <Stack.Navigator
-      initialRouteName={getInitialRouteName()}
-      screenOptions={StackNavigatorOptions}
+      screenOptions={AppNavigatorOptions}
+      initialRouteName={initialRoute}
     >
-      <Stack.Screen
-        name="WelcomeScreen"
-        component={WelcomeScreen}
-        options={WelcomeScreenOptions}
-      />
-      <Stack.Screen
-        name="Tabs"
-        component={TabNavigator}
-        options={({ route }) => {
-          return { headerTitle: getFocusedRouteNameFromRoute(route) ?? "Home" };
-        }}
-      />
-      <Stack.Screen
-        name="PermissionRequestScreen"
-        component={PermissionRequestScreen}
-        options={PermissionRequestScreenOptions}
-      />
-      <Stack.Screen
-        name="CreateProfileScreen"
-        component={CreateProfileScreen}
-        options={CreateProfileScreenOptions}
-      />
-      <Stack.Screen
-        name="CredentialScreen"
-        component={CredentialScreen}
-        options={CredentialScreenOptions}
-      />
+      {/* Onboarding */}
+      <Stack.Screen name="Onboarding" component={WelcomeScreen} />
+      <Stack.Screen name="Import" component={ImportScreen} />
+      <Stack.Screen name="Create" component={CreateScreen} />
+      <Stack.Screen name="Auth" component={AuthScreen} />
+
+      {/* Default */}
+      <Stack.Screen name="Default" component={TabNavigator} />
+      <Stack.Group screenOptions={DefaultGroupOptions}>
+        <Stack.Screen name="ProfileDetail" component={ProfileDetailScreen} />
+        <Stack.Screen
+          name="CredentialDetail"
+          component={CredentialDetailScreen}
+        />
+        <Stack.Screen name="AddProfile" component={AddProfileScreen} />
+        <Stack.Screen name="AddCredentials" component={AddCredentialsScreen} />
+        <Stack.Screen
+          name="AddCredentialDetail"
+          component={AddCredentialDetailScreen}
+        />
+        <Stack.Screen
+          name="AddCredentialOptions"
+          component={AddCredentialOptionsScreen}
+        />
+        <Stack.Screen
+          name="ConnectionDetail"
+          component={ConnectionDetailScreen}
+        />
+        <Stack.Screen
+          name="ReviewConnection"
+          component={ReviewConnectionScreen}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };
 
-const StackNavigatorOptions: NativeStackNavigationOptions = {
+const AppNavigatorOptions: NativeStackNavigationOptions = {
+  headerShown: false,
+};
+const DefaultGroupOptions: NativeStackNavigationOptions = {
   headerShown: true,
-  headerLargeTitle: true,
-};
-
-const WelcomeScreenOptions: NativeStackNavigationOptions = {
-  title: "Welcome",
-  animation: "slide_from_bottom",
-};
-
-const PermissionRequestScreenOptions: NativeStackNavigationOptions = {
-  title: "Permission Request",
-  animation: "slide_from_bottom",
-  presentation: "fullScreenModal",
-};
-
-const CreateProfileScreenOptions: NativeStackNavigationOptions = {
-  title: "Create Profile",
-};
-
-const CredentialScreenOptions: NativeStackNavigationOptions = {
-  title: "Get Credentials",
+  headerTitle: () => false,
+  headerShadowVisible: false,
+  headerBackTitleVisible: false,
+  // headerBackImageSource: TODO: add arrow image source here
 };

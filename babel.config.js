@@ -3,12 +3,12 @@ module.exports = function (api) {
   return {
     presets: ["babel-preset-expo"],
     plugins: [
-      "react-native-paper/babel",
       ["@babel/plugin-proposal-private-methods", { loose: true }],
       [
         "module-resolver",
         {
           alias: {
+            "@": "./src",
             crypto: "react-native-quick-crypto",
             stream: "stream-browserify",
             buffer: "@craftzdog/react-native-buffer",

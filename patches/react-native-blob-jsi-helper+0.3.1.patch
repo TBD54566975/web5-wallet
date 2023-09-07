@@ -1,0 +1,16 @@
+diff --git a/node_modules/react-native-blob-jsi-helper/android/src/main/cpp/cpp-adapter.cpp b/node_modules/react-native-blob-jsi-helper/android/src/main/cpp/cpp-adapter.cpp
+index 1f05fe2..faf7534 100644
+--- a/node_modules/react-native-blob-jsi-helper/android/src/main/cpp/cpp-adapter.cpp
++++ b/node_modules/react-native-blob-jsi-helper/android/src/main/cpp/cpp-adapter.cpp
+@@ -118,6 +118,11 @@ Java_com_reactnativeblobjsihelper_BlobJsiHelperModule_nativeInstall(JNIEnv *env,
+                                                              offset,
+                                                              size);
+         env->DeleteLocalRef(jstring);
++        if (env->ExceptionCheck()) {
++            env->ExceptionDescribe();
++            env->ExceptionClear();
++            throw std::runtime_error("Error calling getBufferJava");
++        }
+ 
+         jboolean isCopy = true;
+         jbyte* bytes = env->GetByteArrayElements(boxedBytes, &isCopy);

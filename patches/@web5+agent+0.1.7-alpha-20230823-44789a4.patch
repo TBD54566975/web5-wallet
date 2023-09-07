@@ -1,0 +1,81 @@
+diff --git a/node_modules/@web5/agent/dist/esm/app-data-store.js b/node_modules/@web5/agent/dist/esm/app-data-store.js
+index e8e64f0..e418b51 100644
+--- a/node_modules/@web5/agent/dist/esm/app-data-store.js
++++ b/node_modules/@web5/agent/dist/esm/app-data-store.js
+@@ -11,7 +11,7 @@ import { DidKeyMethod } from '@web5/dids';
+ import { hkdf } from '@noble/hashes/hkdf';
+ import { sha256 } from '@noble/hashes/sha256';
+ import { sha512 } from '@noble/hashes/sha512';
+-import { randomBytes } from '@web5/crypto/utils';
++import { randomBytes } from '@web5/crypto/dist/esm/utils';
+ import { pbkdf2Async } from '@noble/hashes/pbkdf2';
+ import { Convert, MemoryStore } from '@web5/common';
+ import { CryptoKey, Jose, XChaCha20Poly1305 } from '@web5/crypto';
+diff --git a/node_modules/@web5/agent/dist/esm/dwn-manager.js b/node_modules/@web5/agent/dist/esm/dwn-manager.js
+index 3b68855..0c80d18 100644
+--- a/node_modules/@web5/agent/dist/esm/dwn-manager.js
++++ b/node_modules/@web5/agent/dist/esm/dwn-manager.js
+@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
+     });
+ };
+ import { Jose } from '@web5/crypto';
+-import * as didUtils from '@web5/dids/utils';
++import * as didUtils from '@web5/dids/dist/esm/utils';
+ import { Convert, removeUndefinedProperties } from '@web5/common';
+-import { EventLogLevel, DataStoreLevel, MessageStoreLevel, } from '@tbd54566975/dwn-sdk-js/stores';
++import { EventLogLevel, DataStoreLevel, MessageStoreLevel, } from '@tbd54566975/dwn-sdk-js/dist/esm/src/index-stores';
+ import { Cid, Dwn, Message, EventsGet, DataStream, RecordsRead, MessagesGet, RecordsWrite, RecordsQuery, DwnMethodName, RecordsDelete, ProtocolsQuery, DwnInterfaceName, ProtocolsConfigure, } from '@tbd54566975/dwn-sdk-js';
+ import { isManagedKeyPair } from './utils.js';
+ import { blobToIsomorphicNodeReadable, webReadableToIsomorphicNodeReadable } from './utils.js';
+diff --git a/node_modules/@web5/agent/dist/esm/kms-local.js b/node_modules/@web5/agent/dist/esm/kms-local.js
+index 561cc9c..4475f51 100644
+--- a/node_modules/@web5/agent/dist/esm/kms-local.js
++++ b/node_modules/@web5/agent/dist/esm/kms-local.js
+@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
+         step((generator = generator.apply(thisArg, _arguments || [])).next());
+     });
+ };
+-import { isCryptoKeyPair, checkRequiredProperty } from '@web5/crypto/utils';
++import { isCryptoKeyPair, checkRequiredProperty } from '@web5/crypto/dist/esm/utils';
+ import { EcdhAlgorithm, EcdsaAlgorithm, EdDsaAlgorithm, AesCtrAlgorithm, } from '@web5/crypto';
+ import { isManagedKey, isManagedKeyPair } from './utils.js';
+ import { KeyStoreMemory, PrivateKeyStoreMemory } from './store-managed-key.js';
+diff --git a/node_modules/@web5/agent/dist/esm/rpc-client.js b/node_modules/@web5/agent/dist/esm/rpc-client.js
+index 020df4e..c768329 100644
+--- a/node_modules/@web5/agent/dist/esm/rpc-client.js
++++ b/node_modules/@web5/agent/dist/esm/rpc-client.js
+@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
+         step((generator = generator.apply(thisArg, _arguments || [])).next());
+     });
+ };
+-import { randomUuid } from '@web5/crypto/utils';
++import { randomUuid } from '@web5/crypto/dist/esm/utils';
+ import { createJsonRpcRequest, parseJson } from './json-rpc.js';
+ /**
+  * Client used to communicate with Dwn Servers
+diff --git a/node_modules/@web5/agent/dist/esm/store-managed-key.js b/node_modules/@web5/agent/dist/esm/store-managed-key.js
+index ab4cb58..1a42192 100644
+--- a/node_modules/@web5/agent/dist/esm/store-managed-key.js
++++ b/node_modules/@web5/agent/dist/esm/store-managed-key.js
+@@ -18,7 +18,7 @@ var __rest = (this && this.__rest) || function (s, e) {
+         }
+     return t;
+ };
+-import { randomUuid } from '@web5/crypto/utils';
++import { randomUuid } from '@web5/crypto/dist/esm/utils';
+ import { Convert, removeEmptyObjects, removeUndefinedProperties } from '@web5/common';
+ import { isManagedKeyPair } from './utils.js';
+ /**
+diff --git a/node_modules/@web5/agent/dist/esm/test-managed-agent.js b/node_modules/@web5/agent/dist/esm/test-managed-agent.js
+index 2835aa0..cec93df 100644
+--- a/node_modules/@web5/agent/dist/esm/test-managed-agent.js
++++ b/node_modules/@web5/agent/dist/esm/test-managed-agent.js
+@@ -11,7 +11,7 @@ import { Jose } from '@web5/crypto';
+ import { Dwn } from '@tbd54566975/dwn-sdk-js';
+ import { LevelStore, MemoryStore } from '@web5/common';
+ import { DidIonMethod, DidKeyMethod, DidResolver, DidResolverCacheLevel } from '@web5/dids';
+-import { MessageStoreLevel, DataStoreLevel, EventLogLevel } from '@tbd54566975/dwn-sdk-js/stores';
++import { MessageStoreLevel, DataStoreLevel, EventLogLevel } from '@tbd54566975/dwn-sdk-js/dist/esm/src/index-stores';
+ import { LocalKms } from './kms-local.js';
+ import { DidManager } from './did-manager.js';
+ import { DwnManager } from './dwn-manager.js';

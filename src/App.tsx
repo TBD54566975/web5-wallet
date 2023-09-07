@@ -1,33 +1,41 @@
 import React, { useEffect } from "react";
-import { Provider as PaperProvider, MD3DarkTheme } from "react-native-paper";
-import { DarkTheme, NavigationContainer } from "@react-navigation/native";
-import { AppNavigator } from "./navigation/AppNavigator";
-import { DwnService } from "./features/dwn/dwn-service";
 import { enableLegendStateReact } from "@legendapp/state/react";
-import { StatusBar } from "expo-status-bar";
-import { linking } from "./navigation/deep-links";
+import { type LinkingOptions } from "@react-navigation/native";
+import { AppNavigator } from "./navigation/AppNavigator";
+import { DwnManger } from "./features/dwn/DwnManager";
+import { bootstrapIdentityAgent } from "./features/identity/identity-agent";
+import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme } from "./theme/colors";
 
 enableLegendStateReact();
 
-export const theme: typeof MD3DarkTheme = {
-  ...MD3DarkTheme,
-  colors: {
-    ...MD3DarkTheme.colors,
-    primary: "#ffec19",
+const DeepLinkConfig: LinkingOptions<any> = {
+  prefixes: ["web5://"],
+  config: {
+    screens: {
+      PermissionRequestScreen: ":host/permission",
+    },
   },
 };
 
-export default function App() {
+const App = () => {
   useEffect(() => {
-    void DwnService.initExpoLevelDwn();
+    const startupTasks = async () => {
+      await DwnManger.initExpoLevelDwn();
+      await bootstrapIdentityAgent(
+        "passphrase",
+        "Personal",
+        DwnManger.getDwn()
+      );
+    };
+    void startupTasks();
   }, []);
 
   return (
-    <NavigationContainer theme={DarkTheme} linking={linking}>
-      <StatusBar style="light" />
-      <PaperProvider theme={theme}>
-        <AppNavigator />
-      </PaperProvider>
+    <NavigationContainer linking={DeepLinkConfig} theme={DefaultTheme}>
+      <AppNavigator />
     </NavigationContainer>
   );
-}
+};
+
+export default App;
