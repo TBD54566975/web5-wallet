@@ -1,0 +1,26 @@
+diff --git a/node_modules/@tbd54566975/dwn-sdk-js/dist/types/src/index.d.ts b/node_modules/@tbd54566975/dwn-sdk-js/dist/types/src/index.d.ts
+index 37b515a..af902d3 100644
+--- a/node_modules/@tbd54566975/dwn-sdk-js/dist/types/src/index.d.ts
++++ b/node_modules/@tbd54566975/dwn-sdk-js/dist/types/src/index.d.ts
+@@ -5,7 +5,7 @@ export type { EventsGetMessage, EventsGetReply } from './types/event-types.js';
+ export type { HooksWriteMessage } from './types/hooks-types.js';
+ export type { GenericMessage, Filter } from './types/message-types.js';
+ export type { MessagesGetMessage, MessagesGetReply } from './types/messages-types.js';
+-export type { PermissionConditions, PermissionScope, PermissionsGrantDescriptor, PermissionsGrantMessage, PermissionsRequestDescriptor, PermissionsRequestMessage, PermissionsRevokeDescriptor, PermissionsRevokeMessage } from './types/permissions-types.js';
++export type { PermissionConditions, PermissionScope, PermissionsGrantDescriptor, ProtocolTypes, PermissionsGrantMessage, PermissionsRequestDescriptor, PermissionsRequestMessage, PermissionsRevokeDescriptor, PermissionsRevokeMessage } from './types/permissions-types.js';
+ export type { ProtocolsConfigureDescriptor, ProtocolDefinition, ProtocolRuleSet, ProtocolsQueryFilter, ProtocolsConfigureMessage, ProtocolsQueryMessage } from './types/protocols-types.js';
+ export type { EncryptionProperty, RecordsDeleteMessage, RecordsQueryMessage, RecordsQueryReply, RecordsQueryReplyEntry, RecordsReadReply, RecordsWriteDescriptor, RecordsWriteMessage } from './types/records-types.js';
+ export type { SnapshotsCreateDescriptor, SnapshotsCreateMessage, SnapshotDefinition, SnapshotScope, SnapshotScopeType } from './types/snapshots-types.js';
+diff --git a/node_modules/@tbd54566975/dwn-sdk-js/src/index.ts b/node_modules/@tbd54566975/dwn-sdk-js/src/index.ts
+index 30896e4..60103c2 100644
+--- a/node_modules/@tbd54566975/dwn-sdk-js/src/index.ts
++++ b/node_modules/@tbd54566975/dwn-sdk-js/src/index.ts
+@@ -7,7 +7,7 @@ export type { HooksWriteMessage } from './types/hooks-types.js';
+ export type { GenericMessage, Filter } from './types/message-types.js';
+ export type { MessagesGetMessage, MessagesGetReply } from './types/messages-types.js';
+ export type { PermissionConditions, PermissionScope, PermissionsGrantDescriptor, PermissionsGrantMessage, PermissionsRequestDescriptor, PermissionsRequestMessage, PermissionsRevokeDescriptor, PermissionsRevokeMessage } from './types/permissions-types.js';
+-export type { ProtocolsConfigureDescriptor, ProtocolDefinition, ProtocolRuleSet, ProtocolsQueryFilter, ProtocolsConfigureMessage, ProtocolsQueryMessage } from './types/protocols-types.js';
++export type { ProtocolTypes, ProtocolsConfigureDescriptor, ProtocolDefinition, ProtocolRuleSet, ProtocolsQueryFilter, ProtocolsConfigureMessage, ProtocolsQueryMessage } from './types/protocols-types.js';
+ export type { EncryptionProperty, RecordsDeleteMessage, RecordsQueryMessage, RecordsQueryReply, RecordsQueryReplyEntry, RecordsReadReply, RecordsWriteDescriptor, RecordsWriteMessage } from './types/records-types.js';
+ export type { SnapshotsCreateDescriptor, SnapshotsCreateMessage, SnapshotDefinition, SnapshotScope, SnapshotScopeType } from './types/snapshots-types.js';
+ export { AllowAllTenantGate, TenantGate } from './core/tenant-gate.js';
