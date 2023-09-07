@@ -13,7 +13,7 @@ export type ProfileProtocolType = {
 // TODO: Type definition of Protocols probably need to get fixed and the child types need to get exported:
 export type ProtocolDefinitionRefined = SafeOmit<
   ProtocolDefinition,
-  "types" | "structure" | "published"
+  "types" | "structure"
 > & {
   types?: ProtocolTypes;
   structure?: Record<string, ProtocolRuleSet>;
@@ -24,4 +24,5 @@ export const profileProtocol: ProtocolDefinitionRefined = {
   protocol: "http://garfield.com/profile.schema.json",
   types: undefined,
   structure: undefined,
+  published: true,
 };
