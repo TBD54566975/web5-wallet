@@ -5,6 +5,7 @@ import type {
   ProtocolTypes,
 } from "@tbd54566975/dwn-sdk-js";
 
+// TODO: Not sure how to make this work yet. The upstream types don't have generics to accomodate type checking.
 export type ProfileProtocolType = {
   displayName: string;
 };
