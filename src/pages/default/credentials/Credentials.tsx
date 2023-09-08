@@ -9,7 +9,7 @@ import { FlexLayouts } from "@/theme/layouts";
 import { BadgeNames, ItemProps } from "@/components/Item";
 
 const CredentialsScreen = ({ navigation }) => {
-  const navigateToItem = (credential) => {
+  const navigateToItem = (credential: ItemProps) => {
     navigation.navigate("CredentialDetail", { credential });
   };
 
@@ -27,10 +27,14 @@ const CredentialsScreen = ({ navigation }) => {
               if (!credential) {
                 return <></>;
               }
-              const options: ItemProps = credential; // will transform this
+
               return (
                 <Tappable
-                  options={options}
+                  source={credential.source}
+                  iconName={credential.iconName}
+                  badgeName={credential.badgeName}
+                  heading={credential.heading}
+                  subtitle={credential.subtitle}
                   onPress={() => navigateToItem(credential)}
                 />
               );

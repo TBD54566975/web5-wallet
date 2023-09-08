@@ -1,4 +1,3 @@
-import { BadgeNames, ItemProps } from "@/components/Item";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { For } from "@legendapp/state/react";
@@ -7,9 +6,10 @@ import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import { Tappable } from "../Tappable";
 import { observable } from "@legendapp/state";
 import { mockCredentials } from "@/services/mocks";
+import type { Credential } from "@/types/models";
 
 const AddCredentialsScreen = ({ navigation }) => {
-  const navigateToAddCredentialDetail = (credential) => {
+  const navigateToAddCredentialDetail = (credential: Credential) => {
     navigation.navigate("AddCredentialDetail", { credential });
   };
 
@@ -26,15 +26,12 @@ const AddCredentialsScreen = ({ navigation }) => {
               if (!credential) {
                 return <></>;
               }
-              const options: ItemProps = {
-                heading: credential.name,
-                subtitle: `Issued by ${credential.issuer}`,
-                iconName: credential.icon as ItemProps["iconName"],
-                badgeName: BadgeNames.CREDENTIAL,
-              };
+
               return (
                 <Tappable
-                  options={options}
+                  heading={credential.name}
+                  subtitle={`Issued by ${credential.issuer}`}
+                  iconName={credential.icon}
                   onPress={() => navigateToAddCredentialDetail(credential)}
                 />
               );

@@ -1,45 +1,70 @@
 import React from "react";
-import { View, Image, Text, ImageProps, StyleSheet } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  type ImageURISource,
+} from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 import { Typography } from "@/theme/typography";
 import { ColorTheme } from "@/theme/colors";
 
 export const Item = (props: ItemProps) => {
-  const { heading, subtitle, body, headingSize, ...avatarProps } = props;
-  const bodyProps = { heading, subtitle, body, headingSize };
+  const { heading, subtitle, body, headingSize, badgeName, iconName, source } =
+    props;
+
   return (
     <View style={ItemStyles.row}>
-      <ItemAvatar {...avatarProps} />
-      <ItemBody {...bodyProps} />
+      <ItemAvatar badgeName={badgeName} iconName={iconName} source={source} />
+      <ItemBody
+        heading={heading}
+        subtitle={subtitle}
+        body={body}
+        headingSize={headingSize}
+      />
     </View>
   );
 };
 
 export const ItemStack = (props: ItemStackProps) => {
-  const { images, ...bodyProps } = props;
+  const { images, heading, subtitle, body, headingSize } = props;
+
   return (
     <View>
       <View style={ItemStyles.row}>
         {images.map((imageProps, index) => (
-          <ItemAvatar key={index} {...imageProps} />
+          <ItemAvatar
+            key={index}
+            source={imageProps.source}
+            iconName={imageProps.iconName}
+            badgeName={imageProps.badgeName}
+          />
         ))}
       </View>
-      <ItemBody {...bodyProps} />
+      <ItemBody
+        heading={heading}
+        subtitle={subtitle}
+        body={body}
+        headingSize={headingSize}
+      />
     </View>
   );
 };
 
-export const ItemAvatar = (props) => {
+export const ItemAvatar = (props: ItemAvatarProps) => {
   const { source, iconName, badgeName } = props;
-  if (!source && !iconName) {
-    throw new Error("Must supply either `source` or `iconName`");
-  }
+
   return (
     <View style={ItemStyles.iconAvatarContainer}>
       {source ? (
         <Image source={source} style={ItemStyles.iconAvatarImage} />
       ) : (
-        <Octicons name={iconName} size={20} style={ItemStyles.iconAvatar} />
+        <Octicons
+          name={iconName ?? "hash"}
+          size={20}
+          style={ItemStyles.iconAvatar}
+        />
       )}
       {badgeName ? (
         <View style={ItemStyles.badgeAvatarContainer}>
@@ -50,7 +75,7 @@ export const ItemAvatar = (props) => {
   );
 };
 
-export const ItemBody = (props) => {
+export const ItemBody = (props: ItemBodyProps) => {
   const { heading, subtitle, body, headingSize } = props;
   return (
     <View>
@@ -111,15 +136,16 @@ const ItemStyles = StyleSheet.create({
   },
 });
 
-type ItemAvatarProps = Partial<ImageProps> & {
+type ItemAvatarProps = {
+  source?: ImageURISource;
   iconName?: keyof typeof Octicons.glyphMap;
   badgeName?: BadgeNames;
 };
 
 type ItemBodyProps = {
-  heading;
-  subtitle?;
-  body?;
+  heading: string;
+  subtitle?: string;
+  body?: string;
   headingSize?: keyof typeof Typography;
 };
 

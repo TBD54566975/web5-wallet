@@ -6,28 +6,20 @@ import { formatDID } from "@/util/formatters";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "../Tappable";
-import { BadgeNames, ItemProps } from "@/components/Item";
+import { BadgeNames } from "@/components/Item";
 import { mockConnections } from "@/services/mocks";
 import { profilesAtom } from "@/features/identity/atoms";
+import { For } from "@legendapp/state/react";
+
+const tabLabels = ["About", "Connections", "Activity"];
 
 const ConnectionDetailScreen = ({ navigation, route }) => {
   const { heading: connectionName, iconName: icon } = route.params.connection;
-  const tabLabels = ["About", "Connections", "Activity"];
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
-  const navigateToReviewConnection = (connectionPair) => {
-    navigation.navigate("ReviewConnection", { connectionPair });
+  const navigateToReviewConnection = () => {
+    navigation.navigate("ReviewConnection");
   };
-
-  //TODO: Sub this out for real connections
-  const profiles: ItemProps[] = profilesAtom.map((userProfile) => {
-    const profile = userProfile.get();
-    return {
-      heading: profile.name,
-      iconName: profile.icon as ItemProps["iconName"],
-      badgeName: BadgeNames.PROFILE,
-    };
-  });
 
   const connection = mockConnections[0];
 
@@ -61,19 +53,25 @@ const ConnectionDetailScreen = ({ navigation, route }) => {
               connected to the following profiles.
             </Text>
           </View>
-          {profiles?.map((profile, index) => (
-            <Tappable
-              key={index}
-              options={profile}
-              onPress={() =>
-                navigateToReviewConnection({
-                  connection,
-                  profile,
-                  dateCreated: "Thu Jan 1 2023",
-                })
+          <For each={profilesAtom}>
+            {(profile) => {
+              const profileData = profile.get();
+
+              if (!profileData) {
+                return <></>;
               }
-            />
-          ))}
+
+              return (
+                <Tappable
+                  key={profileData.id}
+                  heading={profileData.name}
+                  iconName={profileData.icon}
+                  badgeName={BadgeNames.PROFILE}
+                  onPress={() => navigateToReviewConnection()}
+                />
+              );
+            }}
+          </For>
         </>
       )}
       {activeTab === tabLabels[2] && <></>}

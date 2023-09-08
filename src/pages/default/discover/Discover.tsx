@@ -6,9 +6,10 @@ import { Tappable } from "@/pages/default/Tappable";
 import { Button } from "@/components/Button";
 import { For } from "@legendapp/state/react";
 import { observable } from "@legendapp/state";
-import { BadgeNames, ItemProps } from "@/components/Item";
+import { BadgeNames } from "@/components/Item";
 import { mockConnections, mockCredentials } from "@/services/mocks";
 import { profilesAtom } from "@/features/identity/atoms";
+import type { Credential, Connection } from "@/types/models";
 
 const DiscoverScreen = ({ navigation }) => {
   const resetProfiles = () => {
@@ -16,11 +17,11 @@ const DiscoverScreen = ({ navigation }) => {
     DevSettings.reload();
   };
 
-  const navigateToAddCredentialDetail = (credential) => {
+  const navigateToAddCredentialDetail = (credential: Credential) => {
     navigation.navigate("AddCredentialDetail", { credential });
   };
 
-  const navigateToConnectionDetail = (connection) => {
+  const navigateToConnectionDetail = (connection: Connection) => {
     navigation.navigate("ConnectionDetail", { connection });
   };
 
@@ -31,19 +32,18 @@ const DiscoverScreen = ({ navigation }) => {
         <For each={availableCredentials}>
           {(availableCredential) => {
             const credential = availableCredential.get();
+
             if (!credential) {
               return <></>;
             }
-            const options: ItemProps = {
-              heading: credential.name,
-              subtitle: `Issued by ${credential.issuer}`,
-              body: credential.description,
-              iconName: credential.icon as ItemProps["iconName"],
-              badgeName: BadgeNames.CREDENTIAL,
-            };
+
             return (
               <Tappable
-                options={options}
+                heading={credential.name}
+                subtitle={`Issued by ${credential.issuer}`}
+                body={credential.description}
+                iconName={credential.icon}
+                badgeName={BadgeNames.CREDENTIAL}
                 onPress={() => navigateToAddCredentialDetail(credential)}
               />
             );
@@ -56,14 +56,12 @@ const DiscoverScreen = ({ navigation }) => {
             if (!connection) {
               return <></>;
             }
-            const options: ItemProps = {
-              heading: connection.name,
-              iconName: connection.icon as ItemProps["iconName"],
-              badgeName: BadgeNames.CONNECTION,
-            };
+
             return (
               <Tappable
-                options={options}
+                heading={connection.name}
+                iconName={connection.icon}
+                badgeName={BadgeNames.CONNECTION}
                 onPress={() => navigateToConnectionDetail(connection)}
               />
             );
@@ -79,7 +77,5 @@ const DiscoverScreen = ({ navigation }) => {
 
 export default DiscoverScreen;
 
-const availableCredentials =
-  observable<typeof mockCredentials>(mockCredentials);
-const availableConnections =
-  observable<typeof mockConnections>(mockConnections);
+const availableCredentials = observable<Credential[]>(mockCredentials);
+const availableConnections = observable<Connection[]>(mockConnections);

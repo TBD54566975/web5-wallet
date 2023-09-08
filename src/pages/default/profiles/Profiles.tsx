@@ -5,12 +5,13 @@ import { For } from "@legendapp/state/react";
 import { ScrollView, View } from "react-native";
 import { Button } from "@/components/Button";
 import { FlexLayouts } from "@/theme/layouts";
-import { BadgeNames, ItemProps } from "@/components/Item";
+import { BadgeNames } from "@/components/Item";
 import { formatDID } from "@/util/formatters";
 import { profilesAtom } from "@/features/identity/atoms";
+import { Profile } from "@/types/models";
 
 const ProfilesScreen = ({ navigation }) => {
-  const navigateToItem = (profile) => {
+  const navigateToItem = (profile: Profile) => {
     navigation.navigate("ProfileDetail", { profile });
   };
 
@@ -28,23 +29,15 @@ const ProfilesScreen = ({ navigation }) => {
               if (!profile) {
                 return <></>;
               }
-              const options: ItemProps = {
-                heading: profile.name,
-                subtitle: profile.displayName,
-                body: formatDID(profile.id),
-                // TODO: Remove this type casting
-                iconName: profile.icon as ItemProps["iconName"],
-                badgeName: BadgeNames.PROFILE,
-              };
+
               return (
                 <Tappable
-                  options={options}
-                  onPress={() =>
-                    navigateToItem({
-                      ...profile,
-                      dateCreated: String(profile.dateCreated),
-                    })
-                  }
+                  iconName={profile.icon}
+                  badgeName={BadgeNames.PROFILE}
+                  heading={profile.name}
+                  subtitle={profile.displayName}
+                  body={formatDID(profile.id)}
+                  onPress={() => navigateToItem(profile)}
                 />
               );
             }}

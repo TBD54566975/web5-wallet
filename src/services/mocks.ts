@@ -1,4 +1,6 @@
-export const mockCredentials = [
+import type { Connection, Credential } from "@/types/models";
+
+export const mockCredentials: Credential[] = [
   {
     name: "U.S. Passport",
     issuer: "U.S. State Department",
@@ -20,7 +22,7 @@ export const mockCredentials = [
   },
 ];
 
-export const mockConnections = [
+export const mockConnections: Connection[] = [
   {
     name: "DIDPay",
     icon: "credit-card",
