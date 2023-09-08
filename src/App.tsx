@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { enableLegendStateReact } from "@legendapp/state/react";
 import { type LinkingOptions } from "@react-navigation/native";
 import { AppNavigator } from "./navigation/AppNavigator";
-import { DwnManger } from "./features/dwn/DwnManager";
-import { bootstrapIdentityAgent } from "./features/identity/identity-agent";
 import { NavigationContainer } from "@react-navigation/native";
 import { DefaultTheme } from "./theme/colors";
+import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 
 enableLegendStateReact();
 
@@ -21,16 +20,10 @@ const DeepLinkConfig: LinkingOptions<any> = {
 const App = () => {
   useEffect(() => {
     const startupTasks = async () => {
-      await DwnManger.initExpoLevelDwn();
-      await bootstrapIdentityAgent(
-        "passphrase",
-        "Personal",
-        DwnManger.getDwn()
-      );
+      await IdentityAgentManager.initAgent();
     };
     void startupTasks();
   }, []);
-
   return (
     <NavigationContainer linking={DeepLinkConfig} theme={DefaultTheme}>
       <AppNavigator />
