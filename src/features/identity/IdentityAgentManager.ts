@@ -31,6 +31,24 @@ const initAgent = async () => {
   const syncManager = new NoOpSyncManager();
 
   agent = await IdentityAgent.create({ dwnManager, appData, syncManager });
+
+  // WARN: EVERYTHING BELOW THIS POINT TEST CODE. DON'T PR IT!
+  // IF IT ENDS UP IN A PR, PLEASE REJECT THE PR!
+  const isFirstLaunch = await agent.firstLaunch();
+  console.log("isFirstLaunch:", isFirstLaunch);
+  await agent.start({ passphrase: "passphrase" });
+
+  const managedProfiles1 = await agent.identityManager.list();
+  console.log("managedProfiles count before:", managedProfiles1.length);
+  const identity = await agent.identityManager.create({
+    name: `Test Profile ${managedProfiles1.length}`,
+    didMethod: "ion",
+    kms: "local",
+  });
+  console.log(`Created ${identity.name} ManagedIdentity: ${identity.did}`);
+
+  const managedProfiles2 = await agent.identityManager.list();
+  console.log("managedProfiles count after:", managedProfiles2.length);
 };
 
 const createDwn = async (): Promise<Dwn> => {
