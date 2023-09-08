@@ -37,6 +37,10 @@ const ButtonThemes = StyleSheet.create({
   secondary: {
     color: ColorTheme.DEFAULT,
   },
+  disabled: {
+    backgroundColor: ColorTheme.MUTED,
+    color: ColorTheme.REDUCED,
+  },
   destructive: {
     backgroundColor: ColorTheme.DANGER,
     color: ColorTheme.DEFAULT_CONTRAST,
