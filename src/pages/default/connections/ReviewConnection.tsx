@@ -8,21 +8,20 @@ import { formatDID, formatDate } from "@/util/formatters";
 import React from "react";
 import { View, SafeAreaView, Text } from "react-native";
 
-const ReviewConnectionScreen = ({ route }) => {
-  //TODO Sub out with real connectionSets
-  const { connection, profile, dateCreated } = route.params.connectionSet || {
+const ReviewConnectionScreen = () => {
+  const { connection, profile } = {
     connection: {
       name: "Dignal",
-      icon: "comment-discussion",
+      icon: "comment-discussion" as const,
     },
     profile: {
       name: "Social profile",
       displayName: "Alex Aardvark",
-      icon: "hash",
+      icon: "hash" as const,
       id: "did:ion:123456789012345678901234567890",
     },
-    dateCreated: "Sat July 01 2023",
   };
+
   return (
     <SafeAreaView>
       <View style={Layouts.container}>
@@ -51,7 +50,7 @@ const ReviewConnectionScreen = ({ route }) => {
         <View>
           <LabelValueItem
             label="Connection made"
-            value={formatDate(dateCreated)}
+            value={formatDate(new Date().toString())}
           />
         </View>
         <View style={Layouts.row}>

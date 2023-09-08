@@ -13,7 +13,6 @@ const CredentialDetailScreen = ({ route }) => {
     heading: credentialName,
     subtitle: issuerName,
     iconName: icon,
-    // ...credential
   } = route.params.credential;
 
   const credential = {

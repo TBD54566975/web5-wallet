@@ -1,7 +1,7 @@
-import { BadgeNames, ItemProps } from "@/components/Item";
+import React, { useState } from "react";
+import { BadgeNames } from "@/components/Item";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
-import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Tappable } from "../Tappable";
 import { LabelValueItem } from "@/components/LabelValue";
@@ -9,31 +9,16 @@ import { formatDID, formatDate } from "@/util/formatters";
 import { MenuPageLayout } from "../MenuPageLayout";
 import { mockConnections } from "@/services/mocks";
 
+const tabLabels = ["About", "Connections", "Activity"];
+
 const ProfileDetailScreen = ({ navigation, route }) => {
-  const tabLabels = ["About", "Connections", "Activity"];
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
-  const navigateToReviewConnection = (connection) => {
-    //TODO: update to `connectionSet`
-    navigation.navigate("ReviewConnection", { connection });
+  const navigateToReviewConnection = () => {
+    navigation.navigate("ReviewConnection");
   };
 
-  const {
-    name: profileName,
-    displayName,
-    icon,
-    dateCreated,
-    id,
-  } = route.params.profile;
-
-  //TODO: Sub this out for real connections
-  const connections: ItemProps[] = mockConnections.map((connection) => {
-    return {
-      heading: connection.name,
-      iconName: connection.icon as ItemProps["iconName"],
-      badgeName: BadgeNames.CONNECTION,
-    };
-  });
+  const { name: profileName, displayName, icon, id } = route.params.profile;
 
   return (
     <MenuPageLayout
@@ -56,7 +41,10 @@ const ProfileDetailScreen = ({ navigation, route }) => {
           <LabelValueItem label="Profile label" value={profileName} />
           <LabelValueItem label="Public display name" value={displayName} />
           <LabelValueItem label="DID" value={formatDID(id)} />
-          <LabelValueItem label="Created on" value={formatDate(dateCreated)} />
+          <LabelValueItem
+            label="Created on"
+            value={formatDate(new Date().toString())}
+          />
         </>
       )}
       {activeTab === tabLabels[1] && (
@@ -67,11 +55,13 @@ const ProfileDetailScreen = ({ navigation, route }) => {
               to the following apps and services.
             </Text>
           </View>
-          {connections?.map((connection, index) => (
+          {mockConnections?.map((connection, index) => (
             <Tappable
               key={index}
-              options={connection}
-              onPress={() => navigateToReviewConnection(connection)}
+              heading={connection.name}
+              iconName={connection.icon}
+              badgeName={BadgeNames.CONNECTION}
+              onPress={() => navigateToReviewConnection()}
             />
           ))}
         </>

@@ -23,11 +23,7 @@ const AddCredentialDetailScreen = ({ navigation, route }) => {
     <SafeAreaView>
       <View style={Layouts.container}>
         <View style={[Layouts.row, FlexLayouts.containerHorizontalCenter]}>
-          <ItemAvatar
-            iconName="note"
-            badgeName={BadgeNames.CREDENTIAL}
-            style={Typography.textCenter}
-          />
+          <ItemAvatar iconName="note" badgeName={BadgeNames.CREDENTIAL} />
           <Text style={[Typography.heading2, Typography.textCenter]}>
             {credential.name}
           </Text>

@@ -40,7 +40,6 @@ const AddCredentialOptionsScreen = ({ navigation, route }) => {
           <ItemAvatar
             iconName={credential.icon}
             badgeName={BadgeNames.CREDENTIAL}
-            style={Typography.textCenter}
           />
           <Text style={[Typography.heading2, Typography.textCenter]}>
             {credential.name}

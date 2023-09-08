@@ -1,6 +1,6 @@
 import { DefaultTheme as ReactNavigationDefaultTheme } from "@react-navigation/native";
 
-export enum ColorPalette {
+enum ColorPalette {
   YELLOW = "#FFEC1A",
   CYAN = "#24F2FF",
   PURPLE = "#9A1AFF",

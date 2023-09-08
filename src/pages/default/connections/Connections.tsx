@@ -7,7 +7,7 @@ import { observable } from "@legendapp/state";
 import { BadgeNames, ItemProps } from "@/components/Item";
 
 const ConnectionsScreen = ({ navigation }) => {
-  const navigateToItem = (connection) => {
+  const navigateToItem = (connection: ItemProps) => {
     navigation.navigate("ConnectionDetail", { connection });
   };
 
@@ -20,10 +20,13 @@ const ConnectionsScreen = ({ navigation }) => {
             if (!connection) {
               return <></>;
             }
-            const options: ItemProps = connection; // will transform this
+
             return (
               <Tappable
-                options={options}
+                heading={connection.heading}
+                subtitle={connection.subtitle}
+                iconName={connection.iconName}
+                badgeName={connection.badgeName}
                 onPress={() => navigateToItem(connection)}
               />
             );

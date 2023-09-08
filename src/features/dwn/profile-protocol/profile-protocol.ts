@@ -1,4 +1,4 @@
-import { SafeOmit } from "@/types/utils";
+import type { SafeOmit } from "@/types/utils";
 import type {
   ProtocolRuleSet,
   ProtocolDefinition,

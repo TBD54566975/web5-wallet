@@ -1,27 +1,25 @@
-import {
+import type {
   CreateProfileOptions,
   ProfileManager as Web5ProfileManager,
 } from "@tbd54566975/web5-user-agent";
-import { DidState } from "@tbd54566975/dids";
+import Octicons from "@expo/vector-icons/Octicons";
 import { Web5 } from "@tbd54566975/web5";
 import { profilesAtom } from "@/features/identity/atoms";
-import type { Profile } from "../../types/models";
 
 export const ProfileManager: Web5ProfileManager = {
   async createProfile(
     options: CreateProfileOptions & {
       displayName?: string;
-    }
+    } & { icon: keyof typeof Octicons.glyphMap }
   ) {
     if (!options.did && !options.didMethod) {
       throw new Error("Must provide DID or DID Method");
     }
 
     try {
-      const did: DidState =
-        options.did ?? (await Web5.did.create(options.didMethod!));
+      const did = options.did ?? (await Web5.did.create(options.didMethod!));
 
-      const profile: Profile = {
+      const profile = {
         did,
         id: did.id,
         name: options.name ?? "",
