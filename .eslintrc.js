@@ -25,7 +25,6 @@ module.exports = {
     "react-native/react-native": true,
   },
   rules: {
-    // things
     "@typescript-eslint/no-unsafe-call": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
@@ -43,7 +42,6 @@ module.exports = {
       },
     ],
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
-    //
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "error",
@@ -59,6 +57,7 @@ module.exports = {
     "@typescript-eslint/triple-slash-reference": "off",
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/await-thenable": "error",
+    "@typescript-eslint/no-namespace": "off",
     "react-native/sort-styles": 0,
     "react-native/no-raw-text": 0,
     "react-native/no-unused-styles": 2,
@@ -95,6 +94,14 @@ module.exports = {
     "react-hooks/exhaustive-deps": "error",
     "no-duplicate-imports": "off",
     "@typescript-eslint/no-redeclare": ["error"],
+    "no-restricted-syntax": [
+      "error",
+      {
+        selector: "TSEnumDeclaration",
+        message:
+          "Don't use TS enums. Prefer const COLORS = { BLUE:'#00F', RED: '#F00' } ",
+      },
+    ],
     "sort-imports": 0,
     "import/extensions": [
       "error",
