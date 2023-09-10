@@ -16,7 +16,7 @@ import {
 export const MenuPageLayout = (props: {
   headerItem: ItemProps;
   menuTabs: MenuProps[];
-  children;
+  children: React.ReactNode;
 }) => {
   const { headerItem, menuTabs, children } = props;
 
@@ -26,39 +26,30 @@ export const MenuPageLayout = (props: {
         <View style={Layouts.row}>
           <Item {...headerItem} headingSize="heading3" />
         </View>
-        <View style={MenuPageStyles.menu}>
+        <View style={styles.menu}>
           {menuTabs?.map((tab, index) => (
             <MenuTab {...tab} key={index} />
           ))}
         </View>
-        <ScrollView style={MenuPageStyles.container}>{children}</ScrollView>
+        <ScrollView style={styles.container}>{children}</ScrollView>
       </View>
     </SafeAreaView>
   );
 };
 
-type MenuProps = { isActiveTab; label } & PressableProps;
+type MenuProps = { isActiveTab: boolean; label: string } & PressableProps;
 
 const MenuTab = (props: MenuProps) => {
   return (
-    <Pressable
-      {...props}
-      style={props.isActiveTab ? MenuPageStyles.activeTab : null}
-    >
-      <Text
-        style={
-          props.isActiveTab
-            ? MenuPageStyles.activeText
-            : MenuPageStyles.inactiveText
-        }
-      >
+    <Pressable {...props} style={props.isActiveTab ? styles.activeTab : null}>
+      <Text style={props.isActiveTab ? styles.activeText : styles.inactiveText}>
         {props.label}
       </Text>
     </Pressable>
   );
 };
 
-const MenuPageStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     marginBottom: 240,
   },

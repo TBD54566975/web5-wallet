@@ -10,19 +10,24 @@ import { BadgeNames } from "@/components/Item";
 import { mockConnections, mockCredentials } from "@/services/mocks";
 import { profilesAtom } from "@/features/identity/atoms";
 import type { Credential, Connection } from "@/types/models";
+import type { TabNavigatorProps } from "@/types/navigation";
 
-const DiscoverScreen = ({ navigation }) => {
+type Props = TabNavigatorProps<"DiscoverScreen">;
+const DiscoverScreen = ({ navigation }: Props) => {
   const resetProfiles = () => {
     profilesAtom.set([]);
     DevSettings.reload();
   };
 
   const navigateToAddCredentialDetail = (credential: Credential) => {
-    navigation.navigate("AddCredentialDetail", { credential });
+    navigation.navigate("AddCredentialDetailScreen", { credential });
   };
 
   const navigateToConnectionDetail = (connection: Connection) => {
-    navigation.navigate("ConnectionDetail", { connection });
+    navigation.navigate("ConnectionDetailScreen", {
+      heading: connection.name,
+      iconName: connection.icon,
+    });
   };
 
   return (
@@ -67,9 +72,7 @@ const DiscoverScreen = ({ navigation }) => {
             );
           }}
         </For>
-        <Button kind="secondary" onPress={resetProfiles}>
-          Reset Profile
-        </Button>
+        <Button kind="secondary" onPress={resetProfiles} text="Reset Profile" />
       </ScrollView>
     </ParentPageLayout>
   );

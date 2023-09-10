@@ -3,10 +3,10 @@ import { Alert, SafeAreaView, Text, View } from "react-native";
 import { Button } from "@/components/Button";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
+import type { AppNavigatorProps } from "@/types/navigation";
 
-const WelcomeScreen = ({ navigation }) => {
-  // TODO: Replace with flow for importing wallet
-  // navigation.navigate("Import");
+type Props = AppNavigatorProps<"WelcomeScreen">;
+const WelcomeScreen = ({ navigation }: Props) => {
   const navigateToImportWallet = () => {
     Alert.alert(
       "Import not yet available",
@@ -19,9 +19,8 @@ const WelcomeScreen = ({ navigation }) => {
     );
   };
 
-  // TODO: Replace with new ID Agent work
   const navigateToCreateWallet = () => {
-    navigation.navigate("Create");
+    navigation.navigate("CreateScreen");
   };
 
   return (
@@ -35,13 +34,17 @@ const WelcomeScreen = ({ navigation }) => {
           Sign into apps with an identity you own and control.
         </Text>
         <View style={FlexLayouts.column}>
-          <Button kind="primary" onPress={navigateToCreateWallet}>
-            Create a new wallet
-          </Button>
+          <Button
+            kind="primary"
+            onPress={navigateToCreateWallet}
+            text="Create a new wallet"
+          />
           <Text style={[Typography.label1, Typography.textCenter]}>or</Text>
-          <Button kind="secondary" onPress={navigateToImportWallet}>
-            Import your wallet
-          </Button>
+          <Button
+            kind="secondary"
+            onPress={navigateToImportWallet}
+            text="Import your wallet"
+          />
         </View>
       </View>
     </SafeAreaView>

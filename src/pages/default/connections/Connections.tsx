@@ -5,10 +5,15 @@ import { For } from "@legendapp/state/react";
 import { Tappable } from "@/pages/default/Tappable";
 import { observable } from "@legendapp/state";
 import { BadgeNames, ItemProps } from "@/components/Item";
+import { TabNavigatorProps } from "@/types/navigation";
 
-const ConnectionsScreen = ({ navigation }) => {
+type Props = TabNavigatorProps<"ConnectionsScreen">;
+const ConnectionsScreen = ({ navigation }: Props) => {
   const navigateToItem = (connection: ItemProps) => {
-    navigation.navigate("ConnectionDetail", { connection });
+    navigation.navigate("ConnectionDetailScreen", {
+      heading: connection.heading,
+      iconName: connection.iconName ?? "hash",
+    });
   };
 
   return (

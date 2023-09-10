@@ -9,14 +9,16 @@ import { BadgeNames } from "@/components/Item";
 import { formatDID } from "@/util/formatters";
 import { profilesAtom } from "@/features/identity/atoms";
 import { Profile } from "@/types/models";
+import { TabNavigatorProps } from "@/types/navigation";
 
-const ProfilesScreen = ({ navigation }) => {
+type Props = TabNavigatorProps<"ProfilesScreen">;
+const ProfilesScreen = ({ navigation }: Props) => {
   const navigateToItem = (profile: Profile) => {
-    navigation.navigate("ProfileDetail", { profile });
+    navigation.navigate("ProfileDetailScreen", { profile });
   };
 
   const navigateToAddProfile = () => {
-    navigation.navigate("AddProfile");
+    navigation.navigate("AddProfileScreen");
   };
 
   return (
@@ -43,9 +45,11 @@ const ProfilesScreen = ({ navigation }) => {
             }}
           </For>
         </ScrollView>
-        <Button kind="primary" onPress={navigateToAddProfile}>
-          Create a new profile
-        </Button>
+        <Button
+          kind="primary"
+          onPress={navigateToAddProfile}
+          text="Create a new profile"
+        />
       </View>
     </ParentPageLayout>
   );

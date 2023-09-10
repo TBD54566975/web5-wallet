@@ -9,49 +9,50 @@ import CredentialsScreen from "@/pages/default/credentials/Credentials";
 import ConnectionsScreen from "@/pages/default/connections/Connections";
 import ActivityScreen from "@/pages/default/activity/Activity";
 import DiscoverScreen from "@/pages/default/discover/Discover";
-import { Space } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { ColorTheme } from "@/theme/colors";
+import { SPACE } from "@/theme/layouts";
+import { type TabNavigatorInterface } from "@/types/navigation";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabNavigatorInterface>();
 
 export const TabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={TabOptions}>
+    <Tab.Navigator screenOptions={tabOptions}>
       <Tab.Screen
-        name="Discover"
+        name="DiscoverScreen"
         component={DiscoverScreen}
-        options={DiscoverScreenOptions}
+        options={discoverScreenOptions}
       />
       <Tab.Screen
-        name="Profiles"
+        name="ProfilesScreen"
         component={ProfilesScreen}
-        options={ProfilesScreenOptions}
+        options={profilesScreenOptions}
       />
       <Tab.Screen
-        name="Credentials"
+        name="CredentialsScreen"
         component={CredentialsScreen}
-        options={CredentialsScreenOptions}
+        options={credentialsScreenOptions}
       />
       <Tab.Screen
-        name="Connections"
+        name="ConnectionsScreen"
         component={ConnectionsScreen}
-        options={ConnectionsScreenOptions}
+        options={connectionsScreenOptions}
       />
       <Tab.Screen
-        name="Activity"
+        name="ActivityScreen"
         component={ActivityScreen}
-        options={ActivityScreenOptions}
+        options={activityScreenOptions}
       />
     </Tab.Navigator>
   );
 };
 
-const TabOptions: BottomTabNavigationOptions = {
+const tabOptions: BottomTabNavigationOptions = {
   tabBarStyle: {
     shadowColor: "transparent",
-    marginVertical: Space.XSMALL,
-    paddingTop: Space.XSMALL,
+    marginVertical: SPACE.XSMALL,
+    paddingTop: SPACE.XSMALL,
   },
   tabBarActiveTintColor: ColorTheme.DEFAULT,
   tabBarInactiveTintColor: ColorTheme.MUTED,
@@ -69,22 +70,27 @@ const TabOptions: BottomTabNavigationOptions = {
   headerTitleAlign: "left",
 };
 
-const DiscoverScreenOptions: BottomTabNavigationOptions = {
+const discoverScreenOptions: BottomTabNavigationOptions = {
+  title: "Discover",
   tabBarIcon: (props) => <Octicons name="broadcast" {...props} />,
 };
 
-const ProfilesScreenOptions: BottomTabNavigationOptions = {
+const profilesScreenOptions: BottomTabNavigationOptions = {
+  title: "Profiles",
   tabBarIcon: (props) => <Octicons name="people" {...props} />,
 };
 
-const CredentialsScreenOptions: BottomTabNavigationOptions = {
+const credentialsScreenOptions: BottomTabNavigationOptions = {
+  title: "Credentials",
   tabBarIcon: (props) => <Octicons name="id-badge" {...props} />,
 };
 
-const ConnectionsScreenOptions: BottomTabNavigationOptions = {
+const connectionsScreenOptions: BottomTabNavigationOptions = {
+  title: "Connections",
   tabBarIcon: (props) => <Octicons name="webhook" {...props} />,
 };
 
-const ActivityScreenOptions: BottomTabNavigationOptions = {
+const activityScreenOptions: BottomTabNavigationOptions = {
+  title: "Activity",
   tabBarIcon: (props) => <Octicons name="history" {...props} />,
 };

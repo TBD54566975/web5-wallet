@@ -4,16 +4,15 @@ import { MenuPageLayout } from "../MenuPageLayout";
 import { Button } from "@/components/Button";
 import { BadgeNames } from "@/components/Item";
 import { formatDate } from "@/util/formatters";
+import type { AppNavigatorProps } from "@/types/navigation";
 
-const CredentialDetailScreen = ({ route }) => {
-  const tabLabels = ["About", "Activity"];
+const tabLabels = ["About", "Activity"];
+
+type Props = AppNavigatorProps<"CredentialDetailScreen">;
+const CredentialDetailScreen = ({ route }: Props) => {
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
-  const {
-    heading: credentialName,
-    subtitle: issuerName,
-    iconName: icon,
-  } = route.params.credential;
+  const { heading, subtitle, iconName } = route.params;
 
   const credential = {
     status: "Valid",
@@ -27,9 +26,9 @@ const CredentialDetailScreen = ({ route }) => {
   return (
     <MenuPageLayout
       headerItem={{
-        heading: credentialName,
-        subtitle: `Issued by ${issuerName}`,
-        iconName: icon,
+        heading: heading,
+        subtitle: `Issued by ${subtitle}`,
+        iconName: iconName,
         badgeName: BadgeNames.CREDENTIAL,
       }}
       menuTabs={tabLabels.map((label) => {
@@ -59,7 +58,7 @@ const CredentialDetailScreen = ({ route }) => {
         </>
       )}
       {activeTab === tabLabels[1] && <></>}
-      <Button kind="primary">Present</Button>
+      <Button kind="primary" text="Present" />
     </MenuPageLayout>
   );
 };

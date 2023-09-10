@@ -10,6 +10,19 @@ import Octicons from "@expo/vector-icons/Octicons";
 import { Typography } from "@/theme/typography";
 import { ColorTheme } from "@/theme/colors";
 
+type ItemAvatarProps = {
+  source?: ImageURISource;
+  iconName?: keyof typeof Octicons.glyphMap;
+  badgeName?: BadgeNames;
+};
+type ItemBodyProps = {
+  heading: string;
+  subtitle?: string;
+  body?: string;
+  headingSize?: keyof typeof Typography;
+};
+
+export type ItemProps = ItemAvatarProps & ItemBodyProps;
 export const Item = (props: ItemProps) => {
   const { heading, subtitle, body, headingSize, badgeName, iconName, source } =
     props;
@@ -27,6 +40,7 @@ export const Item = (props: ItemProps) => {
   );
 };
 
+export type ItemStackProps = { images: ItemAvatarProps[] } & ItemBodyProps;
 export const ItemStack = (props: ItemStackProps) => {
   const { images, heading, subtitle, body, headingSize } = props;
 
@@ -135,23 +149,6 @@ const ItemStyles = StyleSheet.create({
     color: ColorTheme.DEFAULT_CONTRAST,
   },
 });
-
-type ItemAvatarProps = {
-  source?: ImageURISource;
-  iconName?: keyof typeof Octicons.glyphMap;
-  badgeName?: BadgeNames;
-};
-
-type ItemBodyProps = {
-  heading: string;
-  subtitle?: string;
-  body?: string;
-  headingSize?: keyof typeof Typography;
-};
-
-export type ItemProps = ItemAvatarProps & ItemBodyProps;
-
-export type ItemStackProps = { images: ItemAvatarProps[] } & ItemBodyProps;
 
 export enum BadgeNames {
   PROFILE = "feed-person",

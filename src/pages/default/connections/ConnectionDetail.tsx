@@ -10,15 +10,17 @@ import { BadgeNames } from "@/components/Item";
 import { mockConnections } from "@/services/mocks";
 import { profilesAtom } from "@/features/identity/atoms";
 import { For } from "@legendapp/state/react";
+import { AppNavigatorProps } from "@/types/navigation";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
-const ConnectionDetailScreen = ({ navigation, route }) => {
-  const { heading: connectionName, iconName: icon } = route.params.connection;
+type Props = AppNavigatorProps<"ConnectionDetailScreen">;
+const ConnectionDetailScreen = ({ navigation, route }: Props) => {
+  const { heading, iconName } = route.params;
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
   const navigateToReviewConnection = () => {
-    navigation.navigate("ReviewConnection");
+    navigation.navigate("ReviewConnectionScreen");
   };
 
   const connection = mockConnections[0];
@@ -26,8 +28,8 @@ const ConnectionDetailScreen = ({ navigation, route }) => {
   return (
     <MenuPageLayout
       headerItem={{
-        heading: connectionName,
-        iconName: icon,
+        heading: heading,
+        iconName: iconName,
         badgeName: BadgeNames.CONNECTION,
       }}
       menuTabs={tabLabels.map((label) => {
@@ -49,8 +51,8 @@ const ConnectionDetailScreen = ({ navigation, route }) => {
         <>
           <View style={Layouts.row}>
             <Text style={Typography.body4}>
-              <Text style={Typography.body2}>{connectionName}</Text> is
-              connected to the following profiles.
+              <Text style={Typography.body2}>{heading}</Text> is connected to
+              the following profiles.
             </Text>
           </View>
           <For each={profilesAtom}>

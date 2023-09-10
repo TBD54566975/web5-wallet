@@ -3,16 +3,17 @@ import { Typography } from "@/theme/typography";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export const LabelValueItem = (props: { label; value }) => {
+type Props = { label: string; value: string };
+export const LabelValueItem = ({ label, value }: Props) => {
   return (
-    <View style={LabelValueStyles.layout}>
-      <Text style={LabelValueStyles.label}>{props.label}</Text>
-      <Text style={Typography.body1}>{props.value}</Text>
+    <View style={styles.layout}>
+      <Text style={styles.label}>{label}</Text>
+      <Text style={Typography.body1}>{value}</Text>
     </View>
   );
 };
 
-const LabelValueStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   layout: {
     marginBottom: 20,
   },
