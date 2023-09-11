@@ -32,31 +32,39 @@ const initAgent = async () => {
 
   agent = await IdentityAgent.create({ dwnManager, appData, syncManager });
 
-  // WARN: EVERYTHING BELOW THIS POINT TEST CODE. DON'T PR IT!
-  // IF IT ENDS UP IN A PR, PLEASE REJECT THE PR!
+  // // WARN: EVERYTHING BELOW THIS POINT TEST CODE. DON'T PR IT!
+  // // IF IT ENDS UP IN A PR, PLEASE REJECT THE PR!
 
-  // Check if it's the first launch.
-  const isFirstLaunch = await agent.firstLaunch();
-  console.log("isFirstLaunch:", isFirstLaunch);
+  // // Check if it's the first launch.
+  // const isFirstLaunch = await agent.firstLaunch();
+  // console.log("isFirstLaunch:", isFirstLaunch);
 
   // Start the agent with a hard-coded passphrase
   await agent.start({ passphrase: "passphrase" });
 
-  // List number of identities
-  const managedProfiles1 = await agent.identityManager.list();
-  console.log("managedProfiles count before:", managedProfiles1.length);
+  // // List number of identities
+  // const managedProfiles1 = await agent.identityManager.list();
+  // console.log("managedProfiles count before:", managedProfiles1.length);
 
-  // Create a brand new identity
-  const identity = await agent.identityManager.create({
-    name: `Test Profile ${managedProfiles1.length}`,
-    didMethod: "ion",
-    kms: "local",
-  });
-  console.log(`Created ${identity.name} ManagedIdentity: ${identity.did}`);
+  // // Create a brand new identity
+  // const identity = await agent.identityManager.create({
+  //   name: `Test Profile ${managedProfiles1.length}`,
+  //   didMethod: "ion",
+  //   kms: "local",
+  // });
+  // console.log(`Created ${identity.name} ManagedIdentity: ${identity.did}`);
+  // await agent.identityManager.import({
+  //   identity,
+  //   context: agent.agentDid,
+  // });
 
-  // List number of identities a second time, it should be 1 more than it was before as we just made one.
-  const managedProfiles2 = await agent.identityManager.list();
-  console.log("managedProfiles count after:", managedProfiles2.length);
+  // // Try fetching the brand new identity that was just created
+  // const fetched = await agent.identityManager.get({ did: identity.did });
+  // console.log("Fetched:", fetched);
+
+  // // List number of identities a second time, it should be 1 more than it was before as we just made one.
+  // const managedProfiles2 = await agent.identityManager.list();
+  // console.log("managedProfiles count after:", managedProfiles2.length);
 };
 
 const createDwn = async (): Promise<Dwn> => {

@@ -15,6 +15,20 @@ const ProfilesScreen = ({ navigation }: Props) => {
   const [managedIdentities, setManagedIdentities] = useState<ManagedIdentity[]>(
     []
   );
+  useEffect(() => {
+    const fetchManagedIdentities = async () => {
+      console.log("Fetching managedIdentities!");
+      const managedIdentities =
+        await IdentityAgentManager.getAgent().identityManager.list();
+      console.log(
+        "Fetched managedIdentities:",
+        JSON.stringify(managedIdentities)
+      );
+      setManagedIdentities(managedIdentities);
+    };
+
+    void fetchManagedIdentities();
+  }, []);
 
   const navigateToItem = (profile: Profile) => {
     navigation.navigate("ProfileDetailScreen", { profile });
@@ -23,21 +37,6 @@ const ProfilesScreen = ({ navigation }: Props) => {
   const navigateToAddProfile = () => {
     navigation.navigate("AddProfileScreen");
   };
-
-  useEffect(() => {
-    const fetchManagedIdentities = async () => {
-      // console.log("Fetching managedIdentities!");
-      // const managedIdentities =
-      //   await IdentityAgentManager.getAgent().identityManager.list();
-      // console.log(
-      //   "Fetched managedIdentities:",
-      //   JSON.stringify(managedIdentities)
-      // );
-      // setManagedIdentities(managedIdentities);
-    };
-
-    void fetchManagedIdentities();
-  }, []);
 
   return (
     <ParentPageLayout>
@@ -52,25 +51,6 @@ const ProfilesScreen = ({ navigation }: Props) => {
               onPress={() => console.log("tapped", identity.name)}
             />
           ))}
-          {/* <For each={profilesAtom}>
-            {(userProfile) => {
-              const profile = userProfile.get();
-              if (!profile) {
-                return <></>;
-              }
-
-              return (
-                <Tappable
-                  iconName={profile.icon}
-                  badgeName={BadgeNames.PROFILE}
-                  heading={profile.name}
-                  subtitle={profile.displayName}
-                  body={formatDID(profile.id)}
-                  onPress={() => navigateToItem(profile)}
-                />
-              );
-            }}
-          </For> */}
         </ScrollView>
         <Button
           kind="primary"
