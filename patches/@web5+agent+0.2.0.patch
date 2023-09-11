@@ -12,7 +12,7 @@ index e8e64f0..e418b51 100644
  import { Convert, MemoryStore } from '@web5/common';
  import { CryptoKey, Jose, XChaCha20Poly1305 } from '@web5/crypto';
 diff --git a/node_modules/@web5/agent/dist/esm/dwn-manager.js b/node_modules/@web5/agent/dist/esm/dwn-manager.js
-index 3b68855..0c80d18 100644
+index 81385d2..5413db3 100644
 --- a/node_modules/@web5/agent/dist/esm/dwn-manager.js
 +++ b/node_modules/@web5/agent/dist/esm/dwn-manager.js
 @@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
@@ -67,10 +67,10 @@ index ab4cb58..1a42192 100644
  import { isManagedKeyPair } from './utils.js';
  /**
 diff --git a/node_modules/@web5/agent/dist/esm/test-managed-agent.js b/node_modules/@web5/agent/dist/esm/test-managed-agent.js
-index 2835aa0..cec93df 100644
+index 786fe18..99416f8 100644
 --- a/node_modules/@web5/agent/dist/esm/test-managed-agent.js
 +++ b/node_modules/@web5/agent/dist/esm/test-managed-agent.js
-@@ -11,7 +11,7 @@ import { Jose } from '@web5/crypto';
+@@ -12,7 +12,7 @@ import { Jose } from '@web5/crypto';
  import { Dwn } from '@tbd54566975/dwn-sdk-js';
  import { LevelStore, MemoryStore } from '@web5/common';
  import { DidIonMethod, DidKeyMethod, DidResolver, DidResolverCacheLevel } from '@web5/dids';

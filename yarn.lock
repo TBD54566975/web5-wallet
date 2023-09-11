@@ -3264,82 +3264,83 @@
     "@urql/core" ">=2.3.1"
     wonka "^4.0.14"
 
-"@web5/agent@0.1.7-alpha-20230823-44789a4":
-  version "0.1.7-alpha-20230823-44789a4"
-  resolved "https://registry.yarnpkg.com/@web5/agent/-/agent-0.1.7-alpha-20230823-44789a4.tgz#84e1221273c09e340d67c368215c45b609683a3e"
-  integrity sha512-htQSToEl2Z7OO5jy5svFkm1qhznMPvNpmYYPwxgnVo+2EPZwXPo9ohCPHrY9xHX917+gu1z64ynWD2SEQd2PXA==
+"@web5/agent@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@web5/agent/-/agent-0.2.0.tgz#d479d88d83159df28746bd5006135c984021b5c3"
+  integrity sha512-bAS9aalCRK08vPOgAvMt4JKVtD97t0+EPUThTuDlqVASRlwBewEV0DpXw1AjH7oNEFJKZuwCyCd8k+gF4RLdLw==
   dependencies:
     "@tbd54566975/dwn-sdk-js" "0.2.1"
-    "@web5/common" "0.1.1-alpha-20230823-44789a4"
-    "@web5/crypto" "0.1.6-alpha-20230823-44789a4"
-    "@web5/dids" "0.1.9-alpha-20230823-44789a4"
+    "@web5/common" "0.2.0"
+    "@web5/crypto" "0.2.0"
+    "@web5/dids" "0.2.0"
     level "8.0.0"
     readable-stream "4.4.2"
     readable-web-to-node-stream "3.0.2"
 
-"@web5/api@0.8.0-alpha-20230823-44789a4":
-  version "0.8.0-alpha-20230823-44789a4"
-  resolved "https://registry.yarnpkg.com/@web5/api/-/api-0.8.0-alpha-20230823-44789a4.tgz#3853662c9ecae73491bd6f7110c90149dc614c45"
-  integrity sha512-8bX5wnE2KPCZvvU65e7NAPHCTKK5+PFX9e6B+7VC2AQl7jxwNhPfpb5TSbFNZIg8LaumVAgQzBaa76m3+wcUpQ==
+"@web5/api@0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@web5/api/-/api-0.8.1.tgz#dcaebd7b644b1f91f707c7e66e4d3e77739bb6ac"
+  integrity sha512-4/MArXdWEvXSiSd9Q70PfQI/IJu6YfctTSqC/jz0xkR0xFkTq/Vnxtiu/e+1WfDFK0iVViubskJu0lj4J0QivA==
   dependencies:
     "@tbd54566975/dwn-sdk-js" "0.2.1"
-    "@web5/agent" "0.1.7-alpha-20230823-44789a4"
-    "@web5/crypto" "0.1.6-alpha-20230823-44789a4"
-    "@web5/dids" "0.1.9-alpha-20230823-44789a4"
-    "@web5/user-agent" "0.1.10-alpha-20230823-44789a4"
+    "@web5/agent" "0.2.0"
+    "@web5/crypto" "0.2.0"
+    "@web5/dids" "0.2.0"
+    "@web5/user-agent" "0.2.0"
     level "8.0.0"
     ms "2.1.3"
     readable-stream "4.4.2"
     readable-web-to-node-stream "3.0.2"
 
-"@web5/common@0.1.1-alpha-20230823-44789a4":
-  version "0.1.1-alpha-20230823-44789a4"
-  resolved "https://registry.yarnpkg.com/@web5/common/-/common-0.1.1-alpha-20230823-44789a4.tgz#b89d8ca7d38f94e8835595aa3b642a7710818fa3"
-  integrity sha512-2H+1ABUsAAeLlePvCraA61RF4pEtYXF5o6jEi8wLQo5VSR+mHE3DzzpzTj+OmyJEpzon2b8kgn+kfOC3KbsgJQ==
+"@web5/common@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@web5/common/-/common-0.2.0.tgz#94139f089790c3c4ef3bbddfdb2ca33706211405"
+  integrity sha512-JRJ2D0OhtyPCcvHNfzuTAkVKviy4abA5z6OlYM5ZatR3abyLVt/L6HjDKTXBuBzR49tUQcffSqJ9+EdJ5knp+w==
   dependencies:
     level "8.0.0"
     multiformats "11.0.2"
 
-"@web5/crypto@0.1.6-alpha-20230823-44789a4":
-  version "0.1.6-alpha-20230823-44789a4"
-  resolved "https://registry.yarnpkg.com/@web5/crypto/-/crypto-0.1.6-alpha-20230823-44789a4.tgz#9931d19f7c9517c5c935e52ff0aeaf8872a9be5c"
-  integrity sha512-95UVP2kzm/L7ZROJxaHis3PsuXQ9tB5ROQncoHjxu+v+CSZqXfJidepdeud29lqkWgGv1DQnuf8f1LSW67W9rg==
+"@web5/crypto@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@web5/crypto/-/crypto-0.2.0.tgz#5092162f2b9016c66c459b9faf8bc86c549da155"
+  integrity sha512-JjtP5D5FUO7yiIlyUI8RpuzyFtM8Xpchsl8XzMq9M0ZwK3aVckEAf1VMdiaHpDzESYORXAdK39yJ/t+vG7hT9w==
   dependencies:
     "@noble/ciphers" "0.1.4"
     "@noble/curves" "1.1.0"
     "@noble/hashes" "1.3.1"
-    "@web5/common" "0.1.1-alpha-20230823-44789a4"
+    "@web5/common" "0.2.0"
 
-"@web5/dids@0.1.9-alpha-20230823-44789a4":
-  version "0.1.9-alpha-20230823-44789a4"
-  resolved "https://registry.yarnpkg.com/@web5/dids/-/dids-0.1.9-alpha-20230823-44789a4.tgz#b16b2d0b5b1e8f2ddb108bfaebf20191e1675573"
-  integrity sha512-RZxuS4snl0id8s/hMzKQufNFJoPmuTD83oHISCEtq1ENPOq9/EDMTCdVY2HaVkzXh45QewJcxt4n9a7TenUMAw==
+"@web5/dids@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@web5/dids/-/dids-0.2.0.tgz#51fa77428d35bdf31a7642d1da4782fa79ef7960"
+  integrity sha512-vA9+0SAo+51va1LZZCMKSpzWqw2aN+emKNK5ej31aPGvHxrMT87d+dtjF35eorfpeBWvlQ6LxcccdTQ4zT+mWg==
   dependencies:
     "@decentralized-identity/ion-pow-sdk" "1.0.17"
     "@decentralized-identity/ion-sdk" "1.0.1"
-    "@web5/common" "0.1.1-alpha-20230823-44789a4"
-    "@web5/crypto" "0.1.6-alpha-20230823-44789a4"
+    "@web5/common" "0.2.0"
+    "@web5/crypto" "0.2.0"
     canonicalize "2.0.0"
     did-resolver "4.1.0"
     level "8.0.0"
+    ms "2.1.3"
 
-"@web5/identity-agent@0.1.0-alpha-20230823-44789a4":
-  version "0.1.0-alpha-20230823-44789a4"
-  resolved "https://registry.yarnpkg.com/@web5/identity-agent/-/identity-agent-0.1.0-alpha-20230823-44789a4.tgz#dd71586873cd68f695fc2b333615b8154a1953c4"
-  integrity sha512-ZEkn2kIboNF63+4N7aSxdP8wMSdyNNrhS6tWd44ybq22SIESRsOvcBzxd4YVI3N2oEoFzyCSWX/t0Z6Xxm4AwQ==
+"@web5/identity-agent@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@web5/identity-agent/-/identity-agent-0.2.0.tgz#e32ff30e1b668e7421a40e79eedbf03ac4479509"
+  integrity sha512-GQjYraNRrO1mPpflYhRvo+ydmRITEMxRJY+ELa3LHtqL8PCPOi22d7hqS+CkD5qGuvwS6t68Om1/JuP4zEKKpA==
   dependencies:
-    "@web5/agent" "0.1.7-alpha-20230823-44789a4"
-    "@web5/api" "0.8.0-alpha-20230823-44789a4"
+    "@web5/agent" "0.2.0"
+    "@web5/api" "0.8.1"
 
-"@web5/user-agent@0.1.10-alpha-20230823-44789a4":
-  version "0.1.10-alpha-20230823-44789a4"
-  resolved "https://registry.yarnpkg.com/@web5/user-agent/-/user-agent-0.1.10-alpha-20230823-44789a4.tgz#ff8f785b1aac54c3d267cbd8e99cf0d8b3a1f503"
-  integrity sha512-WQq5Xc7Ein0Dn38DVraxPguAQor3PLGl3ycpz51a3fJwgJf9mMD6V5kUIr1dmnIqXaKIml32j71gRiyyfJQqFg==
+"@web5/user-agent@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@web5/user-agent/-/user-agent-0.2.0.tgz#1e5a3f9be1c13ca8db03b3fbb0c40f604b15cbdd"
+  integrity sha512-5Nk5naCcBOn2hBwLPdR4fRq1eg0pTj4Fr8p2aFLLyfFplVcHB0U9OtsyutgcaCMs2ecaJCEXwmxpeR0LkwQLPg==
   dependencies:
-    "@web5/agent" "0.1.7-alpha-20230823-44789a4"
-    "@web5/common" "0.1.1-alpha-20230823-44789a4"
-    "@web5/crypto" "0.1.6-alpha-20230823-44789a4"
-    "@web5/dids" "0.1.9-alpha-20230823-44789a4"
+    "@web5/agent" "0.2.0"
+    "@web5/common" "0.2.0"
+    "@web5/crypto" "0.2.0"
+    "@web5/dids" "0.2.0"
 
 "@xmldom/xmldom@~0.7.7":
   version "0.7.11"
