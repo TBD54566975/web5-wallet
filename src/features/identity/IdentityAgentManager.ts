@@ -20,7 +20,6 @@ const initAgent = async () => {
     );
     return;
   }
-
   const dwn = await createDwn();
   const dwnManager = new DwnManager({ dwn });
   const appData = new AppDataVault({
