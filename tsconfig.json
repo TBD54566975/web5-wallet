@@ -9,9 +9,9 @@
     "isolatedModules": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true
+    "strict": true,
+    "jsx": "react"
   },
-  "extends": "expo/tsconfig.base",
   "include": [".eslintrc.js", "**/*"],
   "exclude": ["./src/reference/**/*"]
 }
