@@ -1,27 +1,26 @@
-import { ColorTheme } from "@/theme/colors";
-import { Layouts, Space } from "@/theme/layouts";
 import React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
+import { ColorTheme } from "@/theme/colors";
+import { SPACE } from "@/theme/layouts";
 
-export const ParentPageLayout = ({ children }) => {
+type Props = { children: React.ReactNode };
+export const ParentPageLayout = ({ children }: Props) => {
   return (
-    <SafeAreaView style={ParentPageLayoutTheme.container}>
-      <View style={ParentPageLayoutTheme.inner}>{children}</View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.inner}>{children}</View>
     </SafeAreaView>
   );
 };
 
-const ParentPageLayoutTheme = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     backgroundColor: ColorTheme.PRIMARY,
     flex: 1,
   },
   inner: {
     backgroundColor: ColorTheme.DEFAULT_CONTRAST,
-    paddingTop: Space.XXLARGE,
+    paddingTop: SPACE.XXLARGE,
     flex: 1,
-    borderTopLeftRadius: Space.XXLARGE,
-    borderTopRightRadius: Space.XXLARGE,
-    ...Layouts.container,
+    padding: SPACE.BASE,
   },
 });

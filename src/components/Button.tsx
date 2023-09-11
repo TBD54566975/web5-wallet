@@ -1,35 +1,51 @@
 /* eslint-disable react-native/no-unused-styles */
-import { ColorTheme } from "@/theme/colors";
-import { Space } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
 import React from "react";
-import { StyleSheet, Pressable, Text, PressableProps } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  Pressable,
+  type PressableProps,
+  type StyleProp,
+  type ViewStyle,
+} from "react-native";
+import Octicons from "@expo/vector-icons/Octicons";
+import { ColorTheme } from "@/theme/colors";
+import { SPACE } from "@/theme/layouts";
+import { Typography } from "@/theme/typography";
 
 export const Button = (
   props: PressableProps & {
-    kind: Exclude<keyof typeof ButtonThemes, "default">;
-    style?;
-    children;
+    kind: keyof typeof buttonStyles;
+    style?: StyleProp<ViewStyle>;
+    text: string;
+    icon?: keyof typeof Octicons.glyphMap;
   }
 ) => {
-  const { kind, children, style, ...pressableProps } = props;
-  const ButtonStyle = StyleSheet.compose(ButtonThemes[kind], style);
+  const { kind, style, text, icon, ...pressableProps } = props;
+  const incomingStyle = StyleSheet.compose(buttonStyles[kind], style);
+
   return (
-    <Pressable {...pressableProps} style={[ButtonLayouts.default, ButtonStyle]}>
-      <Text style={[Typography.body3, ButtonStyle]}>{children}</Text>
+    <Pressable {...pressableProps} style={[styles.button, incomingStyle]}>
+      <Text style={[Typography.body3, incomingStyle]}>{text}</Text>
+      {!!icon && <Octicons name={icon} style={styles.icon} />}
     </Pressable>
   );
 };
 
-const ButtonLayouts = StyleSheet.create({
-  default: {
+const styles = StyleSheet.create({
+  button: {
     borderRadius: 999,
-    padding: Space.SMALL,
+    padding: SPACE.SMALL,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    marginLeft: SPACE.LARGE,
   },
 });
 
-const ButtonThemes = StyleSheet.create({
+const buttonStyles = StyleSheet.create({
   primary: {
     backgroundColor: ColorTheme.PRIMARY,
     color: ColorTheme.DEFAULT,

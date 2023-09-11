@@ -66,10 +66,10 @@ const ReviewConnectionScreen = () => {
           <Text style={Typography.body4}>&bull; see and edit your chats</Text>
         </View>
         <View style={FlexLayouts.column}>
-          <Button kind="destructive">
-            Disconnect <Text style={Typography.body2}>{connection.name}</Text>{" "}
-            from <Text style={Typography.body2}>{profile.name}</Text>
-          </Button>
+          <Button
+            kind="destructive"
+            text={`Disconnect ${connection.name} from ${profile.name}`}
+          />
           <Text
             style={[
               Typography.label3,

@@ -7,10 +7,12 @@ import { Tappable } from "../Tappable";
 import { observable } from "@legendapp/state";
 import { mockCredentials } from "@/services/mocks";
 import type { Credential } from "@/types/models";
+import { AppNavigatorProps } from "@/types/navigation";
 
-const AddCredentialsScreen = ({ navigation }) => {
+type Props = AppNavigatorProps<"AddCredentialsScreen">;
+const AddCredentialsScreen = ({ navigation }: Props) => {
   const navigateToAddCredentialDetail = (credential: Credential) => {
-    navigation.navigate("AddCredentialDetail", { credential });
+    navigation.navigate("AddCredentialDetailScreen", { credential });
   };
 
   return (

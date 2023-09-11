@@ -7,14 +7,20 @@ import { Tappable } from "@/pages/default/Tappable";
 import { Button } from "@/components/Button";
 import { FlexLayouts } from "@/theme/layouts";
 import { BadgeNames, ItemProps } from "@/components/Item";
+import { TabNavigatorProps } from "@/types/navigation";
 
-const CredentialsScreen = ({ navigation }) => {
+type Props = TabNavigatorProps<"CredentialsScreen">;
+const CredentialsScreen = ({ navigation }: Props) => {
   const navigateToItem = (credential: ItemProps) => {
-    navigation.navigate("CredentialDetail", { credential });
+    navigation.navigate("CredentialDetailScreen", {
+      heading: credential.heading,
+      subtitle: credential.subtitle ?? "",
+      iconName: credential.iconName ?? "hash",
+    });
   };
 
   const navigateToAddCredentials = () => {
-    navigation.navigate("AddCredentials");
+    navigation.navigate("AddCredentialsScreen");
   };
 
   return (
@@ -30,7 +36,6 @@ const CredentialsScreen = ({ navigation }) => {
 
               return (
                 <Tappable
-                  source={credential.source}
                   iconName={credential.iconName}
                   badgeName={credential.badgeName}
                   heading={credential.heading}
@@ -41,9 +46,11 @@ const CredentialsScreen = ({ navigation }) => {
             }}
           </For>
         </ScrollView>
-        <Button kind="primary" onPress={navigateToAddCredentials}>
-          Get a new credential
-        </Button>
+        <Button
+          kind="primary"
+          onPress={navigateToAddCredentials}
+          text="Get a new credential"
+        />
       </View>
     </ParentPageLayout>
   );
@@ -51,26 +58,26 @@ const CredentialsScreen = ({ navigation }) => {
 
 export default CredentialsScreen;
 
-const mockProfileCredentials: ItemProps[] = [
+const mockProfileCredentials = [
   {
     heading: "Driver's License",
     subtitle: "All profiles",
     body: "Valid",
-    iconName: "note",
+    iconName: "note" as const,
     badgeName: BadgeNames.CREDENTIAL,
   },
   {
     heading: "Gym membership",
     subtitle: "Social profile",
     body: "Expired",
-    iconName: "zap",
+    iconName: "zap" as const,
     badgeName: BadgeNames.CREDENTIAL,
   },
   {
     heading: "Employer ID",
     subtitle: "Professional profile",
     body: "Valid",
-    iconName: "organization",
+    iconName: "organization" as const,
     badgeName: BadgeNames.CREDENTIAL,
   },
 ];

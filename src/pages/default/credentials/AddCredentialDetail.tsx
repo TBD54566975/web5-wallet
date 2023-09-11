@@ -7,17 +7,22 @@ import React from "react";
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 import { mockCredentials } from "@/services/mocks";
+import type { Credential } from "@/types/models";
+import { AppNavigatorProps } from "@/types/navigation";
 
-const AddCredentialDetailScreen = ({ navigation, route }) => {
+type Props = AppNavigatorProps<"AddCredentialDetailScreen">;
+const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
   const credential = route.params.credential;
+
   const navigateToAddCredentialOptions = () => {
-    navigation.navigate("AddCredentialOptions", { credential });
-  };
-  const navigateToAddCredentialDetail = (secondaryCredential) => {
-    navigation.push("AddCredentialDetail", { credential: secondaryCredential });
+    navigation.navigate("AddCredentialOptionsScreen", { credential });
   };
 
-  //TODO: Replace mockCredentials with real profile credentials
+  const navigateToAddCredentialDetail = (secondaryCredential: Credential) => {
+    navigation.push("AddCredentialDetailScreen", {
+      credential: secondaryCredential,
+    });
+  };
 
   return (
     <SafeAreaView>
@@ -67,15 +72,16 @@ const AddCredentialDetailScreen = ({ navigation, route }) => {
                 onPress={() =>
                   navigateToAddCredentialDetail(mockCredentials[2])
                 }
-              >
-                Get
-              </Button>
+                text="Get"
+              />
             </View>
           </View>
         </View>
-        <Button kind="primary" onPress={navigateToAddCredentialOptions}>
-          Get this credential
-        </Button>
+        <Button
+          kind="primary"
+          onPress={navigateToAddCredentialOptions}
+          text="Get this credential"
+        />
       </View>
     </SafeAreaView>
   );

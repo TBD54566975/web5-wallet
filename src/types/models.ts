@@ -10,7 +10,7 @@ export type Profile = {
   icon: keyof typeof Octicons.glyphMap;
   connections: Connection[];
   credentials: Credential[];
-  displayName?: string;
+  displayName: string;
 };
 
 export type Credential = {

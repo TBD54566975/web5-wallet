@@ -3,11 +3,13 @@ import { Input } from "@/components/Input";
 import { ProfileManager } from "@/features/identity/ProfileManager";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
+import { AppNavigatorProps } from "@/types/navigation";
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const AddProfileScreen = ({ navigation }) => {
+type Props = AppNavigatorProps<"AddProfileScreen">;
+const AddProfileScreen = ({ navigation }: Props) => {
   const [profileName, setProfileName] = useState("");
   const [displayName, setDisplayName] = useState("");
 
@@ -51,9 +53,7 @@ const AddProfileScreen = ({ navigation }) => {
             label="Set your display name"
           />
         </View>
-        <Button kind="primary" onPress={addProfile}>
-          Save
-        </Button>
+        <Button kind="primary" onPress={addProfile} text="Save" />
       </View>
     </SafeAreaView>
   );

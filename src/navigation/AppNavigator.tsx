@@ -4,62 +4,62 @@ import {
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import { TabNavigator } from "./TabNavigator";
-
 import WelcomeScreen from "@/pages/onboarding/welcome/Welcome";
 import ConnectionDetailScreen from "@/pages/default/connections/ConnectionDetail";
 import ReviewConnectionScreen from "@/pages/default/connections/ReviewConnection";
 import AddCredentialsScreen from "@/pages/default/credentials/AddCredentials";
 import CredentialDetailScreen from "@/pages/default/credentials/CredentialDetail";
-
 import ProfileDetailScreen from "@/pages/default/profiles/ProfileDetail";
-import AuthScreen from "@/pages/onboarding/auth/Auth";
 import CreateScreen from "@/pages/onboarding/create/Create";
-import ImportScreen from "@/pages/onboarding/import/Import";
-
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
 import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
 import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
 import { profilesAtom } from "@/features/identity/atoms";
+import type { AppNavigatorInterface } from "@/types/navigation";
 
-const Stack = createNativeStackNavigator();
-const initialRoute = profilesAtom.peek().length ? "Default" : "Onboarding";
+const Stack = createNativeStackNavigator<AppNavigatorInterface>();
+const initialRoute = profilesAtom.peek().length ? "Tabs" : "WelcomeScreen";
 
 export const AppNavigator = () => {
   return (
     <Stack.Navigator
-      screenOptions={AppNavigatorOptions}
+      screenOptions={appNavigatorOptions}
       initialRouteName={initialRoute}
     >
       {/* Onboarding */}
-      <Stack.Screen name="Onboarding" component={WelcomeScreen} />
-      <Stack.Screen name="Import" component={ImportScreen} />
-      <Stack.Screen name="Create" component={CreateScreen} />
-      <Stack.Screen name="Auth" component={AuthScreen} />
+      <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+      <Stack.Screen name="CreateScreen" component={CreateScreen} />
 
-      {/* Default */}
-      <Stack.Screen name="Default" component={TabNavigator} />
-      <Stack.Group screenOptions={DefaultGroupOptions}>
-        <Stack.Screen name="ProfileDetail" component={ProfileDetailScreen} />
+      {/* Tabs */}
+      <Stack.Screen name="Tabs" component={TabNavigator} />
+      <Stack.Group screenOptions={authedGroupOptions}>
         <Stack.Screen
-          name="CredentialDetail"
+          name="ProfileDetailScreen"
+          component={ProfileDetailScreen}
+        />
+        <Stack.Screen
+          name="CredentialDetailScreen"
           component={CredentialDetailScreen}
         />
-        <Stack.Screen name="AddProfile" component={AddProfileScreen} />
-        <Stack.Screen name="AddCredentials" component={AddCredentialsScreen} />
+        <Stack.Screen name="AddProfileScreen" component={AddProfileScreen} />
         <Stack.Screen
-          name="AddCredentialDetail"
+          name="AddCredentialsScreen"
+          component={AddCredentialsScreen}
+        />
+        <Stack.Screen
+          name="AddCredentialDetailScreen"
           component={AddCredentialDetailScreen}
         />
         <Stack.Screen
-          name="AddCredentialOptions"
+          name="AddCredentialOptionsScreen"
           component={AddCredentialOptionsScreen}
         />
         <Stack.Screen
-          name="ConnectionDetail"
+          name="ConnectionDetailScreen"
           component={ConnectionDetailScreen}
         />
         <Stack.Screen
-          name="ReviewConnection"
+          name="ReviewConnectionScreen"
           component={ReviewConnectionScreen}
         />
       </Stack.Group>
@@ -67,10 +67,10 @@ export const AppNavigator = () => {
   );
 };
 
-const AppNavigatorOptions: NativeStackNavigationOptions = {
+const appNavigatorOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
-const DefaultGroupOptions: NativeStackNavigationOptions = {
+const authedGroupOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitle: () => false,
   headerShadowVisible: false,

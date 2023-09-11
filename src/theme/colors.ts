@@ -1,7 +1,6 @@
-import { ColorValue } from "react-native";
 import { DefaultTheme as ReactNavigationDefaultTheme } from "@react-navigation/native";
 
-const ColorPalette: Record<string, ColorValue> = {
+const ColorPalette = {
   YELLOW: "#FFEC1A",
   CYAN: "#24F2FF",
   PURPLE: "#9A1AFF",
@@ -17,7 +16,7 @@ const ColorPalette: Record<string, ColorValue> = {
   GRAY_900: "#202020",
 };
 
-export const ColorTheme: Record<string, ColorValue> = {
+export const ColorTheme = {
   DEFAULT: ColorPalette.BLACK,
   DEFAULT_CONTRAST: ColorPalette.WHITE,
   REDUCED: ColorPalette.GRAY_600,

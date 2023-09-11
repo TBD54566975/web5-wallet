@@ -6,13 +6,15 @@ import { View, Text, SafeAreaView, Alert } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 import { ProfileManager } from "@/features/identity/ProfileManager";
 import { Item } from "@/components/Item";
+import type { AppNavigatorProps } from "@/types/navigation";
 
-const CreateScreen = ({ navigation }) => {
+type Props = AppNavigatorProps<"CreateScreen">;
+const CreateScreen = ({ navigation }: Props) => {
   const finishCreateProfile = async () => {
     try {
       await ProfileManager.createProfile(seedProfiles.social);
       await ProfileManager.createProfile(seedProfiles.professional);
-      navigation.replace("Default");
+      navigation.navigate("Tabs", { screen: "DiscoverScreen" });
     } catch (e) {
       console.log(e);
       Alert.alert(
@@ -21,7 +23,7 @@ const CreateScreen = ({ navigation }) => {
         [
           {
             text: "OK, close",
-            onPress: () => navigation.replace("Onboarding"),
+            onPress: () => navigation.replace("WelcomeScreen"),
           },
         ]
       );
@@ -62,9 +64,7 @@ const CreateScreen = ({ navigation }) => {
             iconName={seedProfiles.professional.icon}
           />
         </View>
-        <Button kind="primary" onPress={finishCreateProfile}>
-          Next <Octicons name="arrow-right" />
-        </Button>
+        <Button kind="primary" onPress={finishCreateProfile} text="Next" />
       </View>
     </SafeAreaView>
   );

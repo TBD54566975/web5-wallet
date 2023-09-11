@@ -4,6 +4,7 @@ import { profilesAtom } from "@/features/identity/atoms";
 import { ColorTheme } from "@/theme/colors";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
+import { AppNavigatorProps } from "@/types/navigation";
 import { formatDID } from "@/util/formatters";
 import React, { useState } from "react";
 import {
@@ -15,7 +16,8 @@ import {
   Pressable,
 } from "react-native";
 
-const AddCredentialOptionsScreen = ({ navigation, route }) => {
+type Props = AppNavigatorProps<"AddCredentialOptionsScreen">;
+const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
   const credential = route.params.credential;
   const profiles = profilesAtom.map((userProfile) => userProfile.get());
   const [selectedProfile, setSelectedProfile] = useState(profiles[0]);
@@ -83,9 +85,7 @@ const AddCredentialOptionsScreen = ({ navigation, route }) => {
             </Pressable>
           );
         })}
-        <Button kind="primary" onPress={addCredential}>
-          Next
-        </Button>
+        <Button kind="primary" onPress={addCredential} text="Next" />
       </View>
     </SafeAreaView>
   );

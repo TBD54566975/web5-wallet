@@ -8,22 +8,24 @@ import { LabelValueItem } from "@/components/LabelValue";
 import { formatDID, formatDate } from "@/util/formatters";
 import { MenuPageLayout } from "../MenuPageLayout";
 import { mockConnections } from "@/services/mocks";
+import { AppNavigatorProps } from "@/types/navigation";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
-const ProfileDetailScreen = ({ navigation, route }) => {
+type Props = AppNavigatorProps<"ProfileDetailScreen">;
+const ProfileDetailScreen = ({ navigation, route }: Props) => {
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
   const navigateToReviewConnection = () => {
-    navigation.navigate("ReviewConnection");
+    navigation.navigate("ReviewConnectionScreen");
   };
 
-  const { name: profileName, displayName, icon, id } = route.params.profile;
+  const { name, displayName, icon, id } = route.params.profile;
 
   return (
     <MenuPageLayout
       headerItem={{
-        heading: profileName,
+        heading: name,
         subtitle: displayName,
         iconName: icon,
         badgeName: BadgeNames.PROFILE,
@@ -38,7 +40,7 @@ const ProfileDetailScreen = ({ navigation, route }) => {
     >
       {activeTab === tabLabels[0] && (
         <>
-          <LabelValueItem label="Profile label" value={profileName} />
+          <LabelValueItem label="Profile label" value={name} />
           <LabelValueItem label="Public display name" value={displayName} />
           <LabelValueItem label="DID" value={formatDID(id)} />
           <LabelValueItem
@@ -51,8 +53,8 @@ const ProfileDetailScreen = ({ navigation, route }) => {
         <>
           <View style={Layouts.row}>
             <Text style={Typography.body4}>
-              <Text style={Typography.body2}>{profileName}</Text> is connected
-              to the following apps and services.
+              <Text style={Typography.body2}>{name}</Text> is connected to the
+              following apps and services.
             </Text>
           </View>
           {mockConnections?.map((connection, index) => (
