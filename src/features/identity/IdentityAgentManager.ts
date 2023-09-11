@@ -9,6 +9,7 @@ import { Dwn } from "@tbd54566975/dwn-sdk-js";
 import { AbstractDatabaseOptions } from "abstract-level";
 import { ExpoLevel } from "expo-level";
 import { ExpoLevelStore } from "@/features/identity/expo-level-store";
+import { NoOpSyncManager } from "@/features/identity/no-op-sync-manager";
 
 // Singleton
 let agent: IdentityAgent;
@@ -27,7 +28,9 @@ const initAgent = async () => {
     store: new ExpoLevelStore("AppDataVault"),
   });
 
-  agent = await IdentityAgent.create({ dwnManager, appData });
+  const syncManager = new NoOpSyncManager();
+
+  agent = await IdentityAgent.create({ dwnManager, appData, syncManager });
 };
 
 const createDwn = async (): Promise<Dwn> => {
