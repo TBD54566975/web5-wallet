@@ -1,12 +1,12 @@
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
-import { ProfileManager } from "@/features/identity/ProfileManager";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { AppNavigatorProps } from "@/types/navigation";
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 
 type Props = AppNavigatorProps<"AddProfileScreen">;
 const AddProfileScreen = ({ navigation }: Props) => {
@@ -14,18 +14,7 @@ const AddProfileScreen = ({ navigation }: Props) => {
   const [displayName, setDisplayName] = useState("");
 
   const addProfile = async () => {
-    const newProfile: {
-      name: string;
-      icon: string;
-      didMethod: "ion" | "key";
-      displayName: string;
-    } = {
-      name: profileName,
-      icon: "person-fill",
-      didMethod: "ion",
-      displayName: displayName,
-    };
-    await ProfileManager.createProfile(newProfile);
+    await IdentityAgentManager.createIdentity(profileName);
     navigation.goBack();
   };
 

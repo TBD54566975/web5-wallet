@@ -1,5 +1,9 @@
 import { IdentityAgent } from "@web5/identity-agent";
-import { AppDataVault, DwnManager, CreateDidMethodOptions } from "@web5/agent";
+import {
+  AppDataVault,
+  DwnManager,
+  type CreateDidMethodOptions,
+} from "@web5/agent";
 import {
   MessageStoreLevel,
   DataStoreLevel,
@@ -101,7 +105,7 @@ const getAgent = () => {
 const createIdentity = async (
   name: string,
   didMethod: keyof CreateDidMethodOptions = "ion",
-  kms: string = "local"
+  kms = "local"
 ) => {
   const identity = await agent.identityManager.create({
     name,
