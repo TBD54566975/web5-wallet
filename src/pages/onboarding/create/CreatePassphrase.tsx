@@ -17,13 +17,25 @@ const CreatePassphraseScreen = ({ navigation }: Props) => {
   const isPassphraseValid = passphrase?.length >= MIN_PASSPHRASE_LENGTH;
 
   const nextTapped = () => {
-    navigation.navigate("CreateProfilesScreen");
+    navigation.navigate("CreatingWalletScreen", { passphrase });
   };
 
   return (
     <SafeAreaView style={FlexLayouts.wrapper}>
       <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
-        <Text style={Typography.heading1}>Create your passphrase</Text>
+        <View style={Layouts.row}>
+          <Text style={Typography.heading3}>
+            Next up, let&apos;s create your passphrase
+          </Text>
+        </View>
+        <View style={Layouts.row}>
+          <Text style={Typography.paragraph2}>
+            You will use your passphrase to login when you launch the app.
+          </Text>
+          <Text style={Typography.paragraph2}>
+            Make sure it&apos;s memorable, and strong!
+          </Text>
+        </View>
         <View style={Layouts.row}>
           <Input
             label=""

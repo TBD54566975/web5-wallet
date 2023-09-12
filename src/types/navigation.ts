@@ -11,6 +11,7 @@ export type AppNavigatorInterface = {
   WelcomeScreen: undefined;
   CreatePassphraseScreen: undefined;
   CreateProfilesScreen: undefined;
+  CreatingWalletScreen: { passphrase: string };
   EnterPassphraseScreen: undefined;
   Tabs: NavigatorScreenParams<TabNavigatorInterface>;
   ProfileDetailScreen: { profile: Profile };

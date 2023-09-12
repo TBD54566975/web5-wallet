@@ -2,34 +2,18 @@ import { Button } from "@/components/Button";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import React from "react";
-import { View, Text, SafeAreaView, Alert } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
-import { ProfileManager } from "@/features/identity/ProfileManager";
+import { View, Text, SafeAreaView } from "react-native";
 import { Item } from "@/components/Item";
 import type { AppNavigatorProps } from "@/types/navigation";
+import { defaultIdentities } from "@/pages/onboarding/create/default_identities";
 
 type Props = AppNavigatorProps<"CreateProfilesScreen">;
 
 const CreateProfilesScreen = ({ navigation }: Props) => {
-  const finishCreateProfile = async () => {
-    try {
-      await ProfileManager.createProfile(seedProfiles.social);
-      await ProfileManager.createProfile(seedProfiles.professional);
-      navigation.navigate("Tabs", { screen: "DiscoverScreen" });
-    } catch (e) {
-      console.log(e);
-      Alert.alert(
-        "Error",
-        "Error creating wallet. Close this dialog and try again.",
-        [
-          {
-            text: "OK, close",
-            onPress: () => navigation.replace("WelcomeScreen"),
-          },
-        ]
-      );
-    }
+  const onNextTapped = () => {
+    navigation.navigate("CreatePassphraseScreen");
   };
+
   return (
     <SafeAreaView style={FlexLayouts.wrapper}>
       <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
@@ -51,47 +35,19 @@ const CreateProfilesScreen = ({ navigation }: Props) => {
             You can always create, delete, and edit profiles later.
           </Text>
         </View>
-        <View style={Layouts.row}>
-          <Item
-            heading={seedProfiles.social.name}
-            subtitle={seedProfiles.social.displayName}
-            iconName={seedProfiles.social.icon}
-          />
-        </View>
-        <View style={Layouts.row}>
-          <Item
-            heading={seedProfiles.professional.name}
-            subtitle={seedProfiles.social.displayName}
-            iconName={seedProfiles.professional.icon}
-          />
-        </View>
-        <Button kind="primary" onPress={finishCreateProfile} text="Next" />
+        {defaultIdentities.map((identityProps, index) => (
+          <View key={index} style={Layouts.row}>
+            <Item
+              heading={identityProps.name}
+              subtitle={identityProps.displayName}
+              iconName={identityProps.icon}
+            />
+          </View>
+        ))}
+        <Button kind="primary" onPress={onNextTapped} text="Next" />
       </View>
     </SafeAreaView>
   );
 };
 
 export default CreateProfilesScreen;
-
-const seedProfiles: Record<
-  string,
-  {
-    name: string;
-    icon: keyof typeof Octicons.glyphMap;
-    didMethod: "ion" | "key";
-    displayName: string;
-  }
-> = {
-  social: {
-    name: "My social profile",
-    icon: "hash",
-    didMethod: "ion",
-    displayName: "Alex Aardvark",
-  },
-  professional: {
-    name: "My professional profile",
-    icon: "briefcase",
-    didMethod: "ion",
-    displayName: "Alex Aardvark",
-  },
-};
