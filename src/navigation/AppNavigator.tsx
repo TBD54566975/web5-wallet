@@ -10,6 +10,7 @@ import ReviewConnectionScreen from "@/pages/default/connections/ReviewConnection
 import AddCredentialsScreen from "@/pages/default/credentials/AddCredentials";
 import CredentialDetailScreen from "@/pages/default/credentials/CredentialDetail";
 import ProfileDetailScreen from "@/pages/default/profiles/ProfileDetail";
+import CreatePassphraseScreen from "@/pages/onboarding/create/CreatePassphrase";
 import CreateProfilesScreen from "@/pages/onboarding/create/CreateProfiles";
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
 import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
@@ -46,6 +47,10 @@ export const AppNavigator = () => {
     >
       {/* Onboarding */}
       <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+      <Stack.Screen
+        name="CreatePassphraseScreen"
+        component={CreatePassphraseScreen}
+      />
       <Stack.Screen
         name="CreateProfilesScreen"
         component={CreateProfilesScreen}
