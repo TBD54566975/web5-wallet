@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   type NativeStackNavigationOptions,
   createNativeStackNavigator,
@@ -14,13 +14,30 @@ import CreateScreen from "@/pages/onboarding/create/Create";
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
 import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
 import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
-import { profilesAtom } from "@/features/identity/atoms";
 import type { AppNavigatorInterface } from "@/types/navigation";
+import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
+import LoadingScreen from "@/pages/Loading";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
-const initialRoute = profilesAtom.peek().length ? "Tabs" : "WelcomeScreen";
 
 export const AppNavigator = () => {
+  const [initialRoute, setInitialRoute] = useState<
+    keyof AppNavigatorInterface | undefined
+  >(undefined);
+
+  useEffect(() => {
+    const computeInitialRoute = async () => {
+      const isFirstLaunch = await IdentityAgentManager.isFirstLaunch();
+      const initialRoute = isFirstLaunch ? "WelcomeScreen" : "Tabs";
+      setInitialRoute(initialRoute);
+    };
+    void computeInitialRoute();
+  }, []);
+
+  if (!initialRoute) {
+    return <LoadingScreen />;
+  }
+
   return (
     <Stack.Navigator
       screenOptions={appNavigatorOptions}

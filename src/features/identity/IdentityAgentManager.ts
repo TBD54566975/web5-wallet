@@ -121,8 +121,13 @@ const createIdentity = async (
   });
 };
 
+const isFirstLaunch = async () => {
+  return await agent.firstLaunch();
+};
+
 export const IdentityAgentManager = {
   initAgent,
   getAgent,
   createIdentity,
+  isFirstLaunch,
 };
