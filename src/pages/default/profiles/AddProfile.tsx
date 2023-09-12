@@ -36,7 +36,7 @@ const AddProfileScreen = ({ navigation }: Props) => {
         <View style={Layouts.row}>
           <Input
             onChangeText={setDisplayName}
-            value={profileName}
+            value={displayName}
             placeholder={"My display name"}
             nativeID="displayName"
             label="Set your display name"
