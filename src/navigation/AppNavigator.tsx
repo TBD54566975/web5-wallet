@@ -12,7 +12,7 @@ import CredentialDetailScreen from "@/pages/default/credentials/CredentialDetail
 import ProfileDetailScreen from "@/pages/default/profiles/ProfileDetail";
 import CreatePassphraseScreen from "@/pages/onboarding/create/CreatePassphrase";
 import CreateProfilesScreen from "@/pages/onboarding/create/CreateProfiles";
-import CreatingWalletScreen from "@/pages/onboarding/create/CreatingWallet";
+import CreateWalletScreen from "@/pages/onboarding/create/CreatingWallet";
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
 import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
 import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
@@ -59,10 +59,7 @@ export const AppNavigator = () => {
         name="CreateProfilesScreen"
         component={CreateProfilesScreen}
       />
-      <Stack.Screen
-        name="CreatingWalletScreen"
-        component={CreatingWalletScreen}
-      />
+      <Stack.Screen name="CreateWalletScreen" component={CreateWalletScreen} />
 
       {/* Login */}
       <Stack.Screen

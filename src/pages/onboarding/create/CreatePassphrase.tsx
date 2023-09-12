@@ -17,7 +17,7 @@ const CreatePassphraseScreen = ({ navigation }: Props) => {
   const isPassphraseValid = passphrase?.length >= MIN_PASSPHRASE_LENGTH;
 
   const nextTapped = () => {
-    navigation.navigate("CreatingWalletScreen", { passphrase });
+    navigation.navigate("CreateWalletScreen", { passphrase });
   };
 
   return (

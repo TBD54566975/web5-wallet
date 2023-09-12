@@ -6,9 +6,9 @@ import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { defaultIdentities } from "@/pages/onboarding/create/default_identities";
 
-type Props = AppNavigatorProps<"CreatingWalletScreen">;
+type Props = AppNavigatorProps<"CreateWalletScreen">;
 
-const CreatingWalletScreen = ({ navigation, route }: Props) => {
+const CreateWalletScreen = ({ navigation, route }: Props) => {
   useEffect(() => {
     console.log("Starting to create identities");
 
@@ -43,4 +43,4 @@ const CreatingWalletScreen = ({ navigation, route }: Props) => {
   );
 };
 
-export default CreatingWalletScreen;
+export default CreateWalletScreen;
