@@ -10,7 +10,7 @@ import ReviewConnectionScreen from "@/pages/default/connections/ReviewConnection
 import AddCredentialsScreen from "@/pages/default/credentials/AddCredentials";
 import CredentialDetailScreen from "@/pages/default/credentials/CredentialDetail";
 import ProfileDetailScreen from "@/pages/default/profiles/ProfileDetail";
-import CreateScreen from "@/pages/onboarding/create/Create";
+import CreateProfilesScreen from "@/pages/onboarding/create/CreateProfiles";
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
 import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
 import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
@@ -27,6 +27,7 @@ export const AppNavigator = () => {
 
   useEffect(() => {
     const computeInitialRoute = async () => {
+      await IdentityAgentManager.initAgent();
       const isFirstLaunch = await IdentityAgentManager.isFirstLaunch();
       const initialRoute = isFirstLaunch ? "WelcomeScreen" : "Tabs";
       setInitialRoute(initialRoute);
@@ -45,7 +46,10 @@ export const AppNavigator = () => {
     >
       {/* Onboarding */}
       <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-      <Stack.Screen name="CreateScreen" component={CreateScreen} />
+      <Stack.Screen
+        name="CreateProfilesScreen"
+        component={CreateProfilesScreen}
+      />
 
       {/* Tabs */}
       <Stack.Screen name="Tabs" component={TabNavigator} />

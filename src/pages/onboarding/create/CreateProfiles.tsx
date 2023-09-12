@@ -8,8 +8,9 @@ import { ProfileManager } from "@/features/identity/ProfileManager";
 import { Item } from "@/components/Item";
 import type { AppNavigatorProps } from "@/types/navigation";
 
-type Props = AppNavigatorProps<"CreateScreen">;
-const CreateScreen = ({ navigation }: Props) => {
+type Props = AppNavigatorProps<"CreateProfilesScreen">;
+
+const CreateProfilesScreen = ({ navigation }: Props) => {
   const finishCreateProfile = async () => {
     try {
       await ProfileManager.createProfile(seedProfiles.social);
@@ -70,7 +71,7 @@ const CreateScreen = ({ navigation }: Props) => {
   );
 };
 
-export default CreateScreen;
+export default CreateProfilesScreen;
 
 const seedProfiles: Record<
   string,

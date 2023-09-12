@@ -9,7 +9,7 @@ import type { Credential, Profile } from "@/types/models";
 
 export type AppNavigatorInterface = {
   WelcomeScreen: undefined;
-  CreateScreen: undefined;
+  CreateProfilesScreen: undefined;
   Tabs: NavigatorScreenParams<TabNavigatorInterface>;
   ProfileDetailScreen: { profile: Profile };
   CredentialDetailScreen: {

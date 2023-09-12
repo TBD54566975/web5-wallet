@@ -20,7 +20,7 @@ const WelcomeScreen = ({ navigation }: Props) => {
   };
 
   const navigateToCreateWallet = () => {
-    navigation.navigate("CreateScreen");
+    navigation.navigate("CreateProfilesScreen");
   };
 
   return (
