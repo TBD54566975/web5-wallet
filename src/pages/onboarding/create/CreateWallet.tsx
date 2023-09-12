@@ -35,7 +35,7 @@ const CreateWalletScreen = ({ navigation, route }: Props) => {
     <SafeAreaView style={FlexLayouts.wrapper}>
       <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
         <ActivityIndicator size="large" />
-        <Text style={[Typography.body1, Typography.textCenter]}>
+        <Text style={[Typography.body2, Typography.textCenter]}>
           Creating your wallet...
         </Text>
       </View>
