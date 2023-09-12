@@ -5,7 +5,6 @@ import { ScrollView, View } from "react-native";
 import { Button } from "@/components/Button";
 import { FlexLayouts } from "@/theme/layouts";
 import { formatDID } from "@/util/formatters";
-import { Profile } from "@/types/models";
 import { TabNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { type ManagedIdentity } from "@web5/agent";
@@ -17,22 +16,12 @@ const ProfilesScreen = ({ navigation }: Props) => {
   );
   useEffect(() => {
     const fetchManagedIdentities = async () => {
-      console.log("Fetching managedIdentities!");
-      const managedIdentities =
-        await IdentityAgentManager.getAgent().identityManager.list();
-      console.log(
-        "Fetched managedIdentities:",
-        JSON.stringify(managedIdentities)
-      );
+      const managedIdentities = await IdentityAgentManager.listIdentities();
       setManagedIdentities(managedIdentities);
     };
 
     void fetchManagedIdentities();
   }, []);
-
-  const navigateToItem = (profile: Profile) => {
-    navigation.navigate("ProfileDetailScreen", { profile });
-  };
 
   const navigateToAddProfile = () => {
     navigation.navigate("AddProfileScreen");

@@ -18,6 +18,7 @@ import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentia
 import type { AppNavigatorInterface } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import LoadingScreen from "@/pages/Loading";
+import EnterPassphraseScreen from "@/pages/default/passphrase/EnterPassphrase";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
@@ -30,7 +31,9 @@ export const AppNavigator = () => {
     const computeInitialRoute = async () => {
       await IdentityAgentManager.initAgent();
       const isFirstLaunch = await IdentityAgentManager.isFirstLaunch();
-      const initialRoute = isFirstLaunch ? "WelcomeScreen" : "Tabs";
+      const initialRoute = isFirstLaunch
+        ? "WelcomeScreen"
+        : "EnterPassphraseScreen";
       setInitialRoute(initialRoute);
     };
     void computeInitialRoute();
@@ -54,6 +57,12 @@ export const AppNavigator = () => {
       <Stack.Screen
         name="CreateProfilesScreen"
         component={CreateProfilesScreen}
+      />
+
+      {/* Login */}
+      <Stack.Screen
+        name="EnterPassphraseScreen"
+        component={EnterPassphraseScreen}
       />
 
       {/* Tabs */}

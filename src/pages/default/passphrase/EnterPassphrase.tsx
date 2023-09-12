@@ -1,20 +1,35 @@
 import React, { useState } from "react";
+import { Alert, SafeAreaView, Text, View } from "react-native";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
-import { View, Text, SafeAreaView } from "react-native";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { AppNavigatorProps } from "@/types/navigation";
+import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 
 type Props = AppNavigatorProps<"EnterPassphraseScreen">;
 
 const EnterPassphraseScreen = ({ navigation }: Props) => {
   const [passphrase, setPassphrase] = useState<string>("");
 
-  const isPassphraseValid = passphrase?.length >= 0;
+  const isLoginButtonDisabled = passphrase?.length === 0;
 
-  const nextTapped = () => {
-    navigation.navigate("CreateProfilesScreen");
+  const loginTapped = async () => {
+    try {
+      await IdentityAgentManager.startAgent(passphrase);
+      navigation.replace("Tabs", { screen: "DiscoverScreen" });
+    } catch (e) {
+      console.error("Error logging in:", e);
+      Alert.alert(
+        "Error logging in",
+        "Close this dialog, double check your passphrase, and try again.",
+        [
+          {
+            text: "Ok",
+          },
+        ]
+      );
+    }
   };
 
   return (
@@ -35,10 +50,10 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
           />
         </View>
         <Button
-          kind={isPassphraseValid ? "primary" : "disabled"}
-          text="Next"
-          onPress={nextTapped}
-          disabled={!isPassphraseValid}
+          kind={isLoginButtonDisabled ? "disabled" : "primary"}
+          text="Login"
+          onPress={loginTapped}
+          disabled={isLoginButtonDisabled}
         />
       </View>
     </SafeAreaView>
