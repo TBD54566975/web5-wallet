@@ -1,5 +1,10 @@
 import { IdentityAgent } from "@web5/identity-agent";
-import { AppDataVault, DwnManager } from "@web5/agent";
+import {
+  type CreateDidMethodOptions,
+  type ManagedIdentity,
+  AppDataVault,
+  DwnManager,
+} from "@web5/agent";
 import {
   MessageStoreLevel,
   DataStoreLevel,
@@ -60,11 +65,41 @@ const createExpoLevelDatabase = (
   return new ExpoLevel(location, options);
 };
 
-const getAgent = () => {
-  return agent;
+const isFirstLaunch = async () => {
+  return await agent.firstLaunch();
+};
+
+const startAgent = async (passphrase: string) => {
+  return await agent.start({ passphrase });
+};
+
+const createIdentity = async (
+  name: string,
+  didMethod: keyof CreateDidMethodOptions = "ion",
+  kms = "local"
+) => {
+  const identity = await agent.identityManager.create({
+    name,
+    didMethod,
+    kms,
+  });
+
+  // Import the identity that was just created, using the agent's DID as the context,
+  // so that the agent can access that identity.
+  await agent.identityManager.import({
+    identity,
+    context: agent.agentDid,
+  });
+};
+
+const listIdentities = () => {
+  return agent.identityManager.list();
 };
 
 export const IdentityAgentManager = {
   initAgent,
-  getAgent,
+  isFirstLaunch,
+  startAgent,
+  createIdentity,
+  listIdentities,
 };

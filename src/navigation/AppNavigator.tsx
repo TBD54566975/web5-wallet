@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   type NativeStackNavigationOptions,
   createNativeStackNavigator,
@@ -10,17 +10,40 @@ import ReviewConnectionScreen from "@/pages/default/connections/ReviewConnection
 import AddCredentialsScreen from "@/pages/default/credentials/AddCredentials";
 import CredentialDetailScreen from "@/pages/default/credentials/CredentialDetail";
 import ProfileDetailScreen from "@/pages/default/profiles/ProfileDetail";
-import CreateScreen from "@/pages/onboarding/create/Create";
+import CreatePassphraseScreen from "@/pages/onboarding/create/CreatePassphrase";
+import CreateProfilesScreen from "@/pages/onboarding/create/CreateProfiles";
+import CreateWalletScreen from "@/pages/onboarding/create/CreateWallet";
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
 import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
 import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
-import { profilesAtom } from "@/features/identity/atoms";
 import type { AppNavigatorInterface } from "@/types/navigation";
+import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
+import LoadingScreen from "@/pages/Loading";
+import EnterPassphraseScreen from "@/pages/default/passphrase/EnterPassphrase";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
-const initialRoute = profilesAtom.peek().length ? "Tabs" : "WelcomeScreen";
 
 export const AppNavigator = () => {
+  const [initialRoute, setInitialRoute] = useState<
+    keyof AppNavigatorInterface | undefined
+  >(undefined);
+
+  useEffect(() => {
+    const computeInitialRoute = async () => {
+      await IdentityAgentManager.initAgent();
+      const isFirstLaunch = await IdentityAgentManager.isFirstLaunch();
+      const initialRoute = isFirstLaunch
+        ? "WelcomeScreen"
+        : "EnterPassphraseScreen";
+      setInitialRoute(initialRoute);
+    };
+    void computeInitialRoute();
+  }, []);
+
+  if (!initialRoute) {
+    return <LoadingScreen />;
+  }
+
   return (
     <Stack.Navigator
       screenOptions={appNavigatorOptions}
@@ -28,7 +51,21 @@ export const AppNavigator = () => {
     >
       {/* Onboarding */}
       <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-      <Stack.Screen name="CreateScreen" component={CreateScreen} />
+      <Stack.Screen
+        name="CreateProfilesScreen"
+        component={CreateProfilesScreen}
+      />
+      <Stack.Screen
+        name="CreatePassphraseScreen"
+        component={CreatePassphraseScreen}
+      />
+      <Stack.Screen name="CreateWalletScreen" component={CreateWalletScreen} />
+
+      {/* Login */}
+      <Stack.Screen
+        name="EnterPassphraseScreen"
+        component={EnterPassphraseScreen}
+      />
 
       {/* Tabs */}
       <Stack.Screen name="Tabs" component={TabNavigator} />
