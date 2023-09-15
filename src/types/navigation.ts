@@ -5,7 +5,7 @@ import type {
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import type Octicons from "@expo/vector-icons/Octicons";
-import type { Credential, Profile } from "@/types/models";
+import type { MockCredential, MockProfile } from "@/types/models";
 
 export type AppNavigatorInterface = {
   WelcomeScreen: undefined;
@@ -14,7 +14,7 @@ export type AppNavigatorInterface = {
   CreateWalletScreen: { passphrase: string };
   EnterPassphraseScreen: undefined;
   Tabs: NavigatorScreenParams<TabNavigatorInterface>;
-  ProfileDetailScreen: { profile: Profile };
+  ProfileDetailScreen: { profile: MockProfile };
   CredentialDetailScreen: {
     heading: string;
     subtitle: string;
@@ -22,8 +22,8 @@ export type AppNavigatorInterface = {
   };
   AddProfileScreen: undefined;
   AddCredentialsScreen: undefined;
-  AddCredentialDetailScreen: { credential: Credential };
-  AddCredentialOptionsScreen: { credential: Credential };
+  AddCredentialDetailScreen: { credential: MockCredential };
+  AddCredentialOptionsScreen: { credential: MockCredential };
   ConnectionDetailScreen: {
     heading: string;
     iconName: keyof typeof Octicons.glyphMap;
