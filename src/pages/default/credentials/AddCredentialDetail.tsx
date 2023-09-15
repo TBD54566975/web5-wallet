@@ -7,7 +7,7 @@ import React from "react";
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 import { mockCredentials } from "@/services/mocks";
-import type { Credential } from "@/types/models";
+import type { MockCredential } from "@/types/models";
 import { AppNavigatorProps } from "@/types/navigation";
 
 type Props = AppNavigatorProps<"AddCredentialDetailScreen">;
@@ -18,7 +18,9 @@ const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
     navigation.navigate("AddCredentialOptionsScreen", { credential });
   };
 
-  const navigateToAddCredentialDetail = (secondaryCredential: Credential) => {
+  const navigateToAddCredentialDetail = (
+    secondaryCredential: MockCredential
+  ) => {
     navigation.push("AddCredentialDetailScreen", {
       credential: secondaryCredential,
     });
