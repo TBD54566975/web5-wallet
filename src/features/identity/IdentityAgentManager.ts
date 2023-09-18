@@ -1,10 +1,14 @@
 import { IdentityAgent } from "@web5/identity-agent";
 import {
   type CreateDidMethodOptions,
-  type ManagedIdentity,
   AppDataVault,
   DwnManager,
 } from "@web5/agent";
+import { Web5 } from "@web5/api";
+import {
+  profileProtocol,
+  Profile,
+} from "@/features/dwn/profile-protocol/profile-protocol";
 import {
   MessageStoreLevel,
   DataStoreLevel,
@@ -75,6 +79,7 @@ const startAgent = async (passphrase: string) => {
 
 const createIdentity = async (
   name: string,
+  displayName: string,
   didMethod: keyof CreateDidMethodOptions = "ion",
   kms = "local"
 ) => {
@@ -89,6 +94,29 @@ const createIdentity = async (
   await agent.identityManager.import({
     identity,
     context: agent.agentDid,
+  });
+
+  // Install the profile protocol in the DWN, for the newly created identity tenant
+  const web5 = new Web5({ agent, connectedDid: identity.did });
+  // const configureResponse = await web5.dwn.protocols.configure({
+  //   message: {
+  //     definition: profileProtocol,
+  //   },
+  // });
+  // console.log("Configure response:", JSON.stringify(configureResponse));
+
+  // Write a profile
+  const profile: Profile = {
+    displayName,
+  };
+  await web5.dwn.records.write({
+    data: profile,
+    message: {
+      schema: profileProtocol.types.profile.schema,
+      // protocol: profileProtocol.protocol,
+      // protocolPath: "displayName",
+    },
+    store: true,
   });
 };
 
