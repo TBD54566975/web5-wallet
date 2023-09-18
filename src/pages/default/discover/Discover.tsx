@@ -9,7 +9,7 @@ import { observable } from "@legendapp/state";
 import { BadgeNames } from "@/components/Item";
 import { mockConnections, mockCredentials } from "@/services/mocks";
 import { profilesAtom } from "@/features/identity/atoms";
-import type { Credential, Connection } from "@/types/models";
+import type { MockCredential, MockConnection } from "@/types/models";
 import type { TabNavigatorProps } from "@/types/navigation";
 
 type Props = TabNavigatorProps<"DiscoverScreen">;
@@ -19,11 +19,11 @@ const DiscoverScreen = ({ navigation }: Props) => {
     DevSettings.reload();
   };
 
-  const navigateToAddCredentialDetail = (credential: Credential) => {
+  const navigateToAddCredentialDetail = (credential: MockCredential) => {
     navigation.navigate("AddCredentialDetailScreen", { credential });
   };
 
-  const navigateToConnectionDetail = (connection: Connection) => {
+  const navigateToConnectionDetail = (connection: MockConnection) => {
     navigation.navigate("ConnectionDetailScreen", {
       heading: connection.name,
       iconName: connection.icon,
@@ -80,5 +80,5 @@ const DiscoverScreen = ({ navigation }: Props) => {
 
 export default DiscoverScreen;
 
-const availableCredentials = observable<Credential[]>(mockCredentials);
-const availableConnections = observable<Connection[]>(mockConnections);
+const availableCredentials = observable<MockCredential[]>(mockCredentials);
+const availableConnections = observable<MockConnection[]>(mockConnections);
