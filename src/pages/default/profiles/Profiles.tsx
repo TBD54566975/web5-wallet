@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
 import { Tappable } from "@/pages/default/Tappable";
-import { ScrollView, View } from "react-native";
+import { ActivityIndicator, ScrollView, View } from "react-native";
 import { Button } from "@/components/Button";
-import { FlexLayouts } from "@/theme/layouts";
+import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { formatDID } from "@/util/formatters";
 import { TabNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { Profile } from "@/features/dwn/profile-protocol/profile-protocol";
 import type { ManagedIdentity } from "@web5/agent";
 import { fetchProfile } from "@/features/identity/fetch-profile";
+import useFetchData from "@/hooks/useFetchData";
+import LoadingScreen from "@/pages/Loading";
 
 type Row = {
   identity: ManagedIdentity;
@@ -19,31 +21,25 @@ type Row = {
 type Props = TabNavigatorProps<"ProfilesScreen">;
 
 const ProfilesScreen = ({ navigation }: Props) => {
-  const [rows, setRows] = useState<Row[]>([]);
+  const { data: rows, loading } = useFetchData(async () => {
+    const managedIdentities = await IdentityAgentManager.listIdentities();
+    const unfilteredRows = await Promise.all(
+      managedIdentities.map(async (identity): Promise<Row | undefined> => {
+        const profile = await fetchProfile(identity);
+        if (!profile) {
+          return undefined;
+        }
 
-  useEffect(() => {
-    const fetchRows = async () => {
-      const managedIdentities = await IdentityAgentManager.listIdentities();
-      const unfilteredRows = await Promise.all(
-        managedIdentities.map(async (identity): Promise<Row | undefined> => {
-          const profile = await fetchProfile(identity);
-          if (!profile) {
-            return undefined;
-          }
+        return {
+          identity,
+          profile,
+        };
+      })
+    );
 
-          return {
-            identity,
-            profile,
-          };
-        })
-      );
-
-      const rows = unfilteredRows.filter((row) => row !== undefined) as Row[];
-      setRows(rows);
-    };
-
-    void fetchRows();
-  }, []);
+    const rows = unfilteredRows.filter((row) => row !== undefined) as Row[];
+    return rows;
+  });
 
   const navigateToProfile = (identity: ManagedIdentity) => {
     navigation.navigate("ProfileDetailScreen", { identity });
@@ -53,11 +49,15 @@ const ProfilesScreen = ({ navigation }: Props) => {
     navigation.navigate("AddProfileScreen");
   };
 
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <ParentPageLayout>
       <View style={FlexLayouts.containerButtonBottom}>
         <ScrollView>
-          {rows.map((row) => (
+          {rows?.map((row) => (
             <Tappable
               key={row.identity.did}
               iconName="hash"

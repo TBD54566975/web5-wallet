@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BadgeNames } from "@/components/Item";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
@@ -9,15 +9,15 @@ import { formatDID, formatDate } from "@/util/formatters";
 import { MenuPageLayout } from "../MenuPageLayout";
 import { mockConnections } from "@/services/mocks";
 import { AppNavigatorProps } from "@/types/navigation";
-import { Profile } from "@/features/dwn/profile-protocol/profile-protocol";
 import { fetchProfile } from "@/features/identity/fetch-profile";
+import useFetchData from "@/hooks/useFetchData";
+import LoadingScreen from "@/pages/Loading";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
 type Props = AppNavigatorProps<"ProfileDetailScreen">;
 const ProfileDetailScreen = ({ navigation, route }: Props) => {
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
-  const [profile, setProfile] = useState<Profile | undefined>(undefined);
 
   const navigateToReviewConnection = () => {
     navigation.navigate("ReviewConnectionScreen");
@@ -25,13 +25,13 @@ const ProfileDetailScreen = ({ navigation, route }: Props) => {
 
   const { identity } = route.params;
 
-  useEffect(() => {
-    const loadData = async () => {
-      const profile = await fetchProfile(identity);
-      setProfile(profile);
-    };
-    void loadData();
-  }, [identity]);
+  const { data: profile, loading } = useFetchData(async () => {
+    return await fetchProfile(identity);
+  });
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <MenuPageLayout
