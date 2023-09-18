@@ -10,7 +10,7 @@ import { MenuPageLayout } from "../MenuPageLayout";
 import { mockConnections } from "@/services/mocks";
 import { AppNavigatorProps } from "@/types/navigation";
 import { Profile } from "@/features/dwn/profile-protocol/profile-protocol";
-import { fetchProfile } from "@/features/identity/profile-fetch";
+import { fetchProfile } from "@/features/identity/fetch-profile";
 
 const tabLabels = ["About", "Connections", "Activity"];
 

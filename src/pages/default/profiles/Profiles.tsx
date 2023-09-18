@@ -9,7 +9,7 @@ import { TabNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { Profile } from "@/features/dwn/profile-protocol/profile-protocol";
 import type { ManagedIdentity } from "@web5/agent";
-import { fetchProfile } from "@/features/identity/profile-fetch";
+import { fetchProfile } from "@/features/identity/fetch-profile";
 
 type Row = {
   identity: ManagedIdentity;
