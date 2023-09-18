@@ -5,7 +5,8 @@ import type {
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import type Octicons from "@expo/vector-icons/Octicons";
-import type { MockCredential, MockProfile } from "@/types/models";
+import type { MockCredential } from "@/types/models";
+import type { ManagedIdentity } from "@web5/agent";
 
 export type AppNavigatorInterface = {
   WelcomeScreen: undefined;
@@ -14,7 +15,7 @@ export type AppNavigatorInterface = {
   CreateWalletScreen: { passphrase: string };
   EnterPassphraseScreen: undefined;
   Tabs: NavigatorScreenParams<TabNavigatorInterface>;
-  ProfileDetailScreen: { profile: MockProfile };
+  ProfileDetailScreen: { identity: ManagedIdentity };
   CredentialDetailScreen: {
     heading: string;
     subtitle: string;
