@@ -18,6 +18,13 @@ export const profileProtocol = {
           who: "anyone",
           can: "read",
         },
+        // TODO: remove the following rule.
+        // This only exists currently due to a bug where ManagedIdentities
+        // aren't being considered the DWN's tentant.
+        {
+          who: "anyone",
+          can: "write",
+        },
       ],
     },
   },

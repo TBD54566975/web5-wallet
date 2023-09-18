@@ -1,6 +1,7 @@
 import { IdentityAgent } from "@web5/identity-agent";
 import {
   type CreateDidMethodOptions,
+  type ManagedIdentity,
   AppDataVault,
   DwnManager,
 } from "@web5/agent";
@@ -98,12 +99,11 @@ const createIdentity = async (
 
   // Install the profile protocol in the DWN, for the newly created identity tenant
   const web5 = new Web5({ agent, connectedDid: identity.did });
-  // const configureResponse = await web5.dwn.protocols.configure({
-  //   message: {
-  //     definition: profileProtocol,
-  //   },
-  // });
-  // console.log("Configure response:", JSON.stringify(configureResponse));
+  await web5.dwn.protocols.configure({
+    message: {
+      definition: profileProtocol,
+    },
+  });
 
   // Write a profile
   const profile: Profile = {
@@ -113,8 +113,8 @@ const createIdentity = async (
     data: profile,
     message: {
       schema: profileProtocol.types.profile.schema,
-      // protocol: profileProtocol.protocol,
-      // protocolPath: "displayName",
+      protocol: profileProtocol.protocol,
+      protocolPath: "profile",
     },
     store: true,
   });
@@ -124,10 +124,15 @@ const listIdentities = () => {
   return agent.identityManager.list();
 };
 
+const web5 = (identity: ManagedIdentity): Web5 => {
+  return new Web5({ agent, connectedDid: identity.did });
+};
+
 export const IdentityAgentManager = {
   initAgent,
   isFirstLaunch,
   startAgent,
   createIdentity,
   listIdentities,
+  web5,
 };
