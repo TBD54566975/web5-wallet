@@ -14,7 +14,7 @@ const AddProfileScreen = ({ navigation }: Props) => {
   const [displayName, setDisplayName] = useState("");
 
   const addProfile = async () => {
-    await IdentityAgentManager.createIdentity(profileName);
+    await IdentityAgentManager.createIdentity(profileName, displayName);
     navigation.goBack();
   };
 

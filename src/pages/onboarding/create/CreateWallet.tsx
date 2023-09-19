@@ -10,15 +10,16 @@ type Props = AppNavigatorProps<"CreateWalletScreen">;
 
 const CreateWalletScreen = ({ navigation, route }: Props) => {
   useEffect(() => {
-    console.log("Starting to create identities");
-
     const createWallet = async () => {
       try {
         await IdentityAgentManager.startAgent(route.params.passphrase);
 
         const defaultIdentityCreatePromises = defaultIdentities.map(
           (identity) => {
-            return IdentityAgentManager.createIdentity(identity.name);
+            return IdentityAgentManager.createIdentity(
+              identity.name,
+              identity.displayName
+            );
           }
         );
         await Promise.all(defaultIdentityCreatePromises);
