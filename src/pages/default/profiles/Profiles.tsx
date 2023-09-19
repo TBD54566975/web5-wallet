@@ -7,11 +7,9 @@ import { FlexLayouts } from "@/theme/layouts";
 import { formatDID } from "@/util/formatters";
 import { TabNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import {
-  Profile,
-  profileProtocol,
-} from "@/features/dwn/profile-protocol/profile-protocol";
+import { Profile } from "@/features/dwn/profile-protocol/profile-protocol";
 import type { ManagedIdentity } from "@web5/agent";
+import { fetchProfile } from "@/features/identity/fetch-profile";
 
 type Row = {
   identity: ManagedIdentity;
@@ -28,37 +26,10 @@ const ProfilesScreen = ({ navigation }: Props) => {
       const managedIdentities = await IdentityAgentManager.listIdentities();
       const unfilteredRows = await Promise.all(
         managedIdentities.map(async (identity): Promise<Row | undefined> => {
-          const web5 = IdentityAgentManager.web5(identity);
-
-          const queryResult = await web5.dwn.records.query({
-            message: {
-              filter: {
-                protocol: profileProtocol.protocol,
-                protocolPath: "profile",
-              },
-            },
-          });
-
-          // The Records returned with a query result DO NOT have access
-          // to the data. Get the recordId we're interested in and
-          // make an explicit read request to acquire a Record that DOES
-          // have access to the data.
-          const recordId = queryResult.records?.at(0)?.id;
-          if (!recordId) {
+          const profile = await fetchProfile(identity);
+          if (!profile) {
             return undefined;
           }
-
-          const readResult = await web5.dwn.records.read({
-            message: {
-              recordId,
-            },
-          });
-
-          if (!readResult) {
-            return undefined;
-          }
-
-          const profile = (await readResult.record.data.json()) as Profile;
 
           return {
             identity,
@@ -73,6 +44,10 @@ const ProfilesScreen = ({ navigation }: Props) => {
 
     void fetchRows();
   }, []);
+
+  const navigateToProfile = (identity: ManagedIdentity) => {
+    navigation.navigate("ProfileDetailScreen", { identity });
+  };
 
   const navigateToAddProfile = () => {
     navigation.navigate("AddProfileScreen");
@@ -89,7 +64,7 @@ const ProfilesScreen = ({ navigation }: Props) => {
               heading={row.identity.name}
               subtitle={row.profile.displayName}
               body={formatDID(row.identity.did)}
-              onPress={() => console.log("tapped", row.identity.name)}
+              onPress={() => navigateToProfile(row.identity)}
             />
           ))}
         </ScrollView>
