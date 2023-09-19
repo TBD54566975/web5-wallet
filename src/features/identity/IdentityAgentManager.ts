@@ -9,7 +9,7 @@ import {
   MessageStoreLevel,
   DataStoreLevel,
   EventLogLevel,
-} from "@tbd54566975/dwn-sdk-js/dist/esm/src/index-stores";
+} from "@tbd54566975/dwn-sdk-js/stores";
 import { Dwn } from "@tbd54566975/dwn-sdk-js";
 import { AbstractDatabaseOptions } from "abstract-level";
 import { ExpoLevel } from "expo-level";
