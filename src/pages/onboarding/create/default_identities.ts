@@ -14,7 +14,7 @@ export const defaultIdentities: NewIdentityProps[] = [
   },
   {
     name: "Professional",
-    displayName: "Alex Aardvark",
+    displayName: "Bo Jangles",
     icon: "briefcase",
   },
 ];

@@ -7,21 +7,47 @@ import { FlexLayouts } from "@/theme/layouts";
 import { formatDID } from "@/util/formatters";
 import { TabNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import { type ManagedIdentity } from "@web5/agent";
+import { Profile } from "@/features/dwn/profile-protocol/profile-protocol";
+import type { ManagedIdentity } from "@web5/agent";
+import { fetchProfile } from "@/features/identity/fetch-profile";
+
+type Row = {
+  identity: ManagedIdentity;
+  profile: Profile;
+};
 
 type Props = TabNavigatorProps<"ProfilesScreen">;
+
 const ProfilesScreen = ({ navigation }: Props) => {
-  const [managedIdentities, setManagedIdentities] = useState<ManagedIdentity[]>(
-    []
-  );
+  const [rows, setRows] = useState<Row[]>([]);
+
   useEffect(() => {
-    const fetchManagedIdentities = async () => {
+    const fetchRows = async () => {
       const managedIdentities = await IdentityAgentManager.listIdentities();
-      setManagedIdentities(managedIdentities);
+      const unfilteredRows = await Promise.all(
+        managedIdentities.map(async (identity): Promise<Row | undefined> => {
+          const profile = await fetchProfile(identity);
+          if (!profile) {
+            return undefined;
+          }
+
+          return {
+            identity,
+            profile,
+          };
+        })
+      );
+
+      const rows = unfilteredRows.filter((row) => row !== undefined) as Row[];
+      setRows(rows);
     };
 
-    void fetchManagedIdentities();
+    void fetchRows();
   }, []);
+
+  const navigateToProfile = (identity: ManagedIdentity) => {
+    navigation.navigate("ProfileDetailScreen", { identity });
+  };
 
   const navigateToAddProfile = () => {
     navigation.navigate("AddProfileScreen");
@@ -31,13 +57,14 @@ const ProfilesScreen = ({ navigation }: Props) => {
     <ParentPageLayout>
       <View style={FlexLayouts.containerButtonBottom}>
         <ScrollView>
-          {managedIdentities.map((identity) => (
+          {rows.map((row) => (
             <Tappable
-              key={identity.did}
+              key={row.identity.did}
               iconName="hash"
-              heading={identity.name}
-              body={formatDID(identity.did)}
-              onPress={() => console.log("tapped", identity.name)}
+              heading={row.identity.name}
+              subtitle={row.profile.displayName}
+              body={formatDID(row.identity.did)}
+              onPress={() => navigateToProfile(row.identity)}
             />
           ))}
         </ScrollView>

@@ -1,20 +1,26 @@
 import { IdentityAgent } from "@web5/identity-agent";
 import {
   type CreateDidMethodOptions,
-  type ManagedIdentity,
   AppDataVault,
   DwnManager,
+  SyncManagerLevel,
 } from "@web5/agent";
+import { Web5 } from "@web5/api";
+import {
+  profileProtocol,
+  Profile,
+} from "@/features/dwn/profile-protocol/profile-protocol";
 import {
   MessageStoreLevel,
   DataStoreLevel,
   EventLogLevel,
 } from "@tbd54566975/dwn-sdk-js/stores";
+import { type Level } from "level";
 import { Dwn } from "@tbd54566975/dwn-sdk-js";
 import { AbstractDatabaseOptions } from "abstract-level";
 import { ExpoLevel } from "expo-level";
 import { ExpoLevelStore } from "@/features/identity/expo-level-store";
-import { NoOpSyncManager } from "@/features/identity/no-op-sync-manager";
+import ms from "ms";
 
 // Singleton
 let agent: IdentityAgent;
@@ -33,7 +39,9 @@ const initAgent = async () => {
     store: new ExpoLevelStore("AppDataVault"),
   });
 
-  const syncManager = new NoOpSyncManager();
+  const syncManager = new SyncManagerLevel({
+    db: new ExpoLevel("SyncStore") as Level,
+  });
 
   agent = await IdentityAgent.create({ dwnManager, appData, syncManager });
 };
@@ -70,11 +78,32 @@ const isFirstLaunch = async () => {
 };
 
 const startAgent = async (passphrase: string) => {
-  return await agent.start({ passphrase });
+  await agent.start({ passphrase });
+  await startSync();
+};
+
+const startSync = async () => {
+  // Register all DIDs under management, as well as the agent's master DID
+  const managedIdentities = await agent.identityManager.list();
+  const didsToRegister = [
+    agent.agentDid,
+    ...managedIdentities.map((i) => i.did),
+  ];
+
+  await Promise.all(
+    didsToRegister.map((did) => agent.syncManager.registerIdentity({ did }))
+  );
+
+  // TODO: Once selective sync is enabled, only sync for records that the mobile identity agent
+  // cares about. We DO NOT want to sync every record the user has in their DWN to their mobile device.
+  agent.syncManager.startSync({ interval: ms("2m") }).catch((error: any) => {
+    console.error(`Sync failed: ${error}`);
+  });
 };
 
 const createIdentity = async (
   name: string,
+  displayName: string,
   didMethod: keyof CreateDidMethodOptions = "ion",
   kms = "local"
 ) => {
@@ -90,10 +119,36 @@ const createIdentity = async (
     identity,
     context: agent.agentDid,
   });
+
+  // Install the profile protocol in the DWN, for the newly created identity tenant
+  const web5 = new Web5({ agent, connectedDid: identity.did });
+  await web5.dwn.protocols.configure({
+    message: {
+      definition: profileProtocol,
+    },
+  });
+
+  // Write a profile
+  const profile: Profile = {
+    displayName,
+  };
+  await web5.dwn.records.write({
+    data: profile,
+    message: {
+      schema: profileProtocol.types.profile.schema,
+      protocol: profileProtocol.protocol,
+      protocolPath: "profile",
+    },
+    store: true,
+  });
 };
 
 const listIdentities = () => {
   return agent.identityManager.list();
+};
+
+const web5 = (identity: ManagedIdentity): Web5 => {
+  return new Web5({ agent, connectedDid: identity.did });
 };
 
 export const IdentityAgentManager = {
@@ -102,4 +157,5 @@ export const IdentityAgentManager = {
   startAgent,
   createIdentity,
   listIdentities,
+  web5,
 };
