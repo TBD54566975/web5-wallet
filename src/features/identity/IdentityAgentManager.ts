@@ -1,9 +1,9 @@
 import { IdentityAgent } from "@web5/identity-agent";
 import {
   type CreateDidMethodOptions,
-  type ManagedIdentity,
   AppDataVault,
   DwnManager,
+  SyncManagerLevel,
 } from "@web5/agent";
 import { Web5 } from "@web5/api";
 import {
@@ -15,11 +15,12 @@ import {
   DataStoreLevel,
   EventLogLevel,
 } from "@tbd54566975/dwn-sdk-js/stores";
+import { type Level } from "level";
 import { Dwn } from "@tbd54566975/dwn-sdk-js";
 import { AbstractDatabaseOptions } from "abstract-level";
 import { ExpoLevel } from "expo-level";
 import { ExpoLevelStore } from "@/features/identity/expo-level-store";
-import { NoOpSyncManager } from "@/features/identity/no-op-sync-manager";
+import ms from "ms";
 
 // Singleton
 let agent: IdentityAgent;
@@ -38,7 +39,9 @@ const initAgent = async () => {
     store: new ExpoLevelStore("AppDataVault"),
   });
 
-  const syncManager = new NoOpSyncManager();
+  const syncManager = new SyncManagerLevel({
+    db: new ExpoLevel("SyncStore") as Level,
+  });
 
   agent = await IdentityAgent.create({ dwnManager, appData, syncManager });
 };
@@ -75,7 +78,27 @@ const isFirstLaunch = async () => {
 };
 
 const startAgent = async (passphrase: string) => {
-  return await agent.start({ passphrase });
+  await agent.start({ passphrase });
+  await startSync();
+};
+
+const startSync = async () => {
+  // Register all DIDs under management, as well as the agent's master DID
+  const managedIdentities = await agent.identityManager.list();
+  const didsToRegister = [
+    agent.agentDid,
+    ...managedIdentities.map((i) => i.did),
+  ];
+
+  await Promise.all(
+    didsToRegister.map((did) => agent.syncManager.registerIdentity({ did }))
+  );
+
+  // TODO: Once selective sync is enabled, only sync for records that the mobile identity agent
+  // cares about. We DO NOT want to sync every record the user has in their DWN to their mobile device.
+  agent.syncManager.startSync({ interval: ms("2m") }).catch((error: any) => {
+    console.error(`Sync failed: ${error}`);
+  });
 };
 
 const createIdentity = async (
