@@ -14,7 +14,7 @@ export const useProfile = (
   identity: ManagedIdentity,
   options: CustomizableUseQueryOptions<FetchProfileResult> = {}
 ) => {
-  return useQuery({
+  return useQuery<FetchProfileResult>({
     ...options,
     ...fetchProfileQueryOptions(identity),
   });
