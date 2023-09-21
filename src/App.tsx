@@ -4,6 +4,7 @@ import { type LinkingOptions } from "@react-navigation/native";
 import { AppNavigator } from "./navigation/AppNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { DefaultTheme } from "./theme/colors";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 enableLegendStateReact();
 
@@ -16,11 +17,15 @@ const DeepLinkConfig: LinkingOptions<any> = {
   },
 };
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
-    <NavigationContainer linking={DeepLinkConfig} theme={DefaultTheme}>
-      <AppNavigator />
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer linking={DeepLinkConfig} theme={DefaultTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 };
 

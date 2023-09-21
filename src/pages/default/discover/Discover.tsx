@@ -8,7 +8,7 @@ import { For } from "@legendapp/state/react";
 import { observable } from "@legendapp/state";
 import { BadgeNames } from "@/components/Item";
 import { mockConnections, mockCredentials } from "@/services/mocks";
-import { profilesAtom } from "@/features/identity/atoms";
+import { profilesAtom } from "@/features/profile/atoms";
 import type { MockCredential, MockConnection } from "@/types/models";
 import type { TabNavigatorProps } from "@/types/navigation";
 
