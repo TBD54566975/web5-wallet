@@ -8,8 +8,8 @@ import { formatDID } from "@/util/formatters";
 import { TabNavigatorProps } from "@/types/navigation";
 import type { ManagedIdentity } from "@web5/agent";
 import LoadingScreen from "@/pages/Loading";
-import { useProfiles } from "@/hooks/profile-hooks";
-import { useIdentityList } from "@/hooks/identity-hooks";
+import { useProfiles } from "@/features/profile/hooks";
+import { useIdentityList } from "@/features/identity/hooks";
 
 type Props = TabNavigatorProps<"ProfilesScreen">;
 

@@ -7,8 +7,8 @@ import { type ManagedIdentity } from "@web5/agent";
 import {
   type FetchProfileResult,
   fetchProfile,
-} from "@/features/identity/fetch-profile";
-import { type CustomizableUseQueryOptions } from "@/hooks/types";
+} from "@/features/profile/fetch-profile";
+import { type CustomizableUseQueryOptions } from "@/types/use-query";
 
 export const useProfile = (
   identity: ManagedIdentity,

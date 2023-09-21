@@ -9,7 +9,7 @@ import { formatDID, formatDate } from "@/util/formatters";
 import { MenuPageLayout } from "../MenuPageLayout";
 import { mockConnections } from "@/services/mocks";
 import { AppNavigatorProps } from "@/types/navigation";
-import { useProfile } from "@/hooks/profile-hooks";
+import { useProfile } from "@/features/profile/hooks";
 import LoadingScreen from "@/pages/Loading";
 
 const tabLabels = ["About", "Connections", "Activity"];
