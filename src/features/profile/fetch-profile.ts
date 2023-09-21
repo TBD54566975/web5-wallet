@@ -5,7 +5,11 @@ import {
 } from "@/features/dwn/profile-protocol/profile-protocol";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 
-export const fetchProfile = async (identity: ManagedIdentity) => {
+export type FetchProfileResult = ManagedIdentity & Partial<Profile>;
+
+export const fetchProfile = async (
+  identity: ManagedIdentity
+): Promise<FetchProfileResult> => {
   const web5 = IdentityAgentManager.web5(identity);
 
   const queryResult = await web5.dwn.records.query({
@@ -23,7 +27,7 @@ export const fetchProfile = async (identity: ManagedIdentity) => {
   // have access to the data.
   const recordId = queryResult.records?.at(0)?.id;
   if (!recordId) {
-    return undefined;
+    return identity;
   }
 
   const readResult = await web5.dwn.records.read({
@@ -33,8 +37,9 @@ export const fetchProfile = async (identity: ManagedIdentity) => {
   });
 
   if (!readResult) {
-    return undefined;
+    return identity;
   }
 
-  return (await readResult.record.data.json()) as Profile;
+  const profile = (await readResult.record.data.json()) as Profile;
+  return { ...identity, ...profile };
 };

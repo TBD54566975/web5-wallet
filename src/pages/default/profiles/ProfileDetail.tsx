@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BadgeNames } from "@/components/Item";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
@@ -9,35 +9,26 @@ import { formatDID, formatDate } from "@/util/formatters";
 import { MenuPageLayout } from "../MenuPageLayout";
 import { mockConnections } from "@/services/mocks";
 import { AppNavigatorProps } from "@/types/navigation";
-import { Profile } from "@/features/dwn/profile-protocol/profile-protocol";
-import { fetchProfile } from "@/features/identity/fetch-profile";
+import { useProfile } from "@/features/profile/hooks";
+import LoadingScreen from "@/pages/Loading";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
 type Props = AppNavigatorProps<"ProfileDetailScreen">;
 const ProfileDetailScreen = ({ navigation, route }: Props) => {
+  const { identity } = route.params;
+
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
-  const [profile, setProfile] = useState<Profile | undefined>(undefined);
+  const { data: profile, isLoading: isLoadingProfile } = useProfile(identity);
 
   const navigateToReviewConnection = () => {
     navigation.navigate("ReviewConnectionScreen");
   };
 
-  const { identity } = route.params;
-
-  useEffect(() => {
-    const loadData = async () => {
-      const profile = await fetchProfile(identity);
-      setProfile(profile);
-    };
-    void loadData();
-  }, [identity]);
-
   return (
     <MenuPageLayout
       headerItem={{
         heading: identity.name,
-        subtitle: profile?.displayName,
         iconName: "hash",
         badgeName: BadgeNames.PROFILE,
       }}
@@ -49,22 +40,23 @@ const ProfileDetailScreen = ({ navigation, route }: Props) => {
         };
       })}
     >
-      {activeTab === tabLabels[0] && (
-        <>
-          <LabelValueItem label="Profile label" value={identity.name} />
-          {!!profile && (
+      {activeTab === tabLabels[0] &&
+        (isLoadingProfile || !profile ? (
+          <LoadingScreen />
+        ) : (
+          <>
+            <LabelValueItem label="Profile label" value={profile.name} />
             <LabelValueItem
               label="Public display name"
-              value={profile.displayName}
+              value={profile?.displayName ?? "Not Available"}
             />
-          )}
-          <LabelValueItem label="DID" value={formatDID(identity.did)} />
-          <LabelValueItem
-            label="Created on"
-            value={formatDate(new Date().toString())}
-          />
-        </>
-      )}
+            <LabelValueItem label="DID" value={formatDID(profile.did)} />
+            <LabelValueItem
+              label="Created on"
+              value={formatDate(new Date().toString())}
+            />
+          </>
+        ))}
       {activeTab === tabLabels[1] && (
         <>
           <View style={Layouts.row}>

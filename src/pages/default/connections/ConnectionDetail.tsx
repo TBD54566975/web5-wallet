@@ -8,7 +8,7 @@ import { Typography } from "@/theme/typography";
 import { Tappable } from "../Tappable";
 import { BadgeNames } from "@/components/Item";
 import { mockConnections } from "@/services/mocks";
-import { profilesAtom } from "@/features/identity/atoms";
+import { profilesAtom } from "@/features/profile/atoms";
 import { For } from "@legendapp/state/react";
 import { AppNavigatorProps } from "@/types/navigation";
 
