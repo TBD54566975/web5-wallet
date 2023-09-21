@@ -21,7 +21,6 @@ const ProfilesScreen = ({ navigation }: Props) => {
     enabled: allIdentities !== undefined,
   });
   const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
-  const profiles = profileQueries.map((query) => query.data);
 
   const navigateToProfile = (identity: ManagedIdentity) => {
     navigation.navigate("ProfileDetailScreen", { identity });
@@ -39,7 +38,7 @@ const ProfilesScreen = ({ navigation }: Props) => {
     <ParentPageLayout>
       <View style={FlexLayouts.containerButtonBottom}>
         <ScrollView>
-          {profiles.map((profile) =>
+          {profileQueries.map(({ data: profile }) =>
             profile ? (
               <Tappable
                 key={profile.did}
