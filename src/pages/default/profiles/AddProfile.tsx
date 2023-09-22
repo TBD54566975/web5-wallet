@@ -7,7 +7,6 @@ import React, { useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import { useQueryClient } from "@tanstack/react-query";
 import { invalidateIdentityList } from "@/features/identity/hooks";
 
 type Props = AppNavigatorProps<"AddProfileScreen">;
@@ -15,8 +14,6 @@ const AddProfileScreen = ({ navigation }: Props) => {
   const [profileName, setProfileName] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-
-  const queryClient = useQueryClient();
 
   const addProfile = async () => {
     if (isProcessing) {
@@ -26,7 +23,7 @@ const AddProfileScreen = ({ navigation }: Props) => {
     setIsProcessing(true);
     try {
       await IdentityAgentManager.createIdentity(profileName, displayName);
-      await invalidateIdentityList(queryClient);
+      await invalidateIdentityList();
       navigation.goBack();
     } catch (error) {
       console.error("Error:", error);

@@ -1,5 +1,6 @@
-import { QueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { type ManagedIdentity } from "@web5/agent";
+import { queryClient } from "@/features/app/store";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { type CustomizableUseQueryOptions } from "@/types/use-query";
 
@@ -13,7 +14,7 @@ export const useIdentityList = (
   });
 };
 
-export const invalidateIdentityList = async (queryClient: QueryClient) => {
+export const invalidateIdentityList = async () => {
   await queryClient.invalidateQueries({ queryKey: identityListQueryKey });
 };
 
