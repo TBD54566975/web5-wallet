@@ -12,17 +12,11 @@ import {
   profileProtocol,
   Profile,
 } from "@/features/profile/protocol/profile-protocol";
-import {
-  MessageStoreLevel,
-  DataStoreLevel,
-  EventLogLevel,
-} from "@tbd54566975/dwn-sdk-js/stores";
 import { type Level } from "level";
-import { Dwn } from "@tbd54566975/dwn-sdk-js";
-import { AbstractDatabaseOptions } from "abstract-level";
 import { ExpoLevel } from "expo-level";
 import { ExpoLevelStore } from "@/features/app/expo-level-store";
 import ms from "ms";
+import { createDwn } from "@/features/dwn/dwn";
 
 // Singleton
 let agent: IdentityAgent;
@@ -47,33 +41,6 @@ const initAgent = async () => {
   });
 
   agent = await IdentityAgent.create({ dwnManager, appData, syncManager });
-};
-
-const createDwn = async (): Promise<Dwn> => {
-  const messageStore = new MessageStoreLevel({
-    createLevelDatabase: createExpoLevelDatabase,
-  });
-
-  const dataStore = new DataStoreLevel({
-    createLevelDatabase: createExpoLevelDatabase,
-  });
-
-  const eventLog = new EventLogLevel({
-    createLevelDatabase: createExpoLevelDatabase,
-  });
-
-  return await Dwn.create({
-    messageStore,
-    dataStore,
-    eventLog,
-  });
-};
-
-const createExpoLevelDatabase = (
-  location: string,
-  options?: AbstractDatabaseOptions<unknown, unknown>
-): ExpoLevel<unknown, unknown> => {
-  return new ExpoLevel(location, options);
 };
 
 const isFirstLaunch = async () => {
