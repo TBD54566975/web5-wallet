@@ -4,18 +4,32 @@ import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { AppNavigatorProps } from "@/types/navigation";
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
+import { invalidateIdentityList } from "@/features/identity/hooks";
 
 type Props = AppNavigatorProps<"AddProfileScreen">;
 const AddProfileScreen = ({ navigation }: Props) => {
   const [profileName, setProfileName] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const addProfile = async () => {
-    await IdentityAgentManager.createIdentity(profileName, displayName);
-    navigation.goBack();
+    if (isProcessing) {
+      return;
+    }
+
+    setIsProcessing(true);
+    try {
+      await IdentityAgentManager.createIdentity(profileName, displayName);
+      await invalidateIdentityList();
+      navigation.goBack();
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -42,7 +56,11 @@ const AddProfileScreen = ({ navigation }: Props) => {
             label="Set your display name"
           />
         </View>
-        <Button kind="primary" onPress={addProfile} text="Save" />
+        {isProcessing ? (
+          <ActivityIndicator />
+        ) : (
+          <Button kind="primary" onPress={addProfile} text="Save" />
+        )}
       </View>
     </SafeAreaView>
   );
