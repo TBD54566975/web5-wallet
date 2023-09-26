@@ -5,6 +5,7 @@
   "scripts": {
     "start": "expo start --dev-client --clear",
     "android": "expo run:android",
+    "android:release": "cd android && ./gradlew :app:bundleRelease && open app/build/outputs/bundle/release/",
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -14,7 +15,7 @@
     "clean:android": "cd android;./gradlew clean;./gradlew --stop",
     "clean:ios": "rm -rf ios/build; pod cache clean --all; rm -rf ios/Pods; cd ios; xcodebuild -alltargets clean",
     "clean": "yarn run clean:rn; yarn run clean:yarn; yarn run clean:android; yarn run clean:ios; npx pod-install@latest",
-    "deep-clean": "yarn run clean:rn; yarn run clean:yarn; yarn run clean:system; yarn run clean:android; yarn run clean:ios; npx pod-install@latest",
+    "deep-clean": "yarn run clean:system; yarn run clean",
     "postinstall": "patch-package"
   },
   "@comment resolutions": "enforce de-duping even if upstream wont. this will need to be maintained.",
