@@ -20,6 +20,7 @@ import type { AppNavigatorInterface } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import LoadingScreen from "@/pages/Loading";
 import EnterPassphraseScreen from "@/pages/default/passphrase/EnterPassphrase";
+import ConnectionRequestScreen from "@/pages/default/connections/ConnectionRequest";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
@@ -100,6 +101,14 @@ export const AppNavigator = () => {
           component={ReviewConnectionScreen}
         />
       </Stack.Group>
+
+      {/* Full Screen Modals */}
+      <Stack.Group screenOptions={fullscreenModalGroupOptions}>
+        <Stack.Screen
+          name="ConnectionRequestScreen"
+          component={ConnectionRequestScreen}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };
@@ -107,10 +116,16 @@ export const AppNavigator = () => {
 const appNavigatorOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
+
 const authedGroupOptions: NativeStackNavigationOptions = {
   headerShown: true,
   headerTitle: () => false,
   headerShadowVisible: false,
   headerBackTitleVisible: false,
   // headerBackImageSource: TODO: add arrow image source here
+};
+
+const fullscreenModalGroupOptions: NativeStackNavigationOptions = {
+  animation: "slide_from_bottom",
+  presentation: "fullScreenModal",
 };

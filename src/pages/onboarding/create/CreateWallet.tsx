@@ -5,6 +5,7 @@ import { Typography } from "@/theme/typography";
 import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { defaultIdentities } from "@/pages/onboarding/create/default_identities";
+import { Deeplink } from "@/features/deeplink/deeplink";
 
 type Props = AppNavigatorProps<"CreateWalletScreen">;
 
@@ -24,6 +25,7 @@ const CreateWalletScreen = ({ navigation, route }: Props) => {
         );
         await Promise.all(defaultIdentityCreatePromises);
         navigation.replace("Tabs", { screen: "DiscoverScreen" });
+        await Deeplink.openDelayedDeeplinkIfNeeded();
       } catch (e) {
         console.error(e);
       }

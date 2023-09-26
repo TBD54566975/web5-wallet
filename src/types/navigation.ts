@@ -30,6 +30,7 @@ export type AppNavigatorInterface = {
     iconName: keyof typeof Octicons.glyphMap;
   };
   ReviewConnectionScreen: undefined;
+  ConnectionRequestScreen: undefined;
 };
 
 export type TabNavigatorInterface = {

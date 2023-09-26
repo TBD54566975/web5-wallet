@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   type BottomTabNavigationOptions,
   createBottomTabNavigator,
@@ -13,10 +13,35 @@ import { Typography } from "@/theme/typography";
 import { ColorTheme } from "@/theme/colors";
 import { SPACE } from "@/theme/layouts";
 import { type TabNavigatorInterface } from "@/types/navigation";
+import { type AppStateStatus } from "react-native/types";
+import { AppState } from "react-native";
+import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 
 const Tab = createBottomTabNavigator<TabNavigatorInterface>();
 
 export const TabNavigator = () => {
+  const [appState, setAppState] = useState(AppState.currentState);
+
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState: AppStateStatus) => {
+      if (appState.match(/inactive|background/) && nextAppState === "active") {
+        console.log("App has come to the foreground!");
+        console.log("isStarted:", IdentityAgentManager.isStarted);
+        // Place your code here that you want to run when the component is displayed in the foreground
+      }
+      setAppState(nextAppState);
+    };
+
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  }, [appState]);
+
   return (
     <Tab.Navigator screenOptions={tabOptions}>
       <Tab.Screen
