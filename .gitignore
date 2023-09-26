@@ -56,3 +56,7 @@ dist/
 
 # let devs store personal reference material
 src/reference
+
+# keys
+*.env
+!example.env
