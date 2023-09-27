@@ -1,6 +1,7 @@
 import { IdentityAgent } from "@web5/identity-agent";
 import {
   type CreateDidMethodOptions,
+  type ManagedIdentity,
   AppDataVault,
   DwnManager,
   SyncManagerLevel,
@@ -24,6 +25,7 @@ import ms from "ms";
 
 // Singleton
 let agent: IdentityAgent;
+let isStarted = false;
 
 const initAgent = async () => {
   if (agent) {
@@ -77,9 +79,14 @@ const isFirstLaunch = async () => {
   return await agent.firstLaunch();
 };
 
+const isAgentStarted = () => {
+  return isStarted;
+};
+
 const startAgent = async (passphrase: string) => {
   await agent.start({ passphrase });
   await startSync();
+  isStarted = true;
 };
 
 const startSync = async () => {
@@ -154,6 +161,7 @@ const web5 = (identity: ManagedIdentity): Web5 => {
 export const IdentityAgentManager = {
   initAgent,
   isFirstLaunch,
+  isAgentStarted,
   startAgent,
   createIdentity,
   listIdentities,

@@ -6,6 +6,7 @@ import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
+import { Deeplink } from "@/features/deeplink/deeplink";
 
 type Props = AppNavigatorProps<"EnterPassphraseScreen">;
 
@@ -18,6 +19,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
     try {
       await IdentityAgentManager.startAgent(passphrase);
       navigation.replace("Tabs", { screen: "DiscoverScreen" });
+      await Deeplink.openDelayedDeeplinkIfNeeded();
     } catch (e) {
       console.error("Error logging in:", e);
       Alert.alert(
