@@ -1,6 +1,6 @@
 import { Item, ItemProps } from "@/components/Item";
 import { ColorTheme } from "@/theme/colors";
-import { Layouts } from "@/theme/layouts";
+import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import React from "react";
 import {
@@ -21,8 +21,8 @@ export const MenuPageLayout = (props: {
   const { headerItem, menuTabs, children } = props;
 
   return (
-    <SafeAreaView>
-      <View style={Layouts.container}>
+    <SafeAreaView style={FlexLayouts.wrapper}>
+      <View style={[Layouts.container, FlexLayouts.wrapper]}>
         <View style={Layouts.row}>
           <Item {...headerItem} headingSize="heading3" />
         </View>
@@ -51,7 +51,7 @@ const MenuTab = (props: MenuProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 240,
+    flex: 1,
   },
   menu: {
     flexDirection: "row",
