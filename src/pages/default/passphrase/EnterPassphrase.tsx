@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, SafeAreaView, Text, View } from "react-native";
+import * as Keychain from "react-native-keychain";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Button } from "@/components/Button";
@@ -34,6 +35,27 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
     }
   };
 
+  useEffect(() => {
+    const foo = async () => {
+      console.log("yo dawg");
+      const supportedBiometryType = await Keychain.getSupportedBiometryType();
+      console.log("supportedBiometryType:", supportedBiometryType);
+      const canImply = await Keychain.canImplyAuthentication();
+      console.log("canImply:", canImply);
+
+      const setResult = await Keychain.setGenericPassword("foo", "bar", {
+        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
+        accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+        authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
+      });
+      console.log("Result:", JSON.stringify(setResult));
+
+      const getResult = await Keychain.getGenericPassword();
+      console.log("getResult:", JSON.stringify(getResult));
+    };
+    void foo();
+  }, []);
+
   return (
     <SafeAreaView style={FlexLayouts.wrapper}>
       <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
@@ -58,7 +80,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
           disabled={isLoginButtonDisabled}
         />
         <View>
-          <Text>Enable biometrics?</Text>
+          <Text>Enable biometric login?</Text>
         </View>
       </View>
     </SafeAreaView>
