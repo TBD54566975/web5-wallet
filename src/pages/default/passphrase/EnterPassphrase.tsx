@@ -57,6 +57,9 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
           onPress={loginTapped}
           disabled={isLoginButtonDisabled}
         />
+        <View>
+          <Text>Enable biometrics?</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
