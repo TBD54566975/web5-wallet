@@ -1,4 +1,4 @@
-import { Layouts } from "@/theme/layouts";
+import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { For } from "@legendapp/state/react";
 import React from "react";
@@ -16,8 +16,8 @@ const AddCredentialsScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView>
-      <View style={Layouts.container}>
+    <SafeAreaView style={FlexLayouts.wrapper}>
+      <View style={[Layouts.container, FlexLayouts.wrapper]}>
         <View style={Layouts.row}>
           <Text style={Typography.heading3}>Get a new credential</Text>
         </View>
