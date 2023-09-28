@@ -28,9 +28,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
 
   const loginTapped = async () => {
     try {
-      await IdentityAgentManager.startAgent(passphrase);
-      navigation.replace("Tabs", { screen: "DiscoverScreen" });
-      await Deeplink.openDelayedDeeplinkIfNeeded();
+      await IdentityAgentManager.startAgent(passphrase).then(onLoginSuccess);
     } catch (e) {
       console.error("Error logging in:", e);
       Alert.alert(
@@ -43,35 +41,46 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
         ]
       );
     }
+
+    if (enableBiometryLogin) {
+      try {
+        console.log("Setting the generic password");
+        await Keychain.setGenericPassword("username", passphrase, {
+          accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
+          accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+          authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
+          storage: Keychain.STORAGE_TYPE.RSA,
+        });
+      } catch (e) {
+        console.error("Error saving biometric passphrase:", e);
+      }
+    }
+  };
+
+  const onLoginSuccess = async () => {
+    navigation.replace("Tabs", { screen: "DiscoverScreen" });
+    await Deeplink.openDelayedDeeplinkIfNeeded();
   };
 
   useEffect(() => {
     const foo = async () => {
-      setSupportedBiometryType(await Keychain.getSupportedBiometryType());
+      const f = await Keychain.getGenericPassword();
+      if (f) {
+        const storedPassphrase = f.password;
+        try {
+          await IdentityAgentManager.startAgent(storedPassphrase).then(
+            onLoginSuccess
+          );
+        } catch (e) {
+          console.log(
+            "Stored passphrase didn't unlock vault. Purging stored passphrase."
+          );
 
-      // const resetResult = await Keychain.resetGenericPassword();
-      // console.log("resetResult:", resetResult);
-
-      const canImply = await Keychain.canImplyAuthentication();
-      console.log("canImply:", canImply);
-
-      // const setResult = await Keychain.setGenericPassword(
-      //   "foo",
-      //   "bar"
-      //   // , {
-      //   //   accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
-      //   //   accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
-      //   //   authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
-      //   // }
-      // );
-      // console.log("Result:", JSON.stringify(setResult));
-
-      try {
-        const getResult = await Keychain.getGenericPassword();
-        console.log("getResult:", JSON.stringify(getResult));
-      } catch (e) {
-        console.error("getGenericPassword Error:", e);
+          await Keychain.resetGenericPassword();
+        }
       }
+
+      setSupportedBiometryType(await Keychain.getSupportedBiometryType());
     };
     void foo();
   }, []);
