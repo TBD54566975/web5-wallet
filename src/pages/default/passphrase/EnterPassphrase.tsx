@@ -28,7 +28,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
 
   const loginTapped = async () => {
     try {
-      await IdentityAgentManager.startAgent(passphrase).then(onLoginSuccess);
+      await IdentityAgentManager.startAgent(passphrase);
     } catch (e) {
       console.error("Error logging in:", e);
       Alert.alert(
@@ -40,28 +40,62 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
           },
         ]
       );
+      return;
     }
 
+    // The passphrase is now known to successfully unlocked the app.
+    // Store it if the user wants to enable biometric login.
     if (enableBiometryLogin) {
-      try {
-        // Call `getGenericPassword` before actually setting the password.
-        // This will prompt the use to allow the app access to biometrics if they
-        // haven't already, as `setGenericPassword` will not.
-        await Keychain.getGenericPassword({
-          accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
-        });
+      await storePassphraseWithBiometrics();
+    }
 
-        console.log("Setting the generic password");
-        await Keychain.setGenericPassword("username", passphrase, {
-          accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
-          accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
-          authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
-          storage: Keychain.STORAGE_TYPE.RSA,
-        });
+    await onLoginSuccess();
+  };
+
+  const storePassphraseWithBiometrics = async () => {
+    try {
+      // The passphrase shouldn't be stored in the keychain if the user doesn't grant
+      // access to the system's biometric capabilities.
+      //
+      // `getGenericPassword` is the only function that will prompt the user to enable
+      // biometrics: https://github.com/oblador/react-native-keychain/issues/392
+      //
+      // Call it right away, discarding any result, so that the prompt appears.
+      // In the event that the user DOES deny the use of system biometrics,
+      // the operation will throw.
+      await Keychain.getGenericPassword({
+        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
+      });
+
+      console.log("Setting the generic password");
+      await Keychain.setGenericPassword("agentPassphrase", passphrase, {
+        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
+        accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+        authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
+        storage: Keychain.STORAGE_TYPE.RSA,
+      });
+    } catch (e) {
+      console.error("Error saving biometric passphrase:", e);
+    }
+  };
+
+  const attemptBiometricLogin = async (): Promise<boolean> => {
+    const getResult = await Keychain.getGenericPassword({
+      accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
+    });
+    if (getResult) {
+      try {
+        await IdentityAgentManager.startAgent(getResult.password);
       } catch (e) {
-        console.error("Error saving biometric passphrase:", e);
+        console.log(
+          "Stored passphrase didn't unlock the IdentityAgent. Purging stored passphrase."
+        );
+        await Keychain.resetGenericPassword();
+        return false;
       }
     }
+
+    return true;
   };
 
   const onLoginSuccess = async () => {
@@ -70,26 +104,15 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
   };
 
   useEffect(() => {
-    const foo = async () => {
-      const f = await Keychain.getGenericPassword();
-      if (f) {
-        const storedPassphrase = f.password;
-        try {
-          await IdentityAgentManager.startAgent(storedPassphrase).then(
-            onLoginSuccess
-          );
-        } catch (e) {
-          console.log(
-            "Stored passphrase didn't unlock vault. Purging stored passphrase."
-          );
-
-          await Keychain.resetGenericPassword();
-        }
+    const asyncWork = async () => {
+      if (await attemptBiometricLogin()) {
+        await onLoginSuccess();
+      } else {
+        setSupportedBiometryType(await Keychain.getSupportedBiometryType());
       }
-
-      setSupportedBiometryType(await Keychain.getSupportedBiometryType());
     };
-    void foo();
+    void asyncWork();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
