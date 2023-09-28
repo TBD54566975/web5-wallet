@@ -44,9 +44,16 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
 
     if (enableBiometryLogin) {
       try {
+        // Call `getGenericPassword` before actually setting the password.
+        // This will prompt the use to allow the app access to biometrics if they
+        // haven't already, as `setGenericPassword` will not.
+        await Keychain.getGenericPassword({
+          accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
+        });
+
         console.log("Setting the generic password");
         await Keychain.setGenericPassword("username", passphrase, {
-          accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
+          accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
           accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
           authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
           storage: Keychain.STORAGE_TYPE.RSA,
