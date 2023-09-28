@@ -132,8 +132,6 @@ const authedGroupOptions: NativeStackNavigationOptions = {
 };
 
 const fullscreenModalGroupOptions: NativeStackNavigationOptions = {
-  headerBackTitleVisible: true,
-  headerShown: true,
   animation: "slide_from_bottom",
   presentation: "fullScreenModal",
 };
