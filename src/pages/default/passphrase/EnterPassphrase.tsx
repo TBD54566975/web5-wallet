@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Alert, SafeAreaView, Text, View } from "react-native";
-import * as Keychain from "react-native-keychain";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
+import {
+  Alert,
+  SafeAreaView,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+} from "react-native";
+import { FlexLayouts, Layouts, SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { Deeplink } from "@/features/deeplink/deeplink";
+import * as Keychain from "react-native-keychain";
 
 type Props = AppNavigatorProps<"EnterPassphraseScreen">;
 
 const EnterPassphraseScreen = ({ navigation }: Props) => {
   const [passphrase, setPassphrase] = useState<string>("");
+  const [supportedBiometryType, setSupportedBiometryType] =
+    useState<Keychain.BIOMETRY_TYPE | null>(null);
+  const [enableBiometryLogin, setEnableBiometryLogin] = useState(false);
 
   const isLoginButtonDisabled = passphrase?.length === 0;
 
@@ -37,21 +47,31 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
 
   useEffect(() => {
     const foo = async () => {
-      console.log("yo dawg");
-      const supportedBiometryType = await Keychain.getSupportedBiometryType();
-      console.log("supportedBiometryType:", supportedBiometryType);
+      setSupportedBiometryType(await Keychain.getSupportedBiometryType());
+
+      // const resetResult = await Keychain.resetGenericPassword();
+      // console.log("resetResult:", resetResult);
+
       const canImply = await Keychain.canImplyAuthentication();
       console.log("canImply:", canImply);
 
-      const setResult = await Keychain.setGenericPassword("foo", "bar", {
-        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
-        accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
-        authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
-      });
-      console.log("Result:", JSON.stringify(setResult));
+      // const setResult = await Keychain.setGenericPassword(
+      //   "foo",
+      //   "bar"
+      //   // , {
+      //   //   accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY,
+      //   //   accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+      //   //   authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
+      //   // }
+      // );
+      // console.log("Result:", JSON.stringify(setResult));
 
-      const getResult = await Keychain.getGenericPassword();
-      console.log("getResult:", JSON.stringify(getResult));
+      try {
+        const getResult = await Keychain.getGenericPassword();
+        console.log("getResult:", JSON.stringify(getResult));
+      } catch (e) {
+        console.error("getGenericPassword Error:", e);
+      }
     };
     void foo();
   }, []);
@@ -79,12 +99,25 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
           onPress={loginTapped}
           disabled={isLoginButtonDisabled}
         />
-        <View>
-          <Text>Enable biometric login?</Text>
-        </View>
+        {!!supportedBiometryType && (
+          <View style={styles.biometricLoginRow}>
+            <Text style={FlexLayouts.wrapper}>Enable biometric login?</Text>
+            <Switch
+              onValueChange={setEnableBiometryLogin}
+              value={enableBiometryLogin}
+            />
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  biometricLoginRow: {
+    flexDirection: "row",
+    paddingVertical: SPACE.LARGE,
+  },
+});
 
 export default EnterPassphraseScreen;
