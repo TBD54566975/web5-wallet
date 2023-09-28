@@ -31,6 +31,7 @@ export type AppNavigatorInterface = {
   };
   ReviewConnectionScreen: undefined;
   ConnectionRequestScreen: undefined;
+  AddConnectionScreen: undefined;
 };
 
 export type TabNavigatorInterface = {
