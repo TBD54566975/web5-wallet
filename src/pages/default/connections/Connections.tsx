@@ -1,12 +1,12 @@
 import React from "react";
+import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
 import { ScrollView } from "react-native";
 import { For } from "@legendapp/state/react";
-import { observable } from "@legendapp/state";
-import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
 import { Tappable } from "@/pages/default/Tappable";
+import { observable } from "@legendapp/state";
 import { BadgeNames, ItemProps } from "@/components/Item";
-import { TabNavigatorProps } from "@/types/navigation";
 import { Button } from "@/components/Button";
+import type { TabNavigatorProps } from "@/types/navigation";
 
 type Props = TabNavigatorProps<"ConnectionsScreen">;
 const ConnectionsScreen = ({ navigation }: Props) => {
