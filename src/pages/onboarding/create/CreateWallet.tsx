@@ -6,6 +6,7 @@ import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { defaultIdentities } from "@/pages/onboarding/create/default_identities";
 import { Deeplink } from "@/features/deeplink/deeplink";
+import { BiometricLogin } from "@/features/biometrics/biometric-login";
 
 type Props = AppNavigatorProps<"CreateWalletScreen">;
 
@@ -24,6 +25,9 @@ const CreateWalletScreen = ({ navigation, route }: Props) => {
           }
         );
         await Promise.all(defaultIdentityCreatePromises);
+        // User just created a brand new wallet. Clear any stored biometric login
+        // data that may be stored locally on device.
+        await BiometricLogin.clearStoredPassphrase();
         navigation.replace("Tabs", { screen: "DiscoverScreen" });
         await Deeplink.openDelayedDeeplinkIfNeeded();
       } catch (e) {

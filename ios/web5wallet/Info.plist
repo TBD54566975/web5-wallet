@@ -52,6 +52,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow $(PRODUCT_NAME) to use the camera</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID to securely and quickly authenticate you, ensuring that only you can access your wallet and perform sensitive operations. This enhances the security of your data and simplifies the login process.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>SplashScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
