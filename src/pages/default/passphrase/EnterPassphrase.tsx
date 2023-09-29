@@ -14,14 +14,14 @@ import { Input } from "@/components/Input";
 import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { Deeplink } from "@/features/deeplink/deeplink";
-import * as Keychain from "react-native-keychain";
+import { BiometricLogin } from "@/features/biometrics/biometric-login";
 
 type Props = AppNavigatorProps<"EnterPassphraseScreen">;
 
 const EnterPassphraseScreen = ({ navigation }: Props) => {
   const [passphrase, setPassphrase] = useState<string>("");
-  const [supportedBiometryType, setSupportedBiometryType] =
-    useState<Keychain.BIOMETRY_TYPE | null>(null);
+  const [isBiometricLoginSupported, setIsBiometricLoginSupported] =
+    useState(false);
   const [enableBiometryLogin, setEnableBiometryLogin] = useState(false);
 
   const isLoginButtonDisabled = passphrase?.length === 0;
@@ -44,58 +44,12 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
     }
 
     // The passphrase is now known to successfully unlocked the app.
-    // Store it if the user wants to enable biometric login.
+    // Store it if the user enabled future biometric login.
     if (enableBiometryLogin) {
-      await storePassphraseWithBiometrics();
+      await BiometricLogin.setStoredPassphrase(passphrase);
     }
 
     await onLoginSuccess();
-  };
-
-  const storePassphraseWithBiometrics = async () => {
-    try {
-      // The passphrase shouldn't be stored in the keychain if the user doesn't grant
-      // access to the system's biometric capabilities.
-      //
-      // `getGenericPassword` is the only function that will prompt the user to enable
-      // biometrics: https://github.com/oblador/react-native-keychain/issues/392
-      //
-      // Call it right away, discarding any result, so that the prompt appears.
-      // In the event that the user DOES deny the use of system biometrics,
-      // the operation will throw.
-      await Keychain.getGenericPassword({
-        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
-      });
-
-      console.log("Setting the generic password");
-      await Keychain.setGenericPassword("agentPassphrase", passphrase, {
-        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
-        accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
-        authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
-        storage: Keychain.STORAGE_TYPE.RSA,
-      });
-    } catch (e) {
-      console.error("Error saving biometric passphrase:", e);
-    }
-  };
-
-  const attemptBiometricLogin = async (): Promise<boolean> => {
-    const getResult = await Keychain.getGenericPassword({
-      accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
-    });
-    if (getResult) {
-      try {
-        await IdentityAgentManager.startAgent(getResult.password);
-      } catch (e) {
-        console.log(
-          "Stored passphrase didn't unlock the IdentityAgent. Purging stored passphrase."
-        );
-        await Keychain.resetGenericPassword();
-        return false;
-      }
-    }
-
-    return true;
   };
 
   const onLoginSuccess = async () => {
@@ -104,14 +58,14 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
   };
 
   useEffect(() => {
-    const asyncWork = async () => {
-      if (await attemptBiometricLogin()) {
+    const biometricStartup = async () => {
+      if (await BiometricLogin.login()) {
         await onLoginSuccess();
       } else {
-        setSupportedBiometryType(await Keychain.getSupportedBiometryType());
+        setIsBiometricLoginSupported(await BiometricLogin.isSupported());
       }
     };
-    void asyncWork();
+    void biometricStartup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -138,7 +92,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
           onPress={loginTapped}
           disabled={isLoginButtonDisabled}
         />
-        {!!supportedBiometryType && (
+        {!!isBiometricLoginSupported && (
           <View style={styles.biometricLoginRow}>
             <Text style={FlexLayouts.wrapper}>Enable biometric login?</Text>
             <Switch
