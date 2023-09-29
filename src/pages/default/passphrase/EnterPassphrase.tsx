@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { FlexLayouts, Layouts, SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Button } from "@/components/Button";
@@ -71,37 +72,39 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
 
   return (
     <SafeAreaView style={FlexLayouts.wrapper}>
-      <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
-        <Text style={Typography.heading1}>Enter your passphrase</Text>
-        <View style={Layouts.row}>
-          <Input
-            label=""
-            nativeID="passphrase"
-            placeholder={"Passphrase"}
-            value={passphrase}
-            onChangeText={setPassphrase}
-            autoComplete="current-password"
-            autoCapitalize="none"
-            autoCorrect={false}
-            clearButtonMode="while-editing"
-          />
-        </View>
-        <Button
-          kind={isLoginButtonDisabled ? "disabled" : "primary"}
-          text="Login"
-          onPress={loginTapped}
-          disabled={isLoginButtonDisabled}
-        />
-        {!!isBiometricLoginSupported && (
-          <View style={styles.biometricLoginRow}>
-            <Text style={FlexLayouts.wrapper}>Enable biometric login?</Text>
-            <Switch
-              onValueChange={setEnableBiometryLogin}
-              value={enableBiometryLogin}
+      <KeyboardAvoidingView behavior={"padding"} style={FlexLayouts.wrapper}>
+        <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
+          <Text style={Typography.heading1}>Enter your passphrase</Text>
+          <View style={Layouts.row}>
+            <Input
+              label=""
+              nativeID="passphrase"
+              placeholder={"Passphrase"}
+              value={passphrase}
+              onChangeText={setPassphrase}
+              autoComplete="current-password"
+              autoCapitalize="none"
+              autoCorrect={false}
+              clearButtonMode="while-editing"
             />
           </View>
-        )}
-      </View>
+          <Button
+            kind={isLoginButtonDisabled ? "disabled" : "primary"}
+            text="Login"
+            onPress={loginTapped}
+            disabled={isLoginButtonDisabled}
+          />
+          {!!isBiometricLoginSupported && (
+            <View style={styles.biometricLoginRow}>
+              <Text style={FlexLayouts.wrapper}>Enable biometric login?</Text>
+              <Switch
+                onValueChange={setEnableBiometryLogin}
+                value={enableBiometryLogin}
+              />
+            </View>
+          )}
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
