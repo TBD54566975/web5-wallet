@@ -1,12 +1,13 @@
-// eslint-disable-next-line import/namespace, import/no-namespace, import/no-deprecated
-import * as Keychain from "react-native-keychain";
+/* eslint-disable import/no-namespace */
+import * as LocalAuthentication from "expo-local-authentication";
+import * as SecureStore from "expo-secure-store";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 
-const service = "website.tbd.wallet.web5.biometriclogin";
+const keychainItemKey = "userPassphrase";
+const keychainService = "website.tbd.wallet.web5.biometriclogin";
 
 const isSupported = async (): Promise<boolean> => {
-  const supportedType = await Keychain.getSupportedBiometryType();
-  return !!supportedType;
+  return await LocalAuthentication.isEnrolledAsync();
 };
 
 const login = async (): Promise<boolean> => {
@@ -31,35 +32,18 @@ const login = async (): Promise<boolean> => {
   return false;
 };
 
-const getStoredPassphrase = async (): Promise<string | null> => {
-  const result = await Keychain.getGenericPassword({ service });
-  if (result) {
-    return result.password;
-  } else {
-    return null;
-  }
+const getStoredPassphrase = async () => {
+  return await SecureStore.getItemAsync(keychainItemKey, { keychainService });
 };
 
 const setStoredPassphrase = async (passphrase: string) => {
-  // The passphrase shouldn't be stored in the keychain if the user doesn't grant
-  // access to the system's biometric capabilities.
-  //
-  // `getGenericPassword` is the only function that will prompt the user to enable
-  // biometrics: https://github.com/oblador/react-native-keychain/issues/392
-  //
-  // Call it after storing the passphrase, discarding any result, so that the prompt appears.
-  // In the event that the user DOES deny the use of system biometrics,
-  // the operation will throw, indicating any stored passphrase should be cleared.
   try {
-    await Keychain.setGenericPassword("agentPassphrase", passphrase, {
-      accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
-      accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
-      authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
-      storage: Keychain.STORAGE_TYPE.RSA,
-      service,
+    await LocalAuthentication.authenticateAsync();
+    await SecureStore.setItemAsync(keychainItemKey, passphrase, {
+      keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+      requireAuthentication: true,
+      keychainService,
     });
-
-    await Keychain.getGenericPassword({ service });
   } catch (e) {
     console.log("Error saving biometric passphrase:", e);
     await clearStoredPassphrase();
@@ -67,7 +51,9 @@ const setStoredPassphrase = async (passphrase: string) => {
 };
 
 const clearStoredPassphrase = async () => {
-  await Keychain.resetGenericPassword({ service });
+  await SecureStore.deleteItemAsync(keychainItemKey, {
+    keychainService,
+  });
 };
 
 export const BiometricLogin = {
