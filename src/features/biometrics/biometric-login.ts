@@ -2,20 +2,11 @@
 import * as Keychain from "react-native-keychain";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 
-// TODO: Service?
+const service = "website.tbd.wallet.web5.biometriclogin";
 
 const isSupported = async (): Promise<boolean> => {
   const supportedType = await Keychain.getSupportedBiometryType();
   return !!supportedType;
-};
-
-const getStoredPassphrase = async (): Promise<string | null> => {
-  const result = await Keychain.getGenericPassword();
-  if (result) {
-    return result.password;
-  } else {
-    return null;
-  }
 };
 
 const login = async (): Promise<boolean> => {
@@ -27,6 +18,7 @@ const login = async (): Promise<boolean> => {
   if (storedPassphrase) {
     try {
       await IdentityAgentManager.startAgent(storedPassphrase);
+      return true;
     } catch (e) {
       console.log(
         "Stored passphrase didn't unlock the IdentityAgent. Purging stored passphrase."
@@ -36,7 +28,16 @@ const login = async (): Promise<boolean> => {
     }
   }
 
-  return true;
+  return false;
+};
+
+const getStoredPassphrase = async (): Promise<string | null> => {
+  const result = await Keychain.getGenericPassword({ service });
+  if (result) {
+    return result.password;
+  } else {
+    return null;
+  }
 };
 
 const setStoredPassphrase = async (passphrase: string) => {
@@ -55,9 +56,10 @@ const setStoredPassphrase = async (passphrase: string) => {
       accessible: Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
       authenticationType: Keychain.AUTHENTICATION_TYPE.BIOMETRICS,
       storage: Keychain.STORAGE_TYPE.RSA,
+      service,
     });
 
-    await Keychain.getGenericPassword();
+    await Keychain.getGenericPassword({ service });
   } catch (e) {
     console.log("Error saving biometric passphrase:", e);
     await clearStoredPassphrase();
@@ -65,7 +67,7 @@ const setStoredPassphrase = async (passphrase: string) => {
 };
 
 const clearStoredPassphrase = async () => {
-  await Keychain.resetGenericPassword();
+  await Keychain.resetGenericPassword({ service });
 };
 
 export const BiometricLogin = {
