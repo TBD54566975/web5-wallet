@@ -1,4 +1,5 @@
 import "@tbd54566975/web5-react-native-polyfills";
+import "@/util/globals";
 import { registerRootComponent } from "expo";
 import { polyfillBlob } from "./blob-polyfill";
 
