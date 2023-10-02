@@ -33,15 +33,12 @@ const AddConnectionScreen = ({ navigation }: Props) => {
 
   const onQRCodeScanned = ({ data }: BarCodeScannerResult) => {
     setIsScanned(true);
-    void web5Connect(data);
-  };
 
-  const web5Connect = (qrContent: string) => {
     try {
       // pull out the query params from the QR code
-      const data = extractQueryParams(qrContent);
+      const qrParams = extractQueryParams(data);
 
-      deriveConnectKey(data.dwaDID, data.connectNonce, data.serverURL);
+      initConnect(qrParams.dwaDID, qrParams.connectNonce, qrParams.serverURL);
     } catch (e: any) {
       alert(e.message);
       navigation.goBack();
@@ -67,7 +64,7 @@ const AddConnectionScreen = ({ navigation }: Props) => {
 
     if (!(connectNonce instanceof Uint8Array)) {
       throw new Error(
-        "Not a valid connect nonce. Failed to create Uint8Array from it."
+        "Not a valid connect nonce. Failed to create Uint8Array from scanned string."
       );
     }
 
@@ -75,7 +72,7 @@ const AddConnectionScreen = ({ navigation }: Props) => {
   };
 
   // derive Connect ID and Connect Key from the public key of the DWA
-  const deriveConnectKey = (
+  const initConnect = (
     dwaDID: string,
     connectNonce: Uint8Array,
     serverURL: string
@@ -93,7 +90,7 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     );
     const connectId = base64url.baseEncode(connectUUID);
 
-    // derive the connect key from the DWA's public key
+    // derive the connect key from the DWA's signing public key
     const connectKey = hkdf(
       sha256,
       dwaSignPublicKey,
