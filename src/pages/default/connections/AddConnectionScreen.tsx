@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, Text, View, StyleSheet } from "react-native";
+import { SafeAreaView, Text, View, StyleSheet, Alert } from "react-native";
 import {
   BarCodeScanner,
   type BarCodeScannerResult,
@@ -117,6 +117,19 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     );
 
     // TODO: raise permissions request UI? Accept/deny. need designs.
+    Alert.alert(
+      "Permissions Request",
+      `DWA would like access to ${JSON.stringify(decryptedPermissionsRequest)}`,
+      [
+        {
+          text: "Cancel",
+          onPress: () => navigation.goBack(),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => navigation.goBack() },
+      ]
+    );
+
     NOOP(decryptedPermissionsRequest);
 
     // TODO: raise identity selection UI. need designs.
