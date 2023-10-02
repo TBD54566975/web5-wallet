@@ -11,6 +11,7 @@ import { base64url } from "multiformats/bases/base64";
 import { hkdf } from "@noble/hashes/hkdf";
 import { sha256 } from "@noble/hashes/sha256";
 import { xchacha20_poly1305 } from "@noble/ciphers/chacha";
+import { edwardsToMontgomeryPub, x25519 } from "@noble/curves/ed25519";
 import { createJsonRpcRequest } from "@tbd54566975/web5-agent";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { useMount } from "@/hooks/useMount";
@@ -38,7 +39,7 @@ const AddConnectionScreen = ({ navigation }: Props) => {
 
     // instead use a mock
     const mockQRContent =
-      "web5://connect?appDid=did%3Akey%3AzLCDinger&nonce=%5B0%2C%201%2C%202%2C%203%5D&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
+      "web5://connect?appDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&nonce=%5B0%2C%201%2C%202%2C%203%5D&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
 
     void web5Connect(mockQRContent);
   };
@@ -114,37 +115,77 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     console.log(connectUUID);
     console.log(connectId);
 
-    const connectRequestCipherText = fetchConnectRequestCipherText(
+    const connectionRequestCipherText = fetchEncryptedConnectionRequest(
       connectId,
       serverURL
     );
 
     // decrypt connection request that came from Connect Server
-    const permissionRequests = decryptConnectRequest(
-      connectRequestCipherText,
+    const decryptedPermissionsRequest = decryptConnectionRequest(
+      connectionRequestCipherText,
       connectKey,
       connectNonce
     );
 
-    // TODO: is the mock I'm returning the final shape of these
-    NOOP(permissionRequests);
+    // TODO: raise permissions request UI? Accept/deny. need designs.
+    NOOP(decryptedPermissionsRequest);
 
     // User selects the ION DID to use with the DWA.
-    // TODO: prompt UI? need designs.
-    // const connectedDid = "did:ion:EiCabc123";
+    // TODO: raise identity selection UI. need designs.
+    const selectedIdentityDid = "did:ion:EiCabc123";
 
-    // User authorizes the connection request, including requested permissions.
-    return { dwaSignPublicKey };
+    // User clicks "accept." Send grant to DWN server.
+    const data = postPermissionsAuthorization(
+      dwaSignPublicKey,
+      selectedIdentityDid
+    );
+
+    // TODO: Add connection data to the DWN?
+    addConnectionToDwn(data);
+  };
+
+  const postPermissionsAuthorization = (
+    dwaSignPublicKey: Uint8Array,
+    payload: string
+  ) => {
+    // Generate the challenge PIN.
+    const pin = generatePin();
+
+    // perform ECDH-ES-XC20PKW with the ION DID private key and
+    // DWA's signing public key.
+
+    // derive the DWA's key agreement key to be used with ECDH.
+    const appKAPublicKey = edwardsToMontgomeryPub(dwaSignPublicKey);
+
+    // create an ephemeral key to pair use with ECDH-ES.
+    const ephemeralPrivateKey = x25519.utils.randomPrivateKey();
+    const ephemeralPublicKey = x25519.getPublicKey(ephemeralPrivateKey);
+
+    // Using DWA's key agreement public key, generate a shared secret
+    // with ECDH using Curve25519 aka X25519.
+    const sharedSecret = x25519.getSharedSecret(
+      ephemeralPrivateKey,
+      appKAPublicKey
+    );
+
+    // IDA HTTP Posts the JWE to the Connect Server using the App's Connect UUID.
+    // including the challenge PIN encrypted.
+    NOOP(payload);
+    NOOP(sharedSecret);
+    NOOP(ephemeralPublicKey);
+    NOOP(pin);
+
+    // Hardcode result
+    return { connectionName: "Dignal", connectedTo: "Social profile" };
   };
 
   /**
    * Reach out to connect server to get cipher text with connectRequest inside
    */
-  const fetchConnectRequestCipherText = (
+  const fetchEncryptedConnectionRequest = (
     connectId: string,
     connectURL: string
   ) => {
-    // mock away the fetch for now
     const requestId = uuid();
     const jsonRpcRequest = createJsonRpcRequest(
       requestId,
@@ -153,6 +194,8 @@ const AddConnectionScreen = ({ navigation }: Props) => {
         uuid: connectId,
       }
     );
+
+    // mock away the fetch for now
     NOOP(jsonRpcRequest);
     NOOP(connectURL);
     // const response = await fetch(connectURL, {
@@ -161,28 +204,31 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     // });
     // const { message: connectRequestCipherText } = await response.json();
 
-    // mock bc we dont fetch yet
-    const connectRequestCipherText = new Uint8Array([9, 9, 9]);
+    // return mock bc we dont fetch yet
+    const mockCipherText = new Uint8Array([9, 9, 9]);
 
-    return connectRequestCipherText;
+    return mockCipherText;
   };
 
   /**
    * Create the cipher, decrypt the connectRequest, pull out permissions object
    */
-  const decryptConnectRequest = (
+  const decryptConnectionRequest = (
     cipherText: Uint8Array,
     connectKey: Uint8Array,
     connectNonce: Uint8Array
   ) => {
-    // do nothing with the cipher and instead mock getting
-    // back a permission req because we dont fetch yet
     const cipher = xchacha20_poly1305(connectKey, connectNonce);
     NOOP(cipher);
+
+    // do nothing with the cipher and instead mock getting
+    // back a permission req because we dont fetch yet
+
     // const decryptedConnectRequest = cipher.decrypt(cipherText).toString();
     // const connectRequest = JSON.parse(decryptedConnectRequest);
     // const { permissionsRequests } = connectRequest;
 
+    // TODO: is the mock I'm using the final shape of these?
     const mockPermissionsRequests = [
       {
         scope: {
@@ -199,6 +245,37 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     ];
 
     return mockPermissionsRequests;
+  };
+
+  const addConnectionToDwn = (connectionData: any) => {
+    NOOP(connectionData);
+  };
+
+  const base58btcMultibaseToBytes = (base58btcMultibase: string) => {
+    const multibaseBytes = base58btc.decode(base58btcMultibase);
+    return multibaseBytes.slice(2);
+  };
+
+  const stringifiedArrayToUInt8Array = (stringifiedArray: string) => {
+    try {
+      // Parse JSON string to get an array
+      const parsedArray = JSON.parse(stringifiedArray);
+
+      // Optional: Concatenate array elements
+      const concatenatedString = parsedArray.join(",");
+
+      // Encode the string to bytes
+      const utf8Bytes = new TextEncoder().encode(concatenatedString);
+
+      // Create and return a UInt8Array
+      return new Uint8Array(utf8Bytes);
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const generatePin = () => {
+    return "1234;";
   };
 
   // mock a valid scan
@@ -232,29 +309,6 @@ const AddConnectionScreen = ({ navigation }: Props) => {
       </View>
     </SafeAreaView>
   );
-};
-
-const base58btcMultibaseToBytes = (base58btcMultibase: string) => {
-  const multibaseBytes = base58btc.decode(base58btcMultibase);
-  return multibaseBytes.slice(2);
-};
-
-const stringifiedArrayToUInt8Array = (stringifiedArray: string) => {
-  try {
-    // Parse JSON string to get an array
-    const parsedArray = JSON.parse(stringifiedArray);
-
-    // Optional: Concatenate array elements
-    const concatenatedString = parsedArray.join(",");
-
-    // Encode the string to bytes
-    const utf8Bytes = new TextEncoder().encode(concatenatedString);
-
-    // Create and return a UInt8Array
-    return new Uint8Array(utf8Bytes);
-  } catch (e) {
-    return null;
-  }
 };
 
 const styles = StyleSheet.create({
