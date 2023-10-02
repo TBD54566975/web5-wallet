@@ -90,7 +90,7 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     );
     const connectId = base64url.baseEncode(connectUUID);
 
-    // derive the connect key from the DWA's signing public key
+    // derive the Connect Key from the DWA's signing public key
     const connectKey = hkdf(
       sha256,
       dwaSignPublicKey,
