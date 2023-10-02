@@ -14,7 +14,6 @@ import { xchacha20_poly1305 } from "@noble/ciphers/chacha";
 import { edwardsToMontgomeryPub, x25519 } from "@noble/curves/ed25519";
 import { createJsonRpcRequest } from "@tbd54566975/web5-agent";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
-import { useMount } from "@/hooks/useMount";
 import type { AppNavigatorProps } from "@/types/navigation";
 
 type Props = AppNavigatorProps<"AddConnectionScreen">;
