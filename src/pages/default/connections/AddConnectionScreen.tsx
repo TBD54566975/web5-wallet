@@ -71,7 +71,6 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     return { dwaDID, connectNonce, serverURL };
   };
 
-  // derive Connect ID and Connect Key from the public key of the DWA
   const initConnect = (
     dwaDID: string,
     connectNonce: Uint8Array,
@@ -81,14 +80,14 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     const dwaSignPublicKey = base58btcMultibaseToBytes(dwaSignKeyID);
 
     // derive the Connect UUID from the DWA's signing public key.
-    const connectUUID = hkdf(
+    const connectIdU8A = hkdf(
       sha256,
       dwaSignPublicKey,
       undefined,
       "connect_uuid",
       32
     );
-    const connectId = base64url.baseEncode(connectUUID);
+    const connectId = base64url.baseEncode(connectIdU8A);
 
     // derive the Connect Key from the DWA's signing public key
     const connectKey = hkdf(
@@ -101,7 +100,7 @@ const AddConnectionScreen = ({ navigation }: Props) => {
 
     console.log(dwaSignKeyID);
     console.log(dwaSignPublicKey);
-    console.log(connectUUID);
+    console.log(connectIdU8A);
     console.log(connectId);
 
     const connectionRequestCipherText = fetchEncryptedConnectionRequest(
