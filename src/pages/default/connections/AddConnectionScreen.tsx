@@ -234,12 +234,6 @@ const AddConnectionScreen = ({ navigation }: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  scanner: {
-    height: 300,
-  },
-});
-
 const base58btcMultibaseToBytes = (base58btcMultibase: string) => {
   const multibaseBytes = base58btc.decode(base58btcMultibase);
   return multibaseBytes.slice(2);
@@ -262,5 +256,11 @@ const stringifiedArrayToUInt8Array = (stringifiedArray: string) => {
     return null;
   }
 };
+
+const styles = StyleSheet.create({
+  scanner: {
+    height: 300,
+  },
+});
 
 export default AddConnectionScreen;
