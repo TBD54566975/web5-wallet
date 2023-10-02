@@ -33,15 +33,7 @@ const AddConnectionScreen = ({ navigation }: Props) => {
 
   const onQRCodeScanned = ({ data }: BarCodeScannerResult) => {
     setIsScanned(true);
-
-    // temporarily throw away the real data of whatever QR code that got scanned
-    NOOP(data);
-
-    // instead use a mock
-    const mockQRContent =
-      "web5://connect?appDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&nonce=%5B0%2C%201%2C%202%2C%203%5D&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
-
-    void web5Connect(mockQRContent);
+    void web5Connect(data);
   };
 
   const web5Connect = (qrContent: string) => {
@@ -281,7 +273,10 @@ const AddConnectionScreen = ({ navigation }: Props) => {
   // mock a valid scan
   useMount(() => {
     setTimeout(() => {
-      onQRCodeScanned("abc" as any);
+      const mockQRContent =
+        "web5://connect?appDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&nonce=%5B0%2C%201%2C%202%2C%203%5D&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
+
+      onQRCodeScanned({ data: mockQRContent } as any);
     }, 3000);
   });
 
