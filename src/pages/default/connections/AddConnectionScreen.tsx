@@ -79,7 +79,7 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     const dwaSignKeyID = dwaDID.substring(dwaDID.lastIndexOf(":") + 1);
     const dwaSignPublicKey = base58btcMultibaseToBytes(dwaSignKeyID);
 
-    // derive the Connect UUID from the DWA's signing public key.
+    // derive the Connect Id from the DWA's signing public key.
     const connectIdU8A = hkdf(
       sha256,
       dwaSignPublicKey,
@@ -103,12 +103,13 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     console.log(connectIdU8A);
     console.log(connectId);
 
+    // call into DWN server using the passed QR data
     const connectionRequestCipherText = fetchEncryptedConnectionRequest(
       connectId,
       serverURL
     );
 
-    // decrypt connection request that came from Connect Server
+    // decrypt the cipher text using the connectKey and connectNonce
     const decryptedPermissionsRequest = decryptConnectionRequest(
       connectionRequestCipherText,
       connectKey,
@@ -118,17 +119,16 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     // TODO: raise permissions request UI? Accept/deny. need designs.
     NOOP(decryptedPermissionsRequest);
 
-    // User selects the ION DID to use with the DWA.
     // TODO: raise identity selection UI. need designs.
     const selectedIdentityDid = "did:ion:EiCabc123";
 
-    // User clicks "accept." Send grant to DWN server.
+    // after User clicks "accept." Send grant? (check terminology) to DWN server.
     const data = postPermissionsAuthorization(
       dwaSignPublicKey,
       selectedIdentityDid
     );
 
-    // TODO: Add connection data to the DWN?
+    // TODO: Add connection data to the DWN level store?
     addConnectionToDwn(data);
   };
 
