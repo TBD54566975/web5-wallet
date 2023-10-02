@@ -279,15 +279,15 @@ const AddConnectionScreen = ({ navigation }: Props) => {
     return "1234;";
   };
 
-  // mock a valid scan
-  useMount(() => {
-    setTimeout(() => {
-      const mockQRContent =
-        "web5://connect?appDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&nonce=%5B0%2C%201%2C%202%2C%203%5D&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
-
-      onQRCodeScanned({ data: mockQRContent } as any);
-    }, 3000);
-  });
+  // test util to mock a valid scan
+  // useMount(() => {
+  //   setTimeout(() => {
+  //     const mockQRContent =
+  //       "web5://connect?appDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&nonce=%5B0%2C%201%2C%202%2C%203%5D&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
+  //
+  //     onQRCodeScanned({ data: mockQRContent } as any);
+  //   }, 3000);
+  // });
 
   return (
     <SafeAreaView style={FlexLayouts.wrapper}>
