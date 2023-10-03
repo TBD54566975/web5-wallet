@@ -11,7 +11,6 @@ export const fetchProfile = async (
   identity: ManagedIdentity
 ): Promise<FetchProfileResult> => {
   const web5 = IdentityAgentManager.web5(identity);
-
   const queryResult = await web5.dwn.records.query({
     message: {
       filter: {
@@ -32,7 +31,9 @@ export const fetchProfile = async (
 
   const readResult = await web5.dwn.records.read({
     message: {
-      recordId,
+      filter: {
+        recordId,
+      },
     },
   });
 
