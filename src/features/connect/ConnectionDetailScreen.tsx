@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
-import { MenuPageLayout } from "../../../components/MenuPageLayout";
+import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { LabelValueItem } from "@/components/LabelValue";
 import { formatDID } from "@/util/formatters";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
-import { Tappable } from "../../../components/Tappable";
+import { Tappable } from "../../components/Tappable";
 import { BadgeNames } from "@/components/Item";
 import { profilesAtom } from "@/features/profile/atoms";
 import { For } from "@legendapp/state/react";

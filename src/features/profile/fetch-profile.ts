@@ -2,7 +2,7 @@ import type { ManagedIdentity } from "@web5/agent";
 import {
   Profile,
   profileProtocol,
-} from "@/features/dwn/profile-protocol/profile-protocol";
+} from "@/features/profile/protocol/profile-protocol";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 
 export type FetchProfileResult = ManagedIdentity & Partial<Profile>;

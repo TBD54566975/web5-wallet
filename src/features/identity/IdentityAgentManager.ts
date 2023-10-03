@@ -10,7 +10,7 @@ import { Web5 } from "@web5/api";
 import {
   profileProtocol,
   Profile,
-} from "@/features/dwn/profile-protocol/profile-protocol";
+} from "@/features/profile/protocol/profile-protocol";
 import {
   MessageStoreLevel,
   DataStoreLevel,

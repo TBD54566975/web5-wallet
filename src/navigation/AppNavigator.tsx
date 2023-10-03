@@ -4,23 +4,23 @@ import {
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import { TabNavigator } from "./TabNavigator";
-import WelcomeScreen from "@/screens/onboarding/welcome/Welcome";
-import ConnectionDetailScreen from "@/screens/default/connections/ConnectionDetailScreen";
-import ReviewConnectionScreen from "@/screens/default/connections/ReviewConnectionScreen";
-import AddCredentialsScreen from "@/screens/default/credentials/AddCredentialsScreen";
-import CredentialDetailScreen from "@/screens/default/credentials/CredentialDetailScreen";
-import ProfileDetailScreen from "@/screens/default/profiles/ProfileDetailScreen";
-import CreatePassphraseScreen from "@/screens/onboarding/create/CreatePassphraseScreen";
-import CreateProfilesScreen from "@/screens/onboarding/create/CreateProfilesScreen";
-import CreateWalletScreen from "@/screens/onboarding/create/CreateWalletScreen";
-import AddProfileScreen from "@/screens/default/profiles/AddProfileScreen";
-import AddCredentialDetailScreen from "@/screens/default/credentials/AddCredentialDetailScreen";
-import AddCredentialOptionsScreen from "@/screens/default/credentials/AddCredentialOptionsScreen";
+import WelcomeScreen from "@/features/auth/WelcomeScreen";
+import ConnectionDetailScreen from "@/features/connect/ConnectionDetailScreen";
+import ReviewConnectionScreen from "@/features/connect/ReviewConnectionScreen";
+import AddCredentialsScreen from "@/features/credentials/AddCredentialsScreen";
+import CredentialDetailScreen from "@/features/credentials/CredentialDetailScreen";
+import ProfileDetailScreen from "@/features/profile/ProfileDetailScreen";
+import CreatePassphraseScreen from "@/features/auth/CreatePassphraseScreen";
+import CreateProfilesScreen from "@/features/profile/CreateProfilesScreen";
+import CreateWalletScreen from "@/features/identity/CreateWalletScreen";
+import AddProfileScreen from "@/features/profile/AddProfileScreen";
+import AddCredentialDetailScreen from "@/features/credentials/AddCredentialDetailScreen";
+import AddCredentialOptionsScreen from "@/features/credentials/AddCredentialOptionsScreen";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import Loader from "@/components/Loader";
-import EnterPassphraseScreen from "@/screens/default/passphrase/EnterPassphraseScreen";
-import ConnectionRequestScreen from "@/screens/default/connections/ConnectionRequestScreen";
-import AddConnectionScreen from "@/screens/default/connections/AddConnectionScreen";
+import EnterPassphraseScreen from "@/features/auth/EnterPassphraseScreen";
+import ConnectionRequestScreen from "@/features/connect/ConnectionRequestScreen";
+import AddConnectionScreen from "@/features/connect/AddConnectionScreen";
 import type { AppNavigatorInterface } from "@/types/navigation";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();

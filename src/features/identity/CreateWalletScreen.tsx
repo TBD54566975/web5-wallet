@@ -4,9 +4,9 @@ import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import { defaultIdentities } from "@/features/identity/default_identities";
+import { defaultIdentities } from "@/features/identity/default-identities";
 import { Deeplink } from "@/features/deeplink/deeplink";
-import { BiometricLogin } from "@/features/biometrics/biometric-login";
+import { BiometricLogin } from "@/features/auth/biometric-login";
 
 type Props = AppNavigatorProps<"CreateWalletScreen">;
 

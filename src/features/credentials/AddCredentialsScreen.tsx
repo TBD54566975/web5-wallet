@@ -3,7 +3,7 @@ import { Typography } from "@/theme/typography";
 import { For } from "@legendapp/state/react";
 import React from "react";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
-import { Tappable } from "../../../components/Tappable";
+import { Tappable } from "../../components/Tappable";
 import { observable } from "@legendapp/state";
 import type { MockCredential } from "@/types/models";
 import { AppNavigatorProps } from "@/types/navigation";

@@ -1,6 +1,6 @@
 import { LabelValueItem } from "@/components/LabelValue";
 import React, { useState } from "react";
-import { MenuPageLayout } from "../../../components/MenuPageLayout";
+import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { Button } from "@/components/Button";
 import { BadgeNames } from "@/components/Item";
 import { formatDate } from "@/util/formatters";
