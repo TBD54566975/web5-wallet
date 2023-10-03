@@ -21,7 +21,7 @@ import { type Level } from "level";
 import { Dwn } from "@tbd54566975/dwn-sdk-js";
 import { AbstractDatabaseOptions } from "abstract-level";
 import { ExpoLevel } from "expo-level";
-import { ExpoLevelStore } from "@/features/identity/expo-level-store";
+import { ExpoLevelStore } from "@/features/app/expo-level-store";
 import ms from "ms";
 
 // Singleton
