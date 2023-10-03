@@ -39,8 +39,9 @@ const AddConnectionScreen = ({ navigation }: Props) => {
 
       initConnect(qrParams.dwaDID, qrParams.connectNonce, qrParams.serverURL);
     } catch (e: any) {
+      // TODO: probably use a snackbar for this error instead
+      // https://github.com/TBD54566975/web5-wallet/pull/125#discussion_r1344175344
       alert(e.message);
-      navigation.goBack();
     }
   };
 
