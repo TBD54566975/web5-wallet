@@ -6,7 +6,7 @@ import { enableLegendStateReact } from "@legendapp/state/react";
 import { AppNavigator } from "./navigation/AppNavigator";
 import { DefaultTheme } from "./theme/colors";
 import { queryClient } from "@/features/app/store";
-import { Deeplink } from "@/features/deeplink/deeplink";
+import { Deeplink } from "@/features/app/deeplink";
 
 enableLegendStateReact();
 

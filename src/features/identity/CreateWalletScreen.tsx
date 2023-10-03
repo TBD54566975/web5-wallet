@@ -5,7 +5,7 @@ import { Typography } from "@/theme/typography";
 import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { defaultIdentities } from "@/features/identity/default-identities";
-import { Deeplink } from "@/features/deeplink/deeplink";
+import { Deeplink } from "@/features/app/deeplink";
 import { BiometricLogin } from "@/features/auth/biometric-login";
 
 type Props = AppNavigatorProps<"CreateWalletScreen">;
