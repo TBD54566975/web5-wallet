@@ -1,13 +1,13 @@
 import React from "react";
-import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
-import { Tappable } from "@/pages/default/Tappable";
+import { ParentPageLayout } from "@/components/ParentPageLayout";
+import { Tappable } from "@/components/Tappable";
 import { ScrollView, View } from "react-native";
 import { Button } from "@/components/Button";
 import { FlexLayouts } from "@/theme/layouts";
 import { formatDID } from "@/util/formatters";
 import { TabNavigatorProps } from "@/types/navigation";
 import type { ManagedIdentity } from "@web5/agent";
-import LoadingScreen from "@/pages/Loading";
+import Loader from "@/components/Loader";
 import { useProfiles } from "@/features/profile/hooks";
 import { useIdentityList } from "@/features/identity/hooks";
 
@@ -31,7 +31,7 @@ const ProfilesScreen = ({ navigation }: Props) => {
   };
 
   if (isLoadingIdentities || isLoadingProfiles) {
-    return <LoadingScreen />;
+    return <Loader />;
   }
 
   return (

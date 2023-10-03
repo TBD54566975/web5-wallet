@@ -14,8 +14,8 @@ import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import { Deeplink } from "@/features/deeplink/deeplink";
-import { BiometricLogin } from "@/features/biometrics/biometric-login";
+import { Deeplink } from "@/features/app/deeplink";
+import { BiometricLogin } from "@/features/auth/biometric-login";
 
 type Props = AppNavigatorProps<"EnterPassphraseScreen">;
 

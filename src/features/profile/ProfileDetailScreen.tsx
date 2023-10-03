@@ -3,14 +3,14 @@ import { BadgeNames } from "@/components/Item";
 import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { View, Text } from "react-native";
-import { Tappable } from "../Tappable";
+import { Tappable } from "../../components/Tappable";
 import { LabelValueItem } from "@/components/LabelValue";
 import { formatDID, formatDate } from "@/util/formatters";
-import { MenuPageLayout } from "../MenuPageLayout";
-import { mockConnections } from "@/services/mocks";
+import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { AppNavigatorProps } from "@/types/navigation";
 import { useProfile } from "@/features/profile/hooks";
-import LoadingScreen from "@/pages/Loading";
+import Loader from "@/components/Loader";
+import { mockConnections } from "@/features/connect/mocks";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
@@ -42,7 +42,7 @@ const ProfileDetailScreen = ({ navigation, route }: Props) => {
     >
       {activeTab === tabLabels[0] &&
         (isLoadingProfile || !profile ? (
-          <LoadingScreen />
+          <Loader />
         ) : (
           <>
             <LabelValueItem label="Profile label" value={profile.name} />

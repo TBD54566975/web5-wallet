@@ -6,9 +6,9 @@ import { Typography } from "@/theme/typography";
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
-import { mockCredentials } from "@/services/mocks";
 import type { MockCredential } from "@/types/models";
 import { AppNavigatorProps } from "@/types/navigation";
+import { mockCredentials } from "@/features/credentials/mocks";
 
 type Props = AppNavigatorProps<"AddCredentialDetailScreen">;
 const AddCredentialDetailScreen = ({ navigation, route }: Props) => {

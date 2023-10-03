@@ -1,5 +1,5 @@
 import React from "react";
-import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
+import { ParentPageLayout } from "@/components/ParentPageLayout";
 import { ScrollView, View } from "react-native";
 import { For } from "@legendapp/state/react";
 import { observable } from "@legendapp/state";
