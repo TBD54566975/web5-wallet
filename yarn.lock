@@ -3062,10 +3062,10 @@
     uuid "8.3.2"
     varint "6.0.0"
 
-"@tbd54566975/dwn-sdk-js@0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@tbd54566975/dwn-sdk-js/-/dwn-sdk-js-0.2.2.tgz#3f1e10664560caf7f4fb227ea68a8fdf18cf8247"
-  integrity sha512-n0bbi91GrsPCZTG5Z/iBwlzhKEVET6b9GT4T1cdGRT0CHGNQdW+jHrKhhNzBIVDF15z92VWOA9Ogyug2KJ7J4Q==
+"@tbd54566975/dwn-sdk-js@0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@tbd54566975/dwn-sdk-js/-/dwn-sdk-js-0.2.3.tgz#f5f8afb81cd411053edf5dbfc24d8f5855c7110e"
+  integrity sha512-T3Yy6kY6zftdVgsX2C0D2bIAmWQQVCFrLB95+BN/zoAAA29LogOr807Kx15QHrKmILWidVfYt/ZwsPHl4k5bDQ==
   dependencies:
     "@ipld/dag-cbor" "9.0.3"
     "@js-temporal/polyfill" "0.4.4"
