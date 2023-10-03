@@ -5,7 +5,7 @@ import React from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import { Item } from "@/components/Item";
 import type { AppNavigatorProps } from "@/types/navigation";
-import { defaultIdentities } from "@/pages/onboarding/create/default_identities";
+import { defaultIdentities } from "@/features/identity/default_identities";
 
 type Props = AppNavigatorProps<"CreateProfilesScreen">;
 

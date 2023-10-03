@@ -1,9 +1,9 @@
 import React from "react";
-import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
+import { ParentPageLayout } from "@/components/ParentPageLayout";
 import { ScrollView, View } from "react-native";
 import { For } from "@legendapp/state/react";
 import { observable } from "@legendapp/state";
-import { Tappable } from "@/pages/default/Tappable";
+import { Tappable } from "@/components/Tappable";
 import { Button } from "@/components/Button";
 import { FlexLayouts } from "@/theme/layouts";
 import { BadgeNames, ItemProps } from "@/components/Item";

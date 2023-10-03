@@ -1,16 +1,17 @@
 import React from "react";
 import { Text, DevSettings, ScrollView } from "react-native";
-import { ParentPageLayout } from "@/pages/default/ParentPageLayout";
+import { ParentPageLayout } from "@/components/ParentPageLayout";
 import { Typography } from "@/theme/typography";
-import { Tappable } from "@/pages/default/Tappable";
+import { Tappable } from "@/components/Tappable";
 import { Button } from "@/components/Button";
 import { For } from "@legendapp/state/react";
 import { observable } from "@legendapp/state";
 import { BadgeNames } from "@/components/Item";
-import { mockConnections, mockCredentials } from "@/services/mocks";
 import { profilesAtom } from "@/features/profile/atoms";
 import type { MockCredential, MockConnection } from "@/types/models";
 import type { TabNavigatorProps } from "@/types/navigation";
+import { mockConnections } from "@/features/connect/mocks";
+import { mockCredentials } from "@/features/credentials/mocks";
 
 type Props = TabNavigatorProps<"DiscoverScreen">;
 const DiscoverScreen = ({ navigation }: Props) => {

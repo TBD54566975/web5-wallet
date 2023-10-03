@@ -4,11 +4,11 @@ import {
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import Octicons from "@expo/vector-icons/Octicons";
-import ProfilesScreen from "@/pages/default/profiles/Profiles";
-import CredentialsScreen from "@/pages/default/credentials/Credentials";
-import ConnectionsScreen from "@/pages/default/connections/Connections";
-import ActivityScreen from "@/pages/default/activity/Activity";
-import DiscoverScreen from "@/pages/default/discover/Discover";
+import ProfilesScreen from "@/screens/default/profiles/ProfilesScreen";
+import CredentialsScreen from "@/screens/default/credentials/CredentialsScreen";
+import ConnectionsScreen from "@/screens/default/connections/ConnectionsScreen";
+import ActivityScreen from "@/screens/default/activity/ActivityScreen";
+import DiscoverScreen from "@/screens/default/discover/DiscoverScreen";
 import { Typography } from "@/theme/typography";
 import { ColorTheme } from "@/theme/colors";
 import { SPACE } from "@/theme/layouts";
