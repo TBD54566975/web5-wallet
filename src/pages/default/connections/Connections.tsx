@@ -5,7 +5,8 @@ import { For } from "@legendapp/state/react";
 import { Tappable } from "@/pages/default/Tappable";
 import { observable } from "@legendapp/state";
 import { BadgeNames, ItemProps } from "@/components/Item";
-import { TabNavigatorProps } from "@/types/navigation";
+import { Button } from "@/components/Button";
+import type { TabNavigatorProps } from "@/types/navigation";
 
 type Props = TabNavigatorProps<"ConnectionsScreen">;
 const ConnectionsScreen = ({ navigation }: Props) => {
@@ -14,6 +15,10 @@ const ConnectionsScreen = ({ navigation }: Props) => {
       heading: connection.heading,
       iconName: connection.iconName ?? "hash",
     });
+  };
+
+  const navigateAddConnection = () => {
+    navigation.navigate("AddConnectionScreen");
   };
 
   return (
@@ -38,6 +43,7 @@ const ConnectionsScreen = ({ navigation }: Props) => {
           }}
         </For>
       </ScrollView>
+      <Button kind="primary" onPress={navigateAddConnection} text="Connect" />
     </ParentPageLayout>
   );
 };

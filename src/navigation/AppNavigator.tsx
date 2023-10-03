@@ -16,11 +16,12 @@ import CreateWalletScreen from "@/pages/onboarding/create/CreateWallet";
 import AddProfileScreen from "@/pages/default/profiles/AddProfile";
 import AddCredentialDetailScreen from "@/pages/default/credentials/AddCredentialDetail";
 import AddCredentialOptionsScreen from "@/pages/default/credentials/AddCredentialOptions";
-import type { AppNavigatorInterface } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import LoadingScreen from "@/pages/Loading";
 import EnterPassphraseScreen from "@/pages/default/passphrase/EnterPassphrase";
 import ConnectionRequestScreen from "@/pages/default/connections/ConnectionRequest";
+import AddConnectionScreen from "@/pages/default/connections/AddConnectionScreen";
+import type { AppNavigatorInterface } from "@/types/navigation";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
@@ -100,6 +101,11 @@ export const AppNavigator = () => {
           name="ReviewConnectionScreen"
           component={ReviewConnectionScreen}
         />
+        <Stack.Screen
+          name="AddConnectionScreen"
+          component={AddConnectionScreen}
+          options={addConnectionScreenOptions}
+        />
       </Stack.Group>
 
       {/* Full Screen Modals */}
@@ -128,4 +134,8 @@ const authedGroupOptions: NativeStackNavigationOptions = {
 const fullscreenModalGroupOptions: NativeStackNavigationOptions = {
   animation: "slide_from_bottom",
   presentation: "fullScreenModal",
+};
+
+const addConnectionScreenOptions: NativeStackNavigationOptions = {
+  animation: "slide_from_bottom",
 };
