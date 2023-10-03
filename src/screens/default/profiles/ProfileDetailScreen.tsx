@@ -9,7 +9,7 @@ import { formatDID, formatDate } from "@/util/formatters";
 import { MenuPageLayout } from "../../../components/MenuPageLayout";
 import { AppNavigatorProps } from "@/types/navigation";
 import { useProfile } from "@/features/profile/hooks";
-import LoadingScreen from "@/components/Loading";
+import Loader from "@/components/Loader";
 import { mockConnections } from "@/features/connect/mocks";
 
 const tabLabels = ["About", "Connections", "Activity"];
@@ -42,7 +42,7 @@ const ProfileDetailScreen = ({ navigation, route }: Props) => {
     >
       {activeTab === tabLabels[0] &&
         (isLoadingProfile || !profile ? (
-          <LoadingScreen />
+          <Loader />
         ) : (
           <>
             <LabelValueItem label="Profile label" value={profile.name} />

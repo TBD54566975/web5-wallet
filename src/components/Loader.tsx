@@ -2,7 +2,7 @@ import React from "react";
 import { ActivityIndicator, SafeAreaView, View } from "react-native";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 
-const LoadingScreen = () => {
+const Loader = () => {
   return (
     <SafeAreaView style={FlexLayouts.wrapper}>
       <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
@@ -12,4 +12,4 @@ const LoadingScreen = () => {
   );
 };
 
-export default LoadingScreen;
+export default Loader;

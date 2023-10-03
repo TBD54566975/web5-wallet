@@ -7,7 +7,7 @@ import { FlexLayouts } from "@/theme/layouts";
 import { formatDID } from "@/util/formatters";
 import { TabNavigatorProps } from "@/types/navigation";
 import type { ManagedIdentity } from "@web5/agent";
-import LoadingScreen from "@/components/Loading";
+import Loader from "@/components/Loader";
 import { useProfiles } from "@/features/profile/hooks";
 import { useIdentityList } from "@/features/identity/hooks";
 
@@ -31,7 +31,7 @@ const ProfilesScreen = ({ navigation }: Props) => {
   };
 
   if (isLoadingIdentities || isLoadingProfiles) {
-    return <LoadingScreen />;
+    return <Loader />;
   }
 
   return (

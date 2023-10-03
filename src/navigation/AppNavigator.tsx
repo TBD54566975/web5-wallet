@@ -17,7 +17,7 @@ import AddProfileScreen from "@/screens/default/profiles/AddProfileScreen";
 import AddCredentialDetailScreen from "@/screens/default/credentials/AddCredentialDetailScreen";
 import AddCredentialOptionsScreen from "@/screens/default/credentials/AddCredentialOptionsScreen";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import LoadingScreen from "@/components/Loading";
+import Loader from "@/components/Loader";
 import EnterPassphraseScreen from "@/screens/default/passphrase/EnterPassphraseScreen";
 import ConnectionRequestScreen from "@/screens/default/connections/ConnectionRequestScreen";
 import AddConnectionScreen from "@/screens/default/connections/AddConnectionScreen";
@@ -43,7 +43,7 @@ export const AppNavigator = () => {
   }, []);
 
   if (!initialRoute) {
-    return <LoadingScreen />;
+    return <Loader />;
   }
 
   return (
