@@ -6,7 +6,8 @@ import {
   DwnManager,
   SyncManagerLevel,
 } from "@web5/agent";
-import { Web5 } from "@web5/api";
+import { getTechPreviewDwnEndpoints, Web5 } from "@web5/api";
+import { DidIonMethod, type DidIonCreateOptions } from "@web5/dids";
 import {
   profileProtocol,
   Profile,
@@ -114,9 +115,18 @@ const createIdentity = async (
   didMethod: keyof CreateDidMethodOptions = "ion",
   kms = "local"
 ) => {
+  let didOptions: DidIonCreateOptions | undefined;
+  if (didMethod === "ion") {
+    const serviceEndpointNodes = await getTechPreviewDwnEndpoints();
+    didOptions = await DidIonMethod.generateDwnOptions({
+      serviceEndpointNodes,
+    });
+  }
+
   const identity = await agent.identityManager.create({
     name,
     didMethod,
+    didOptions,
     kms,
   });
 

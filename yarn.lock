@@ -3410,6 +3410,19 @@
     readable-stream "4.4.2"
     readable-web-to-node-stream "3.0.2"
 
+"@web5/agent@0.2.0-alpha-20231003-cd24256":
+  version "0.2.0-alpha-20231003-cd24256"
+  resolved "https://registry.yarnpkg.com/@web5/agent/-/agent-0.2.0-alpha-20231003-cd24256.tgz#eddadd6339692de8d1fd34de5d177e29bf77e2a8"
+  integrity sha512-OIp9oZ/lkLJThPpx/6MK9NuL6THrB7WjK/dzMyL2CECj6EZVHk3aPWS2Rzd/ByN5y2WWE4FEYxJxXSVsALC8DQ==
+  dependencies:
+    "@tbd54566975/dwn-sdk-js" "0.2.1"
+    "@web5/common" "0.2.0-alpha-20231003-cd24256"
+    "@web5/crypto" "0.2.0-alpha-20231003-cd24256"
+    "@web5/dids" "0.2.0-alpha-20231003-cd24256"
+    level "8.0.0"
+    readable-stream "4.4.2"
+    readable-web-to-node-stream "3.0.2"
+
 "@web5/api@0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@web5/api/-/api-0.8.1.tgz#dcaebd7b644b1f91f707c7e66e4d3e77739bb6ac"
@@ -3425,10 +3438,33 @@
     readable-stream "4.4.2"
     readable-web-to-node-stream "3.0.2"
 
+"@web5/api@0.8.1-alpha-20231003-cd24256":
+  version "0.8.1-alpha-20231003-cd24256"
+  resolved "https://registry.yarnpkg.com/@web5/api/-/api-0.8.1-alpha-20231003-cd24256.tgz#a5ccadb15e75a6e67b0de69397993249d15c4b49"
+  integrity sha512-rE0yVbbbgfaUJTJBIWB5Fa5hPB+4E9wTMHnNs+z5qj7GQfZFjX30y7S5b2C388fcXxdRL5Y77qbTcqvaPqQ0nw==
+  dependencies:
+    "@tbd54566975/dwn-sdk-js" "0.2.1"
+    "@web5/agent" "0.2.0-alpha-20231003-cd24256"
+    "@web5/crypto" "0.2.0-alpha-20231003-cd24256"
+    "@web5/dids" "0.2.0-alpha-20231003-cd24256"
+    "@web5/user-agent" "0.2.0-alpha-20231003-cd24256"
+    level "8.0.0"
+    ms "2.1.3"
+    readable-stream "4.4.2"
+    readable-web-to-node-stream "3.0.2"
+
 "@web5/common@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@web5/common/-/common-0.2.0.tgz#94139f089790c3c4ef3bbddfdb2ca33706211405"
   integrity sha512-JRJ2D0OhtyPCcvHNfzuTAkVKviy4abA5z6OlYM5ZatR3abyLVt/L6HjDKTXBuBzR49tUQcffSqJ9+EdJ5knp+w==
+  dependencies:
+    level "8.0.0"
+    multiformats "11.0.2"
+
+"@web5/common@0.2.0-alpha-20231003-cd24256":
+  version "0.2.0-alpha-20231003-cd24256"
+  resolved "https://registry.yarnpkg.com/@web5/common/-/common-0.2.0-alpha-20231003-cd24256.tgz#4e3353de54f0fe726aec06071e8cf524f0369154"
+  integrity sha512-jQUtjWAx6AR3gDLu1yo21iiYfb/AFU1rxlzwPl3EwsTKqdjrOqUvWmi4nOMZZf9gQ1xPzewJLfHY5ociwXVG2g==
   dependencies:
     level "8.0.0"
     multiformats "11.0.2"
@@ -3443,6 +3479,16 @@
     "@noble/hashes" "1.3.1"
     "@web5/common" "0.2.0"
 
+"@web5/crypto@0.2.0-alpha-20231003-cd24256":
+  version "0.2.0-alpha-20231003-cd24256"
+  resolved "https://registry.yarnpkg.com/@web5/crypto/-/crypto-0.2.0-alpha-20231003-cd24256.tgz#b6d9e009f66bba1da697ce60353e54e1fe437f3d"
+  integrity sha512-D8VzXBqmWIdGjjx/sKbVS7WUPCFkrT6/1qpNFsDCcnDMLi3NHrOUt7VOzQhbzLGYeeCNUUdeA0nM1bFwP6Oo8w==
+  dependencies:
+    "@noble/ciphers" "0.1.4"
+    "@noble/curves" "1.1.0"
+    "@noble/hashes" "1.3.1"
+    "@web5/common" "0.2.0-alpha-20231003-cd24256"
+
 "@web5/dids@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@web5/dids/-/dids-0.2.0.tgz#51fa77428d35bdf31a7642d1da4782fa79ef7960"
@@ -3452,6 +3498,20 @@
     "@decentralized-identity/ion-sdk" "1.0.1"
     "@web5/common" "0.2.0"
     "@web5/crypto" "0.2.0"
+    canonicalize "2.0.0"
+    did-resolver "4.1.0"
+    level "8.0.0"
+    ms "2.1.3"
+
+"@web5/dids@0.2.0-alpha-20231003-cd24256":
+  version "0.2.0-alpha-20231003-cd24256"
+  resolved "https://registry.yarnpkg.com/@web5/dids/-/dids-0.2.0-alpha-20231003-cd24256.tgz#80fc7d739d4e6e358f4c46ed74c30181f4aad158"
+  integrity sha512-20RUOYgwT4XdevBXHG8ayH78nJlIgx0Rmzy6Qxzz5yS38m2VgLEabf+X8KcoK1d1QO+hmq99fcWfxpIGyDHmVg==
+  dependencies:
+    "@decentralized-identity/ion-pow-sdk" "1.0.17"
+    "@decentralized-identity/ion-sdk" "1.0.1"
+    "@web5/common" "0.2.0-alpha-20231003-cd24256"
+    "@web5/crypto" "0.2.0-alpha-20231003-cd24256"
     canonicalize "2.0.0"
     did-resolver "4.1.0"
     level "8.0.0"
@@ -3474,6 +3534,16 @@
     "@web5/common" "0.2.0"
     "@web5/crypto" "0.2.0"
     "@web5/dids" "0.2.0"
+
+"@web5/user-agent@0.2.0-alpha-20231003-cd24256":
+  version "0.2.0-alpha-20231003-cd24256"
+  resolved "https://registry.yarnpkg.com/@web5/user-agent/-/user-agent-0.2.0-alpha-20231003-cd24256.tgz#deeec4a1d6406c66aa12a8bff3422e268f3263ed"
+  integrity sha512-5RjlmbYoJajxf1ZdUQ3HCRFIrMBsjEi5uXKAsHGHRYSgJCMeUP4fr+p3JJWy3Uaux8mouOa8O/Gra1NMEw2UtA==
+  dependencies:
+    "@web5/agent" "0.2.0-alpha-20231003-cd24256"
+    "@web5/common" "0.2.0-alpha-20231003-cd24256"
+    "@web5/crypto" "0.2.0-alpha-20231003-cd24256"
+    "@web5/dids" "0.2.0-alpha-20231003-cd24256"
 
 "@xmldom/xmldom@~0.7.7":
   version "0.7.11"
