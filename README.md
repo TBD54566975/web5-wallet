@@ -31,28 +31,3 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 ## Further troubleshooting
 
 - Run `npx expo-env-info@latest`
-
-# Dependencies
-
-| Package                           | Description                                                                                               |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| @craftzdog/react-native-buffer    | The `Buffer` module from Node.js. Polyfilled using native C++                                             |
-| react-native-quick-base64         | Base64 atoa/btoa used for crypto in Node.js. Polyfilled using native C++                                  |
-| react-native-bignumber            | Also known as bn.js used for crypto in Node.js. Polyfilled using native C++                               |
-| react-native-quick-crypto         | The `crypto` module from Node.js. Polyfilled using native C++                                             |
-| fastestsmallesttextencoderdecoder | The `TextEnder` & `TextDecoder` module from Node.js. Polyfilled with JS                                   |
-| stream-browserify                 | The `stream` module from Node.js. Polyfilled with JS                                                      |
-| react-native-safe-area-context    | Used to provide safe area dimensions at top and bottom of screen                                          |
-| @decentralized-identity/ion-tools | Provides `did:ion` support using Javascript                                                               |
-| @react-navigation/native          | Provides navigation (concepts of screens and animations) for rn                                           |
-| @react-navigation/native-stack    | Makes react-navigation use native UI                                                                      |
-| react-native-screens              | Makes react-navigation use native UI                                                                      |
-| react-native-paper                | Provides nice looking UI for easy prototyping                                                             |
-| patch-package                     | Create patches of packages instead of forking (useful for monorepos not easily forked)                    |
-| postinstall-postinstall           | Postinstall hook for Yarn v1                                                                              |
-| react-native-mmkv                 | Localstorage key-value store, faster than SharedPreferences, UserDefaults or SQL                          |
-| @legendapp/state                  | Proxy based atomic state management that implements Signals inside React. Similar to Valtio, Mobx, Jotai. |
-
-# Considerations
-
-- Three packages are polyfilled using JS rather than native. C++ polyfills could be created for higher performance.

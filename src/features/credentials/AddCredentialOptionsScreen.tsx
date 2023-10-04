@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { BadgeNames, Item, ItemAvatar, ItemProps } from "@/components/Item";
-import { profilesAtom } from "@/features/profile/atoms";
+import { mockConnections } from "@/features/connect/mocks";
 import { ColorTheme } from "@/theme/colors";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
@@ -19,8 +19,7 @@ import {
 type Props = AppNavigatorProps<"AddCredentialOptionsScreen">;
 const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
   const credential = route.params.credential;
-  const profiles = profilesAtom.map((userProfile) => userProfile.get());
-  const [selectedProfile, setSelectedProfile] = useState(profiles[0]);
+  const [selectedProfile, setSelectedProfile] = useState(mockConnections[0]);
 
   const addCredential = () => {
     Alert.alert(
@@ -56,7 +55,8 @@ const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
           </Text>
         </View>
 
-        {profiles.map((profile, index) => {
+        {mockConnections.map((profile, index) => {
+          // TODO: don't key by index
           return (
             <Pressable
               style={Layouts.row}
@@ -64,20 +64,20 @@ const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
               onPress={() => setSelectedProfile(profile)}
               accessibilityRole="radio"
             >
-              <View style={Selections.row}>
-                <View style={[FlexLayouts.row, Selections.textContainer]}>
+              <View style={styles.row}>
+                <View style={[FlexLayouts.row, styles.textContainer]}>
                   <Item
                     heading={profile.name}
-                    subtitle={profile.displayName}
+                    subtitle={profile.description}
                     body={formatDID(profile.id)}
                     iconName={profile.icon as ItemProps["iconName"]}
                     badgeName={BadgeNames.PROFILE}
                   />
                 </View>
-                <View style={Selections.buttonContainer}>
-                  <View style={Selections.radioOuter}>
+                <View style={styles.buttonContainer}>
+                  <View style={styles.radioOuter}>
                     {selectedProfile === profile && (
-                      <View style={Selections.radioInner} />
+                      <View style={styles.radioInner} />
                     )}
                   </View>
                 </View>
@@ -93,7 +93,7 @@ const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
 
 export default AddCredentialOptionsScreen;
 
-const Selections = StyleSheet.create({
+const styles = StyleSheet.create({
   //TODO: this is a shared style with Item/Tappable styles
   row: {
     flexDirection: "row",

@@ -1,3 +1,4 @@
+import { BadgeNames } from "@/components/Item";
 import { MockCredential } from "@/types/models";
 
 export const mockCredentials: MockCredential[] = [
@@ -19,5 +20,29 @@ export const mockCredentials: MockCredential[] = [
     issuer: "Foreign Department",
     description: "Foriegn passport for international ID purposes",
     icon: "archive",
+  },
+];
+
+export const mockProfileCredentials = [
+  {
+    heading: "Driver's License",
+    subtitle: "All profiles",
+    body: "Valid",
+    iconName: "note" as const,
+    badgeName: BadgeNames.CREDENTIAL,
+  },
+  {
+    heading: "Gym membership",
+    subtitle: "Social profile",
+    body: "Expired",
+    iconName: "zap" as const,
+    badgeName: BadgeNames.CREDENTIAL,
+  },
+  {
+    heading: "Employer ID",
+    subtitle: "Professional profile",
+    body: "Valid",
+    iconName: "organization" as const,
+    badgeName: BadgeNames.CREDENTIAL,
   },
 ];

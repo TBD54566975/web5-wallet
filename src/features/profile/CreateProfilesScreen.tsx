@@ -1,11 +1,11 @@
+import React from "react";
+import { View, Text, SafeAreaView } from "react-native";
 import { Button } from "@/components/Button";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
-import React from "react";
-import { View, Text, SafeAreaView } from "react-native";
 import { Item } from "@/components/Item";
-import type { AppNavigatorProps } from "@/types/navigation";
 import { defaultIdentities } from "@/features/identity/default-identities";
+import type { AppNavigatorProps } from "@/types/navigation";
 
 type Props = AppNavigatorProps<"CreateProfilesScreen">;
 
