@@ -1,0 +1,38 @@
+import { BadgeNames, ItemStackProps } from "@/components/Item";
+
+export const mockActivity: ItemStackProps[] = [
+  {
+    heading: "Social profile connected to DIDPay",
+    body: "July 1, 2023",
+    images: [
+      {
+        iconName: "hash",
+        badgeName: BadgeNames.PROFILE,
+      },
+      {
+        iconName: "credit-card",
+        badgeName: BadgeNames.CONNECTION,
+      },
+    ],
+  },
+  {
+    heading: "Anonymous profile created",
+    body: "June 25, 2023",
+    images: [
+      {
+        source: { uri: "https://reactnative.dev/img/tiny_logo.png" },
+        badgeName: BadgeNames.PROFILE,
+      },
+    ],
+  },
+  {
+    heading: "Professional profile disconnected from Dignal",
+    body: "June 20, 2023",
+    images: [
+      {
+        iconName: "briefcase",
+        badgeName: BadgeNames.PROFILE,
+      },
+    ],
+  },
+];

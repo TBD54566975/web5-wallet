@@ -7,10 +7,9 @@ import { Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "../../components/Tappable";
 import { BadgeNames } from "@/components/Item";
-import { profilesAtom } from "@/features/profile/atoms";
-import { For } from "@legendapp/state/react";
 import { AppNavigatorProps } from "@/types/navigation";
 import { mockConnections } from "@/features/connect/mocks";
+import { mockProfileCredentials } from "@/features/credentials/mocks";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
@@ -55,25 +54,19 @@ const ConnectionDetailScreen = ({ navigation, route }: Props) => {
               the following profiles.
             </Text>
           </View>
-          <For each={profilesAtom}>
-            {(profile) => {
-              const profileData = profile.get();
 
-              if (!profileData) {
-                return <></>;
-              }
-
-              return (
-                <Tappable
-                  key={profileData.id}
-                  heading={profileData.name}
-                  iconName={profileData.icon}
-                  badgeName={BadgeNames.PROFILE}
-                  onPress={() => navigateToReviewConnection()}
-                />
-              );
-            }}
-          </For>
+          {mockProfileCredentials.map((profile, index) => {
+            // TODO: don't key by index
+            return (
+              <Tappable
+                key={index}
+                heading={profile.subtitle}
+                iconName={profile.iconName}
+                badgeName={BadgeNames.PROFILE}
+                onPress={() => navigateToReviewConnection()}
+              />
+            );
+          })}
         </>
       )}
       {activeTab === tabLabels[2] && <></>}

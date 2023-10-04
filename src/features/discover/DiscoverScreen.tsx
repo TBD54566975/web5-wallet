@@ -1,25 +1,16 @@
 import React from "react";
-import { Text, DevSettings, ScrollView } from "react-native";
+import { Text, ScrollView } from "react-native";
 import { ParentPageLayout } from "@/components/ParentPageLayout";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "@/components/Tappable";
-import { Button } from "@/components/Button";
-import { For } from "@legendapp/state/react";
-import { observable } from "@legendapp/state";
 import { BadgeNames } from "@/components/Item";
-import { profilesAtom } from "@/features/profile/atoms";
-import type { MockCredential, MockConnection } from "@/types/models";
-import type { TabNavigatorProps } from "@/types/navigation";
 import { mockConnections } from "@/features/connect/mocks";
 import { mockCredentials } from "@/features/credentials/mocks";
+import type { MockCredential, MockConnection } from "@/types/models";
+import type { TabNavigatorProps } from "@/types/navigation";
 
 type Props = TabNavigatorProps<"DiscoverScreen">;
 const DiscoverScreen = ({ navigation }: Props) => {
-  const resetProfiles = () => {
-    profilesAtom.set([]);
-    DevSettings.reload();
-  };
-
   const navigateToAddCredentialDetail = (credential: MockCredential) => {
     navigation.navigate("AddCredentialDetailScreen", { credential });
   };
@@ -35,51 +26,39 @@ const DiscoverScreen = ({ navigation }: Props) => {
     <ParentPageLayout>
       <ScrollView>
         <Text style={Typography.heading4}>Get a new credential</Text>
-        <For each={availableCredentials}>
-          {(availableCredential) => {
-            const credential = availableCredential.get();
 
-            if (!credential) {
-              return <></>;
-            }
+        {mockCredentials.map((credential, index) => {
+          // TODO: don't index by key
+          return (
+            <Tappable
+              key={index}
+              heading={credential.name}
+              subtitle={`Issued by ${credential.issuer}`}
+              body={credential.description}
+              iconName={credential.icon}
+              badgeName={BadgeNames.CREDENTIAL}
+              onPress={() => navigateToAddCredentialDetail(credential)}
+            />
+          );
+        })}
 
-            return (
-              <Tappable
-                heading={credential.name}
-                subtitle={`Issued by ${credential.issuer}`}
-                body={credential.description}
-                iconName={credential.icon}
-                badgeName={BadgeNames.CREDENTIAL}
-                onPress={() => navigateToAddCredentialDetail(credential)}
-              />
-            );
-          }}
-        </For>
         <Text style={Typography.heading4}>Our favorite Web5 Apps</Text>
-        <For each={availableConnections}>
-          {(availableConnection) => {
-            const connection = availableConnection.get();
-            if (!connection) {
-              return <></>;
-            }
 
-            return (
-              <Tappable
-                heading={connection.name}
-                iconName={connection.icon}
-                badgeName={BadgeNames.CONNECTION}
-                onPress={() => navigateToConnectionDetail(connection)}
-              />
-            );
-          }}
-        </For>
-        <Button kind="secondary" onPress={resetProfiles} text="Reset Profile" />
+        {mockConnections.map((connection, index) => {
+          // TODO: don't key by index
+          return (
+            <Tappable
+              key={index}
+              heading={connection.name}
+              iconName={connection.icon}
+              badgeName={BadgeNames.CONNECTION}
+              onPress={() => navigateToConnectionDetail(connection)}
+            />
+          );
+        })}
       </ScrollView>
     </ParentPageLayout>
   );
 };
 
 export default DiscoverScreen;
-
-const availableCredentials = observable<MockCredential[]>(mockCredentials);
-const availableConnections = observable<MockConnection[]>(mockConnections);

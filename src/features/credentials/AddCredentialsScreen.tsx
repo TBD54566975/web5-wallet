@@ -1,10 +1,8 @@
-import { FlexLayouts, Layouts } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { For } from "@legendapp/state/react";
 import React from "react";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import { FlexLayouts, Layouts } from "@/theme/layouts";
+import { Typography } from "@/theme/typography";
 import { Tappable } from "../../components/Tappable";
-import { observable } from "@legendapp/state";
 import type { MockCredential } from "@/types/models";
 import { AppNavigatorProps } from "@/types/navigation";
 import { mockCredentials } from "@/features/credentials/mocks";
@@ -22,23 +20,18 @@ const AddCredentialsScreen = ({ navigation }: Props) => {
           <Text style={Typography.heading3}>Get a new credential</Text>
         </View>
         <ScrollView>
-          <For each={availableCredentials}>
-            {(availableCredential) => {
-              const credential = availableCredential.get();
-              if (!credential) {
-                return <></>;
-              }
-
-              return (
-                <Tappable
-                  heading={credential.name}
-                  subtitle={`Issued by ${credential.issuer}`}
-                  iconName={credential.icon}
-                  onPress={() => navigateToAddCredentialDetail(credential)}
-                />
-              );
-            }}
-          </For>
+          {mockCredentials.map((credential, index) => {
+            // TODO: don't key by index
+            return (
+              <Tappable
+                key={index}
+                heading={credential.name}
+                subtitle={`Issued by ${credential.issuer}`}
+                iconName={credential.icon}
+                onPress={() => navigateToAddCredentialDetail(credential)}
+              />
+            );
+          })}
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -46,6 +39,3 @@ const AddCredentialsScreen = ({ navigation }: Props) => {
 };
 
 export default AddCredentialsScreen;
-
-const availableCredentials =
-  observable<typeof mockCredentials>(mockCredentials);
