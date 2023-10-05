@@ -125,6 +125,10 @@ const createIdentity = async (
     },
     store: true,
   });
+
+  // Register the new identity with syncManager so that all records associated
+  // with it (including the profile) get synced to the remote DWN servers.
+  await agent.syncManager.registerIdentity({ did: identity.did });
 };
 
 const listIdentities = () => {

@@ -31,7 +31,7 @@
     "@tbd54566975/dwn-sdk-js": "0.2.3",
     "@tbd54566975/web5": "0.7.11",
     "@tbd54566975/web5-react-native-metro-config": "0.1.3",
-    "@tbd54566975/web5-react-native-polyfills": "0.1.3",
+    "@tbd54566975/web5-react-native-polyfills": "0.2.1",
     "@types/uuid": "9.0.4",
     "@web5/api": "0.8.1-alpha-20231003-e73c548",
     "@web5/dids": "0.2.0-alpha-20231003-e73c548",
