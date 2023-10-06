@@ -1,14 +1,15 @@
+import React from "react";
+import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import { Button } from "@/components/Button";
-import { BadgeNames, ItemAvatar } from "@/components/Item";
+import { BadgeNames } from "@/components/Item";
 import { ColorTheme } from "@/theme/colors";
 import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
-import React from "react";
-import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
-import type { MockCredential } from "@/types/models";
-import { AppNavigatorProps } from "@/types/navigation";
 import { mockCredentials } from "@/features/credentials/mocks";
+import { Avatar } from "@/components/Avatar";
+import type { MockCredential } from "@/types/models";
+import type { AppNavigatorProps } from "@/types/navigation";
 
 type Props = AppNavigatorProps<"AddCredentialDetailScreen">;
 const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
@@ -30,7 +31,7 @@ const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
     <SafeAreaView>
       <View style={Layouts.container}>
         <View style={[Layouts.row, FlexLayouts.containerHorizontalCenter]}>
-          <ItemAvatar iconName="note" badgeName={BadgeNames.CREDENTIAL} />
+          <Avatar iconName="note" badgeName={BadgeNames.CREDENTIAL} />
           <Text style={[Typography.heading2, Typography.textCenter]}>
             {credential.name}
           </Text>

@@ -1,11 +1,3 @@
-import { Button } from "@/components/Button";
-import { BadgeNames, Item, ItemAvatar, ItemProps } from "@/components/Item";
-import { mockConnections } from "@/features/connect/mocks";
-import { ColorTheme } from "@/theme/colors";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { AppNavigatorProps } from "@/types/navigation";
-import { formatDID } from "@/util/formatters";
 import React, { useState } from "react";
 import {
   Alert,
@@ -15,6 +7,15 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
+import { Avatar } from "@/components/Avatar";
+import { Button } from "@/components/Button";
+import { BadgeNames, Item, type ItemProps } from "@/components/Item";
+import { mockConnections } from "@/features/connect/mocks";
+import { ColorTheme } from "@/theme/colors";
+import { FlexLayouts, Layouts } from "@/theme/layouts";
+import { Typography } from "@/theme/typography";
+import { AppNavigatorProps } from "@/types/navigation";
+import { formatDID } from "@/util/formatters";
 
 type Props = AppNavigatorProps<"AddCredentialOptionsScreen">;
 const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
@@ -38,7 +39,7 @@ const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
     <SafeAreaView>
       <View style={Layouts.container}>
         <View style={[Layouts.row, FlexLayouts.containerHorizontalCenter]}>
-          <ItemAvatar
+          <Avatar
             iconName={credential.icon}
             badgeName={BadgeNames.CREDENTIAL}
           />

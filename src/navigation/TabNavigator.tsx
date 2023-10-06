@@ -61,11 +61,10 @@ const tabOptions: BottomTabNavigationOptions = {
     backgroundColor: ColorTheme.PRIMARY,
   },
   headerTitleContainerStyle: {
+    paddingBottom: SPACE.SMALL,
     justifyContent: "flex-end",
   },
-  headerTitleStyle: {
-    ...Typography.heading1,
-  },
+  headerTitleStyle: Typography.heading1,
   headerTitleAllowFontScaling: true,
   headerTitleAlign: "left",
 };
