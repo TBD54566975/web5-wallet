@@ -4,7 +4,6 @@ export const Typography = StyleSheet.create({
   heading1: {
     fontWeight: "900",
     fontSize: 32,
-    marginBottom: 12,
   },
   heading2: {
     fontWeight: "600",
@@ -12,22 +11,20 @@ export const Typography = StyleSheet.create({
   },
   heading3: {
     fontWeight: "600",
-    fontSize: 24,
+    fontSize: 26,
+    lineHeight: 32,
   },
   heading4: {
     fontWeight: "600",
     fontSize: 18,
-    marginBottom: 12,
   },
   paragraph1: {
     fontWeight: "600",
     fontSize: 16,
-    marginBottom: 8,
   },
   paragraph2: {
-    fontWeight: "400",
+    fontWeight: "300",
     fontSize: 14,
-    marginBottom: 8,
   },
   body1: {
     fontWeight: "600",

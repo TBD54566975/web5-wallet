@@ -1,9 +1,8 @@
 import React from "react";
-import { ParentPageLayout } from "@/components/ParentPageLayout";
-import { ScrollView, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Tappable } from "@/components/Tappable";
 import { Button } from "@/components/Button";
-import { FlexLayouts } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import { ItemProps } from "@/components/Item";
 import { TabNavigatorProps } from "@/types/navigation";
 import { mockProfileCredentials } from "@/features/credentials/mocks";
@@ -23,9 +22,9 @@ const CredentialsScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <ParentPageLayout>
-      <View style={FlexLayouts.containerButtonBottom}>
-        <ScrollView>
+    <View style={styles.wrapper}>
+      <ScrollView>
+        <View style={styles.container}>
           {mockProfileCredentials.map((credential, index) => {
             // TODO: don't key by index
             return (
@@ -39,15 +38,20 @@ const CredentialsScreen = ({ navigation }: Props) => {
               />
             );
           })}
-        </ScrollView>
-        <Button
-          kind="primary"
-          onPress={navigateToAddCredentials}
-          text="Get a new credential"
-        />
-      </View>
-    </ParentPageLayout>
+          <Button
+            kind="primary"
+            onPress={navigateToAddCredentials}
+            text="Get a new credential"
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: { flex: 1 },
+  container: { padding: SPACE.BASE },
+});
 
 export default CredentialsScreen;

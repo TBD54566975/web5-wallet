@@ -1,9 +1,8 @@
 import React from "react";
-import { ParentPageLayout } from "@/components/ParentPageLayout";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Tappable } from "@/components/Tappable";
-import { ScrollView, View } from "react-native";
 import { Button } from "@/components/Button";
-import { FlexLayouts } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import { formatDID } from "@/util/formatters";
 import { TabNavigatorProps } from "@/types/navigation";
 import type { ManagedIdentity } from "@web5/agent";
@@ -35,9 +34,9 @@ const ProfilesScreen = ({ navigation }: Props) => {
   }
 
   return (
-    <ParentPageLayout>
-      <View style={FlexLayouts.containerButtonBottom}>
-        <ScrollView>
+    <View style={styles.wrapper}>
+      <ScrollView>
+        <View style={styles.container}>
           {profileQueries.map(({ data: profile }) =>
             profile ? (
               <Tappable
@@ -50,15 +49,20 @@ const ProfilesScreen = ({ navigation }: Props) => {
               />
             ) : null
           )}
-        </ScrollView>
-        <Button
-          kind="primary"
-          onPress={navigateToAddProfile}
-          text="Create a new profile"
-        />
-      </View>
-    </ParentPageLayout>
+          <Button
+            kind="primary"
+            onPress={navigateToAddProfile}
+            text="Create a new profile"
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: { flex: 1 },
+  container: { padding: SPACE.BASE },
+});
 
 export default ProfilesScreen;

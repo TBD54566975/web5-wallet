@@ -1,12 +1,12 @@
 import React from "react";
-import { ScrollView } from "react-native";
-import { ParentPageLayout } from "@/components/ParentPageLayout";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Tappable } from "@/components/Tappable";
 import { BadgeNames } from "@/components/Item";
 import { Button } from "@/components/Button";
 import { mockConnections } from "@/features/connect/mocks";
 import type { TabNavigatorProps } from "@/types/navigation";
 import { MockConnection } from "@/types/models";
+import { SPACE } from "@/theme/layouts";
 
 type Props = TabNavigatorProps<"ConnectionsScreen">;
 const ConnectionsScreen = ({ navigation }: Props) => {
@@ -22,25 +22,36 @@ const ConnectionsScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <ParentPageLayout>
+    <View style={styles.wrapper}>
       <ScrollView>
-        {mockConnections.map((connection, index) => {
-          // TODO: don't key by index
-          return (
-            <Tappable
-              key={index}
-              heading={connection.name}
-              subtitle={connection.description}
-              iconName={connection.icon}
-              badgeName={BadgeNames.CONNECTION}
-              onPress={() => navigateToItem(connection)}
-            />
-          );
-        })}
+        <View style={styles.container}>
+          {mockConnections.map((connection, index) => {
+            // TODO: don't key by index
+            return (
+              <Tappable
+                key={index}
+                heading={connection.name}
+                subtitle={connection.description}
+                iconName={connection.icon}
+                badgeName={BadgeNames.CONNECTION}
+                onPress={() => navigateToItem(connection)}
+              />
+            );
+          })}
+          <Button
+            kind="primary"
+            onPress={navigateAddConnection}
+            text="Connect"
+          />
+        </View>
       </ScrollView>
-      <Button kind="primary" onPress={navigateAddConnection} text="Connect" />
-    </ParentPageLayout>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: { flex: 1 },
+  container: { padding: SPACE.BASE },
+});
 
 export default ConnectionsScreen;

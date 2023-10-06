@@ -1,5 +1,16 @@
 module.exports = {
-  ignorePatterns: ["node_modules/", "src/reference/**/*"],
+  ignorePatterns: [
+    ".expo/**/*",
+    ".github/**/*",
+    ".vscode/**/*",
+    "android/**/*",
+    "assets/**/*",
+    "env/**/*",
+    "ios/**/*",
+    "node_modules/",
+    "patches/**/*",
+    "src/reference/**/*",
+  ],
   plugins: [
     "@typescript-eslint",
     "react",
