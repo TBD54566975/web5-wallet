@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
-import { ActivityIndicator, SafeAreaView, Text, View } from "react-native";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
@@ -39,15 +45,27 @@ const CreateWalletScreen = ({ navigation, route }: Props) => {
   }, []);
 
   return (
-    <SafeAreaView style={FlexLayouts.wrapper}>
-      <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.container}>
         <ActivityIndicator size="large" />
-        <Text style={[Typography.body2, Typography.textCenter]}>
-          Creating your wallet...
-        </Text>
+        <Text style={centerTextStyle}>Creating your wallet...</Text>
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: { flex: 1 },
+  container: {
+    margin: SPACE.BASE,
+    flex: 1,
+    justifyContent: "center",
+  },
+});
+
+const centerTextStyle = StyleSheet.create([
+  Typography.body2,
+  { textAlign: "center" },
+]);
 
 export default CreateWalletScreen;

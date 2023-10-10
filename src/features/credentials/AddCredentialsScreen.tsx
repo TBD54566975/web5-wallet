@@ -1,6 +1,6 @@
 import React from "react";
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "../../components/Tappable";
 import type { MockCredential } from "@/types/models";
@@ -14,12 +14,12 @@ const AddCredentialsScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={FlexLayouts.wrapper}>
-      <View style={[Layouts.container, FlexLayouts.wrapper]}>
-        <View style={Layouts.row}>
-          <Text style={Typography.heading3}>Get a new credential</Text>
-        </View>
-        <ScrollView>
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.header}>
+        <Text style={Typography.heading3}>Get a new credential</Text>
+      </View>
+      <ScrollView>
+        <View style={styles.container}>
           {mockCredentials.map((credential, index) => {
             // TODO: don't key by index
             return (
@@ -32,10 +32,24 @@ const AddCredentialsScreen = ({ navigation }: Props) => {
               />
             );
           })}
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
+  header: {
+    padding: SPACE.BASE,
+  },
+  container: {
+    flex: 1,
+    padding: SPACE.BASE,
+    gap: SPACE.LARGE,
+  },
+});
 
 export default AddCredentialsScreen;

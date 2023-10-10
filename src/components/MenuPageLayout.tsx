@@ -1,10 +1,9 @@
 import { Item, ItemProps } from "@/components/Item";
 import { ColorTheme } from "@/theme/colors";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import React from "react";
 import {
-  SafeAreaView,
   View,
   ScrollView,
   Pressable,
@@ -21,19 +20,15 @@ export const MenuPageLayout = (props: {
   const { headerItem, menuTabs, children } = props;
 
   return (
-    <SafeAreaView style={FlexLayouts.wrapper}>
-      <View style={[Layouts.container, FlexLayouts.wrapper]}>
-        <View style={Layouts.row}>
-          <Item {...headerItem} headingSize="heading3" />
-        </View>
-        <View style={styles.menu}>
-          {menuTabs?.map((tab, index) => (
-            <MenuTab {...tab} key={index} />
-          ))}
-        </View>
-        <ScrollView style={styles.container}>{children}</ScrollView>
+    <View style={styles.container}>
+      <Item {...headerItem} headingSize="heading3" />
+      <View style={styles.menu}>
+        {menuTabs?.map((tab, index) => (
+          <MenuTab {...tab} key={index} />
+        ))}
       </View>
-    </SafeAreaView>
+      <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
+    </View>
   );
 };
 
@@ -52,19 +47,18 @@ const MenuTab = (props: MenuProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: SPACE.BASE,
+    gap: SPACE.LARGE,
   },
   menu: {
     flexDirection: "row",
     gap: 32,
-    paddingBottom: 20,
   },
   activeTab: {
     borderBottomWidth: 4,
     paddingBottom: 8,
   },
-  activeText: {
-    ...Typography.body3,
-  },
+  activeText: Typography.body3,
   inactiveText: {
     color: ColorTheme.MUTED,
     ...Typography.body3,

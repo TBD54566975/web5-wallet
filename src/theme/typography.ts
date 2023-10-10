@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const Typography = StyleSheet.create({
   heading1: {
     fontWeight: "900",
-    fontSize: 32,
+    fontSize: 34,
   },
   heading2: {
     fontWeight: "600",
@@ -15,8 +15,8 @@ export const Typography = StyleSheet.create({
     lineHeight: 32,
   },
   heading4: {
-    fontWeight: "600",
-    fontSize: 18,
+    fontWeight: "700",
+    fontSize: 20,
   },
   paragraph1: {
     fontWeight: "600",
@@ -41,10 +41,6 @@ export const Typography = StyleSheet.create({
   body4: {
     fontWeight: "400",
     fontSize: 14,
-  },
-  label1: {
-    fontWeight: "600",
-    fontSize: 10,
   },
   label2: {
     fontWeight: "500",
