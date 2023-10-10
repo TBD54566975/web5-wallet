@@ -1,9 +1,10 @@
-import { LabelValueItem } from "@/components/LabelValue";
 import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { LabelValueItem } from "@/components/LabelValue";
 import { MenuPageLayout } from "../../components/MenuPageLayout";
-import { Button } from "@/components/Button";
 import { BadgeNames } from "@/components/Item";
 import { formatDate } from "@/util/formatters";
+import { SPACE } from "@/theme/layouts";
 import type { AppNavigatorProps } from "@/types/navigation";
 
 const tabLabels = ["About", "Activity"];
@@ -42,7 +43,7 @@ const CredentialDetailScreen = ({ route }: Props) => {
       {activeTab === tabLabels[0] && (
         // This rendering of information should be mindful of the flexibility
         // of fields and how will map them to labels
-        <>
+        <View style={styles.column}>
           <LabelValueItem label="Status" value={credential.status} />
           <LabelValueItem
             label="Date acquired"
@@ -55,12 +56,15 @@ const CredentialDetailScreen = ({ route }: Props) => {
             value={credential.dateOfBirth}
           />
           <LabelValueItem label="Address" value={credential.address} />
-        </>
+        </View>
       )}
       {activeTab === tabLabels[1] && <></>}
-      <Button kind="primary" text="Present" />
     </MenuPageLayout>
   );
 };
+
+const styles = StyleSheet.create({
+  column: { gap: SPACE.MEDIUM },
+});
 
 export default CredentialDetailScreen;

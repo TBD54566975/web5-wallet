@@ -6,13 +6,14 @@ import {
   Text,
   StyleSheet,
   Pressable,
+  ScrollView,
 } from "react-native";
 import { Avatar } from "@/components/Avatar";
 import { Button } from "@/components/Button";
 import { BadgeNames, Item, type ItemProps } from "@/components/Item";
 import { mockConnections } from "@/features/connect/mocks";
 import { ColorTheme } from "@/theme/colors";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { AppNavigatorProps } from "@/types/navigation";
 import { formatDID } from "@/util/formatters";
@@ -37,78 +38,75 @@ const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
 
   return (
     <SafeAreaView>
-      <View style={Layouts.container}>
-        <View style={[Layouts.row, FlexLayouts.containerHorizontalCenter]}>
-          <Avatar
-            iconName={credential.icon}
-            badgeName={BadgeNames.CREDENTIAL}
-          />
-          <Text style={[Typography.heading2, Typography.textCenter]}>
-            {credential.name}
-          </Text>
-          <Text style={[Typography.body3, Typography.textCenter]}>
-            Issued by {credential.issuer}
-          </Text>
-        </View>
-        <View style={Layouts.row}>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.headerColumn}>
+            <Avatar
+              iconName={credential.icon}
+              badgeName={BadgeNames.CREDENTIAL}
+            />
+            <Text style={styles.headerCredentialName}>{credential.name}</Text>
+            <Text style={styles.headerCredentialIssuer}>
+              Issued by {credential.issuer}
+            </Text>
+          </View>
           <Text style={Typography.body4}>
             Select which of your profiles you’d like to add this credential to.
           </Text>
-        </View>
-
-        {mockConnections.map((profile, index) => {
-          // TODO: don't key by index
-          return (
-            <Pressable
-              style={Layouts.row}
-              key={index}
-              onPress={() => setSelectedProfile(profile)}
-              accessibilityRole="radio"
-            >
-              <View style={styles.row}>
-                <View style={[FlexLayouts.row, styles.textContainer]}>
-                  <Item
-                    heading={profile.name}
-                    subtitle={profile.description}
-                    body={formatDID(profile.id)}
-                    iconName={profile.icon as ItemProps["iconName"]}
-                    badgeName={BadgeNames.PROFILE}
-                  />
-                </View>
-                <View style={styles.buttonContainer}>
-                  <View style={styles.radioOuter}>
-                    {selectedProfile === profile && (
-                      <View style={styles.radioInner} />
-                    )}
+          {mockConnections.map((profile, index) => {
+            // TODO: don't key by index
+            return (
+              <Pressable
+                key={index}
+                onPress={() => setSelectedProfile(profile)}
+                accessibilityRole="radio"
+              >
+                <View style={styles.listItemRow}>
+                  <View style={styles.iconAndTextRow}>
+                    <Item
+                      heading={profile.name}
+                      subtitle={profile.description}
+                      body={formatDID(profile.id)}
+                      iconName={profile.icon as ItemProps["iconName"]}
+                      badgeName={BadgeNames.PROFILE}
+                    />
+                  </View>
+                  <View style={styles.radioRow}>
+                    <View style={styles.radioOuter}>
+                      {selectedProfile === profile && (
+                        <View style={styles.radioInner} />
+                      )}
+                    </View>
                   </View>
                 </View>
-              </View>
-            </Pressable>
-          );
-        })}
-        <Button kind="primary" onPress={addCredential} text="Next" />
-      </View>
+              </Pressable>
+            );
+          })}
+          <Button kind="primary" onPress={addCredential} text="Next" />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default AddCredentialOptionsScreen;
-
 const styles = StyleSheet.create({
-  //TODO: this is a shared style with Item/Tappable styles
-  row: {
-    flexDirection: "row",
-    // alignContent: "flex-start",
+  container: {
+    margin: SPACE.BASE,
+    gap: SPACE.LARGE,
   },
-  textContainer: {
+  listItemRow: { flexDirection: "row" },
+  headerColumn: { alignItems: "center" },
+  headerCredentialName: { ...Typography.heading2, textAlign: "center" },
+  headerCredentialIssuer: { ...Typography.body3, textAlign: "center" },
+  iconAndTextRow: {
     flexBasis: "67%",
     flexDirection: "row",
   },
-  buttonContainer: {
+  radioRow: {
     flexBasis: "33%",
     justifyContent: "flex-end",
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   radioOuter: {
     padding: 2,
@@ -128,3 +126,5 @@ const styles = StyleSheet.create({
     backgroundColor: ColorTheme.DEFAULT,
   },
 });
+
+export default AddCredentialOptionsScreen;

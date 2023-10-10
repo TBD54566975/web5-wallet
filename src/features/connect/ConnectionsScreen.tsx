@@ -51,7 +51,7 @@ const ConnectionsScreen = ({ navigation }: Props) => {
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
-  container: { padding: SPACE.BASE },
+  container: { padding: SPACE.BASE, gap: SPACE.LARGE },
 });
 
 export default ConnectionsScreen;

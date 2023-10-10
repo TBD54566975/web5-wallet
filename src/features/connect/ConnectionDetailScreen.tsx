@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { LabelValueItem } from "@/components/LabelValue";
 import { formatDID } from "@/util/formatters";
-import { Layouts } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "../../components/Tappable";
 import { BadgeNames } from "@/components/Item";
@@ -39,39 +39,47 @@ const ConnectionDetailScreen = ({ navigation, route }: Props) => {
         };
       })}
     >
-      {activeTab === tabLabels[0] && (
-        <>
-          <LabelValueItem label="DID" value={formatDID(connection.id)} />
-          <LabelValueItem label="Developer" value={connection.developer} />
-          <LabelValueItem label="Description" value={connection.description} />
-        </>
-      )}
-      {activeTab === tabLabels[1] && (
-        <>
-          <View style={Layouts.row}>
+      <View style={styles.row}>
+        {activeTab === tabLabels[0] && (
+          <>
+            <LabelValueItem label="DID" value={formatDID(connection.id)} />
+            <LabelValueItem label="Developer" value={connection.developer} />
+            <LabelValueItem
+              label="Description"
+              value={connection.description}
+            />
+          </>
+        )}
+        {activeTab === tabLabels[1] && (
+          <>
             <Text style={Typography.body4}>
-              <Text style={Typography.body2}>{heading}</Text> is connected to
-              the following profiles.
+              {heading} is connected to the following profiles.
             </Text>
-          </View>
 
-          {mockProfileCredentials.map((profile, index) => {
-            // TODO: don't key by index
-            return (
-              <Tappable
-                key={index}
-                heading={profile.subtitle}
-                iconName={profile.iconName}
-                badgeName={BadgeNames.PROFILE}
-                onPress={() => navigateToReviewConnection()}
-              />
-            );
-          })}
-        </>
-      )}
-      {activeTab === tabLabels[2] && <></>}
+            {mockProfileCredentials.map((profile, index) => {
+              // TODO: don't key by index
+              return (
+                <Tappable
+                  key={index}
+                  heading={profile.subtitle}
+                  iconName={profile.iconName}
+                  badgeName={BadgeNames.PROFILE}
+                  onPress={() => navigateToReviewConnection()}
+                />
+              );
+            })}
+          </>
+        )}
+        {activeTab === tabLabels[2] && <></>}
+      </View>
     </MenuPageLayout>
   );
 };
+
+const styles = StyleSheet.create({
+  row: {
+    gap: SPACE.LARGE,
+  },
+});
 
 export default ConnectionDetailScreen;

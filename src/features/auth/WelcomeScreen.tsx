@@ -1,7 +1,7 @@
 import React from "react";
-import { Alert, SafeAreaView, Text, View } from "react-native";
+import { Alert, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { Button } from "@/components/Button";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import type { AppNavigatorProps } from "@/types/navigation";
 
@@ -24,31 +24,46 @@ const WelcomeScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={FlexLayouts.wrapper}>
-      <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
-        <Text style={Typography.heading1}>Welcome to Identity Agent</Text>
-        <Text style={Typography.paragraph1}>
-          Take control of your online identity and personal data.
-        </Text>
-        <Text style={Typography.paragraph1}>
-          Sign into apps with an identity you own and control.
-        </Text>
-        <View style={FlexLayouts.column}>
-          <Button
-            kind="primary"
-            onPress={navigateToCreateWallet}
-            text="Create a new wallet"
-          />
-          <Text style={[Typography.label1, Typography.textCenter]}>or</Text>
-          <Button
-            kind="secondary"
-            onPress={navigateToImportWallet}
-            text="Import your wallet"
-          />
-        </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={Typography.heading1}>Welcome to Identity Agent</Text>
+      <Text style={Typography.paragraph1}>
+        Take control of your online identity and personal data.
+      </Text>
+      <Text style={Typography.paragraph1}>
+        Sign into apps with an identity you own and control.
+      </Text>
+      <View style={styles.column}>
+        <Button
+          kind="primary"
+          onPress={navigateToCreateWallet}
+          text="Create a new wallet"
+        />
+        <Text style={styles.label}>or</Text>
+        <Button
+          kind="secondary"
+          onPress={navigateToImportWallet}
+          text="Import your wallet"
+        />
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    margin: SPACE.BASE,
+    flex: 1,
+    justifyContent: "center",
+    gap: SPACE.BASE,
+  },
+  column: {
+    gap: SPACE.BASE / 2,
+  },
+  label: {
+    fontWeight: "600",
+    fontSize: 10,
+    textAlign: "center",
+  },
+});
 
 export default WelcomeScreen;

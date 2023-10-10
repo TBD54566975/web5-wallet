@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
-import { FlexLayouts, Layouts, SPACE } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
@@ -71,23 +71,21 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
   }, []);
 
   return (
-    <SafeAreaView style={FlexLayouts.wrapper}>
-      <KeyboardAvoidingView behavior={"padding"} style={FlexLayouts.wrapper}>
-        <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
+    <SafeAreaView style={styles.wrapper}>
+      <KeyboardAvoidingView behavior={"padding"} style={styles.wrapper}>
+        <View style={styles.container}>
           <Text style={Typography.heading1}>Enter your passphrase</Text>
-          <View style={Layouts.row}>
-            <Input
-              label=""
-              nativeID="passphrase"
-              placeholder={"Passphrase"}
-              value={passphrase}
-              onChangeText={setPassphrase}
-              autoComplete="current-password"
-              autoCapitalize="none"
-              autoCorrect={false}
-              clearButtonMode="while-editing"
-            />
-          </View>
+          <Input
+            label=""
+            nativeID="passphrase"
+            placeholder={"Passphrase"}
+            value={passphrase}
+            onChangeText={setPassphrase}
+            autoComplete="current-password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="while-editing"
+          />
           <Button
             kind={isLoginButtonDisabled ? "disabled" : "primary"}
             text="Login"
@@ -96,7 +94,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
           />
           {!!isBiometricLoginSupported && (
             <View style={styles.biometricLoginRow}>
-              <Text style={FlexLayouts.wrapper}>Enable biometric login?</Text>
+              <Text style={styles.wrapper}>Enable biometric login?</Text>
               <Switch
                 onValueChange={setEnableBiometryLogin}
                 value={enableBiometryLogin}
@@ -110,9 +108,15 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  wrapper: { flex: 1 },
+  container: {
+    margin: SPACE.BASE,
+    flex: 1,
+    justifyContent: "center",
+    gap: SPACE.BASE,
+  },
   biometricLoginRow: {
     flexDirection: "row",
-    paddingVertical: SPACE.LARGE,
   },
 });
 
