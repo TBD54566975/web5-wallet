@@ -7,13 +7,11 @@ type Props = { label: string; value: string };
 export const LabelValueItem = ({ label, value }: Props) => {
   return (
     <View>
-      <Text style={labelStyle}>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
       <Text style={Typography.body1}>{value}</Text>
     </View>
   );
 };
-
-const labelStyle = StyleSheet.create([
-  { color: ColorTheme.REDUCED },
-  Typography.body4,
-]);
+const styles = StyleSheet.create({
+  label: { ...Typography.body4, color: ColorTheme.REDUCED },
+});
