@@ -32,39 +32,37 @@ const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
       <View style={styles.container}>
         <View style={styles.column}>
           <Avatar iconName="note" badgeName={BadgeNames.CREDENTIAL} />
-          <Text style={Checklist.headingNameText}>{credential.name}</Text>
-          <Text style={Checklist.headerIssuerText}>
+          <Text style={styles.headingNameText}>{credential.name}</Text>
+          <Text style={styles.headerIssuerText}>
             Issued by {credential.issuer}
           </Text>
         </View>
 
         <Text style={Typography.body4}>{credential.description}</Text>
-        <View style={Checklist.callout}>
-          <Text style={Checklist.labelText}>Credentials required</Text>
+        <View style={styles.callout}>
+          <Text style={styles.labelText}>Credentials required</Text>
           <View style={styles.row}>
-            <View style={[Checklist.checkbox, Checklist.success]}>
+            <View style={[styles.checkbox, styles.success]}>
               <Octicons name="check" size={16} color={ColorTheme.SUCCESS} />
             </View>
             <View>
               <Text style={Typography.body1}>{mockCredentials[1].name}</Text>
-              <Text style={Checklist.successText}>
-                You have this credential
-              </Text>
+              <Text style={styles.successText}>You have this credential</Text>
             </View>
           </View>
           <View style={styles.rowErrorCheck}>
-            <View style={Checklist.errorRowContainer}>
-              <View style={[Checklist.checkbox, Checklist.danger]}>
+            <View style={styles.errorRowContainer}>
+              <View style={[styles.checkbox, styles.danger]}>
                 <Octicons name="x" size={16} color={ColorTheme.DANGER} />
               </View>
               <View>
                 <Text style={Typography.body1}>{mockCredentials[2].name}</Text>
-                <Text style={Checklist.dangerText}>
+                <Text style={styles.dangerText}>
                   You don&apos;t have this credential
                 </Text>
               </View>
             </View>
-            <View style={Checklist.buttonContainer}>
+            <View style={styles.buttonContainer}>
               <Button
                 kind="primary"
                 onPress={() =>
@@ -85,16 +83,11 @@ const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
   );
 };
 
-export default AddCredentialDetailScreen;
-
 const styles = StyleSheet.create({
   container: { padding: SPACE.BASE, gap: SPACE.LARGE },
   column: { alignItems: "center" },
   row: { flexDirection: "row", gap: 8 },
   rowErrorCheck: { flexDirection: "row" },
-});
-
-const Checklist = StyleSheet.create({
   callout: {
     borderWidth: 4,
     borderRadius: 20,
@@ -136,3 +129,5 @@ const Checklist = StyleSheet.create({
     alignItems: "flex-start",
   },
 });
+
+export default AddCredentialDetailScreen;
