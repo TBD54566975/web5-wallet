@@ -13,7 +13,7 @@ import { sha256 } from "@noble/hashes/sha256";
 import { xchacha20_poly1305 } from "@noble/ciphers/chacha";
 import { edwardsToMontgomeryPub, x25519 } from "@noble/curves/ed25519";
 import { createJsonRpcRequest } from "@tbd54566975/web5-agent";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import type { AppNavigatorProps } from "@/types/navigation";
 
 type Props = AppNavigatorProps<"AddConnectionScreen">;
@@ -290,8 +290,8 @@ const AddConnectionScreen = ({ navigation }: Props) => {
   // });
 
   return (
-    <SafeAreaView style={FlexLayouts.wrapper}>
-      <View style={Layouts.container}>
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.container}>
         {hasPermission === null && (
           <Text>You must grant camera permissions to use Connect.</Text>
         )}
@@ -316,6 +316,8 @@ const AddConnectionScreen = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  wrapper: { flex: 1 },
+  container: { padding: SPACE.BASE },
   scanner: {
     height: 300,
   },

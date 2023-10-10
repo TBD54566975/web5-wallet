@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
+import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { AppNavigatorProps } from "@/types/navigation";
@@ -22,35 +22,29 @@ const CreatePassphraseScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={FlexLayouts.wrapper}>
-      <KeyboardAvoidingView behavior={"padding"} style={FlexLayouts.wrapper}>
-        <View style={[Layouts.container, FlexLayouts.containerVerticalCenter]}>
-          <View style={Layouts.row}>
-            <Text style={Typography.heading3}>
-              Next up, let&apos;s create your passphrase
-            </Text>
-          </View>
-          <View style={Layouts.row}>
-            <Text style={Typography.paragraph2}>
-              You will use your passphrase to login when you launch the app.
-            </Text>
-            <Text style={Typography.paragraph2}>
-              Make sure it&apos;s memorable, and strong!
-            </Text>
-          </View>
-          <View style={Layouts.row}>
-            <Input
-              label=""
-              nativeID="passphrase"
-              placeholder={"Passphrase"}
-              value={passphrase}
-              onChangeText={setPassphrase}
-              autoComplete="new-password"
-              autoCapitalize="none"
-              autoCorrect={false}
-              clearButtonMode="while-editing"
-            />
-          </View>
+    <SafeAreaView style={styles.wrapper}>
+      <KeyboardAvoidingView behavior={"padding"} style={styles.wrapper}>
+        <View style={styles.container}>
+          <Text style={Typography.heading3}>
+            Next up, let&apos;s create your passphrase
+          </Text>
+          <Text style={Typography.paragraph2}>
+            You will use your passphrase to login when you launch the app.
+          </Text>
+          <Text style={Typography.paragraph2}>
+            Make sure it&apos;s memorable, and strong!
+          </Text>
+          <Input
+            label=""
+            nativeID="passphrase"
+            placeholder={"Passphrase"}
+            value={passphrase}
+            onChangeText={setPassphrase}
+            autoComplete="new-password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            clearButtonMode="while-editing"
+          />
           <Button
             kind={isPassphraseValid ? "primary" : "disabled"}
             text="Next"
@@ -62,5 +56,15 @@ const CreatePassphraseScreen = ({ navigation }: Props) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: { flex: 1 },
+  container: {
+    margin: SPACE.BASE,
+    flex: 1,
+    justifyContent: "center",
+    gap: SPACE.LARGE,
+  },
+});
 
 export default CreatePassphraseScreen;

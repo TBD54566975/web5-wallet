@@ -26,7 +26,7 @@ const DiscoverScreen = ({ navigation }: Props) => {
     <ScrollView>
       <View style={styles.container}>
         <Text style={Typography.heading4}>Get a new credential</Text>
-        <View>
+        <View style={styles.row}>
           {mockCredentials.map((credential, index) => {
             // TODO: don't index by key
             return (
@@ -43,7 +43,7 @@ const DiscoverScreen = ({ navigation }: Props) => {
           })}
         </View>
         <Text style={Typography.heading4}>Our favorite Web5 Apps</Text>
-        <View>
+        <View style={styles.row}>
           {mockConnections.map((connection, index) => {
             // TODO: don't key by index
             return (
@@ -64,6 +64,7 @@ const DiscoverScreen = ({ navigation }: Props) => {
 
 const styles = StyleSheet.create({
   container: { margin: SPACE.BASE, gap: SPACE.LARGE },
+  row: { gap: SPACE.LARGE },
 });
 
 export default DiscoverScreen;
