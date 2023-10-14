@@ -18,6 +18,10 @@ export const Typography = StyleSheet.create({
     fontWeight: "700",
     fontSize: 20,
   },
+  heading5: {
+    fontWeight: "700",
+    fontSize: 16,
+  },
   paragraph1: {
     fontWeight: "600",
     fontSize: 16,

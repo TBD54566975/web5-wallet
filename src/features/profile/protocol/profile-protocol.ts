@@ -1,4 +1,4 @@
-export type Profile = {
+export type ProfileProtocol = {
   displayName: string;
 };
 

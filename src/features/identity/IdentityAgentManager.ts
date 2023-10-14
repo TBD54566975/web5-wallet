@@ -10,7 +10,7 @@ import { getTechPreviewDwnEndpoints, Web5 } from "@web5/api";
 import { DidIonMethod, type DidIonCreateOptions } from "@web5/dids";
 import {
   profileProtocol,
-  Profile,
+  type ProfileProtocol,
 } from "@/features/profile/protocol/profile-protocol";
 import { type Level } from "level";
 import { ExpoLevel } from "expo-level";
@@ -113,7 +113,7 @@ const createIdentity = async (
   });
 
   // Write a profile
-  const profile: Profile = {
+  const profile: ProfileProtocol = {
     displayName,
   };
   await web5.dwn.records.write({

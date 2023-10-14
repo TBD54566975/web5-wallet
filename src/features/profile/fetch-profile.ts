@@ -1,15 +1,11 @@
 import type { ManagedIdentity } from "@web5/agent";
-import {
-  Profile,
-  profileProtocol,
-} from "@/features/profile/protocol/profile-protocol";
+import { profileProtocol } from "@/features/profile/protocol/profile-protocol";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-
-export type FetchProfileResult = ManagedIdentity & Partial<Profile>;
+import type { Profile } from "@/types/models";
 
 export const fetchProfile = async (
   identity: ManagedIdentity
-): Promise<FetchProfileResult> => {
+): Promise<Profile> => {
   const web5 = IdentityAgentManager.web5(identity);
   const queryResult = await web5.dwn.records.query({
     message: {
@@ -41,6 +37,6 @@ export const fetchProfile = async (
     return identity;
   }
 
-  const profile = (await readResult.record.data.json()) as Profile;
+  const profile = await readResult.record.data.json();
   return { ...identity, ...profile };
 };

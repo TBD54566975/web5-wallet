@@ -5,9 +5,8 @@ import {
   type BarCodeScannerResult,
 } from "expo-barcode-scanner";
 import queryString from "query-string";
-import { ConnectSuite } from "./connect-suite";
-import { FlexLayouts, Layouts } from "@/theme/layouts";
 import { useMount } from "@/hooks/useMount";
+import { SPACE } from "@/theme/layouts";
 import type { AppNavigatorProps } from "@/types/navigation";
 
 type Props = AppNavigatorProps<"ConnectQRScanScreen">;
@@ -55,13 +54,6 @@ const ConnectQRScanScreen = ({ navigation }: Props) => {
     const temporaryDid = query.temporaryDid;
     const serverURL = query.url;
     const connectNonce = query.nonce;
-    const uInt8Validation = ConnectSuite.stringToUInt8Array(query.nonce);
-
-    if (!(uInt8Validation instanceof Uint8Array)) {
-      throw new Error(
-        "Not a valid connect nonce. Failed to create Uint8Array from scanned string."
-      );
-    }
 
     return { temporaryDid, connectNonce, serverURL };
   };
@@ -70,15 +62,15 @@ const ConnectQRScanScreen = ({ navigation }: Props) => {
   useMount(() => {
     setTimeout(() => {
       const mockQRContent =
-        "web5://connect?temporaryDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&nonce=%5B0%2C%201%2C%202%2C%203%5D&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
+        "web5://connect?nonce=%5B0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%2C16%2C17%2C18%2C19%2C20%2C21%2C22%2C23%5D&temporaryDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
 
       onQRCodeScanned({ data: mockQRContent } as any);
     }, 3000);
   });
 
   return (
-    <SafeAreaView style={FlexLayouts.wrapper}>
-      <View style={Layouts.container}>
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.container}>
         {hasPermission === null && (
           <Text>You must grant camera permissions to use Connect.</Text>
         )}
@@ -103,6 +95,8 @@ const ConnectQRScanScreen = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  wrapper: { flex: 1 },
+  container: { padding: SPACE.BASE, gap: SPACE.LARGE },
   scanner: {
     height: 300,
   },

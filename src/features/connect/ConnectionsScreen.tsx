@@ -18,7 +18,7 @@ const ConnectionsScreen = ({ navigation }: Props) => {
   };
 
   const navigateAddConnection = () => {
-    navigation.navigate("AddConnectionScreen");
+    navigation.navigate("ConnectQRScanScreen");
   };
 
   return (
