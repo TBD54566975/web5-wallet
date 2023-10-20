@@ -62,18 +62,6 @@ const initConnect = (
   );
 
   return decryptedConnectRequest;
-
-  // const grants = submitConnection(decryptedConnectRequest);
-
-  // after User clicks "accept." Send grant? (check terminology) to DWN server.
-  // const data = postPermissionsAuthorization(
-  //   dwaSignPublicKey,
-  //   selectedIdentityDid
-  // );
-  NOOP(postPermissionsAuthorization);
-
-  // // TODO: Add connection data to the DWN level store?
-  // addConnectionToDwn(data);
 };
 
 const createGrantsForDid = async (
@@ -82,15 +70,14 @@ const createGrantsForDid = async (
 ) => {
   try {
     const { privateJwk } = await Secp256k1.generateKeyPair();
-
     const authorizationSigner = new PrivateKeySigner({
       privateJwk,
       keyId: "did:jank:bob",
     });
 
     const messages = connectRequest.permissionRequests.map(
-      async (permissionRequest) => {
-        return await PermissionsGrant.create({
+      (permissionRequest) =>
+        PermissionsGrant.create({
           dateExpires: Temporal.Now.instant().toString({
             smallestUnit: "microseconds",
           }),
@@ -108,9 +95,8 @@ const createGrantsForDid = async (
             interface: DwnInterfaceName.Records,
             method: DwnMethodName.Write,
           },
-          authorizationSigner: authorizationSigner,
-        });
-      }
+          authorizationSigner,
+        })
     );
 
     return await Promise.all(messages);
@@ -123,13 +109,17 @@ const submitConnection = async (
   connectRequest: ConnectRequest,
   selectedDids: string[]
 ) => {
-  const createdGrants = [];
+  try {
+    const grantPromises = selectedDids.map((did) =>
+      createGrantsForDid(did, connectRequest)
+    );
 
-  for (const did of selectedDids) {
-    createdGrants.push(createGrantsForDid(did, connectRequest));
+    const createdGrants = (await Promise.all(grantPromises)).flat();
+    NOOP(createdGrants);
+    NOOP(postPermissionsAuthorization);
+  } catch (e) {
+    console.warn(e);
   }
-
-  await Promise.all(createdGrants);
 };
 
 const postPermissionsAuthorization = (
