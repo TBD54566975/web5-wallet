@@ -88,9 +88,6 @@ const createGrantsForDid = async (
           grantedTo: "did:jank:alicesocialdignal",
           // selected did
           grantedFor: selectedDid,
-
-          // signed by IDA Did in the grant
-
           scope: {
             interface: DwnInterfaceName.Records,
             method: DwnMethodName.Write,
