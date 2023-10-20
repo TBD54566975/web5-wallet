@@ -5,7 +5,7 @@ import {
   type BarCodeScannerResult,
 } from "expo-barcode-scanner";
 import queryString from "query-string";
-import { useMount } from "@/hooks/useMount";
+// import { useMount } from "@/hooks/useMount";
 import { SPACE } from "@/theme/layouts";
 import type { AppNavigatorProps } from "@/types/navigation";
 
@@ -59,14 +59,14 @@ const ConnectQRScanScreen = ({ navigation }: Props) => {
   };
 
   // test util to mock a valid scan
-  useMount(() => {
-    setTimeout(() => {
-      const mockQRContent =
-        "web5://connect?nonce=%5B0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%2C16%2C17%2C18%2C19%2C20%2C21%2C22%2C23%5D&temporaryDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
+  // useMount(() => {
+  //   setTimeout(() => {
+  //     const mockQRContent =
+  //       "web5://connect?nonce=%5B0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%2C16%2C17%2C18%2C19%2C20%2C21%2C22%2C23%5D&temporaryDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
 
-      onQRCodeScanned({ data: mockQRContent } as any);
-    }, 3000);
-  });
+  //     onQRCodeScanned({ data: mockQRContent } as any);
+  //   }, 3000);
+  // });
 
   return (
     <SafeAreaView style={styles.wrapper}>
