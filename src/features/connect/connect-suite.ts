@@ -9,13 +9,14 @@ import { sha256 } from "@noble/hashes/sha256";
 import {
   DwnInterfaceName,
   DwnMethodName,
+  PermissionsGrant,
   PrivateKeySigner,
   Secp256k1,
-  PermissionsRequest,
 } from "@tbd54566975/dwn-sdk-js";
 import { Temporal } from "@js-temporal/polyfill";
+import type { ConnectRequestPermission, ConnectRequest } from "@/types/models";
 
-const initConnect = async (
+const initConnect = (
   dwaDID: string,
   stringNonce: string,
   serverURL: string
@@ -48,45 +49,87 @@ const initConnect = async (
   );
 
   // call into DWN server using the passed QR data
-  const connectionRequestCipherText = await fetchEncryptedConnectionRequest(
+  const connectionRequestCipherText = fetchEncryptedConnectionRequest(
     connectId,
     serverURL
   );
 
   // decrypt the cipher text using the connectKey and connectNonce
-  const decryptedPermissionsRequests = decryptConnectionRequest(
+  const decryptedConnectRequest = decryptConnectionRequest(
     connectionRequestCipherText,
     connectKey,
     connectNonce
   );
 
-  // TODO: raise permissions request UI? Accept/deny. need designs.
-  // Alert.alert(
-  //   "Permissions Request",
-  //   `DWA would like access to ${JSON.stringify(decryptedPermissionsRequest)}`,
-  //   [
-  //     {
-  //       text: "Cancel",
-  //       onPress: () => navigation.goBack(),
-  //       style: "cancel",
-  //     },
-  //     { text: "OK", onPress: () => navigation.goBack() },
-  //   ]
-  // );
+  return decryptedConnectRequest;
 
-  // NOOP(decryptedPermissionsRequest);
+  // const grants = submitConnection(decryptedConnectRequest);
 
-  // TODO: raise identity selection UI. need designs.
-  const selectedIdentityDid = "did:ion:EiCabc123";
-
-  // // after User clicks "accept." Send grant? (check terminology) to DWN server.
+  // after User clicks "accept." Send grant? (check terminology) to DWN server.
   // const data = postPermissionsAuthorization(
   //   dwaSignPublicKey,
   //   selectedIdentityDid
   // );
+  NOOP(postPermissionsAuthorization);
 
   // // TODO: Add connection data to the DWN level store?
   // addConnectionToDwn(data);
+};
+
+const createGrantsForDid = async (
+  selectedDid: string,
+  connectRequest: ConnectRequest
+) => {
+  try {
+    const { privateJwk } = await Secp256k1.generateKeyPair();
+
+    const authorizationSigner = new PrivateKeySigner({
+      privateJwk,
+      keyId: "did:jank:bob",
+    });
+
+    const messages = connectRequest.permissionRequests.map(
+      async (permissionRequest) => {
+        return await PermissionsGrant.create({
+          dateExpires: Temporal.Now.instant().toString({
+            smallestUnit: "microseconds",
+          }),
+          description: permissionRequest.description,
+          // selected did
+          grantedBy: selectedDid,
+          // app level did
+          grantedTo: "did:jank:alicesocialdignal",
+          // selected did
+          grantedFor: selectedDid,
+
+          // signed by IDA Did in the grant
+
+          scope: {
+            interface: DwnInterfaceName.Records,
+            method: DwnMethodName.Write,
+          },
+          authorizationSigner: authorizationSigner,
+        });
+      }
+    );
+
+    return await Promise.all(messages);
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
+const submitConnection = async (
+  connectRequest: ConnectRequest,
+  selectedDids: string[]
+) => {
+  const createdGrants = [];
+
+  for (const did of selectedDids) {
+    createdGrants.push(createGrantsForDid(did, connectRequest));
+  }
+
+  await Promise.all(createdGrants);
 };
 
 const postPermissionsAuthorization = (
@@ -127,7 +170,7 @@ const postPermissionsAuthorization = (
 /**
  * Reach out to connect server to get cipher text with connectRequest inside
  */
-const fetchEncryptedConnectionRequest = async (
+const fetchEncryptedConnectionRequest = (
   connectId: string,
   connectURL: string
 ) => {
@@ -151,13 +194,18 @@ const fetchEncryptedConnectionRequest = async (
   // const { message: connectRequestCipherText } = await response.json();
 
   // instead get a mocked connection request
-  const { mockConnectionRequestCipherText } = await getMockConnectionRequest();
+  const mockConnectionRequestCipherText = getMockConnectionRequest();
 
   return mockConnectionRequestCipherText;
 };
 
 /**
- * Create the cipher, decrypt the connectRequest, pull out permissions object
+ * Takes an encrypted connection request along with a key and nonce.
+ * Uses the XChaCha20-Poly1305 algorithm to decrypt the connection request.
+ * Parses the decrypted request to obtain a `ConnectRequest` object.
+ *
+ * @throws Will throw an error if decryption fails.
+ * @todo add more error handling: https://github.com/TBD54566975/web5-wallet/issues/151
  */
 const decryptConnectionRequest = (
   cipherText: Uint8Array,
@@ -170,10 +218,8 @@ const decryptConnectionRequest = (
     decryptedConnectRequestU8A
   );
 
-  const { permissionRequests } = JSON.parse(decryptedConnectRequest);
-
-  // TODO: fix implicit any
-  return permissionRequests;
+  const connectionRequest: ConnectRequest = JSON.parse(decryptedConnectRequest);
+  return connectionRequest;
 };
 
 const base58btcMultibaseToBytes = (base58btcMultibase: string) => {
@@ -190,75 +236,38 @@ const generatePin = () => {
  * required in order to mock a connection request.
  * I don't want to break this up into separate utils so I can centralize this mock.
  */
-const getMockConnectionRequest = async () => {
-  const { privateJwk } = await Secp256k1.generateKeyPair();
-
-  // mocked QR: z6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD
-  const authorizationSigner = new PrivateKeySigner({
-    privateJwk,
-    keyId: "did:key:z6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD",
-  });
-
-  // ONLY partial permissions request is passed by the DWA
-  // IDA constructs the permissionsrequest class, and then uses it to construct the permissionsgrant
-
-  // the piece we dont have is when you are the DWA and have received back one or more grants
-  // and are ready to write a message to yourself in your local DWN that needs to be
-  // attached as a permissions granted because i dont have the keys to alice social i only
-  // have rando keys made up but i want to sign on behalf of alice social.
-  // the grantedFor property is what allows it to happen which is a special case
-
-  // there needs to be an interface for this. (cobble it onto connect?)
-  // web5.dwn.records.create is actually constructing a recordswrite create
-  // there is no convenience method for this process
-  // call directly into the DWN
-  // now youve got the grant how do you write the record
-
-  // the DWA cant know ahead of time the DIDs the IDA will select
-  // what that means is the permisisons request must be created in the IDA
-
-  // scenario: DWA sends PermissionsRequest (1) to IDA's DWN
-  const mockPermissionsRequest1 = {
+const getMockConnectionRequest = () => {
+  const mockPermissionsRequest1: ConnectRequestPermission = {
     messageTimestamp: Temporal.Now.instant().toString({
       smallestUnit: "microseconds",
     }),
     description: "drugs",
-    // selected IDA DID
-    grantedBy: "did:jank:IDA",
-    // DWA did
-    grantedTo: "did:key:z6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD",
-    // derived connect did
-    grantedFor: "did:jank:DERIVED",
     scope: {
       interface: DwnInterfaceName.Records,
       method: DwnMethodName.Write,
       protocol: "profile",
     },
-    // conditions omitted from mock because too new
-    // TODO: who is the authorization signer, the DWA or the IDA?
-    authorizationSigner,
   };
 
-  // scenario: DWA sends PermissionsRequest (2) to IDA's DWN
-  const mockPermissionsRequest2 = await PermissionsRequest.create({
+  const mockPermissionsRequest2: ConnectRequestPermission = {
     messageTimestamp: Temporal.Now.instant().toString({
       smallestUnit: "microseconds",
     }),
     description: "NFTs",
-    // selected IDA DID
-    grantedBy: "did:jank:IDA",
-    // DWA did
-    grantedTo: "did:key:z6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD",
-    // derived connect did
-    grantedFor: "did:jank:IDA",
     scope: {
       interface: DwnInterfaceName.Records,
       method: DwnMethodName.Write,
       protocol: "profile",
     },
-    // conditions omitted from mock because too new
-    authorizationSigner,
-  });
+  };
+
+  const mockConnectionRequest: ConnectRequest = {
+    did: "did:key:dwa",
+    origin: "dinger.xyz",
+    permissionRequests: [mockPermissionsRequest1, mockPermissionsRequest2],
+  };
+
+  // we need a new field in the grant "delegatedGrant?"
 
   // mocked QR: z6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD
   const signPublicKey = base58btcMultibaseToBytes(
@@ -281,31 +290,19 @@ const getMockConnectionRequest = async () => {
 
   const cipher = xchacha20_poly1305(connectKey, mockNonce);
 
-  const mockConnectionRequest = JSON.stringify({
-    // TODO: is this the same as the grantedTo?
-    did: "did:key:z6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD",
-    // TODO: still not sure origin works under the hood
-    origin: "dinger.xyz",
-    permissionRequests: [mockPermissionsRequest1, mockPermissionsRequest2],
-  });
-
   const mockConnectionRequestU8A = new TextEncoder().encode(
-    mockConnectionRequest
+    JSON.stringify(mockConnectionRequest)
   );
 
   const mockConnectionRequestCipherText = cipher.encrypt(
     mockConnectionRequestU8A
   );
 
-  return {
-    mockConnectionRequestCipherText,
-    mockPrivateKey: privateJwk,
-  };
+  return mockConnectionRequestCipherText;
 };
-
-const createPermissionGrant = () => {};
 
 export const ConnectSuite = {
   initConnect,
   getMockConnectionRequest,
+  submitConnection,
 };

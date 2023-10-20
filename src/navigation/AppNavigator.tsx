@@ -22,6 +22,7 @@ import EnterPassphraseScreen from "@/features/auth/EnterPassphraseScreen";
 import ConnectProfileSelectScreen from "@/features/connect/ConnectProfileSelectScreen";
 import ConnectQRScanScreen from "@/features/connect/ConnectQRScanScreen";
 import type { AppNavigatorInterface } from "@/types/navigation";
+import ConnectPinConfirmScreen from "@/features/connect/ConnectPinConfirmScreen";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
@@ -109,6 +110,10 @@ export const AppNavigator = () => {
         <Stack.Screen
           name="ConnectProfileSelectScreen"
           component={ConnectProfileSelectScreen}
+        />
+        <Stack.Screen
+          name="ConnectPinConfirmScreen"
+          component={ConnectPinConfirmScreen}
         />
       </Stack.Group>
     </Stack.Navigator>
