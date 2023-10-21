@@ -24,6 +24,9 @@ export const ColorTheme = {
   PRIMARY: ColorPalette.YELLOW,
   SUCCESS: ColorPalette.GREEN,
   DANGER: ColorPalette.RED,
+  GRAY_50: ColorPalette.GRAY_50,
+  GRAY_200: ColorPalette.GRAY_200,
+  BLACK: ColorPalette.BLACK,
 };
 
 // Monochrome theme gives us fine-grained control over color palette

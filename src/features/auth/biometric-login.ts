@@ -21,7 +21,7 @@ const login = async (): Promise<boolean> => {
       await IdentityAgentManager.startAgent(storedPassphrase);
       return true;
     } catch (e) {
-      console.log(
+      console.info(
         "Stored passphrase didn't unlock the IdentityAgent. Purging stored passphrase."
       );
       await clearStoredPassphrase();
@@ -45,7 +45,7 @@ const setStoredPassphrase = async (passphrase: string) => {
       keychainService,
     });
   } catch (e) {
-    console.log("Error saving biometric passphrase:", e);
+    console.info("Error saving biometric passphrase:", e);
     await clearStoredPassphrase();
   }
 };

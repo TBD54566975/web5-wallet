@@ -3,16 +3,14 @@ import {
   useQueries,
   useQuery,
 } from "@tanstack/react-query";
+import { fetchProfile } from "@/features/profile/fetch-profile";
 import { type ManagedIdentity } from "@web5/agent";
-import {
-  type FetchProfileResult,
-  fetchProfile,
-} from "@/features/profile/fetch-profile";
 import { type CustomizableUseQueryOptions } from "@/types/use-query";
+import { type Profile } from "@/types/models";
 
 export const useProfile = (
   identity: ManagedIdentity,
-  options: CustomizableUseQueryOptions<FetchProfileResult> = {}
+  options: CustomizableUseQueryOptions<Profile> = {}
 ) => {
   return useQuery({
     ...options,
@@ -22,7 +20,7 @@ export const useProfile = (
 
 export const useProfiles = (
   managedIdentities: ManagedIdentity[],
-  options: CustomizableUseQueryOptions<FetchProfileResult> = {}
+  options: CustomizableUseQueryOptions<Profile> = {}
 ) => {
   return useQueries({
     queries: managedIdentities.map((identity) => {
@@ -36,7 +34,7 @@ export const useProfiles = (
 
 function fetchProfileQueryOptions(
   identity: ManagedIdentity
-): UseQueryOptions<FetchProfileResult> {
+): UseQueryOptions<Profile> {
   return {
     queryKey: ["profile", identity.did],
     queryFn: () => fetchProfile(identity),

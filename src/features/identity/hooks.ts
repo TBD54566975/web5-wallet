@@ -11,6 +11,7 @@ export const useIdentityList = (
     ...options,
     queryKey: identityListQueryKey,
     queryFn: IdentityAgentManager.listIdentities,
+    staleTime: 3600000,
   });
 };
 

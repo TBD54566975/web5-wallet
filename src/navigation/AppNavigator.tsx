@@ -19,9 +19,10 @@ import AddCredentialOptionsScreen from "@/features/credentials/AddCredentialOpti
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import Loader from "@/components/Loader";
 import EnterPassphraseScreen from "@/features/auth/EnterPassphraseScreen";
-import ConnectionRequestScreen from "@/features/connect/ConnectionRequestScreen";
-import AddConnectionScreen from "@/features/connect/AddConnectionScreen";
+import ConnectProfileSelectScreen from "@/features/connect/ConnectProfileSelectScreen";
+import ConnectQRScanScreen from "@/features/connect/ConnectQRScanScreen";
 import type { AppNavigatorInterface } from "@/types/navigation";
+import ConnectPinConfirmScreen from "@/features/connect/ConnectPinConfirmScreen";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
@@ -102,17 +103,17 @@ export const AppNavigator = () => {
           component={ReviewConnectionScreen}
         />
         <Stack.Screen
-          name="AddConnectionScreen"
-          component={AddConnectionScreen}
-          options={addConnectionScreenOptions}
+          name="ConnectQRScanScreen"
+          component={ConnectQRScanScreen}
+          options={connectQRScanScreenOptions}
         />
-      </Stack.Group>
-
-      {/* Full Screen Modals */}
-      <Stack.Group screenOptions={fullscreenModalGroupOptions}>
         <Stack.Screen
-          name="ConnectionRequestScreen"
-          component={ConnectionRequestScreen}
+          name="ConnectProfileSelectScreen"
+          component={ConnectProfileSelectScreen}
+        />
+        <Stack.Screen
+          name="ConnectPinConfirmScreen"
+          component={ConnectPinConfirmScreen}
         />
       </Stack.Group>
     </Stack.Navigator>
@@ -131,11 +132,6 @@ const authedGroupOptions: NativeStackNavigationOptions = {
   // headerBackImageSource: TODO: add arrow image source here
 };
 
-const fullscreenModalGroupOptions: NativeStackNavigationOptions = {
-  animation: "slide_from_bottom",
-  presentation: "fullScreenModal",
-};
-
-const addConnectionScreenOptions: NativeStackNavigationOptions = {
+const connectQRScanScreenOptions: NativeStackNavigationOptions = {
   animation: "slide_from_bottom",
 };
