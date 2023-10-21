@@ -4,7 +4,6 @@ import { SPACE } from "@/theme/layouts";
 import { Button } from "@/components/Button";
 import { Typography } from "@/theme/typography";
 
-// type Props = AppNavigatorProps<"ConnectPinConfirmScreen">;
 const ConnectPinConfirmScreen = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
