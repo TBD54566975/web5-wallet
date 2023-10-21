@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SafeAreaView, Text, View, StyleSheet } from "react-native";
 import {
   BarCodeScanner,
   type BarCodeScannerResult,
 } from "expo-barcode-scanner";
 import queryString from "query-string";
-// import { useMount } from "@/hooks/useMount";
 import { SPACE } from "@/theme/layouts";
+import { useMount } from "@/hooks/useMount";
 import type { AppNavigatorProps } from "@/types/navigation";
 
 type Props = AppNavigatorProps<"ConnectQRScanScreen">;
@@ -14,14 +14,14 @@ const ConnectQRScanScreen = ({ navigation }: Props) => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [isScanned, setIsScanned] = useState(false);
 
-  useEffect(() => {
+  useMount(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     };
 
     void getBarCodeScannerPermissions();
-  }, []);
+  });
 
   const onQRCodeScanned = ({ data }: BarCodeScannerResult) => {
     setIsScanned(true);
