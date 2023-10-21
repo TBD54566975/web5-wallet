@@ -38,7 +38,7 @@ const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
 
   // create a derived state `checkList` with a `checked` property on each profile
-  // TODO: abstract this out of the view
+  // TODO: maybe abstract this out of the view?
   type CheckList = (Profile & { checked: boolean })[];
   const deriveChecklistState = () => {
     if (!isLoadingProfiles) {
@@ -55,13 +55,13 @@ const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
     }
   };
 
-  const onPressSubmit = () => {
+  const onPressSubmit = async () => {
     if (decryptedConnectionRequest) {
       const selectedDids = checkList
         .filter((box) => box.checked)
         .map((did) => did.did);
 
-      void ConnectSuite.submitConnection(
+      await ConnectSuite.submitConnection(
         decryptedConnectionRequest,
         selectedDids
       );
