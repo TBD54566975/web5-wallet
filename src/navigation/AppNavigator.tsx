@@ -110,6 +110,7 @@ export const AppNavigator = () => {
         <Stack.Screen
           name="ConnectProfileSelectScreen"
           component={ConnectProfileSelectScreen}
+          options={connectProfileSelectScreenOptions}
         />
         <Stack.Screen
           name="ConnectPinConfirmScreen"
@@ -134,4 +135,12 @@ const authedGroupOptions: NativeStackNavigationOptions = {
 
 const connectQRScanScreenOptions: NativeStackNavigationOptions = {
   animation: "slide_from_bottom",
+  headerTransparent: true,
+  headerTitle: "",
+  headerTintColor: "white",
+};
+
+const connectProfileSelectScreenOptions: NativeStackNavigationOptions = {
+  animation: "slide_from_bottom",
+  headerBackVisible: false,
 };

@@ -6,7 +6,7 @@ import { LabelValueItem } from "@/components/LabelValue";
 import { ColorTheme } from "@/theme/colors";
 import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
-import { formatDID, formatDate } from "@/util/formatters";
+import { formatDID, formatDate } from "@/utils/formatters";
 
 const ReviewConnectionScreen = () => {
   const { connection, profile } = {

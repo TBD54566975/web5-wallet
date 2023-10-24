@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   ActivityIndicator,
   SafeAreaView,
@@ -13,11 +13,12 @@ import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { defaultIdentities } from "@/features/identity/default-identities";
 import { Deeplink } from "@/features/app/deeplink";
 import { BiometricLogin } from "@/features/auth/biometric-login";
+import { useMount } from "@/hooks/useMount";
 
 type Props = AppNavigatorProps<"CreateWalletScreen">;
 
 const CreateWalletScreen = ({ navigation, route }: Props) => {
-  useEffect(() => {
+  useMount(() => {
     const createWallet = async () => {
       try {
         await IdentityAgentManager.startAgent(route.params.passphrase);
@@ -42,7 +43,7 @@ const CreateWalletScreen = ({ navigation, route }: Props) => {
     };
 
     void createWallet();
-  }, []);
+  });
 
   return (
     <SafeAreaView style={styles.wrapper}>

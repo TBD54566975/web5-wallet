@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { Tappable } from "@/components/Tappable";
 import { Button } from "@/components/Button";
 import { SPACE } from "@/theme/layouts";
-import { formatDID } from "@/util/formatters";
+import { formatDID } from "@/utils/formatters";
 import { TabNavigatorProps } from "@/types/navigation";
 import type { ManagedIdentity } from "@web5/agent";
 import Loader from "@/components/Loader";

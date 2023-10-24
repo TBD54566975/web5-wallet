@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   SafeAreaView,
@@ -16,6 +16,7 @@ import { AppNavigatorProps } from "@/types/navigation";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
 import { Deeplink } from "@/features/app/deeplink";
 import { BiometricLogin } from "@/features/auth/biometric-login";
+import { useMount } from "@/hooks/useMount";
 
 type Props = AppNavigatorProps<"EnterPassphraseScreen">;
 
@@ -58,7 +59,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
     await Deeplink.openDelayedDeeplinkIfNeeded();
   };
 
-  useEffect(() => {
+  useMount(() => {
     const biometricStartup = async () => {
       if (await BiometricLogin.login()) {
         await onLoginSuccess();
@@ -67,8 +68,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
       }
     };
     void biometricStartup();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <SafeAreaView style={styles.wrapper}>
