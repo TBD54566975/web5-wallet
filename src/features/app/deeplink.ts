@@ -1,10 +1,11 @@
 import { Linking } from "react-native";
-import { type LinkingOptions } from "@react-navigation/native";
 import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
+import { type LinkingOptions } from "@react-navigation/native";
+import { type AppNavigatorInterface } from "@/types/navigation";
 
 let delayedDeeplink: string | null = null;
 
-const config: LinkingOptions<any> = {
+const config: LinkingOptions<AppNavigatorInterface> = {
   prefixes: ["web5://"],
   filter: (url) => {
     // Do not handle any deeplinks until the IdentityAgent has been started.
@@ -18,7 +19,7 @@ const config: LinkingOptions<any> = {
   },
   config: {
     screens: {
-      ConnectionRequestScreen: ":host/permission",
+      ConnectProfileSelectScreen: "connect",
     },
   },
 };

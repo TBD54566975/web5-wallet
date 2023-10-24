@@ -62,10 +62,10 @@ const ConnectQRScanScreen = ({ navigation }: Props) => {
     }
 
     const temporaryDid = query.temporaryDid;
-    const serverURL = query.url;
-    const connectNonce = query.nonce;
+    const url = query.url;
+    const nonce = query.nonce;
 
-    return { temporaryDid, connectNonce, serverURL };
+    return { temporaryDid, nonce, url };
   };
 
   // test util to mock a valid scan
