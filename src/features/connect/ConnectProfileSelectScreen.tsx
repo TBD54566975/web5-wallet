@@ -88,11 +88,11 @@ const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
    * to generate grants for each selected DID.
    */
   useMount(() => {
-    const { connectNonce, temporaryDid, serverURL } = route.params;
+    const { nonce, temporaryDid, url } = route.params;
     const decryptedConnectionRequest = ConnectSuite.initConnect(
       temporaryDid,
-      connectNonce,
-      serverURL
+      nonce,
+      url
     );
 
     setDecryptedConnectionRequest(decryptedConnectionRequest);

@@ -31,9 +31,9 @@ export type AppNavigatorInterface = {
   };
   ReviewConnectionScreen: undefined;
   ConnectProfileSelectScreen: {
-    connectNonce: string;
+    nonce: string;
     temporaryDid: string;
-    serverURL: string;
+    url: string;
   };
   ConnectQRScanScreen: undefined;
   ConnectPinConfirmScreen: undefined;

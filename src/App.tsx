@@ -6,11 +6,16 @@ import { AppNavigator } from "./navigation/AppNavigator";
 import { DefaultTheme } from "./theme/colors";
 import { queryClient } from "@/features/app/store";
 import { Deeplink } from "@/features/app/deeplink";
+import Loader from "@/components/Loader";
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <NavigationContainer linking={Deeplink.config} theme={DefaultTheme}>
+      <NavigationContainer
+        linking={Deeplink.config}
+        theme={DefaultTheme}
+        fallback={<Loader />}
+      >
         <KeyboardProvider>
           <AppNavigator />
         </KeyboardProvider>
