@@ -5,7 +5,6 @@ import { SPACE } from "@/theme/layouts";
 
 type Props = { style?: ViewStyle; checked: boolean };
 export const Checkbox = ({ style, checked }: Props) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkboxStyle = useMemo(
     () => ({ ...styles.checkbox, ...style }),
     [style]

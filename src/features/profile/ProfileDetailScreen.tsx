@@ -5,7 +5,7 @@ import { Typography } from "@/theme/typography";
 import { View, Text, StyleSheet } from "react-native";
 import { Tappable } from "../../components/Tappable";
 import { LabelValueItem } from "@/components/LabelValue";
-import { formatDID, formatDate } from "@/util/formatters";
+import { formatDID, formatDate } from "@/utils/formatters";
 import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { AppNavigatorProps } from "@/types/navigation";
 import { useProfile } from "@/features/profile/hooks";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { LabelValueItem } from "@/components/LabelValue";
-import { formatDID } from "@/util/formatters";
+import { formatDID } from "@/utils/formatters";
 import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { Tappable } from "../../components/Tappable";

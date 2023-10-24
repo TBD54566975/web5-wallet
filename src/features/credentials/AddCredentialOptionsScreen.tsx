@@ -16,7 +16,7 @@ import { ColorTheme } from "@/theme/colors";
 import { SPACE } from "@/theme/layouts";
 import { Typography } from "@/theme/typography";
 import { AppNavigatorProps } from "@/types/navigation";
-import { formatDID } from "@/util/formatters";
+import { formatDID } from "@/utils/formatters";
 
 type Props = AppNavigatorProps<"AddCredentialOptionsScreen">;
 const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {

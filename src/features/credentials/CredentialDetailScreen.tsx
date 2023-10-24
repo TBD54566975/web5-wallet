@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { LabelValueItem } from "@/components/LabelValue";
 import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { BadgeNames } from "@/components/Item";
-import { formatDate } from "@/util/formatters";
+import { formatDate } from "@/utils/formatters";
 import { SPACE } from "@/theme/layouts";
 import type { AppNavigatorProps } from "@/types/navigation";
 

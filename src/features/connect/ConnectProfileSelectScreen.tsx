@@ -55,6 +55,10 @@ const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
     }
   };
 
+  const onPressClose = () => {
+    navigation.popToTop();
+  };
+
   const onPressSubmit = async () => {
     if (decryptedConnectionRequest) {
       const selectedDids = checkList
@@ -158,7 +162,18 @@ const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
             </View>
           </View>
           <View style={styles.footer}>
-            <Button kind="primary" onPress={onPressSubmit} text="Next" />
+            <Button
+              style={styles.btn}
+              kind="secondary"
+              onPress={onPressClose}
+              text="Cancel"
+            />
+            <Button
+              style={styles.btn}
+              kind="primary"
+              onPress={onPressSubmit}
+              text="Next"
+            />
           </View>
         </View>
       </ScrollView>
@@ -182,7 +197,14 @@ const styles = StyleSheet.create({
   body: { flex: 1, gap: SPACE.XXXLARGE },
   checkbox: { marginLeft: "auto" },
   column: { gap: SPACE.LARGE },
-  footer: { marginTop: "auto" },
+  footer: {
+    alignItems: "flex-end",
+    marginTop: "auto",
+    flexDirection: "row",
+    flex: 1,
+    gap: SPACE.SMALL,
+  },
+  btn: { flex: 1 },
 });
 
 export default ConnectProfileSelectScreen;
