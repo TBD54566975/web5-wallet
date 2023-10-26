@@ -85,6 +85,7 @@ const EnterPassphraseScreen = ({ navigation }: Props) => {
             autoCapitalize="none"
             autoCorrect={false}
             clearButtonMode="while-editing"
+            secureTextEntry={true}
           />
           <Button
             kind={isLoginButtonDisabled ? "disabled" : "primary"}
