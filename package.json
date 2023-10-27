@@ -34,6 +34,7 @@
     "@tbd54566975/web5-react-native-polyfills": "0.2.1",
     "@types/uuid": "9.0.4",
     "@web5/api": "0.8.1-alpha-20231003-e73c548",
+    "@web5/credentials": "^0.3.0",
     "@web5/dids": "0.2.0-alpha-20231003-e73c548",
     "@web5/identity-agent": "0.2.1-alpha-20231003-e73c548",
     "expo": "49.0.3",
