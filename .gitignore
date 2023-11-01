@@ -58,5 +58,5 @@ dist/
 src/reference
 
 # keys
-*.env
-!example.env
+.env*
+!.env.example
