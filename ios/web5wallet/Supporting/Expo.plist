@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
         <key>EXUpdatesSDKVersion</key>
-        <string>YOUR-APP-SDK-VERSION-HERE</string>
+        <string>49.0.0</string>
         <key>EXUpdatesURL</key>
         <string>YOUR-APP-URL-HERE</string>
 </dict>
