@@ -144,11 +144,7 @@ android {
         }
 
         release {
-            // TODO: CD env vars
-//            storeFile file(TBDWALLET_STORE_FILE)
-//            storePassword TBDWALLET_STORE_PASSWORD
-//            keyAlias TBDWALLET_KEY_ALIAS
-//            keyPassword TBDWALLET_KEY_PASSWORD
+
         }
     }
     buildTypes {
