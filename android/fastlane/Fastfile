@@ -21,7 +21,7 @@ platform :android do
     slack_build_info
   end
 
-  desc 'Update Gradle properties and generate apk'
+  desc 'Update gradle properties and build binary'
   lane :build_binary do |_options|
     android_set_version_code
 
