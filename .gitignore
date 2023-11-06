@@ -60,3 +60,7 @@ src/reference
 # keys
 .env*
 !.env.example
+
+# fastlane 
+**/fastlane/report.xml
+**/fastlane/README.md

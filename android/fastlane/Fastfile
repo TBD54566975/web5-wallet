@@ -1,0 +1,72 @@
+require 'dotenv'
+
+default_platform(:android)
+
+platform :android do
+  package_json = load_json(json_path: '../package.json')
+  version = package_json['version']
+  major_version = version.split('.')[0]
+  minor_version = version.split('.')[1]
+  patch_version = version.split('.')[2]
+
+  short_version = "#{major_version}.#{minor_version}.#{patch_version}"
+
+  before_all do |_lane, options|
+    Dotenv.load(File.expand_path(options[:env_file], __dir__))
+  end
+
+  lane :deploy do |_options|
+    build_binary
+    upload_aab_to_play_store
+    slack_build_info
+  end
+
+  desc 'Update Gradle properties and generate apk'
+  lane :build_binary do |_options|
+    android_set_version_code
+
+    keystore_absolute_path = File.expand_path(ENV['TBDWALLET_ANDROID_KEYSTORE_FILENAME'], __dir__)
+
+    gradle_properties = {
+      'versionName' => short_version,
+      'applicationId' => ENV['TBDWALLET_ANDROID_APPLICATION_ID'],
+      'appName' => ENV['TBDWALLET_DISPLAY_NAME'],
+      'bundleJS' => true,
+      'android.injected.signing.store.file' => keystore_absolute_path,
+      'android.injected.signing.store.password' => ENV['TBDWALLET_ANDROID_KEYSTORE_PASSWORD'],
+      'android.injected.signing.key.alias' => ENV['TBDWALLET_ANDROID_KEY_ALIAS'],
+      'android.injected.signing.key.password' => ENV['TBDWALLET_ANDROID_KEY_PASSWORD']
+    }
+
+    gradle(
+      task: 'bundle',
+      build_type: 'release',
+      properties: gradle_properties,
+      flags: '--full-stacktrace --continue --info'
+    )
+  end
+
+  desc 'Upload AAB to the internal release channel in the Google Play store'
+  lane :upload_aab_to_play_store do
+    upload_to_play_store(
+      track: 'internal',
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      rollout: '1.0',
+      package_name: ENV['TBDWALLET_ANDROID_APPLICATION_ID'],
+      json_key_data: ENV['TBDWALLET_ANDROID_GPLAY_SERVICE_ACCOUNT']
+    )
+  end
+
+  lane :slack_build_info do
+    slack(
+      slack_url: ENV['TBDWALLET_SLACK_URL'],
+      message: "Published Android internal testing release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{android_get_version_code})",
+      channel: '#tbd-wallet-engineering',
+      default_payloads: []
+    )
+  end
+end
