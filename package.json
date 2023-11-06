@@ -17,7 +17,9 @@
     "clean:ios": "rm -rf ios/build; pod cache clean --all; rm -rf ios/Pods; cd ios; xcodebuild -alltargets clean;cd ..",
     "clean": "yarn run clean:rn; yarn run clean:yarn; yarn run clean:android; yarn run clean:ios; yarn run pod-install",
     "deep-clean": "yarn run clean:system; yarn run clean",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "deploy:android:development:release": "cd android && bundle exec fastlane deploy env_file:../../env/.env.development.release",
+    "deploy:android:production:release": "cd android && bundle exec fastlane deploy env_file:../../env/.env.production.release"
   },
   "@comment resolutions": "enforce de-duping even if upstream wont. this will need to be maintained.",
   "resolutions": {
