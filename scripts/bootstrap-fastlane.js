@@ -7,16 +7,23 @@ const fs = require("fs");
 const path = require("path");
 
 const envDir = "./env";
-const iosFastlaneDir = "./ios/fastlane";
-const androidFastlaneDir = "./android/fastlane";
+const targetDirs = ["./ios/fastlane", "./android/fastlane"];
 
 // This function creates a symlink if the target file does not already exist
 function createSymlink(sourcePath, targetPath) {
-  if (!fs.existsSync(targetPath)) {
+  try {
+    if (fs.existsSync(targetPath)) {
+      console.log(`Symlink already exists: ${targetPath}`);
+      return;
+    }
+
     fs.symlinkSync(sourcePath, targetPath, "file");
     console.log(`Symlink created: ${targetPath} -> ${sourcePath}`);
-  } else {
-    console.log(`Symlink already exists: ${targetPath}`);
+  } catch (err) {
+    console.error(
+      `Error creating symlink from ${sourcePath} to ${targetPath}:`,
+      err
+    );
   }
 }
 
@@ -49,4 +56,4 @@ function processDirectory(sourceDir, targetDirs) {
 }
 
 // Creating symlinks for iOS and Android fastlane directories
-processDirectory(envDir, [iosFastlaneDir, androidFastlaneDir]);
+processDirectory(envDir, targetDirs);
