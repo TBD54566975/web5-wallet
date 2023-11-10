@@ -24,7 +24,6 @@ platform :android do
 
     gradle_properties = {
       'versionName' => short_version,
-      'archivesBaseName' => "#{ENV['TBDWALLET_BUILD_TYPE']}-#{short_version}-#{build_number}",
       'applicationId' => ENV['TBDWALLET_ANDROID_APPLICATION_ID'],
       'appName' => ENV['TBDWALLET_DISPLAY_NAME'],
       'bundleJS' => true,
