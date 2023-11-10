@@ -1,0 +1,102 @@
+default_platform(:ios)
+
+platform :ios do
+  package_json = load_json(json_path: '../package.json')
+  version = package_json['version']
+  build_number = package_json['buildNumber']
+  major_version = version.split('.')[0]
+  minor_version = version.split('.')[1]
+  patch_version = version.split('.')[2]
+
+  short_version = "#{major_version}.#{minor_version}.#{patch_version}"
+
+  lane :deploy do
+    configure_build
+    build_and_upload
+    slack_build_info
+  end
+
+  lane :configure_build do
+    update_app_identifier(
+      app_identifier: ENV['TBDWALLET_IOS_APPLICATION_ID'],
+      plist_path: 'web5wallet/Info.plist'
+    )
+
+    match(
+      type: 'appstore',
+      app_identifier: ENV['TBDWALLET_IOS_APPLICATION_ID'],
+      readonly: true,
+      git_url: ENV['MATCH_GIT_URL']
+    )
+
+    increment_version_number(version_number: short_version)
+    increment_build_number(build_number: build_number)
+
+    update_info_plist(
+      plist_path: 'web5wallet/Info.plist',
+      display_name: ENV['TBDWALLET_DISPLAY_NAME']
+    )
+
+    # configure codepush later
+    # update_info_plist(
+    #   plist_path: "web5wallet/Supporting/Expo.plist",
+    #   block: proc do |plist|
+    #     plist['EXUpdatesReleaseChannel'] = "#{buildType}#{shortVersionNoDots}"
+    #   end
+    # );
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      profile_name: ENV['TBDWALLET_IOS_PROVISIONING_PROFILE']
+    )
+  end
+
+  desc 'Build and upload to TestFlight'
+  lane :build_and_upload do
+    build_app(
+      scheme: 'web5wallet',
+      workspace: 'web5wallet.xcworkspace',
+      configuration: 'Release',
+      export_method: 'app-store',
+      xcargs: {
+        PROVISIONING_PROFILE_SPECIFIER: ENV['TBDWALLET_IOS_PROVISIONING_PROFILE'],
+        CODE_SIGN_IDENTITY: 'iPhone Distribution',
+        PRODUCT_BUNDLE_IDENTIFIER: ENV['TBDWALLET_IOS_APPLICATION_ID']
+      },
+      export_options: {
+        'signingStyle' => 'manual',
+        'signingCertificate' => 'iPhone Distribution',
+        'destination' => 'export',
+        'method' => 'app-store',
+        'thinning' => '<thin-for-all-variants>',
+        provisioningProfiles: {
+          'website.tbd.wallet' => 'TBD Identity Wallet',
+          'website.tbd.wallet.development' => 'TBD Web5 Wallet Dev'
+        }
+      },
+      output_name: "#{ENV['TBDWALLET_BUILD_TYPE']}-#{short_version}-#{build_number}"
+    )
+
+    upload_to_testflight(
+      app_identifier: ENV['TBDWALLET_IOS_APPLICATION_ID'],
+      skip_waiting_for_build_processing: true
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: true,
+      # automatic provisioning profile
+      profile_name: ''
+    )
+
+    clean_build_artifacts
+  end
+
+  lane :slack_build_info do
+    slack(
+      slack_url: ENV['TBDWALLET_SLACK_URL'],
+      message: "Published iOS release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{build_number}) to Testflight",
+      channel: '#tbd-wallet-engineering',
+      default_payloads: []
+    )
+  end
+end
