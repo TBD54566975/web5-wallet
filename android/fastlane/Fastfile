@@ -1,19 +1,14 @@
-require 'dotenv'
-
 default_platform(:android)
 
 platform :android do
   package_json = load_json(json_path: '../package.json')
   version = package_json['version']
+  build_number = package_json['buildNumber']
   major_version = version.split('.')[0]
   minor_version = version.split('.')[1]
   patch_version = version.split('.')[2]
 
   short_version = "#{major_version}.#{minor_version}.#{patch_version}"
-
-  before_all do |_lane, options|
-    Dotenv.load(File.expand_path(options[:env_file], __dir__))
-  end
 
   lane :deploy do |_options|
     build_binary
@@ -23,7 +18,7 @@ platform :android do
 
   desc 'Update gradle properties and build binary'
   lane :build_binary do |_options|
-    android_set_version_code
+    android_set_version_code(version_code: build_number)
 
     keystore_absolute_path = File.expand_path(ENV['TBDWALLET_ANDROID_KEYSTORE_FILENAME'], __dir__)
 

@@ -1,6 +1,7 @@
 {
   "name": "web5wallet",
   "version": "0.0.0",
+  "buildNumber": "15",
   "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client --clear",
@@ -13,15 +14,18 @@
     "clean:rn": "watchman watch-del-all; rm -rf $TMPDIR/react-*; rm -rf $TMPDIR/react-native-packager-cache-*; rm -rf $TMPDIR/metro-cache; rm -rf $TMPDIR/haste-map-react-native-packager-*",
     "clean:yarn": "rm -rf node_modules/; yarn cache clean; yarn install",
     "clean:system": "rm -rf ~/.cocoapods; rm -rf /Library/Developer/Xcode/DerivedData; rm -rf ~/.gradle/; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache; rm -fr ~/Library/Caches/com.apple.dt.Xcode/",
-    "clean:android": "cd android;./gradlew clean;./gradlew --stop;cd ..",
-    "clean:ios": "rm -rf ios/build; pod cache clean --all; rm -rf ios/Pods; cd ios; xcodebuild -alltargets clean;cd ..",
+    "clean:android": "cd android;./gradlew clean; ./gradlew --stop; cd ..",
+    "clean:ios": "rm -rf ios/build; pod cache clean --all; rm -rf ios/Pods; cd ios; xcodebuild -alltargets clean; cd ..",
     "clean": "yarn run clean:rn; yarn run clean:yarn; yarn run clean:android; yarn run clean:ios; yarn run pod-install",
     "deep-clean": "yarn run clean:system; yarn run clean",
     "postinstall": "patch-package",
-    "deploy:android:development:release": "cd android && bundle exec fastlane deploy env_file:../../env/.env.development.release",
-    "deploy:android:production:release": "cd android && bundle exec fastlane deploy env_file:../../env/.env.production.release"
+    "deploy:android:development:release": "cd android && bundle exec fastlane deploy --env development.release; cd ..",
+    "deploy:android:production:release": "cd android && bundle exec fastlane deploy --env production.release; cd ..",
+    "deploy:ios:development:release": "cd ios && bundle exec fastlane deploy --env development.release; cd ..",
+    "deploy:ios:production:release": "cd ios && bundle exec fastlane deploy --env production.release; cd ..",
+    "symlink:env:fastlane": "node ./scripts/symlink-env-fastlane.js"
   },
-  "@comment resolutions": "enforce de-duping even if upstream wont. this will need to be maintained.",
+  "@comment resolutions": "this is a way of enforcing de-duping even if upstream wont. this will need to be maintained.",
   "resolutions": {
     "@ipld/dag-cbor": "^9.0.3"
   },

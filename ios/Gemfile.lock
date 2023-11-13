@@ -165,6 +165,7 @@ GEM
       xcodeproj (>= 1.13.0, < 2.0.0)
       xcpretty (~> 0.3.0)
       xcpretty-travis-formatter (>= 0.0.3)
+    fastlane-plugin-load_json (0.0.1)
     ffi (1.16.3)
     fourflusher (2.3.1)
     fuzzy_match (2.0.4)
@@ -282,14 +283,15 @@ GEM
       xcpretty (~> 0.2, >= 0.0.7)
 
 PLATFORMS
-  arm64-darwin-21
+  arm64-darwin-23
 
 DEPENDENCIES
   cocoapods (= 1.14.2)
   fastlane
+  fastlane-plugin-load_json
 
 RUBY VERSION
-   ruby 2.7.4p191
+   ruby 3.2.2p53
 
 BUNDLED WITH
-   2.3.20
+   2.4.10
