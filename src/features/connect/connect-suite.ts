@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { xchacha20_poly1305 } from "@noble/ciphers/chacha";
 import { edwardsToMontgomeryPub, x25519 } from "@noble/curves/ed25519";
-import { createJsonRpcRequest } from "@tbd54566975/web5-agent";
+import { createJsonRpcRequest } from "@web5/agent";
 import { base58btc } from "multiformats/bases/base58";
 import { base64url } from "multiformats/bases/base64";
 import { hkdf } from "@noble/hashes/hkdf";
