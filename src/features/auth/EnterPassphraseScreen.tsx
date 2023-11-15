@@ -12,7 +12,7 @@ import { Input } from "../../components/Input";
 import { useMount } from "../../hooks/useMount";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import { AppNavigatorProps } from "../../types/navigation";
+import { type AppNavigatorProps } from "../../types/navigation";
 import { Deeplink } from "../app/deeplink";
 import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 import { BiometricLogin } from "./biometric-login";

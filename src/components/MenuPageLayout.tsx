@@ -3,14 +3,14 @@ import {
   View,
   ScrollView,
   Pressable,
-  PressableProps,
+  type PressableProps,
   Text,
   StyleSheet,
 } from "react-native";
 import { ColorTheme } from "../theme/colors";
 import { SPACE } from "../theme/layouts";
 import { Typography } from "../theme/typography";
-import { ItemProps, Item } from "./Item";
+import { type ItemProps, Item } from "./Item";
 
 export const MenuPageLayout = (props: {
   headerItem: ItemProps;

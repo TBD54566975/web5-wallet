@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Typography } from "../theme/typography";
-import { Avatar, AvatarProps } from "./Avatar";
+import { Avatar, type AvatarProps } from "./Avatar";
 import { ColorTheme } from "../theme/colors";
 
 type ItemBodyProps = {

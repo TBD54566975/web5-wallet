@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { type ManagedIdentity } from "@web5/agent";
-import { CustomizableUseQueryOptions } from "../../types/use-query";
+import type { CustomizableUseQueryOptions } from "../../types/use-query";
 import { queryClient } from "../app/store";
 import { IdentityAgentManager } from "./IdentityAgentManager";
 

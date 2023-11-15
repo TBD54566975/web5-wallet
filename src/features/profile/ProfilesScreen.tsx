@@ -4,7 +4,7 @@ import type { ManagedIdentity } from "@web5/agent";
 import { Loader } from "../../components/Loader";
 import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
-import { TabNavigatorProps } from "../../types/navigation";
+import type { TabNavigatorProps } from "../../types/navigation";
 import { formatDID } from "../../utils/formatters";
 import { useIdentityList } from "../identity/hooks";
 import { useProfiles } from "./hooks";

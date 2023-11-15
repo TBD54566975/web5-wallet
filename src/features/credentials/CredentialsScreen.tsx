@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ItemProps } from "../../components/Item";
+import type { ItemProps } from "../../components/Item";
 import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
 import { mockProfileCredentials } from "./mocks";

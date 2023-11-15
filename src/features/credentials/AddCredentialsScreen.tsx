@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import { MockCredential } from "../../types/models";
+import type { MockCredential } from "../../types/models";
 import { mockCredentials } from "./mocks";
 import type { AppNavigatorProps } from "../../types/navigation";
 

@@ -1,6 +1,6 @@
 import { Linking } from "react-native";
 import { type LinkingOptions } from "@react-navigation/native";
-import { AppNavigatorInterface } from "../../types/navigation";
+import { type AppNavigatorInterface } from "../../types/navigation";
 import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 
 let delayedDeeplink: string | null = null;

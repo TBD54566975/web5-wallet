@@ -1,4 +1,4 @@
-import Octicons from "@expo/vector-icons/Octicons";
+import type Octicons from "@expo/vector-icons/Octicons";
 
 type NewIdentityProps = {
   name: string;

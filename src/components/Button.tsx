@@ -6,7 +6,7 @@ import {
   type PressableProps,
   type StyleProp,
   type ViewStyle,
-  TextStyle,
+  type TextStyle,
 } from "react-native";
 import { ObjectUtils } from "../utils/object";
 import Octicons from "@expo/vector-icons/Octicons";

@@ -15,7 +15,7 @@ import { ExpoLevelStore } from "../app/expo-level-store";
 import { createDwn } from "../dwn/dwn";
 import {
   profileProtocol,
-  ProfileProtocol,
+  type ProfileProtocol,
 } from "../profile/protocol/profile-protocol";
 
 // Singleton

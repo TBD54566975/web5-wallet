@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { StyleSheet, View, ViewStyle } from "react-native";
+import { StyleSheet, View, type ViewStyle } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 import { SPACE } from "../theme/layouts";
 

@@ -5,7 +5,7 @@ import { Avatar } from "../../components/Avatar";
 import { ColorTheme } from "../../theme/colors";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import { MockCredential } from "../../types/models";
+import type { MockCredential } from "../../types/models";
 import type { AppNavigatorProps } from "../../types/navigation";
 import { mockCredentials } from "./mocks";
 import { Button } from "../../components/Button";

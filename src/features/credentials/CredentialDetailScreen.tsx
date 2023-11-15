@@ -4,7 +4,7 @@ import { VerifiableCredential } from "@web5/credentials";
 import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { LabelValueItem } from "../../components/LabelValue";
 import { SPACE } from "../../theme/layouts";
-import { AppNavigatorProps } from "../../types/navigation";
+import { type AppNavigatorProps } from "../../types/navigation";
 import { formatDate } from "../../utils/formatters";
 
 const tabLabels = ["About", "Activity"];

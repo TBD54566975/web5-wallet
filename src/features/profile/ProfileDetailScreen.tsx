@@ -6,7 +6,7 @@ import { MenuPageLayout } from "../../components/MenuPageLayout";
 import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import { AppNavigatorProps } from "../../types/navigation";
+import type { AppNavigatorProps } from "../../types/navigation";
 import { formatDID, formatDate } from "../../utils/formatters";
 import { mockConnections } from "../connect/mocks";
 import { useProfile } from "./hooks";

@@ -3,8 +3,8 @@ import { Text, ScrollView, View, StyleSheet } from "react-native";
 import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import { MockCredential, MockConnection } from "../../types/models";
-import { TabNavigatorProps } from "../../types/navigation";
+import type { MockCredential, MockConnection } from "../../types/models";
+import type { TabNavigatorProps } from "../../types/navigation";
 import { mockConnections } from "../connect/mocks";
 import { mockCredentials } from "../credentials/mocks";
 

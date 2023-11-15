@@ -4,7 +4,7 @@ import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { Input } from "../../components/Input";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import { AppNavigatorProps } from "../../types/navigation";
+import type { AppNavigatorProps } from "../../types/navigation";
 import { Button } from "../../components/Button";
 
 // Minimum number of characters that are required for a password to be considered valid
