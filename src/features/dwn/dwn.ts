@@ -4,7 +4,7 @@ import {
   DataStoreLevel,
   EventLogLevel,
 } from "@tbd54566975/dwn-sdk-js";
-import { AbstractDatabaseOptions } from "abstract-level";
+import type { AbstractDatabaseOptions } from "abstract-level";
 import { type Level } from "level";
 import { ExpoLevel } from "expo-level";
 

@@ -4,11 +4,11 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { AppNavigator } from "./navigation/AppNavigator";
 import { DefaultTheme } from "./theme/colors";
-import { queryClient } from "@/features/app/store";
-import { Deeplink } from "@/features/app/deeplink";
-import Loader from "@/components/Loader";
+import { Deeplink } from "./features/app/deeplink";
+import { queryClient } from "./features/app/store";
+import { Loader } from "./components/Loader";
 
-const App = () => {
+export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer
@@ -23,5 +23,3 @@ const App = () => {
     </QueryClientProvider>
   );
 };
-
-export default App;

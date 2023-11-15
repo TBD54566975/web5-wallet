@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { type ManagedIdentity } from "@web5/agent";
-import { queryClient } from "@/features/app/store";
-import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import { type CustomizableUseQueryOptions } from "@/types/use-query";
+import type { CustomizableUseQueryOptions } from "../../types/use-query";
+import { queryClient } from "../app/store";
+import { IdentityAgentManager } from "./IdentityAgentManager";
 
 export const useIdentityList = (
   options: CustomizableUseQueryOptions<ManagedIdentity[]> = {}

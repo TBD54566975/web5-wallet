@@ -1,7 +1,7 @@
-import { ColorTheme } from "@/theme/colors";
-import { Typography } from "@/theme/typography";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { ColorTheme } from "../theme/colors";
+import { Typography } from "../theme/typography";
 
 type Props = { label: string; value: string };
 export const LabelValueItem = ({ label, value }: Props) => {

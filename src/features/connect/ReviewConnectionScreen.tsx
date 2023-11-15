@@ -1,14 +1,14 @@
 import React from "react";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView } from "react-native";
-import { Button } from "@/components/Button";
-import { BadgeNames, Item } from "@/components/Item";
-import { LabelValueItem } from "@/components/LabelValue";
-import { ColorTheme } from "@/theme/colors";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { formatDID, formatDate } from "@/utils/formatters";
+import { Item } from "../../components/Item";
+import { LabelValueItem } from "../../components/LabelValue";
+import { ColorTheme } from "../../theme/colors";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { formatDID, formatDate } from "../../utils/formatters";
+import { Button } from "../../components/Button";
 
-const ReviewConnectionScreen = () => {
+export const ReviewConnectionScreen = () => {
   const { connection, profile } = {
     connection: {
       name: "Dignal",
@@ -32,13 +32,13 @@ const ReviewConnectionScreen = () => {
               subtitle={profile.displayName}
               body={formatDID(profile.id)}
               iconName={profile.icon}
-              badgeName={BadgeNames.PROFILE}
+              badgeName={"feed-person"}
               headingSize="heading4"
             />
             <Item
               heading={connection.name}
               iconName={connection.icon}
-              badgeName={BadgeNames.CONNECTION}
+              badgeName={"webhook"}
               headingSize="heading4"
             />
           </View>
@@ -94,5 +94,3 @@ const disclaimerText = StyleSheet.create([
   Typography.textCenter,
   { color: ColorTheme.REDUCED },
 ]);
-
-export default ReviewConnectionScreen;

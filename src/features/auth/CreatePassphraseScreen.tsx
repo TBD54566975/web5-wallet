@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
-import { Button } from "@/components/Button";
-import { Input } from "@/components/Input";
-import { AppNavigatorProps } from "@/types/navigation";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
+import { Input } from "../../components/Input";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import type { AppNavigatorProps } from "../../types/navigation";
+import { Button } from "../../components/Button";
 
 // Minimum number of characters that are required for a password to be considered valid
 const MIN_PASSPHRASE_LENGTH = 3;
 
 type Props = AppNavigatorProps<"CreatePassphraseScreen">;
 
-const CreatePassphraseScreen = ({ navigation }: Props) => {
+export const CreatePassphraseScreen = ({ navigation }: Props) => {
   const [passphrase, setPassphrase] = useState<string>("");
 
   const isPassphraseValid = passphrase?.length >= MIN_PASSPHRASE_LENGTH;
@@ -67,5 +67,3 @@ const styles = StyleSheet.create({
     gap: SPACE.LARGE,
   },
 });
-
-export default CreatePassphraseScreen;

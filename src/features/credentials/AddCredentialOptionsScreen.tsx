@@ -8,18 +8,18 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import { Avatar } from "@/components/Avatar";
-import { Button } from "@/components/Button";
-import { BadgeNames, Item, type ItemProps } from "@/components/Item";
-import { mockConnections } from "@/features/connect/mocks";
-import { ColorTheme } from "@/theme/colors";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { AppNavigatorProps } from "@/types/navigation";
-import { formatDID } from "@/utils/formatters";
+import { Avatar } from "../../components/Avatar";
+import { Item, type ItemProps } from "../../components/Item";
+import { ColorTheme } from "../../theme/colors";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import type { AppNavigatorProps } from "../../types/navigation";
+import { formatDID } from "../../utils/formatters";
+import { mockConnections } from "../connect/mocks";
+import { Button } from "../../components/Button";
 
 type Props = AppNavigatorProps<"AddCredentialOptionsScreen">;
-const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
+export const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
   const credential = route.params.credential;
   const [selectedProfile, setSelectedProfile] = useState(mockConnections[0]);
 
@@ -41,10 +41,7 @@ const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.headerColumn}>
-            <Avatar
-              iconName={credential.icon}
-              badgeName={BadgeNames.CREDENTIAL}
-            />
+            <Avatar iconName={credential.icon} badgeName={"id-badge"} />
             <Text style={styles.headerCredentialName}>{credential.name}</Text>
             <Text style={styles.headerCredentialIssuer}>
               Issued by {credential.issuer}
@@ -68,7 +65,7 @@ const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
                       subtitle={profile.description}
                       body={formatDID(profile.id)}
                       iconName={profile.icon as ItemProps["iconName"]}
-                      badgeName={BadgeNames.PROFILE}
+                      badgeName={"feed-person"}
                     />
                   </View>
                   <View style={styles.radioRow}>
@@ -126,5 +123,3 @@ const styles = StyleSheet.create({
     backgroundColor: ColorTheme.DEFAULT,
   },
 });
-
-export default AddCredentialOptionsScreen;

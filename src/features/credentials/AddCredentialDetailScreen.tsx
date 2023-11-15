@@ -1,18 +1,17 @@
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
-import { Button } from "@/components/Button";
-import { BadgeNames } from "@/components/Item";
-import { ColorTheme } from "@/theme/colors";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
 import Octicons from "@expo/vector-icons/Octicons";
-import { mockCredentials } from "@/features/credentials/mocks";
-import { Avatar } from "@/components/Avatar";
-import type { MockCredential } from "@/types/models";
-import type { AppNavigatorProps } from "@/types/navigation";
+import { Avatar } from "../../components/Avatar";
+import { ColorTheme } from "../../theme/colors";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import type { MockCredential } from "../../types/models";
+import type { AppNavigatorProps } from "../../types/navigation";
+import { mockCredentials } from "./mocks";
+import { Button } from "../../components/Button";
 
 type Props = AppNavigatorProps<"AddCredentialDetailScreen">;
-const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
+export const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
   const credential = route.params.credential;
 
   const navigateToAddCredentialOptions = () => {
@@ -31,7 +30,7 @@ const AddCredentialDetailScreen = ({ navigation, route }: Props) => {
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.column}>
-          <Avatar iconName="note" badgeName={BadgeNames.CREDENTIAL} />
+          <Avatar iconName="note" badgeName={"id-badge"} />
           <Text style={styles.headingNameText}>{credential.name}</Text>
           <Text style={styles.headerIssuerText}>
             Issued by {credential.issuer}
@@ -129,5 +128,3 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
 });
-
-export default AddCredentialDetailScreen;

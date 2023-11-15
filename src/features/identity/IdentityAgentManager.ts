@@ -8,15 +8,15 @@ import {
 } from "@web5/agent";
 import { getTechPreviewDwnEndpoints, Web5 } from "@web5/api";
 import { DidIonMethod, type DidIonCreateOptions } from "@web5/dids";
+import { type Level } from "level";
+import { ExpoLevel } from "expo-level";
+import ms from "ms";
+import { ExpoLevelStore } from "../app/expo-level-store";
+import { createDwn } from "../dwn/dwn";
 import {
   profileProtocol,
   type ProfileProtocol,
-} from "@/features/profile/protocol/profile-protocol";
-import { type Level } from "level";
-import { ExpoLevel } from "expo-level";
-import { ExpoLevelStore } from "@/features/app/expo-level-store";
-import ms from "ms";
-import { createDwn } from "@/features/dwn/dwn";
+} from "../profile/protocol/profile-protocol";
 
 // Singleton
 let agent: IdentityAgent;

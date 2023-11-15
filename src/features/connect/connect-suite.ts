@@ -14,7 +14,10 @@ import {
   Secp256k1,
 } from "@tbd54566975/dwn-sdk-js";
 import { Temporal } from "@js-temporal/polyfill";
-import type { ConnectRequestPermission, ConnectRequest } from "@/types/models";
+import type {
+  ConnectRequest,
+  ConnectRequestPermission,
+} from "../../types/models";
 
 const initConnect = (
   dwaDID: string,

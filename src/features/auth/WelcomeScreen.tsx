@@ -1,12 +1,12 @@
 import React from "react";
 import { Alert, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { Button } from "@/components/Button";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import type { AppNavigatorProps } from "@/types/navigation";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { Button } from "../../components/Button";
+import type { AppNavigatorProps } from "../../types/navigation";
 
 type Props = AppNavigatorProps<"WelcomeScreen">;
-const WelcomeScreen = ({ navigation }: Props) => {
+export const WelcomeScreen = ({ navigation }: Props) => {
   const navigateToImportWallet = () => {
     Alert.alert(
       "Import not yet available",
@@ -65,5 +65,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-export default WelcomeScreen;

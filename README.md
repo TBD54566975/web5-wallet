@@ -14,7 +14,18 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 - yarn v1.22.19 (installed without brew)
 - watchman (via homebrew)
 
-## Troubleshooting Setup
+## Using the debugger
+
+The application can be debugged through VSCode
+
+1. Download the Expo Tools VSCode Extension.
+2. Use the "Run and Debug" menu in VSCode to run the script "Debug Expo App."
+3. Fire up a simulator so that the session attaches to the debugger.
+4. Set your breakpoints as needed.
+
+   > Caution: Reused breakpoints don't work. Make sure to clear breakpoints in between sessions.
+
+## Troubleshooting install
 
 - `which yarn` should be `/Users/{USER}/.yarn/bin/yarn`
 
@@ -28,6 +39,6 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 
 - `rvm list` should include `=* ruby-2.7.4 [ arm64 ]`
 
-## Further troubleshooting
+## Further troubleshooting install
 
 - Run `npx expo-env-info@latest`

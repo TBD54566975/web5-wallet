@@ -1,15 +1,15 @@
 import React from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
-import { Button } from "@/components/Button";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { Item } from "@/components/Item";
-import { defaultIdentities } from "@/features/identity/default-identities";
-import type { AppNavigatorProps } from "@/types/navigation";
+import { Item } from "../../components/Item";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { defaultIdentities } from "../identity/default-identities";
+import { Button } from "../../components/Button";
+import type { AppNavigatorProps } from "../../types/navigation";
 
 type Props = AppNavigatorProps<"CreateProfilesScreen">;
 
-const CreateProfilesScreen = ({ navigation }: Props) => {
+export const CreateProfilesScreen = ({ navigation }: Props) => {
   const onNextTapped = () => {
     navigation.navigate("CreatePassphraseScreen");
   };
@@ -56,5 +56,3 @@ const styles = StyleSheet.create({
     gap: SPACE.LARGE,
   },
 });
-
-export default CreateProfilesScreen;

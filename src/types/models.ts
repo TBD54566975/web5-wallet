@@ -1,7 +1,7 @@
 import type { ManagedIdentity } from "@web5/agent";
-import type { ProfileProtocol } from "@/features/profile/protocol/profile-protocol";
 import type Octicons from "@expo/vector-icons/Octicons";
 import type { PermissionsRequestOptions } from "@tbd54566975/dwn-sdk-js";
+import type { ProfileProtocol } from "../features/profile/protocol/profile-protocol";
 
 // Most data models will change over time as real protocols and data gets used rather than mocks
 export type MockCredential = {

@@ -52,6 +52,7 @@ module.exports = {
         },
       },
     ],
+    "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/ban-ts-comment": "off",
@@ -146,6 +147,7 @@ module.exports = {
     "import/no-namespace": 2,
     "import/no-deprecated": 1,
     "import/no-duplicates": 2,
+    "import/no-default-export": 2,
     "prefer-rest-params": 0,
     "no-restricted-imports": [
       "error",

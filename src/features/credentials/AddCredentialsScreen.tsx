@@ -1,14 +1,14 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
 import { Tappable } from "../../components/Tappable";
-import type { MockCredential } from "@/types/models";
-import { AppNavigatorProps } from "@/types/navigation";
-import { mockCredentials } from "@/features/credentials/mocks";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import type { MockCredential } from "../../types/models";
+import { mockCredentials } from "./mocks";
+import type { AppNavigatorProps } from "../../types/navigation";
 
 type Props = AppNavigatorProps<"AddCredentialsScreen">;
-const AddCredentialsScreen = ({ navigation }: Props) => {
+export const AddCredentialsScreen = ({ navigation }: Props) => {
   const navigateToAddCredentialDetail = (credential: MockCredential) => {
     navigation.navigate("AddCredentialDetailScreen", { credential });
   };
@@ -51,5 +51,3 @@ const styles = StyleSheet.create({
     gap: SPACE.LARGE,
   },
 });
-
-export default AddCredentialsScreen;

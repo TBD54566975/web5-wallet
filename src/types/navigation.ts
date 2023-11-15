@@ -5,8 +5,8 @@ import type {
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import type Octicons from "@expo/vector-icons/Octicons";
-import type { MockCredential } from "@/types/models";
 import type { ManagedIdentity } from "@web5/agent";
+import type { MockCredential } from "./models";
 
 export type AppNavigatorInterface = {
   WelcomeScreen: undefined;

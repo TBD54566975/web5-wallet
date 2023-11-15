@@ -3,10 +3,10 @@ import {
   useQueries,
   useQuery,
 } from "@tanstack/react-query";
-import { fetchProfile } from "@/features/profile/fetch-profile";
 import { type ManagedIdentity } from "@web5/agent";
-import { type CustomizableUseQueryOptions } from "@/types/use-query";
-import { type Profile } from "@/types/models";
+import { fetchProfile } from "./fetch-profile";
+import type { Profile } from "../../types/models";
+import type { CustomizableUseQueryOptions } from "../../types/use-query";
 
 export const useProfile = (
   identity: ManagedIdentity,

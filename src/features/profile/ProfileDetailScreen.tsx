@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import { BadgeNames } from "@/components/Item";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { View, Text, StyleSheet } from "react-native";
-import { Tappable } from "../../components/Tappable";
-import { LabelValueItem } from "@/components/LabelValue";
-import { formatDID, formatDate } from "@/utils/formatters";
+import { StyleSheet, View, Text } from "react-native";
+import { LabelValueItem } from "../../components/LabelValue";
+import { Loader } from "../../components/Loader";
 import { MenuPageLayout } from "../../components/MenuPageLayout";
-import { AppNavigatorProps } from "@/types/navigation";
-import { useProfile } from "@/features/profile/hooks";
-import Loader from "@/components/Loader";
-import { mockConnections } from "@/features/connect/mocks";
+import { Tappable } from "../../components/Tappable";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import type { AppNavigatorProps } from "../../types/navigation";
+import { formatDID, formatDate } from "../../utils/formatters";
+import { mockConnections } from "../connect/mocks";
+import { useProfile } from "./hooks";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
 type Props = AppNavigatorProps<"ProfileDetailScreen">;
-const ProfileDetailScreen = ({ navigation, route }: Props) => {
+export const ProfileDetailScreen = ({ navigation, route }: Props) => {
   const { identity } = route.params;
 
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
@@ -30,7 +29,7 @@ const ProfileDetailScreen = ({ navigation, route }: Props) => {
       headerItem={{
         heading: identity.name,
         iconName: "hash",
-        badgeName: BadgeNames.PROFILE,
+        badgeName: "feed-person",
       }}
       menuTabs={tabLabels.map((label) => {
         return {
@@ -70,7 +69,7 @@ const ProfileDetailScreen = ({ navigation, route }: Props) => {
                 key={index}
                 heading={connection.name}
                 iconName={connection.icon}
-                badgeName={BadgeNames.CONNECTION}
+                badgeName={"webhook"}
                 onPress={() => navigateToReviewConnection()}
               />
             ))}
@@ -85,5 +84,3 @@ const ProfileDetailScreen = ({ navigation, route }: Props) => {
 const styles = StyleSheet.create({
   row: { gap: SPACE.LARGE },
 });
-
-export default ProfileDetailScreen;

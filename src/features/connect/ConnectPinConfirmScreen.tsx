@@ -1,10 +1,10 @@
 import React from "react";
 import { SafeAreaView, View, StyleSheet, ScrollView, Text } from "react-native";
-import { SPACE } from "@/theme/layouts";
-import { Button } from "@/components/Button";
-import { Typography } from "@/theme/typography";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { Button } from "../../components/Button";
 
-const ConnectPinConfirmScreen = () => {
+export const ConnectPinConfirmScreen = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <ScrollView contentContainerStyle={styles.scrollview}>
@@ -33,5 +33,3 @@ const styles = StyleSheet.create({
   footer: { marginTop: "auto" },
   pin: { fontWeight: "700", fontSize: 96, textAlign: "center" },
 });
-
-export default ConnectPinConfirmScreen;

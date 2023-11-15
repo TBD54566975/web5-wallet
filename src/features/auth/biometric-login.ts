@@ -1,13 +1,17 @@
-/* eslint-disable import/no-namespace */
-import * as LocalAuthentication from "expo-local-authentication";
-import * as SecureStore from "expo-secure-store";
-import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
+import { isEnrolledAsync, authenticateAsync } from "expo-local-authentication";
+import {
+  getItemAsync,
+  setItemAsync,
+  deleteItemAsync,
+  WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+} from "expo-secure-store";
+import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 
 const keychainItemKey = "userPassphrase";
 const keychainService = "website.tbd.wallet.web5.biometriclogin";
 
 const isSupported = async (): Promise<boolean> => {
-  return await LocalAuthentication.isEnrolledAsync();
+  return await isEnrolledAsync();
 };
 
 const login = async (): Promise<boolean> => {
@@ -33,14 +37,14 @@ const login = async (): Promise<boolean> => {
 };
 
 const getStoredPassphrase = async () => {
-  return await SecureStore.getItemAsync(keychainItemKey, { keychainService });
+  return await getItemAsync(keychainItemKey, { keychainService });
 };
 
 const setStoredPassphrase = async (passphrase: string) => {
   try {
-    await LocalAuthentication.authenticateAsync();
-    await SecureStore.setItemAsync(keychainItemKey, passphrase, {
-      keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+    await authenticateAsync();
+    await setItemAsync(keychainItemKey, passphrase, {
+      keychainAccessible: WHEN_UNLOCKED_THIS_DEVICE_ONLY,
       requireAuthentication: true,
       keychainService,
     });
@@ -51,7 +55,7 @@ const setStoredPassphrase = async (passphrase: string) => {
 };
 
 const clearStoredPassphrase = async () => {
-  await SecureStore.deleteItemAsync(keychainItemKey, {
+  await deleteItemAsync(keychainItemKey, {
     keychainService,
   });
 };
