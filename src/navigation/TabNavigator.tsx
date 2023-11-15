@@ -4,15 +4,15 @@ import {
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import Octicons from "@expo/vector-icons/Octicons";
-import ProfilesScreen from "@/features/profile/ProfilesScreen";
-import CredentialsScreen from "@/features/credentials/CredentialsScreen";
-import ConnectionsScreen from "@/features/connect/ConnectionsScreen";
-import ActivityScreen from "@/features/activity/ActivityScreen";
-import DiscoverScreen from "@/features/discover/DiscoverScreen";
-import { Typography } from "@/theme/typography";
-import { ColorTheme } from "@/theme/colors";
-import { SPACE } from "@/theme/layouts";
-import { type TabNavigatorInterface } from "@/types/navigation";
+import { ColorTheme } from "../theme/colors";
+import { SPACE } from "../theme/layouts";
+import { Typography } from "../theme/typography";
+import type { TabNavigatorInterface } from "../types/navigation";
+import { ActivityScreen } from "../features/activity/ActivityScreen";
+import { ConnectionsScreen } from "../features/connect/ConnectionsScreen";
+import { CredentialsScreen } from "../features/credentials/CredentialsScreen";
+import { DiscoverScreen } from "../features/discover/DiscoverScreen";
+import { ProfilesScreen } from "../features/profile/ProfilesScreen";
 
 const Tab = createBottomTabNavigator<TabNavigatorInterface>();
 

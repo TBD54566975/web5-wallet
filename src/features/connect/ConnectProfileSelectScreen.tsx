@@ -7,21 +7,21 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import { Typography } from "@/theme/typography";
-import { SPACE } from "@/theme/layouts";
-import { Avatar } from "@/components/Avatar";
-import { Checkbox } from "@/components/Checkbox";
-import { Button } from "@/components/Button";
-import Loader from "@/components/Loader";
-import { useIdentityList } from "@/features/identity/hooks";
-import { useProfiles } from "@/features/profile/hooks";
-import { ConnectSuite } from "@/features/connect/connect-suite";
-import { useMount } from "@/hooks/useMount";
-import type { AppNavigatorProps } from "@/types/navigation";
-import type { ConnectRequest, Profile } from "@/types/models";
+import { Avatar } from "../../components/Avatar";
+import { Checkbox } from "../../components/Checkbox";
+import { Loader } from "../../components/Loader";
+import { useMount } from "../../hooks/useMount";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { ConnectRequest, Profile } from "../../types/models";
+import { AppNavigatorProps } from "../../types/navigation";
+import { useIdentityList } from "../identity/hooks";
+import { useProfiles } from "../profile/hooks";
+import { ConnectSuite } from "./connect-suite";
+import { Button } from "../../components/Button";
 
 type Props = AppNavigatorProps<"ConnectProfileSelectScreen">;
-const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
+export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const [checkList, setCheckList] = useState<CheckList>([]);
   const [decryptedConnectionRequest, setDecryptedConnectionRequest] =
     useState<ConnectRequest>();
@@ -206,5 +206,3 @@ const styles = StyleSheet.create({
   },
   btn: { flex: 1 },
 });
-
-export default ConnectProfileSelectScreen;

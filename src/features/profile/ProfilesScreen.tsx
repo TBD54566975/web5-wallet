@@ -1,18 +1,18 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Tappable } from "@/components/Tappable";
-import { Button } from "@/components/Button";
-import { SPACE } from "@/theme/layouts";
-import { formatDID } from "@/utils/formatters";
-import { TabNavigatorProps } from "@/types/navigation";
 import type { ManagedIdentity } from "@web5/agent";
-import Loader from "@/components/Loader";
-import { useProfiles } from "@/features/profile/hooks";
-import { useIdentityList } from "@/features/identity/hooks";
+import { Loader } from "../../components/Loader";
+import { Tappable } from "../../components/Tappable";
+import { SPACE } from "../../theme/layouts";
+import { TabNavigatorProps } from "../../types/navigation";
+import { formatDID } from "../../utils/formatters";
+import { useIdentityList } from "../identity/hooks";
+import { useProfiles } from "./hooks";
+import { Button } from "../../components/Button";
 
 type Props = TabNavigatorProps<"ProfilesScreen">;
 
-const ProfilesScreen = ({ navigation }: Props) => {
+export const ProfilesScreen = ({ navigation }: Props) => {
   const { data: allIdentities, isLoading: isLoadingIdentities } =
     useIdentityList();
 
@@ -64,5 +64,3 @@ const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   container: { padding: SPACE.BASE, gap: SPACE.LARGE },
 });
-
-export default ProfilesScreen;

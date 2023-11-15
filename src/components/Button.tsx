@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import { ObjectUtils } from "../utils/object";
 import Octicons from "@expo/vector-icons/Octicons";
-import { ColorTheme } from "@/theme/colors";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
+import { ColorTheme } from "../theme/colors";
+import { SPACE } from "../theme/layouts";
+import { Typography } from "../theme/typography";
 
 export const Button = (
   props: PressableProps & {

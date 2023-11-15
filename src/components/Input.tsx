@@ -1,4 +1,3 @@
-import { Typography } from "@/theme/typography";
 import React from "react";
 import {
   View,
@@ -7,6 +6,7 @@ import {
   TextInputProps,
   StyleSheet,
 } from "react-native";
+import { Typography } from "../theme/typography";
 
 export const Input = (
   props: { label: string; nativeID: string } & TextInputProps

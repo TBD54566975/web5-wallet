@@ -1,4 +1,4 @@
-import { MockConnection } from "@/types/models";
+import type { MockConnection } from "../../types/models";
 
 export const mockConnections: MockConnection[] = [
   {

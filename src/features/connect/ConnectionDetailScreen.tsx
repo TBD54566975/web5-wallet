@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { MenuPageLayout } from "../../components/MenuPageLayout";
-import { LabelValueItem } from "@/components/LabelValue";
-import { formatDID } from "@/utils/formatters";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
+import { LabelValueItem } from "../../components/LabelValue";
 import { Tappable } from "../../components/Tappable";
-import { BadgeNames } from "@/components/Item";
-import { AppNavigatorProps } from "@/types/navigation";
-import { mockConnections } from "@/features/connect/mocks";
-import { mockProfileCredentials } from "@/features/credentials/mocks";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { formatDID } from "../../utils/formatters";
+import { mockProfileCredentials } from "../credentials/mocks";
+import { mockConnections } from "./mocks";
+import type { AppNavigatorProps } from "../../types/navigation";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
 type Props = AppNavigatorProps<"ConnectionDetailScreen">;
-const ConnectionDetailScreen = ({ navigation, route }: Props) => {
+export const ConnectionDetailScreen = ({ navigation, route }: Props) => {
   const { heading, iconName } = route.params;
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
 
@@ -29,7 +28,7 @@ const ConnectionDetailScreen = ({ navigation, route }: Props) => {
       headerItem={{
         heading: heading,
         iconName: iconName,
-        badgeName: BadgeNames.CONNECTION,
+        badgeName: "webhook",
       }}
       menuTabs={tabLabels.map((label) => {
         return {
@@ -63,7 +62,7 @@ const ConnectionDetailScreen = ({ navigation, route }: Props) => {
                   key={index}
                   heading={profile.subtitle}
                   iconName={profile.iconName}
-                  badgeName={BadgeNames.PROFILE}
+                  badgeName={"feed-person"}
                   onPress={() => navigateToReviewConnection()}
                 />
               );
@@ -81,5 +80,3 @@ const styles = StyleSheet.create({
     gap: SPACE.LARGE,
   },
 });
-
-export default ConnectionDetailScreen;

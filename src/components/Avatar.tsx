@@ -1,13 +1,12 @@
 import React from "react";
 import { type ImageURISource, StyleSheet, View, Image } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
-import { ColorTheme } from "@/theme/colors";
-import { BadgeNames } from "@/components/Item";
+import { ColorTheme } from "../theme/colors";
 
 export type AvatarProps = {
   source?: ImageURISource;
   iconName?: keyof typeof Octicons.glyphMap;
-  badgeName?: BadgeNames;
+  badgeName?: keyof typeof Octicons.glyphMap;
 };
 export const Avatar = (props: AvatarProps) => {
   const { source, iconName, badgeName } = props;

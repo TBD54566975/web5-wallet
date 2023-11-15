@@ -8,19 +8,19 @@ import {
   View,
 } from "react-native";
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { Button } from "@/components/Button";
-import { Input } from "@/components/Input";
-import { AppNavigatorProps } from "@/types/navigation";
-import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import { Deeplink } from "@/features/app/deeplink";
-import { BiometricLogin } from "@/features/auth/biometric-login";
-import { useMount } from "@/hooks/useMount";
+import { Input } from "../../components/Input";
+import { useMount } from "../../hooks/useMount";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { AppNavigatorProps } from "../../types/navigation";
+import { Deeplink } from "../app/deeplink";
+import { IdentityAgentManager } from "../identity/IdentityAgentManager";
+import { BiometricLogin } from "./biometric-login";
+import { Button } from "../../components/Button";
 
 type Props = AppNavigatorProps<"EnterPassphraseScreen">;
 
-const EnterPassphraseScreen = ({ navigation }: Props) => {
+export const EnterPassphraseScreen = ({ navigation }: Props) => {
   const [passphrase, setPassphrase] = useState<string>("");
   const [isBiometricLoginSupported, setIsBiometricLoginSupported] =
     useState(false);
@@ -120,5 +120,3 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 });
-
-export default EnterPassphraseScreen;

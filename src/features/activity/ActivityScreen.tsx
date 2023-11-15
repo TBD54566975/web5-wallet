@@ -1,10 +1,10 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ItemStack } from "@/components/Item";
-import { SPACE } from "@/theme/layouts";
-import { mockActivity } from "@/features/activity/mocks";
+import { ItemStack } from "../../components/Item";
+import { SPACE } from "../../theme/layouts";
+import { mockActivity } from "./mocks";
 
-const ActivityScreen = () => {
+export const ActivityScreen = () => {
   return (
     <View style={styles.wrapper}>
       <ScrollView>
@@ -23,5 +23,3 @@ const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   container: { padding: SPACE.BASE, gap: SPACE.LARGE },
 });
-
-export default ActivityScreen;

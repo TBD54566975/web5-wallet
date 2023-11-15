@@ -2,10 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React Native",
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
-    },
     "isolatedModules": false,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,

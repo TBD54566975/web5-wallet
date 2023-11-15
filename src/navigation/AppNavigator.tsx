@@ -4,25 +4,25 @@ import {
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import { TabNavigator } from "./TabNavigator";
-import WelcomeScreen from "@/features/auth/WelcomeScreen";
-import ConnectionDetailScreen from "@/features/connect/ConnectionDetailScreen";
-import ReviewConnectionScreen from "@/features/connect/ReviewConnectionScreen";
-import AddCredentialsScreen from "@/features/credentials/AddCredentialsScreen";
-import CredentialDetailScreen from "@/features/credentials/CredentialDetailScreen";
-import ProfileDetailScreen from "@/features/profile/ProfileDetailScreen";
-import CreatePassphraseScreen from "@/features/auth/CreatePassphraseScreen";
-import CreateProfilesScreen from "@/features/profile/CreateProfilesScreen";
-import CreateWalletScreen from "@/features/identity/CreateWalletScreen";
-import AddProfileScreen from "@/features/profile/AddProfileScreen";
-import AddCredentialDetailScreen from "@/features/credentials/AddCredentialDetailScreen";
-import AddCredentialOptionsScreen from "@/features/credentials/AddCredentialOptionsScreen";
-import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import Loader from "@/components/Loader";
-import EnterPassphraseScreen from "@/features/auth/EnterPassphraseScreen";
-import ConnectProfileSelectScreen from "@/features/connect/ConnectProfileSelectScreen";
-import ConnectQRScanScreen from "@/features/connect/ConnectQRScanScreen";
-import type { AppNavigatorInterface } from "@/types/navigation";
-import ConnectPinConfirmScreen from "@/features/connect/ConnectPinConfirmScreen";
+import type { AppNavigatorInterface } from "../types/navigation";
+import { IdentityAgentManager } from "../features/identity/IdentityAgentManager";
+import { Loader } from "../components/Loader";
+import { CreatePassphraseScreen } from "../features/auth/CreatePassphraseScreen";
+import { EnterPassphraseScreen } from "../features/auth/EnterPassphraseScreen";
+import { WelcomeScreen } from "../features/auth/WelcomeScreen";
+import { ConnectPinConfirmScreen } from "../features/connect/ConnectPinConfirmScreen";
+import { ConnectProfileSelectScreen } from "../features/connect/ConnectProfileSelectScreen";
+import { ConnectQRScanScreen } from "../features/connect/ConnectQRScanScreen";
+import { ConnectionDetailScreen } from "../features/connect/ConnectionDetailScreen";
+import { ReviewConnectionScreen } from "../features/connect/ReviewConnectionScreen";
+import { AddCredentialDetailScreen } from "../features/credentials/AddCredentialDetailScreen";
+import { AddCredentialOptionsScreen } from "../features/credentials/AddCredentialOptionsScreen";
+import { AddCredentialsScreen } from "../features/credentials/AddCredentialsScreen";
+import { CredentialDetailScreen } from "../features/credentials/CredentialDetailScreen";
+import { CreateWalletScreen } from "../features/identity/CreateWalletScreen";
+import { AddProfileScreen } from "../features/profile/AddProfileScreen";
+import { CreateProfilesScreen } from "../features/profile/CreateProfilesScreen";
+import { ProfileDetailScreen } from "../features/profile/ProfileDetailScreen";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 

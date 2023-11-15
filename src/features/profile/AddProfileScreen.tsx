@@ -1,16 +1,16 @@
-import { Button } from "@/components/Button";
-import { Input } from "@/components/Input";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { AppNavigatorProps } from "@/types/navigation";
 import React, { useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import { invalidateIdentityList } from "@/features/identity/hooks";
+import { Input } from "../../components/Input";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { IdentityAgentManager } from "../identity/IdentityAgentManager";
+import { invalidateIdentityList } from "../identity/hooks";
+import { Button } from "../../components/Button";
+import type { AppNavigatorProps } from "../../types/navigation";
 
 type Props = AppNavigatorProps<"AddProfileScreen">;
-const AddProfileScreen = ({ navigation }: Props) => {
+export const AddProfileScreen = ({ navigation }: Props) => {
   const [profileName, setProfileName] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -63,5 +63,3 @@ const AddProfileScreen = ({ navigation }: Props) => {
 const styles = StyleSheet.create({
   container: { padding: SPACE.BASE, gap: SPACE.LARGE },
 });
-
-export default AddProfileScreen;

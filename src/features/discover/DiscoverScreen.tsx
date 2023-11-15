@@ -1,16 +1,15 @@
 import React from "react";
 import { Text, ScrollView, View, StyleSheet } from "react-native";
-import { Typography } from "@/theme/typography";
-import { Tappable } from "@/components/Tappable";
-import { BadgeNames } from "@/components/Item";
-import { mockConnections } from "@/features/connect/mocks";
-import { mockCredentials } from "@/features/credentials/mocks";
-import type { MockCredential, MockConnection } from "@/types/models";
-import type { TabNavigatorProps } from "@/types/navigation";
-import { SPACE } from "@/theme/layouts";
+import { Tappable } from "../../components/Tappable";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { MockCredential, MockConnection } from "../../types/models";
+import { TabNavigatorProps } from "../../types/navigation";
+import { mockConnections } from "../connect/mocks";
+import { mockCredentials } from "../credentials/mocks";
 
 type Props = TabNavigatorProps<"DiscoverScreen">;
-const DiscoverScreen = ({ navigation }: Props) => {
+export const DiscoverScreen = ({ navigation }: Props) => {
   const navigateToAddCredentialDetail = (credential: MockCredential) => {
     navigation.navigate("AddCredentialDetailScreen", { credential });
   };
@@ -36,7 +35,7 @@ const DiscoverScreen = ({ navigation }: Props) => {
                 subtitle={`Issued by ${credential.issuer}`}
                 body={credential.description}
                 iconName={credential.icon}
-                badgeName={BadgeNames.CREDENTIAL}
+                badgeName={"id-badge"}
                 onPress={() => navigateToAddCredentialDetail(credential)}
               />
             );
@@ -51,7 +50,7 @@ const DiscoverScreen = ({ navigation }: Props) => {
                 key={index}
                 heading={connection.name}
                 iconName={connection.icon}
-                badgeName={BadgeNames.CONNECTION}
+                badgeName={"webhook"}
                 onPress={() => navigateToConnectionDetail(connection)}
               />
             );
@@ -66,5 +65,3 @@ const styles = StyleSheet.create({
   container: { margin: SPACE.BASE, gap: SPACE.LARGE },
   row: { gap: SPACE.LARGE },
 });
-
-export default DiscoverScreen;

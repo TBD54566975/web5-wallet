@@ -5,13 +5,13 @@ import {
   type BarCodeScannerResult,
 } from "expo-barcode-scanner";
 import queryString from "query-string";
-import { SPACE } from "@/theme/layouts";
-import { useMount } from "@/hooks/useMount";
-import { Button } from "@/components/Button";
-import type { AppNavigatorProps } from "@/types/navigation";
+import { useMount } from "../../hooks/useMount";
+import { SPACE } from "../../theme/layouts";
+import type { AppNavigatorProps } from "../../types/navigation";
+import { Button } from "../../components/Button";
 
 type Props = AppNavigatorProps<"ConnectQRScanScreen">;
-const ConnectQRScanScreen = ({ navigation }: Props) => {
+export const ConnectQRScanScreen = ({ navigation }: Props) => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [isScanned, setIsScanned] = useState(false);
 
@@ -179,5 +179,3 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.7)",
   },
 });
-
-export default ConnectQRScanScreen;

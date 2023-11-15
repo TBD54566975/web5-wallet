@@ -1,5 +1,4 @@
-import { BadgeNames } from "@/components/Item";
-import { MockCredential } from "@/types/models";
+import type { MockCredential } from "../../types/models";
 
 export const mockCredentials: MockCredential[] = [
   {
@@ -7,19 +6,19 @@ export const mockCredentials: MockCredential[] = [
     issuer: "U.S. State Department",
     description:
       "Accepted by law everywhere your physical passport is required",
-    icon: "archive",
+    icon: "archive" as const,
   },
   {
     name: "KYC Credential",
     issuer: "TBD (Block Inc.)",
     description: "Meets KYC requirements of most PFIs in the tbDEX network",
-    icon: "issue-closed",
+    icon: "issue-closed" as const,
   },
   {
     name: "Foreign Passport",
     issuer: "Foreign Department",
     description: "Foriegn passport for international ID purposes",
-    icon: "archive",
+    icon: "archive" as const,
   },
 ];
 
@@ -29,20 +28,20 @@ export const mockProfileCredentials = [
     subtitle: "All profiles",
     body: "Valid",
     iconName: "note" as const,
-    badgeName: BadgeNames.CREDENTIAL,
+    badgeName: "id-badge" as const,
   },
   {
     heading: "Gym membership",
     subtitle: "Social profile",
     body: "Expired",
     iconName: "zap" as const,
-    badgeName: BadgeNames.CREDENTIAL,
+    badgeName: "id-badge" as const,
   },
   {
     heading: "Employer ID",
     subtitle: "Professional profile",
     body: "Valid",
     iconName: "organization" as const,
-    badgeName: BadgeNames.CREDENTIAL,
+    badgeName: "id-badge" as const,
   },
 ];

@@ -1,4 +1,4 @@
-import { BadgeNames, ItemStackProps } from "@/components/Item";
+import type { ItemStackProps } from "../../components/Item";
 
 export const mockActivity: ItemStackProps[] = [
   {
@@ -7,11 +7,11 @@ export const mockActivity: ItemStackProps[] = [
     images: [
       {
         iconName: "hash",
-        badgeName: BadgeNames.PROFILE,
+        badgeName: "feed-person",
       },
       {
         iconName: "credit-card",
-        badgeName: BadgeNames.CONNECTION,
+        badgeName: "webhook",
       },
     ],
   },
@@ -21,7 +21,7 @@ export const mockActivity: ItemStackProps[] = [
     images: [
       {
         source: { uri: "https://reactnative.dev/img/tiny_logo.png" },
-        badgeName: BadgeNames.PROFILE,
+        badgeName: "feed-person",
       },
     ],
   },
@@ -31,7 +31,7 @@ export const mockActivity: ItemStackProps[] = [
     images: [
       {
         iconName: "briefcase",
-        badgeName: BadgeNames.PROFILE,
+        badgeName: "feed-person",
       },
     ],
   },

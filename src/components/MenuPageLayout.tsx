@@ -1,7 +1,3 @@
-import { Item, ItemProps } from "@/components/Item";
-import { ColorTheme } from "@/theme/colors";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
 import React from "react";
 import {
   View,
@@ -11,6 +7,10 @@ import {
   Text,
   StyleSheet,
 } from "react-native";
+import { ColorTheme } from "../theme/colors";
+import { SPACE } from "../theme/layouts";
+import { Typography } from "../theme/typography";
+import { ItemProps, Item } from "./Item";
 
 export const MenuPageLayout = (props: {
   headerItem: ItemProps;

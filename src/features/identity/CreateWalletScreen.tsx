@@ -6,18 +6,18 @@ import {
   Text,
   View,
 } from "react-native";
-import { SPACE } from "@/theme/layouts";
-import { Typography } from "@/theme/typography";
-import { AppNavigatorProps } from "@/types/navigation";
-import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import { defaultIdentities } from "@/features/identity/default-identities";
-import { Deeplink } from "@/features/app/deeplink";
-import { BiometricLogin } from "@/features/auth/biometric-login";
-import { useMount } from "@/hooks/useMount";
+import { useMount } from "../../hooks/useMount";
+import { SPACE } from "../../theme/layouts";
+import { Typography } from "../../theme/typography";
+import { Deeplink } from "../app/deeplink";
+import { BiometricLogin } from "../auth/biometric-login";
+import { IdentityAgentManager } from "./IdentityAgentManager";
+import { defaultIdentities } from "./default-identities";
+import type { AppNavigatorProps } from "../../types/navigation";
 
 type Props = AppNavigatorProps<"CreateWalletScreen">;
 
-const CreateWalletScreen = ({ navigation, route }: Props) => {
+export const CreateWalletScreen = ({ navigation, route }: Props) => {
   useMount(() => {
     const createWallet = async () => {
       try {
@@ -68,5 +68,3 @@ const centerTextStyle = StyleSheet.create([
   Typography.body2,
   { textAlign: "center" },
 ]);
-
-export default CreateWalletScreen;

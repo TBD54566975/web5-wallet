@@ -5,9 +5,9 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { SPACE } from "@/theme/layouts";
+import { SPACE } from "../theme/layouts";
 
-const Loader = () => {
+export const Loader = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
@@ -25,5 +25,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-export default Loader;

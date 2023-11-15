@@ -1,7 +1,7 @@
-import { Item, ItemProps } from "@/components/Item";
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
+import { ItemProps, Item } from "./Item";
 
 type Props = { onPress: () => void } & ItemProps;
 export const Tappable = (props: Props) => {

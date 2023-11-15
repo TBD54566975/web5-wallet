@@ -1,7 +1,7 @@
 import type { ManagedIdentity } from "@web5/agent";
-import { profileProtocol } from "@/features/profile/protocol/profile-protocol";
-import { IdentityAgentManager } from "@/features/identity/IdentityAgentManager";
-import type { Profile } from "@/types/models";
+import { IdentityAgentManager } from "../identity/IdentityAgentManager";
+import { profileProtocol } from "./protocol/profile-protocol";
+import type { Profile } from "../../types/models";
 
 export const fetchProfile = async (
   identity: ManagedIdentity

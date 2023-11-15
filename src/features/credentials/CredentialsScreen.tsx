@@ -1,14 +1,14 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Tappable } from "@/components/Tappable";
-import { Button } from "@/components/Button";
-import { SPACE } from "@/theme/layouts";
-import { ItemProps } from "@/components/Item";
-import { TabNavigatorProps } from "@/types/navigation";
-import { mockProfileCredentials } from "@/features/credentials/mocks";
+import { ItemProps } from "../../components/Item";
+import { Tappable } from "../../components/Tappable";
+import { SPACE } from "../../theme/layouts";
+import { mockProfileCredentials } from "./mocks";
+import { Button } from "../../components/Button";
+import type { TabNavigatorProps } from "../../types/navigation";
 
 type Props = TabNavigatorProps<"CredentialsScreen">;
-const CredentialsScreen = ({ navigation }: Props) => {
+export const CredentialsScreen = ({ navigation }: Props) => {
   const navigateToItem = (credential: ItemProps) => {
     navigation.navigate("CredentialDetailScreen", {
       heading: credential.heading,
@@ -53,5 +53,3 @@ const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   container: { padding: SPACE.BASE, gap: SPACE.LARGE },
 });
-
-export default CredentialsScreen;

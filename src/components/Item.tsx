@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Typography } from "@/theme/typography";
-import { ColorTheme } from "@/theme/colors";
-import { Avatar, type AvatarProps } from "@/components/Avatar";
+import { Typography } from "../theme/typography";
+import { Avatar, AvatarProps } from "./Avatar";
+import { ColorTheme } from "../theme/colors";
 
 type ItemBodyProps = {
   heading: string;
@@ -77,9 +77,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
-export enum BadgeNames {
-  PROFILE = "feed-person",
-  CREDENTIAL = "id-badge",
-  CONNECTION = "webhook",
-}
