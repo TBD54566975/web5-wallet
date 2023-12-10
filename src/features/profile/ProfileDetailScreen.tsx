@@ -9,7 +9,7 @@ import { Typography } from "../../theme/typography";
 import type { AppNavigatorProps } from "../../types/navigation";
 import { formatDID, formatDate } from "../../utils/formatters";
 import { mockConnections } from "../connect/mocks";
-import { useProfile } from "./hooks";
+import { useProfileQuery } from "./hooks";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
@@ -18,7 +18,8 @@ export const ProfileDetailScreen = ({ navigation, route }: Props) => {
   const { identity } = route.params;
 
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
-  const { data: profile, isLoading: isLoadingProfile } = useProfile(identity);
+  const { data: profile, isLoading: isLoadingProfile } =
+    useProfileQuery(identity);
 
   const navigateToReviewConnection = () => {
     navigation.navigate("ReviewConnectionScreen");

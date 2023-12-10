@@ -6,19 +6,17 @@ import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
 import type { TabNavigatorProps } from "../../types/navigation";
 import { formatDID } from "../../utils/formatters";
-import { useIdentityList } from "../identity/hooks";
-import { useProfiles } from "./hooks";
+import { useIdentityListQuery } from "../identity/hooks";
+import { useProfilesQuery } from "./hooks";
 import { Button } from "../../components/Button";
 
 type Props = TabNavigatorProps<"ProfilesScreen">;
 
 export const ProfilesScreen = ({ navigation }: Props) => {
   const { data: allIdentities, isLoading: isLoadingIdentities } =
-    useIdentityList();
+    useIdentityListQuery();
 
-  const profileQueries = useProfiles(allIdentities ?? [], {
-    enabled: allIdentities !== undefined,
-  });
+  const profileQueries = useProfilesQuery(allIdentities ?? []);
   const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
 
   const navigateToProfile = (identity: ManagedIdentity) => {

@@ -15,8 +15,8 @@ import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
 import type { ConnectRequest, Profile } from "../../types/models";
 import type { AppNavigatorProps } from "../../types/navigation";
-import { useIdentityList } from "../identity/hooks";
-import { useProfiles } from "../profile/hooks";
+import { useIdentityListQuery } from "../identity/hooks";
+import { useProfilesQuery } from "../profile/hooks";
 import { ConnectSuite } from "./connect-suite";
 import { Button } from "../../components/Button";
 
@@ -28,12 +28,9 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
 
   // TODO: these queries need more abstraction
   const { data: allIdentities, isLoading: isLoadingIdentities } =
-    useIdentityList();
+    useIdentityListQuery();
 
-  const profileQueries = useProfiles(allIdentities ?? [], {
-    enabled: allIdentities !== undefined,
-    staleTime: 3600000,
-  });
+  const profileQueries = useProfilesQuery(allIdentities ?? []);
 
   const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
 
