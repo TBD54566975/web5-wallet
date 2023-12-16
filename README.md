@@ -8,10 +8,10 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 
 - nvm (installed without brew)
 - rvm (installed without brew)
-- ruby-2.7.4 installed inside of rvm and selected
+- ruby-3.2.2 installed inside of rvm and selected
 - node v18.16.0 installed inside of nvm and selected
-- npm v9.4.2 installed inside of node v18.16.0 and selected
-- yarn v1.22.19 (installed without brew)
+- npm v9.x.x installed inside of node v18.16.0 and selected
+- yarn v1.x.x (installed without brew)
 - watchman (via homebrew)
 
 ## Using the debugger
@@ -37,7 +37,7 @@ The application can be debugged through VSCode
 
 - `nvm list` should include `->     v18.16.0`
 
-- `rvm list` should include `=* ruby-2.7.4 [ arm64 ]`
+- `rvm list` should include `=* ruby-3.2.2 [ arm64 ]`
 
 ## Further troubleshooting install
 

@@ -58,7 +58,4 @@ export const Typography = StyleSheet.create({
     fontWeight: "400",
     fontSize: 10,
   },
-  textCenter: {
-    textAlign: "center",
-  },
 });

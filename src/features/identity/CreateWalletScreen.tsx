@@ -49,7 +49,7 @@ export const CreateWalletScreen = ({ navigation, route }: Props) => {
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
         <ActivityIndicator size="large" />
-        <Text style={centerTextStyle}>Creating your wallet...</Text>
+        <Text style={styles.text}>Creating your wallet...</Text>
       </View>
     </SafeAreaView>
   );
@@ -62,9 +62,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  text: { ...Typography.body2, textAlign: "center" },
 });
-
-const centerTextStyle = StyleSheet.create([
-  Typography.body2,
-  { textAlign: "center" },
-]);

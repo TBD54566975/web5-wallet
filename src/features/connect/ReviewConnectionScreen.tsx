@@ -69,7 +69,7 @@ export const ReviewConnectionScreen = () => {
               kind="destructive"
               text={`Disconnect ${connection.name} from ${profile.name}`}
             />
-            <Text style={disclaimerText}>
+            <Text style={styles.disclaimerText}>
               Disconnecting may take up to 24 hours
             </Text>
           </View>
@@ -87,10 +87,9 @@ const styles = StyleSheet.create({
   },
   column: { gap: SPACE.XSMALL },
   row: { gap: SPACE.SMALL },
+  disclaimerText: {
+    ...Typography.label3,
+    textAlign: "center",
+    color: ColorTheme.REDUCED,
+  },
 });
-
-const disclaimerText = StyleSheet.create([
-  Typography.label3,
-  Typography.textCenter,
-  { color: ColorTheme.REDUCED },
-]);

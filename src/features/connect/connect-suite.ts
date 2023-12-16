@@ -73,7 +73,7 @@ const createGrantsForDid = async (
 ) => {
   try {
     const { privateJwk } = await Secp256k1.generateKeyPair();
-    const authorizationSigner = new PrivateKeySigner({
+    const signer = new PrivateKeySigner({
       privateJwk,
       keyId: "did:jank:bob",
     });
@@ -95,7 +95,7 @@ const createGrantsForDid = async (
             interface: DwnInterfaceName.Records,
             method: DwnMethodName.Write,
           },
-          authorizationSigner,
+          signer,
         })
     );
 
@@ -237,6 +237,8 @@ const getMockConnectionRequest = () => {
       method: DwnMethodName.Write,
       protocol: "profile",
     },
+    // @ts-expect-error this is a mock
+    signer: undefined,
   };
 
   const mockPermissionsRequest2: ConnectRequestPermission = {
@@ -249,6 +251,8 @@ const getMockConnectionRequest = () => {
       method: DwnMethodName.Write,
       protocol: "profile",
     },
+    // @ts-expect-error this is a mock
+    signer: undefined,
   };
 
   const mockConnectionRequest: ConnectRequest = {
