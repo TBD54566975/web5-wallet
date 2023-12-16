@@ -1,6 +1,7 @@
 default_platform(:android)
 
 platform :android do
+  skip_docs
   package_json = load_json(json_path: '../package.json')
   version = package_json['version']
   build_number = package_json['buildNumber']
