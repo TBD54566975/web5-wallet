@@ -37,8 +37,8 @@
     "@types/uuid": "9.0.7",
     "@web5/agent": "0.2.5",
     "@web5/api": "0.8.3",
-    "@web5/credentials": "0.3.2",
-    "@web5/dids": "0.2.3",
+    "@web5/credentials": "0.4.1",
+    "@web5/dids": "0.2.4",
     "@web5/identity-agent": "0.2.5",
     "expo": "^50.0.0-preview.4",
     "expo-barcode-scanner": "~12.9.0",
@@ -81,7 +81,7 @@
     "eslint-plugin-react-native": "4.1.0",
     "patch-package": "8.0.0",
     "postinstall-postinstall": "2.1.0",
-    "typescript": "^5.3.0"
+    "typescript": "5.3.3"
   },
   "private": true
 }
