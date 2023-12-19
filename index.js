@@ -1,5 +1,6 @@
 import "@tbd54566975/web5-react-native-polyfills";
 import "./src/utils/globals";
+import "react-native-gesture-handler";
 import { AppRegistry } from "react-native";
 import { polyfillBlob } from "./blob-polyfill";
 import { Crypto } from "@peculiar/webcrypto";

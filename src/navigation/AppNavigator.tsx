@@ -23,6 +23,7 @@ import { CreateWalletScreen } from "../features/identity/CreateWalletScreen";
 import { AddProfileScreen } from "../features/profile/AddProfileScreen";
 import { CreateProfilesScreen } from "../features/profile/CreateProfilesScreen";
 import { ProfileDetailScreen } from "../features/profile/ProfileDetailScreen";
+import { NOIDCScreen } from "../features/credentials/NOIDCScreen";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
@@ -116,6 +117,7 @@ export const AppNavigator = () => {
           name="ConnectPinConfirmScreen"
           component={ConnectPinConfirmScreen}
         />
+        <Stack.Screen name="NOIDCScreen" component={NOIDCScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

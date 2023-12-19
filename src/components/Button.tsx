@@ -2,11 +2,11 @@ import React from "react";
 import {
   Text,
   StyleSheet,
-  Pressable,
-  type PressableProps,
   type StyleProp,
   type ViewStyle,
   type TextStyle,
+  type TouchableOpacityProps,
+  TouchableOpacity,
 } from "react-native";
 import { ObjectUtils } from "../utils/object";
 import Octicons from "@expo/vector-icons/Octicons";
@@ -15,7 +15,7 @@ import { SPACE } from "../theme/layouts";
 import { Typography } from "../theme/typography";
 
 export const Button = (
-  props: PressableProps & {
+  props: TouchableOpacityProps & {
     kind: "primary" | "secondary" | "disabled" | "destructive";
     style?: StyleProp<ViewStyle>;
     text: string;
@@ -70,10 +70,12 @@ export const Button = (
   };
 
   return (
-    <Pressable {...pressableProps} style={buttonStyle()}>
-      <Text style={textStyle()}>{text}</Text>
-      {!!icon && <Octicons name={icon} style={styles.icon} />}
-    </Pressable>
+    <TouchableOpacity {...pressableProps} style={buttonStyle()}>
+      <>
+        <Text style={textStyle()}>{text}</Text>
+        {!!icon && <Octicons name={icon} style={styles.icon} />}
+      </>
+    </TouchableOpacity>
   );
 };
 
