@@ -37,6 +37,9 @@ export type AppNavigatorInterface = {
   };
   ConnectQRScanScreen: undefined;
   ConnectPinConfirmScreen: undefined;
+  NOIDCScreen: {
+    url: string;
+  };
 };
 
 export type TabNavigatorInterface = {
