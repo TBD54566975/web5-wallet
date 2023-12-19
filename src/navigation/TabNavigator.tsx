@@ -13,6 +13,7 @@ import { ConnectionsScreen } from "../features/connect/ConnectionsScreen";
 import { CredentialsScreen } from "../features/credentials/CredentialsScreen";
 import { DiscoverScreen } from "../features/discover/DiscoverScreen";
 import { ProfilesScreen } from "../features/profile/ProfilesScreen";
+import { OIDCScreen } from "../features/credentials/OIDCScreen";
 
 const Tab = createBottomTabNavigator<TabNavigatorInterface>();
 
@@ -20,8 +21,8 @@ export const TabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={tabOptions}>
       <Tab.Screen
-        name="DiscoverScreen"
-        component={DiscoverScreen}
+        name="OIDCScreen"
+        component={OIDCScreen}
         options={discoverScreenOptions}
       />
       <Tab.Screen

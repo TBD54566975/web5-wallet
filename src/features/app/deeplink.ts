@@ -6,7 +6,7 @@ import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 let delayedDeeplink: string | null = null;
 
 const config: LinkingOptions<AppNavigatorInterface> = {
-  prefixes: ["web5://"],
+  prefixes: ["web5://", "openid-vc://"],
   filter: (url) => {
     // Do not handle any deeplinks until the IdentityAgent has been started.
     // If a deeplink comes in before the agent has been started, delay handling
@@ -21,6 +21,12 @@ const config: LinkingOptions<AppNavigatorInterface> = {
     screens: {
       ConnectProfileSelectScreen: "connect",
       NOIDCScreen: "credentials/issuance",
+      OIDCScreen: {
+        path: "openid-vc",
+        parse: {
+          request_uri: (request_uri) => request_uri,
+        },
+      },
     },
   },
 };

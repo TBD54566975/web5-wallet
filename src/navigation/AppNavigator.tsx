@@ -24,6 +24,7 @@ import { AddProfileScreen } from "../features/profile/AddProfileScreen";
 import { CreateProfilesScreen } from "../features/profile/CreateProfilesScreen";
 import { ProfileDetailScreen } from "../features/profile/ProfileDetailScreen";
 import { NOIDCScreen } from "../features/credentials/NOIDCScreen";
+import { OIDCScreen } from "../features/credentials/OIDCScreen";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
@@ -73,6 +74,8 @@ export const AppNavigator = () => {
 
       {/* Tabs */}
       <Stack.Screen name="Tabs" component={TabNavigator} />
+
+      {/* Most other screens */}
       <Stack.Group screenOptions={authedGroupOptions}>
         <Stack.Screen
           name="ProfileDetailScreen"
@@ -118,6 +121,7 @@ export const AppNavigator = () => {
           component={ConnectPinConfirmScreen}
         />
         <Stack.Screen name="NOIDCScreen" component={NOIDCScreen} />
+        <Stack.Screen name="OIDCScreen" component={OIDCScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );

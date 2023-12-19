@@ -40,6 +40,7 @@ export type AppNavigatorInterface = {
   NOIDCScreen: {
     url: string;
   };
+  OIDCScreen: undefined;
 };
 
 export type TabNavigatorInterface = {
