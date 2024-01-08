@@ -12,6 +12,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Typography } from "../../theme/typography";
 import { useIdentityListQuery } from "../identity/hooks";
 import { Button } from "../../components/Button";
+import { Jwt } from "@web5/credentials";
+import { DidKeyMethod } from "@web5/dids";
+import type { ManagedIdentity } from "@web5/agent";
 
 type Props = AppNavigatorProps<"NOIDCScreen">;
 export const NOIDCScreen = ({ route }: Props) => {
@@ -34,6 +37,7 @@ export const NOIDCScreen = ({ route }: Props) => {
       case "VC_RESPONSE":
         const data = message.payload;
         setCredentialReceived(data);
+        didBottomSheetRef.current?.dismiss();
         credentialBottomSheetRef.current?.present();
         break;
     }
@@ -46,8 +50,21 @@ export const NOIDCScreen = ({ route }: Props) => {
     [url]
   );
 
-  const buildDidResponseMessage = (did: string) =>
-    `document.dispatchEvent(new CustomEvent('DidResponse', { detail: '${did}' }));`;
+  const buildDidResponseMessage = async (identity: ManagedIdentity) => {
+    // TODO: after Frank updates KMS get the real key and sign
+    NOOP(identity);
+    const didKey = await DidKeyMethod.create();
+
+    const jwt = await Jwt.sign({
+      signerDid: didKey,
+      payload: {
+        nonce: "1234567",
+        iss: didKey.did,
+        sub: didKey.did,
+      },
+    });
+    return `document.dispatchEvent(new CustomEvent('DidResponse', { detail: '${jwt}' }));`;
+  };
 
   return (
     <BottomSheetModalProvider>
@@ -81,8 +98,8 @@ export const NOIDCScreen = ({ route }: Props) => {
                     key={identity.did}
                     kind={"primary"}
                     text={`${identity.name}`}
-                    onPress={() => {
-                      const message = buildDidResponseMessage(identity.did);
+                    onPress={async () => {
+                      const message = await buildDidResponseMessage(identity);
                       webviewRef.current?.injectJavaScript(message);
                       didBottomSheetRef.current?.close();
                     }}
