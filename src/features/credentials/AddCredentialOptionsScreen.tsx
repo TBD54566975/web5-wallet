@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Avatar } from "../../components/Avatar";
-import { Item, type ItemProps } from "../../components/Item";
+import { Item } from "../../components/Item";
 import { ColorTheme } from "../../theme/colors";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
@@ -64,7 +64,7 @@ export const AddCredentialOptionsScreen = ({ navigation, route }: Props) => {
                       heading={profile.name}
                       subtitle={profile.description}
                       body={formatDID(profile.id)}
-                      iconName={profile.icon as ItemProps["iconName"]}
+                      iconName={profile.icon}
                       badgeName={"feed-person"}
                     />
                   </View>
