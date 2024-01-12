@@ -11,15 +11,15 @@ const tabLabels = ["About", "Activity"];
 
 type Props = AppNavigatorProps<"CredentialDetailScreen">;
 export const CredentialDetailScreen = ({ route }: Props) => {
+  const { heading, subtitle, iconName } = route.params;
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
   const [credValid, setCredValid] = useState("Pending");
 
   // NOTE: Replace with actual VC from database passed in from params, this is an example JWT that would be stored in the database with a web5 deep link
   const vcJwt =
     "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCIsImtpZCI6IiN6Nk1rdTVwWHBkMzdwcm9jMzgyNzVQR2I5MXJma283ZGFYd2JDN1FnOWN4NHFNbkIifQ.eyJpc3MiOiJkaWQ6a2V5Ono2TWt1NXBYcGQzN3Byb2MzODI3NVBHYjkxcmZrbzdkYVh3YkM3UWc5Y3g0cU1uQiIsInN1YiI6ImRpZDprZXk6ejZNa3U1cFhwZDM3cHJvYzM4Mjc1UEdiOTFyZmtvN2RhWHdiQzdRZzljeDRxTW5CIiwidmMiOnsiQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiXSwiaWQiOiJidGMtY3JlZGVudGlhbCIsInR5cGUiOlsiVmVyaWZpYWJsZUNyZWRlbnRpYWwiXSwiaXNzdWVyIjoiZGlkOmtleTp6Nk1rdTVwWHBkMzdwcm9jMzgyNzVQR2I5MXJma283ZGFYd2JDN1FnOWN4NHFNbkIiLCJpc3N1YW5jZURhdGUiOiIyMDIzLTEwLTI2VDE4OjA4OjI5WiIsImNyZWRlbnRpYWxTdWJqZWN0Ijp7ImZpcnN0TmFtZSI6IkFsZXhhbmRlciIsImxhc3ROYW1lIjoiTmFrYW1vdG8iLCJkYXRlT2ZCaXJ0aCI6IlNhdCBKYW4gMSAxOTkwIiwiYWRkcmVzcyI6IjEwMSBNYWluIFN0In19fQ.UBeSL-KX_Wm8EjWabc_WL1WLk_zyES-g1FR3IeTF02SUu_kJy9I7M3xTPEYPcOaXbesP73W5IsXwrzNaybRkCA";
-  const { heading, subtitle, iconName } = route.params;
 
-  const decodedVC = VerifiableCredential.parseJwt(vcJwt);
+  const decodedVC = VerifiableCredential.parseJwt({ vcJwt: vcJwt });
   const issuer = decodedVC.issuer;
   const subject = decodedVC.subject;
   const dateAcquired = decodedVC.vcDataModel.issuanceDate;
@@ -34,7 +34,7 @@ export const CredentialDetailScreen = ({ route }: Props) => {
   useEffect(() => {
     const verifyCredential = async () => {
       try {
-        await VerifiableCredential.verify(vcJwt);
+        await VerifiableCredential.verify({ vcJwt: vcJwt });
         setCredValid("Valid");
       } catch (error) {
         console.error(
