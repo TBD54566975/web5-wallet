@@ -1,191 +1,372 @@
 import React, { useMemo, useRef, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView, type WebViewMessageEvent } from "react-native-webview";
+import type { BottomSheetModal } from "@gorhom/bottom-sheet";
+import {
+  Jwt,
+  PresentationExchange,
+  type PresentationDefinitionV2,
+} from "@web5/credentials";
+import { DidKeyMethod } from "@web5/dids";
 import type { AppNavigatorProps } from "../../types/navigation";
 import {
-  BottomSheetBackdrop,
-  BottomSheetModal,
-  type BottomSheetBackdropProps,
-  BottomSheetModalProvider,
-} from "@gorhom/bottom-sheet";
-import { SafeAreaView } from "react-native-safe-area-context";
+  type CheckList,
+  ProfileSelectChecklist,
+} from "../profile/components/ProfileSelectChecklist";
 import { Typography } from "../../theme/typography";
-import { useIdentityListQuery } from "../identity/hooks";
 import { Button } from "../../components/Button";
-import { Jwt } from "@web5/credentials";
-import { DidKeyMethod } from "@web5/dids";
-import type { ManagedIdentity } from "@web5/agent";
+import { SPACE } from "../../theme/layouts";
+import { Item } from "../../components/Item";
+import { BottomSheet } from "../../components/BottomSheet";
+import { credentialStore } from "./atom";
+import { Checkable } from "../../components/Tappable";
 
 type Props = AppNavigatorProps<"NOIDCScreen">;
-export const NOIDCScreen = ({ route }: Props) => {
-  const { data: identities } = useIdentityListQuery();
-  const webviewRef = useRef<WebView>(null);
-  const didBottomSheetRef = useRef<BottomSheetModal>(null);
-  const credentialBottomSheetRef = useRef<BottomSheetModal>(null);
-  const [credentialReceived, setCredentialReceived] = useState(null);
+const webviewRef = React.createRef<WebView>();
+export const NOIDCScreen = ({ route, navigation }: Props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [credentialReceived, setCredentialReceived] = useState<null | string>(
+    null
+  );
+  const [sheetRoute, setSheetRoute] = useState("CredentialSelectSheet");
+  const [presentationDefinition, setPresentationDefinition] = useState<any>();
+  const [selectedProfiles, setSelectedProfiles] = useState<CheckList>();
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
 
   const url = route.params.url;
 
-  type WebviewMessage = { type: "DID_REQUEST" | "VC_RESPONSE"; payload: any };
-  const handleWebviewMessage = (event: WebViewMessageEvent) => {
-    const message: WebviewMessage = JSON.parse(event.nativeEvent.data);
+  type IncomingMessage = {
+    type: "PRESENTATION_DEFINITION_RESPONSE" | "DID_REQUEST" | "VC_RESPONSE";
+    payload: string;
+  };
+  const onIncomingMessage = (event: WebViewMessageEvent) => {
+    const message: IncomingMessage = JSON.parse(event.nativeEvent.data);
 
     switch (message.type) {
-      case "DID_REQUEST":
-        didBottomSheetRef.current?.present();
+      case "PRESENTATION_DEFINITION_RESPONSE":
+        setPresentationDefinition(message.payload);
+        setSheetRoute("CredentialSelectSheet");
+        bottomSheetRef.current?.present();
         break;
+      // user must select a profile
+      case "DID_REQUEST":
+        setSheetRoute("ProfileSelectSheet");
+        bottomSheetRef.current?.present();
+        break;
+      // noidc success
+      // TODO: this is out of order
       case "VC_RESPONSE":
         const data = message.payload;
         setCredentialReceived(data);
-        didBottomSheetRef.current?.dismiss();
-        credentialBottomSheetRef.current?.present();
+        setSheetRoute("ProfileConfirmSheet");
         break;
     }
   };
 
-  const source = useMemo(
+  const webviewSource = useMemo(
     () => ({
       uri: url,
     }),
     [url]
   );
 
-  const buildDidResponseMessage = async (identity: ManagedIdentity) => {
-    // TODO: after Frank updates KMS get the real key and sign
-    NOOP(identity);
-    const didKey = await DidKeyMethod.create();
+  // CredentialSelectSheet
+  const onCredentialSelect = (presentationDefinition: any, credential: any) => {
+    const presentationSubmission =
+      PresentationExchange.createPresentationFromCredentials({
+        presentationDefinition: presentationDefinition,
+        vcJwts: credential,
+      });
+    const stringifiedPS = JSON.stringify(presentationSubmission);
 
-    const jwt = await Jwt.sign({
-      signerDid: didKey,
-      payload: {
-        nonce: "1234567",
-        iss: didKey.did,
-        sub: didKey.did,
-      },
-    });
-    return `document.dispatchEvent(new CustomEvent('DidResponse', { detail: '${jwt}' }));`;
+    webviewRef.current?.injectJavaScript(
+      `document.dispatchEvent(new CustomEvent('PresentationSubmission', { detail: ${stringifiedPS} }));`
+    );
+    bottomSheetRef.current?.dismiss();
+  };
+
+  // ProfileSelectSheet
+  const onCancel = () => bottomSheetRef.current?.dismiss();
+  const onProfileSelect = (checkedItems: CheckList) => {
+    setSelectedProfiles(checkedItems);
+  };
+
+  // ProfileConfirmSheet
+  const onProfileConfirm = () => {
+    setSheetRoute("NOIDCSuccessSheet");
+  };
+  const onProfileUnconfirm = () => setSheetRoute("CredentialSelectSheet");
+
+  // NOIDCSuccessSheet
+  const onNOIDCSuccessAccept = () => {
+    bottomSheetRef.current?.dismiss();
+    navigation.goBack();
+  };
+
+  const handleSheetRoute = () => {
+    switch (sheetRoute) {
+      case "CredentialSelectSheet":
+        return (
+          <CredentialSelectSheet
+            onCancel={onCancel}
+            presentationDefinition={presentationDefinition}
+            onCredentialSelect={onCredentialSelect}
+          />
+        );
+      case "ProfileSelectSheet":
+        return (
+          <ProfileSelectSheet
+            onCancel={onCancel}
+            onProfileSelect={onProfileSelect}
+          />
+        );
+      case "ProfileConfirmSheet":
+        return (
+          <ProfileConfirmSheet
+            onProfileUnconfirm={onProfileUnconfirm}
+            onProfileConfirm={onProfileConfirm}
+          />
+        );
+      case "NOIDCSuccessSheet":
+        return (
+          <NOIDCSuccessSheet onNOIDCSuccessAccept={onNOIDCSuccessAccept} />
+        );
+    }
   };
 
   return (
-    <BottomSheetModalProvider>
-      <SafeAreaView style={styles.wrapper}>
-        <View style={styles.wrapper}>
-          <WebView
-            ref={webviewRef}
-            injectedJavaScriptBeforeContentLoadedForMainFrameOnly={false}
-            injectedJavaScriptForMainFrameOnly={false}
-            mixedContentMode="always"
-            pullToRefreshEnabled={true}
-            source={source}
-            thirdPartyCookiesEnabled={true}
-            applicationNameForUserAgent={"NOIDC"}
-            onMessage={handleWebviewMessage}
+    <SafeAreaView style={styles.wrapper}>
+      <View style={styles.wrapper}>
+        <WebView
+          ref={webviewRef}
+          injectedJavaScriptBeforeContentLoadedForMainFrameOnly={false}
+          injectedJavaScriptForMainFrameOnly={false}
+          mixedContentMode="always"
+          pullToRefreshEnabled={true}
+          thirdPartyCookiesEnabled={true}
+          source={webviewSource}
+          onMessage={onIncomingMessage}
+        />
+        <BottomSheet ref={bottomSheetRef}>{handleSheetRoute()}</BottomSheet>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+type CredentialSelectSheetProps = {
+  onCancel: () => void;
+  presentationDefinition: PresentationDefinitionV2;
+  onCredentialSelect: (presentationDefinition: any, credential: any) => void;
+};
+const CredentialSelectSheet = ({
+  onCancel,
+  presentationDefinition,
+  onCredentialSelect,
+}: CredentialSelectSheetProps) => {
+  const matchingCreds = PresentationExchange.selectCredentials({
+    vcJwts: [...credentialStore.keys()],
+    presentationDefinition,
+  });
+  const hasMatchingCreds = Boolean(matchingCreds.length);
+  const [selectedCredential, setSelectedCredential] = useState<string | null>(
+    null
+  );
+
+  if (!hasMatchingCreds) {
+    <>
+      <Text style={Typography.heading1}>Credential required</Text>
+      <Text>
+        To proceed you are required to provide a credential for
+        {presentationDefinition.name}. Please check with the issuer to find out
+        how to obtain the required credential.
+      </Text>
+      <View style={styles.btnRow}>
+        <Button
+          kind="secondary"
+          text="Cancel"
+          style={styles.btn}
+          onPress={onCancel}
+        />
+      </View>
+    </>;
+  }
+
+  return (
+    <>
+      <Text style={Typography.heading1}>Attach required credential</Text>
+      <Text>
+        You are being requested to provide a credential for{" "}
+        {presentationDefinition.name}{" "}
+      </Text>
+
+      <Text>Please select the credential you would like to use:</Text>
+      {[...credentialStore].map(([vcJwt, credential], index) => {
+        const cred: Record<string, any> = credential.vcDataModel;
+        delete cred.credentialSubject.id;
+
+        return (
+          <Checkable
+            key={index}
+            checked={selectedCredential === vcJwt}
+            onPress={() => setSelectedCredential(vcJwt)}
+            heading={cred.type[1]}
+            subtitle={JSON.stringify(Object.values(cred.credentialSubject))}
           />
-          <BottomSheetModal
-            ref={didBottomSheetRef}
-            enablePanDownToClose={true}
-            index={0}
-            snapPoints={snapPoints}
-            handleComponent={BottomSheetKnob}
-            backdropComponent={BottomSheetBackdropCustom}
-            style={styles.bottomSheet}
-          >
-            <View style={styles.bottomSheetContainer}>
-              <Text style={Typography.heading1}>Select a profile</Text>
-              <View style={styles.profileButtonList}>
-                {identities?.map((identity) => (
-                  <Button
-                    key={identity.did}
-                    kind={"primary"}
-                    text={`${identity.name}`}
-                    onPress={async () => {
-                      const message = await buildDidResponseMessage(identity);
-                      webviewRef.current?.injectJavaScript(message);
-                      didBottomSheetRef.current?.close();
-                    }}
-                  />
-                ))}
-              </View>
-            </View>
-          </BottomSheetModal>
-          <BottomSheetModal
-            ref={credentialBottomSheetRef}
-            enablePanDownToClose={true}
-            index={0}
-            snapPoints={snapPoints}
-            handleComponent={BottomSheetKnob}
-            backdropComponent={BottomSheetBackdropCustom}
-            style={styles.bottomSheet}
-          >
-            <View style={styles.bottomSheetContainer}>
-              <Text style={Typography.heading1}>Credential Received</Text>
-              <Text>{JSON.stringify(credentialReceived)}</Text>
-            </View>
-          </BottomSheetModal>
-        </View>
-      </SafeAreaView>
-    </BottomSheetModalProvider>
+        );
+      })}
+      <View style={styles.btnRow}>
+        <Button
+          kind="secondary"
+          text="Cancel"
+          style={styles.btn}
+          onPress={onCancel}
+        />
+        <Button
+          disabled={selectedCredential === null}
+          kind="primary"
+          text="Attach"
+          style={styles.btn}
+          onPress={() => {
+            if (selectedCredential !== null) {
+              onCredentialSelect(presentationDefinition, selectedCredential);
+            }
+          }}
+        />
+      </View>
+    </>
+  );
+};
+
+type ProfileSelectSheetProps = {
+  onCancel: () => void;
+  onProfileSelect: (checklist: CheckList) => void;
+};
+const ProfileSelectSheet = ({
+  onCancel,
+  onProfileSelect,
+}: ProfileSelectSheetProps) => {
+  const [checkList, setCheckList] = useState<CheckList>([]);
+  const checkedItems = checkList.flatMap((listItem) =>
+    listItem.checked ? listItem : []
+  );
+  const hasCheckedItems = Boolean(checkedItems.length);
+
+  const buildDidResponseMessage = async () => {
+    // TODO: after Frank updates KMS get the real key and sign
+    const didKey = await DidKeyMethod.create();
+    const didJwtPromises = checkedItems.map(() =>
+      Jwt.sign({
+        signerDid: didKey,
+        payload: {
+          nonce: "1234567",
+          iss: didKey.did,
+          sub: didKey.did,
+        },
+      })
+    );
+
+    const didJwts = await Promise.all(didJwtPromises);
+    const stringifiedDidJwts = JSON.stringify(didJwts);
+
+    if (stringifiedDidJwts) {
+      return `document.dispatchEvent(new CustomEvent('DidResponse', { detail: '${stringifiedDidJwts}' }));`;
+    }
+  };
+
+  const onNextPressed = async () => {
+    const didResponse = await buildDidResponseMessage();
+
+    // TODO: make declarative
+    if (didResponse) {
+      console.log("sending didresponse");
+      onProfileSelect(checkedItems);
+      webviewRef.current?.injectJavaScript(didResponse);
+      console.log("injected JS");
+    }
+  };
+
+  return (
+    <>
+      <Text style={Typography.heading1}>Select profiles</Text>
+      <ProfileSelectChecklist
+        setCheckList={setCheckList}
+        checkList={checkList}
+      />
+      <View style={styles.btnRow}>
+        <Button
+          kind="secondary"
+          text="Cancel"
+          style={styles.btn}
+          onPress={onCancel}
+        />
+        <Button
+          disabled={!hasCheckedItems}
+          kind={"primary"}
+          text="Next"
+          style={styles.btn}
+          onPress={onNextPressed}
+        />
+      </View>
+    </>
+  );
+};
+
+type ProfileConfirmSheetProps = {
+  onProfileUnconfirm: () => void;
+  onProfileConfirm: () => void;
+};
+const ProfileConfirmSheet = ({
+  onProfileConfirm,
+  onProfileUnconfirm,
+}: ProfileConfirmSheetProps) => {
+  return (
+    <>
+      <Text style={Typography.heading1}>Confirm Application</Text>
+      <Text>
+        Your credential application is ready to submit. If approved, credentials
+        will be issued to the following profiles:
+      </Text>
+      <Item heading="My social profile" body="Sanjay" iconName="person" />
+      <View style={styles.btnRow}>
+        <Button
+          kind="secondary"
+          text="Back"
+          style={styles.btn}
+          onPress={onProfileUnconfirm}
+        />
+        <Button
+          kind={"primary"}
+          text="Next"
+          style={styles.btn}
+          onPress={onProfileConfirm}
+        />
+      </View>
+    </>
+  );
+};
+
+type NOIDCSuccessSheet = { onNOIDCSuccessAccept: () => void };
+const NOIDCSuccessSheet = ({ onNOIDCSuccessAccept }: NOIDCSuccessSheet) => {
+  return (
+    <>
+      <Text style={Typography.heading1}>Application Submitted</Text>
+      <Text>Your credential application is submitted.</Text>
+      <Button
+        kind={"primary"}
+        text="Close"
+        style={styles.btn}
+        onPress={onNOIDCSuccessAccept}
+      />
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
-  bottomSheetContainer: {
-    flex: 1,
-    paddingHorizontal: 16,
-    gap: 16,
+  btnRow: {
+    flexDirection: "row",
+    gap: SPACE.SMALL,
   },
-  bottomSheetKnobHeader: {
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFF",
-    paddingVertical: 14,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: -20,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#FFF",
-    borderTopLeftRadius: 64,
-    borderTopRightRadius: 64,
-  },
-  bottomSheetKnobBody: {
-    position: "absolute",
-    width: 50,
-    height: 4,
-    backgroundColor: "#999",
-    borderTopLeftRadius: 2,
-    borderTopRightRadius: 2,
-    borderBottomLeftRadius: 2,
-    borderBottomRightRadius: 2,
-  },
-  bottomSheet: {
-    paddingBottom: 35,
-    paddingHorizontal: 5,
-  },
-  profileButtonList: { flexWrap: "wrap", flexDirection: "row", gap: 8 },
+  btn: { flex: 1 },
 });
-
-const snapPoints = ["40%"];
-
-const BottomSheetKnob = () => {
-  return (
-    <View style={styles.bottomSheetKnobHeader}>
-      <View style={styles.bottomSheetKnobBody} />
-    </View>
-  );
-};
-
-const BottomSheetBackdropCustom = (props: BottomSheetBackdropProps) => (
-  <BottomSheetBackdrop
-    {...props}
-    appearsOnIndex={0}
-    disappearsOnIndex={-1}
-    enableTouchThrough={false}
-    pressBehavior="none"
-  />
-);

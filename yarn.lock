@@ -2666,6 +2666,11 @@
     react-native-url-polyfill "^2.0.0"
     stream-browserify "^3.0.0"
 
+"@th3rdwave/react-navigation-bottom-sheet@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@th3rdwave/react-navigation-bottom-sheet/-/react-navigation-bottom-sheet-0.2.7.tgz#c9a0d1a270c5d5d275769fc4cccb8cebe25f22f8"
+  integrity sha512-tO6W7RJTQVWJb/Q4aD3mokmilKFCU//g5YCvh1Al7fveMGLZDTaZGwte/ReuRm5Wl5oKIYd6IURruCE1G8/n9A==
+
 "@types/cookie@^0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.4.1.tgz#bfd02c1f2224567676c1545199f87c3a861d878d"
@@ -4496,6 +4501,11 @@ deprecated-react-native-prop-types@^5.0.0:
     "@react-native/normalize-colors" "^0.73.0"
     invariant "^2.2.4"
     prop-types "^15.8.1"
+
+derive-valtio@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/derive-valtio/-/derive-valtio-0.1.0.tgz#4b9fb393dfefccfef15fcbbddd745dd22d5d63d7"
+  integrity sha512-OCg2UsLbXK7GmmpzMXhYkdO64vhJ1ROUUGaTFyHjVwEdMEcTTRj7W1TxLbSBxdY8QLBPCcp66MTyaSy0RpO17A==
 
 des.js@^1.0.0:
   version "1.1.0"
@@ -8135,6 +8145,11 @@ protons-runtime@^5.0.0:
     uint8arraylist "^2.4.3"
     uint8arrays "^4.0.6"
 
+proxy-compare@2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/proxy-compare/-/proxy-compare-2.5.1.tgz#17818e33d1653fbac8c2ec31406bce8a2966f600"
+  integrity sha512-oyfc0Tx87Cpwva5ZXezSp5V9vht1c7dZBhvuV/y3ctkgMVUmiAGDVeeB0dKhGSyT0v1ZTEQYpe/RXlBVBNuCLA==
+
 public-encrypt@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/public-encrypt/-/public-encrypt-4.0.3.tgz#4fcc9d77a07e48ba7527e7cbe0de33d0701331e0"
@@ -9819,6 +9834,11 @@ use-latest-callback@^0.1.7:
   resolved "https://registry.yarnpkg.com/use-latest-callback/-/use-latest-callback-0.1.9.tgz#10191dc54257e65a8e52322127643a8940271e2a"
   integrity sha512-CL/29uS74AwreI/f2oz2hLTW7ZqVeV5+gxFeGudzQrgkCytrHw33G4KbnQOrRlAEzzAFXi7dDLMC9zhWcVpzmw==
 
+use-sync-external-store@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
+
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -9861,6 +9881,15 @@ validate-npm-package-name@^3.0.0:
   integrity sha512-M6w37eVCMMouJ9V/sdPGnC5H4uDr73/+xdq0FBLO3TFFX1+7wiUY6Es328NN+y43tmY+doUdN9g9J21vqB7iLw==
   dependencies:
     builtins "^1.0.3"
+
+valtio@1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/valtio/-/valtio-1.13.0.tgz#6ee62629b658bc88a72703817e4eb1827b3d8754"
+  integrity sha512-s2VkxxFyaJwjpIheJonRa/34HWS1EpsEjw9OW9l3j8G4cbIw7lruspOjyv+z2o4BrGx351BH+VWb8sZHkrlyYA==
+  dependencies:
+    derive-valtio "0.1.0"
+    proxy-compare "2.5.1"
+    use-sync-external-store "1.2.0"
 
 varint@6.0.0:
   version "6.0.0"

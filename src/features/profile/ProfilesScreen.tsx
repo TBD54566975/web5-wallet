@@ -16,6 +16,7 @@ export const ProfilesScreen = ({ navigation }: Props) => {
   const { data: allIdentities, isLoading: isLoadingIdentities } =
     useIdentityListQuery();
 
+  // TODO: abstract to RQ
   const profileQueries = useProfilesQuery(allIdentities ?? []);
   const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
 

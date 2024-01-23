@@ -1,12 +1,13 @@
 import React, { type Dispatch, type SetStateAction, useEffect } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useIdentityListQuery } from "../../identity/hooks";
 import { useProfilesQuery } from "../hooks";
 import type { Profile } from "../../../types/models";
-import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SPACE } from "../../../theme/layouts";
 import { Avatar } from "../../../components/Avatar";
 import { Checkbox } from "../../../components/Checkbox";
 import { Typography } from "../../../theme/typography";
+import { Loader } from "../../../components/Loader";
 
 type Props = {
   checkList: CheckList;
@@ -17,13 +18,12 @@ export const ProfileSelectChecklist = ({ checkList, setCheckList }: Props) => {
   // TODO: these queries need more abstraction
   const { data: allIdentities, isLoading: isLoadingIdentities } =
     useIdentityListQuery();
-
   const profileQueries = useProfilesQuery(allIdentities ?? []);
-
   const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
+  const isLoading = isLoadingIdentities || isLoadingProfiles;
 
   const deriveChecklistState = () => {
-    if (!isLoadingProfiles) {
+    if (!isLoading) {
       const identitiesWithCheckmarks = profileQueries.flatMap(
         ({ data: profile }) => {
           if (profile) {
@@ -39,11 +39,15 @@ export const ProfileSelectChecklist = ({ checkList, setCheckList }: Props) => {
 
   // TODO: abstract to React Query
   useEffect(() => {
-    if (!isLoadingProfiles && !isLoadingIdentities) {
+    if (!isLoading) {
       deriveChecklistState();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadingProfiles, isLoadingIdentities]);
+  }, [isLoading]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

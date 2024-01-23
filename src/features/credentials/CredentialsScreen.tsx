@@ -3,9 +3,9 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import type { ItemProps } from "../../components/Item";
 import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
-import { mockProfileCredentials } from "./mocks";
 import { Button } from "../../components/Button";
 import type { TabNavigatorProps } from "../../types/navigation";
+import { credentialStore } from "./atom";
 
 type Props = TabNavigatorProps<"CredentialsScreen">;
 export const CredentialsScreen = ({ navigation }: Props) => {
@@ -25,16 +25,22 @@ export const CredentialsScreen = ({ navigation }: Props) => {
     <View style={styles.wrapper}>
       <ScrollView>
         <View style={styles.container}>
-          {mockProfileCredentials.map((credential, index) => {
+          {[...credentialStore].map(([_vcJwt, credential], index) => {
             // TODO: don't key by index
             return (
               <Tappable
                 key={index}
-                iconName={credential.iconName}
-                badgeName={credential.badgeName}
-                heading={credential.heading}
-                subtitle={credential.subtitle}
-                onPress={() => navigateToItem(credential)}
+                heading={credential.type}
+                subtitle={
+                  (credential.vcDataModel.credentialSubject as any).firstName
+                }
+                onPress={() =>
+                  navigateToItem({
+                    heading: credential.type,
+                    subtitle: (credential.vcDataModel.credentialSubject as any)
+                      .firstName,
+                  })
+                }
               />
             );
           })}
