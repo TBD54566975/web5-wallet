@@ -1,8 +1,8 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ItemStack } from "../../components/Item";
 import { SPACE } from "../../theme/layouts";
 import { mockActivity } from "./mocks";
+import { Activity } from "./components/Activity";
 
 export const ActivityScreen = () => {
   return (
@@ -11,7 +11,7 @@ export const ActivityScreen = () => {
         <View style={styles.container}>
           {mockActivity.map((activity, index) => {
             // TODO: do not key by index
-            return <ItemStack key={index} {...activity} />;
+            return <Activity key={index} {...activity} />;
           })}
         </View>
       </ScrollView>

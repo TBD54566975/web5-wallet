@@ -47,7 +47,7 @@ export const CreatePassphraseScreen = ({ navigation }: Props) => {
             secureTextEntry={true}
           />
           <Button
-            kind={isPassphraseValid ? "primary" : "disabled"}
+            kind={"primary"}
             text="Next"
             onPress={nextTapped}
             disabled={!isPassphraseValid}

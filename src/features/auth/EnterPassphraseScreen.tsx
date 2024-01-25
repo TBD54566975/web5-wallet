@@ -88,7 +88,7 @@ export const EnterPassphraseScreen = ({ navigation }: Props) => {
             secureTextEntry={true}
           />
           <Button
-            kind={isLoginButtonDisabled ? "disabled" : "primary"}
+            kind={"primary"}
             text="Login"
             onPress={loginTapped}
             disabled={isLoginButtonDisabled}

@@ -100,6 +100,7 @@ module.exports = {
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
     "react/no-unused-prop-types": "error",
     "react/prop-types": "off",
     "react/no-unstable-nested-components": "warn",

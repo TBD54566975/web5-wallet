@@ -2,27 +2,33 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { KeyboardProvider } from "react-native-keyboard-controller";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { AppNavigator } from "./navigation/AppNavigator";
 import { DefaultTheme } from "./theme/colors";
 import { Deeplink } from "./features/app/deeplink";
 import { queryClient } from "./features/app/store";
 import { Loader } from "./components/Loader";
+import { credentialStoreActions } from "./features/credentials/atom";
+
+credentialStoreActions.initDemoVC();
 
 export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={styles.container}>
-        <NavigationContainer
-          linking={Deeplink.config}
-          theme={DefaultTheme}
-          fallback={<Loader />}
-        >
-          <KeyboardProvider>
-            <AppNavigator />
-          </KeyboardProvider>
-        </NavigationContainer>
+        <KeyboardProvider>
+          <BottomSheetModalProvider>
+            <NavigationContainer
+              linking={Deeplink.config}
+              theme={DefaultTheme}
+              fallback={<Loader />}
+            >
+              <AppNavigator />
+            </NavigationContainer>
+          </BottomSheetModalProvider>
+        </KeyboardProvider>
       </GestureHandlerRootView>
     </QueryClientProvider>
   );

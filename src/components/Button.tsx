@@ -16,22 +16,24 @@ import { Typography } from "../theme/typography";
 
 export const Button = (
   props: TouchableOpacityProps & {
-    kind: "primary" | "secondary" | "disabled" | "destructive";
+    kind: "primary" | "secondary" | "destructive";
     style?: StyleProp<ViewStyle>;
     text: string;
     icon?: keyof typeof Octicons.glyphMap;
   }
 ) => {
-  const { kind, style, text, icon, ...pressableProps } = props;
+  const { kind, style, text, icon, disabled, ...pressableProps } = props;
 
   const getButtonColor = () => {
+    if (disabled) {
+      return ColorTheme.MUTED;
+    }
+
     switch (kind) {
       case "primary":
         return ColorTheme.PRIMARY;
       case "secondary":
         return ColorTheme.GRAY_50;
-      case "disabled":
-        return ColorTheme.MUTED;
       case "destructive":
         return ColorTheme.DANGER;
       default:
@@ -40,9 +42,11 @@ export const Button = (
   };
 
   const getTextColor = () => {
+    if (disabled) {
+      return ColorTheme.REDUCED;
+    }
+
     switch (kind) {
-      case "disabled":
-        return ColorTheme.REDUCED;
       case "destructive":
         return ColorTheme.DEFAULT_CONTRAST;
       default:
@@ -70,7 +74,11 @@ export const Button = (
   };
 
   return (
-    <TouchableOpacity {...pressableProps} style={buttonStyle()}>
+    <TouchableOpacity
+      {...pressableProps}
+      disabled={disabled}
+      style={buttonStyle()}
+    >
       <>
         <Text style={textStyle()}>{text}</Text>
         {!!icon && <Octicons name={icon} style={styles.icon} />}

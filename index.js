@@ -1,7 +1,7 @@
 import "@tbd54566975/web5-react-native-polyfills";
 import "./src/utils/globals";
 import "react-native-gesture-handler";
-import { AppRegistry } from "react-native";
+import { AppRegistry, LogBox } from "react-native";
 import { polyfillBlob } from "./blob-polyfill";
 import { Crypto } from "@peculiar/webcrypto";
 
@@ -12,6 +12,10 @@ if (!global.structuredClone) {
 polyfillBlob();
 
 global.crypto.subtle = new Crypto().subtle;
+
+if (__DEV__) {
+  LogBox.ignoreLogs(["`useBottomSheetDynamicSnapPoints` will be deprecated"]);
+}
 
 import { App } from "./src/App";
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);

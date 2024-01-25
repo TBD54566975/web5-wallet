@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  View,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-} from "react-native";
-import { Avatar } from "../../components/Avatar";
-import { Checkbox } from "../../components/Checkbox";
+import React, { useState } from "react";
+import { SafeAreaView, Text, View, StyleSheet, ScrollView } from "react-native";
 import { Loader } from "../../components/Loader";
 import { useMount } from "../../hooks/useMount";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import type { ConnectRequest, Profile } from "../../types/models";
+import type { ConnectRequest } from "../../types/models";
 import type { AppNavigatorProps } from "../../types/navigation";
 import { useIdentityListQuery } from "../identity/hooks";
 import { useProfilesQuery } from "../profile/hooks";
 import { ConnectSuite } from "./connect-suite";
 import { Button } from "../../components/Button";
+import {
+  type CheckList,
+  ProfileSelectChecklist,
+} from "../profile/components/ProfileSelectChecklist";
 
 type Props = AppNavigatorProps<"ConnectProfileSelectScreen">;
 export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
-  const [checkList, setCheckList] = useState<CheckList>([]);
   const [decryptedConnectionRequest, setDecryptedConnectionRequest] =
     useState<ConnectRequest>();
+  const [checkList, setCheckList] = useState<CheckList>([]);
 
   // TODO: these queries need more abstraction
   const { data: allIdentities, isLoading: isLoadingIdentities } =
@@ -33,24 +28,6 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const profileQueries = useProfilesQuery(allIdentities ?? []);
 
   const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
-
-  // create a derived state `checkList` with a `checked` property on each profile
-  // TODO: maybe abstract this out of the view?
-  type CheckList = (Profile & { checked: boolean })[];
-  const deriveChecklistState = () => {
-    if (!isLoadingProfiles) {
-      const identitiesWithCheckmarks = profileQueries.flatMap(
-        ({ data: profile }) => {
-          if (profile) {
-            return [{ ...profile, checked: false }];
-          } else {
-            return [];
-          }
-        }
-      );
-      setCheckList(identitiesWithCheckmarks);
-    }
-  };
 
   const onPressClose = () => {
     navigation.popToTop();
@@ -70,14 +47,6 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
       navigation.navigate("ConnectPinConfirmScreen");
     }
   };
-
-  // TODO: abstract to React Query
-  useEffect(() => {
-    if (!isLoadingProfiles && !isLoadingIdentities) {
-      deriveChecklistState();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadingProfiles, isLoadingIdentities]);
 
   /**
    * Use the route params passed into the screen by the QR code (and/or deeplink)
@@ -111,39 +80,10 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
               <Text style={Typography.paragraph2}>
                 Youll be able to use the profiles you select below in Dwitter.
               </Text>
-              <>
-                {checkList.map((profile, index) => {
-                  return (
-                    <Pressable
-                      key={index}
-                      onPress={() => {
-                        setCheckList((current) => {
-                          current[index].checked = !current[index].checked;
-
-                          // immutably set the current state
-                          return [...current];
-                        });
-                      }}
-                    >
-                      <View key={index} style={styles.profilesListItem}>
-                        {/* TODO: there is currently no concept of a web5 profile having an icon */}
-                        {/* https://github.com/TBD54566975/web5-wallet/issues/145 */}
-                        <Avatar iconName={"person"} />
-                        <View>
-                          <Text style={Typography.heading5}>
-                            {profile.displayName}
-                          </Text>
-                          <Text>{profile.name}</Text>
-                        </View>
-                        <Checkbox
-                          checked={profile.checked}
-                          style={styles.checkbox}
-                        />
-                      </View>
-                    </Pressable>
-                  );
-                })}
-              </>
+              <ProfileSelectChecklist
+                checkList={checkList}
+                setCheckList={setCheckList}
+              />
             </View>
             <View style={styles.column}>
               <Text style={Typography.heading3}>Permissions requested</Text>
@@ -181,18 +121,12 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   scrollview: { flexGrow: 1 },
-  profilesListItem: {
-    flexDirection: "row",
-    gap: SPACE.BASE,
-    alignItems: "center",
-  },
   container: {
     padding: SPACE.MEDIUM,
     flex: 1,
     gap: SPACE.BASE,
   },
   body: { flex: 1, gap: SPACE.XXXLARGE },
-  checkbox: { marginLeft: "auto" },
   column: { gap: SPACE.LARGE },
   footer: {
     alignItems: "flex-end",

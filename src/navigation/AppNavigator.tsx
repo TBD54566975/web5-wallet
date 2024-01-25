@@ -117,10 +117,18 @@ export const AppNavigator = () => {
           name="ConnectPinConfirmScreen"
           component={ConnectPinConfirmScreen}
         />
-        <Stack.Screen name="NOIDCScreen" component={NOIDCScreen} />
+        <Stack.Screen
+          name="NOIDCScreen"
+          component={NOIDCScreen}
+          options={noidcScreenOptions}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
+};
+
+const noidcScreenOptions: NativeStackNavigationOptions = {
+  animation: "slide_from_bottom",
 };
 
 const appNavigatorOptions: NativeStackNavigationOptions = {
