@@ -1,6 +1,6 @@
-import type { ItemStackProps } from "../../components/Item";
+import type { ActivityProps } from "./components/Activity";
 
-export const mockActivity: ItemStackProps[] = [
+export const mockActivity: ActivityProps[] = [
   {
     heading: "Social profile connected to DIDPay",
     body: "July 1, 2023",

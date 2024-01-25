@@ -279,10 +279,8 @@ const ProfileSelectSheet = ({
 
     // TODO: make declarative
     if (didResponse) {
-      console.log("sending didresponse");
       onProfileSelect(checkedItems);
       webviewRef.current?.injectJavaScript(didResponse);
-      console.log("injected JS");
     }
   };
 

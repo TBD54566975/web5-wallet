@@ -3,8 +3,8 @@ import { View, StyleSheet } from "react-native";
 import { Avatar, type AvatarProps } from "../../../components/Avatar";
 import { ItemBody, type ItemBodyProps } from "../../../components/Item";
 
-export type ItemStackProps = { images: AvatarProps[] } & ItemBodyProps;
-export const Activity = (props: ItemStackProps) => {
+export type ActivityProps = { images: AvatarProps[] } & ItemBodyProps;
+export const Activity = (props: ActivityProps) => {
   const { images, heading, subtitle, body, headingSize } = props;
 
   return (
