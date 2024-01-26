@@ -136,21 +136,19 @@ export const NOIDCScreen = ({ route, navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.wrapper}>
-        <WebView
-          ref={webviewRef}
-          injectedJavaScriptBeforeContentLoadedForMainFrameOnly={false}
-          injectedJavaScriptForMainFrameOnly={false}
-          mixedContentMode="always"
-          pullToRefreshEnabled={true}
-          thirdPartyCookiesEnabled={true}
-          source={webviewSource}
-          onMessage={onIncomingMessage}
-        />
-        <BottomSheet ref={bottomSheetRef}>{handleSheetRoute()}</BottomSheet>
-      </View>
-    </SafeAreaView>
+    <View style={styles.wrapper}>
+      <WebView
+        ref={webviewRef}
+        injectedJavaScriptBeforeContentLoadedForMainFrameOnly={false}
+        injectedJavaScriptForMainFrameOnly={false}
+        mixedContentMode="always"
+        pullToRefreshEnabled={true}
+        thirdPartyCookiesEnabled={true}
+        source={webviewSource}
+        onMessage={onIncomingMessage}
+      />
+      <BottomSheet ref={bottomSheetRef}>{handleSheetRoute()}</BottomSheet>
+    </View>
   );
 };
 
