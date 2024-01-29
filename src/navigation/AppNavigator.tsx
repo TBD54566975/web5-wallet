@@ -72,7 +72,11 @@ export const AppNavigator = () => {
       />
 
       {/* Tabs */}
-      <Stack.Screen name="Tabs" component={TabNavigator} />
+      <Stack.Screen
+        name="Tabs"
+        component={TabNavigator}
+        options={tabNavigatorOptions}
+      />
       <Stack.Group screenOptions={authedGroupOptions}>
         <Stack.Screen
           name="ProfileDetailScreen"
@@ -125,6 +129,10 @@ export const AppNavigator = () => {
       </Stack.Group>
     </Stack.Navigator>
   );
+};
+
+const tabNavigatorOptions: NativeStackNavigationOptions = {
+  animation: "fade_from_bottom",
 };
 
 const noidcScreenOptions: NativeStackNavigationOptions = {
