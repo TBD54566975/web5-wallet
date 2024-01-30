@@ -14,6 +14,7 @@
 		96905EF65AED1B983A6B3ABC /* libPods-web5wallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-web5wallet.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		0998EBC7DBEF4654A44486DF /* Satoshi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E0EF61FCD2C4C12B9D5E435 /* Satoshi.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,6 +70,7 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-web5wallet/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		0E0EF61FCD2C4C12B9D5E435 /* Satoshi.ttf */ = {isa = PBXFileReference; name = "Satoshi.ttf"; path = "../assets/fonts/Satoshi.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
+				7FE389A20BFB4AB6AEDB6538 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -195,6 +198,15 @@
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
+		};
+		7FE389A20BFB4AB6AEDB6538 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				0E0EF61FCD2C4C12B9D5E435 /* Satoshi.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -262,6 +274,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
+				0998EBC7DBEF4654A44486DF /* Satoshi.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
