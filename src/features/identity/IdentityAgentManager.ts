@@ -7,7 +7,7 @@ import {
   SyncManagerLevel,
 } from "@web5/agent";
 import { getTechPreviewDwnEndpoints, Web5 } from "@web5/api";
-import { DidIonMethod, type DidIonCreateOptions } from "@web5/dids";
+import { DidIonMethod, type DidIonCreateOptions, type PortableDid } from "@web5/dids";
 import { type Level } from "level";
 import { ExpoLevel } from "expo-level";
 import ms from "ms";
@@ -17,6 +17,9 @@ import {
   profileProtocol,
   type ProfileProtocol,
 } from "../profile/protocol/profile-protocol";
+import {
+  setItemAsync,
+} from "expo-secure-store";
 
 // Singleton
 let agent: IdentityAgent;
@@ -90,11 +93,13 @@ const createIdentity = async (
     });
   }
 
+  const portableDid: PortableDid = await DidIonMethod.create(didOptions);
+  await setItemAsync(name, JSON.stringify(portableDid));
+
   const identity = await agent.identityManager.create({
+    did: portableDid,
     name,
-    didMethod,
-    didOptions,
-    kms,
+    kms
   });
 
   // Import the identity that was just created, using the agent's DID as the context,
