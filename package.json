@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "buildNumber": "15",
   "main": "index.js",
+  "packageManager": "yarn@1.22.19",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -10,7 +11,7 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "pod-install": "cd ios; bundle exec pod install;cd ..",
+    "pods": "cd ios; bundle exec pod install;cd ..",
     "clean:rn": "watchman watch-del-all; rm -rf $TMPDIR/react-*; rm -rf $TMPDIR/react-native-packager-cache-*; rm -rf $TMPDIR/metro-cache; rm -rf $TMPDIR/haste-map-react-native-packager-*",
     "clean:yarn": "rm -rf node_modules/; yarn cache clean; yarn install",
     "clean:system": "rm -rf ~/.cocoapods; rm -rf /Library/Developer/Xcode/DerivedData; rm -rf ~/.gradle/; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache; rm -rf $(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache; rm -fr ~/Library/Caches/com.apple.dt.Xcode/",
