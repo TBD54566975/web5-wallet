@@ -20,7 +20,7 @@ const config: LinkingOptions<AppNavigatorInterface> = {
   config: {
     screens: {
       ConnectProfileSelectScreen: "connect",
-      NOIDCScreen: "credentials/issuance",
+      WebviewCredentialsScreen: "credentials/issuance",
     },
   },
 };

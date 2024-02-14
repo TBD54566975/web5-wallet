@@ -33,7 +33,7 @@ export const Avatar = (props: AvatarProps) => {
 
 const styles = StyleSheet.create({
   iconAvatarContainer: {
-    backgroundColor: ColorTheme.DEFAULT,
+    backgroundColor: ColorTheme.GRAY_50,
     borderRadius: 999,
     position: "relative",
     flexBasis: "auto",
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   iconAvatar: {
     textAlign: "center",
     margin: "auto",
-    color: ColorTheme.PRIMARY,
+    color: ColorTheme.BLACK_2,
   },
   badgeAvatarContainer: {
     backgroundColor: ColorTheme.DEFAULT,

@@ -23,7 +23,8 @@ import { CreateWalletScreen } from "../features/identity/CreateWalletScreen";
 import { AddProfileScreen } from "../features/profile/AddProfileScreen";
 import { CreateProfilesScreen } from "../features/profile/CreateProfilesScreen";
 import { ProfileDetailScreen } from "../features/profile/ProfileDetailScreen";
-import { NOIDCScreen } from "../features/credentials/NOIDCScreen";
+import { WebviewCredentialsScreen } from "../features/idc/webview-idc/WebviewCredentialsScreen";
+import { OIDCScreen } from "../features/idc/oidc/OIDCScreen";
 
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
@@ -50,7 +51,7 @@ export const AppNavigator = () => {
 
   return (
     <Stack.Navigator
-      screenOptions={appNavigatorOptions}
+      screenOptions={headerHidden}
       initialRouteName={initialRoute}
     >
       {/* Onboarding */}
@@ -75,7 +76,7 @@ export const AppNavigator = () => {
       <Stack.Screen
         name="Tabs"
         component={TabNavigator}
-        options={tabNavigatorOptions}
+        options={fadeFromBottom}
       />
       <Stack.Group screenOptions={authedGroupOptions}>
         <Stack.Screen
@@ -122,24 +123,29 @@ export const AppNavigator = () => {
           component={ConnectPinConfirmScreen}
         />
         <Stack.Screen
-          name="NOIDCScreen"
-          component={NOIDCScreen}
-          options={noidcScreenOptions}
+          name="WebviewCredentialsScreen"
+          component={WebviewCredentialsScreen}
+          options={slideFromBottom}
+        />
+        <Stack.Screen
+          name="OIDCScreen"
+          component={OIDCScreen}
+          options={slideFromBottom}
         />
       </Stack.Group>
     </Stack.Navigator>
   );
 };
 
-const tabNavigatorOptions: NativeStackNavigationOptions = {
+const fadeFromBottom: NativeStackNavigationOptions = {
   animation: "fade_from_bottom",
 };
 
-const noidcScreenOptions: NativeStackNavigationOptions = {
+const slideFromBottom: NativeStackNavigationOptions = {
   animation: "slide_from_bottom",
 };
 
-const appNavigatorOptions: NativeStackNavigationOptions = {
+const headerHidden: NativeStackNavigationOptions = {
   headerShown: false,
 };
 

@@ -5,7 +5,7 @@ import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
 import { Button } from "../../components/Button";
 import type { TabNavigatorProps } from "../../types/navigation";
-import { credentialStore } from "./atom";
+import { credentialStore } from "./atoms";
 
 type Props = TabNavigatorProps<"CredentialsScreen">;
 export const CredentialsScreen = ({ navigation }: Props) => {

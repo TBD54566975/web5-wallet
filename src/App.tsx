@@ -10,7 +10,7 @@ import { DefaultTheme } from "./theme/colors";
 import { Deeplink } from "./features/app/deeplink";
 import { queryClient } from "./features/app/store";
 import { Loader } from "./components/Loader";
-import { credentialStoreActions } from "./features/credentials/atom";
+import { credentialStoreActions } from "./features/credentials/atoms";
 
 credentialStoreActions.initDemoVC();
 

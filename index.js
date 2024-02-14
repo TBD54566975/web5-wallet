@@ -14,7 +14,10 @@ polyfillBlob();
 global.crypto.subtle = new Crypto().subtle;
 
 if (__DEV__) {
-  LogBox.ignoreLogs(["`useBottomSheetDynamicSnapPoints` will be deprecated"]);
+  LogBox.ignoreLogs([
+    "`useBottomSheetDynamicSnapPoints` will be deprecated",
+    "Provided value to SecureStore is larger than 2048 bytes. An attempt to store such a value will throw an error in SDK 35.",
+  ]);
 }
 
 import { App } from "./src/App";

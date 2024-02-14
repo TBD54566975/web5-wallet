@@ -8,6 +8,7 @@ const ColorPalette = {
   GREEN: "#32BF00",
   WHITE: "#FFFFFF",
   BLACK: "#000000",
+  BLACK_2: "#1C1B1F",
   GRAY_50: "#F1F1F1",
   GRAY_200: "#D3D3D3",
   GRAY_400: "#AFAFAF",
@@ -27,6 +28,7 @@ export const ColorTheme = {
   GRAY_50: ColorPalette.GRAY_50,
   GRAY_200: ColorPalette.GRAY_200,
   BLACK: ColorPalette.BLACK,
+  BLACK_2: ColorPalette.BLACK_2,
 };
 
 // Monochrome theme gives us fine-grained control over color palette

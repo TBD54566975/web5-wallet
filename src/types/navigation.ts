@@ -37,9 +37,10 @@ export type AppNavigatorInterface = {
   };
   ConnectQRScanScreen: undefined;
   ConnectPinConfirmScreen: undefined;
-  NOIDCScreen: {
+  WebviewCredentialsScreen: {
     url: string;
   };
+  OIDCScreen: undefined;
 };
 
 export type TabNavigatorInterface = {
