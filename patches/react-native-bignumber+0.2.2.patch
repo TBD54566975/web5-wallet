@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-bignumber/cpp/MGBigNumberHostObject.cpp b/node_modules/react-native-bignumber/cpp/MGBigNumberHostObject.cpp
+index 9e8dd7e..1c57b76 100644
+--- a/node_modules/react-native-bignumber/cpp/MGBigNumberHostObject.cpp
++++ b/node_modules/react-native-bignumber/cpp/MGBigNumberHostObject.cpp
+@@ -23,7 +23,7 @@ namespace margelo
+     {
+         this->fields.push_back(HOST_LAMBDA("createFromString", {
+             std::string strRep = arguments[0].getString(runtime).utf8(runtime);
+-            strRep.erase(std::remove_if(strRep.begin(), strRep.end(), std::isspace), strRep.end());
++            strRep.erase(remove_if(strRep.begin(), strRep.end(), isspace), strRep.end());
+             int base = 10;
+             if (!arguments[1].isUndefined())
+             {
