@@ -171,6 +171,7 @@ module.exports = {
   globals: {
     TextEncoder: true,
     NOOP: true,
+    ErrorUtils: true,
   },
   overrides: [
     {
