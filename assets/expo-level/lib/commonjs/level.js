@@ -8,31 +8,18 @@ var _abstractLevel = require("abstract-level");
 var _reactNativeLeveldb = require("react-native-leveldb");
 var _moduleError = _interopRequireDefault(require("module-error"));
 var fs = _interopRequireWildcard(require("expo-file-system"));
-let _Symbol$iterator;
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-_Symbol$iterator = Symbol.iterator;
 class ExpoLevelIterator extends _abstractLevel.AbstractIterator {
+  valid = true;
+  startingBoundIsOpen = false;
+  endingBoundIsOpen = false;
+  stepCount = 0;
+  busy = false;
+  startedReading = false;
   constructor(db, options) {
     super(db, options);
-    _defineProperty(this, "it", void 0);
-    _defineProperty(this, "valid", true);
-    _defineProperty(this, "options", void 0);
-    _defineProperty(this, "hasLimit", void 0);
-    _defineProperty(this, "isReversed", void 0);
-    _defineProperty(this, "readsKeys", void 0);
-    _defineProperty(this, "readsValues", void 0);
-    _defineProperty(this, "startingBoundIsOpen", false);
-    _defineProperty(this, "endingBoundIsOpen", false);
-    _defineProperty(this, "stepCount", 0);
-    _defineProperty(this, "startingBound", void 0);
-    _defineProperty(this, "endingBound", void 0);
-    _defineProperty(this, "busy", false);
-    _defineProperty(this, "startedReading", false);
     const level = this.db._db;
     // console.log('iterator options was', options);
     this.it = level.newIterator();
@@ -90,7 +77,6 @@ class ExpoLevelIterator extends _abstractLevel.AbstractIterator {
       }
       // this.isReversed ? this.it.seekLast() : this.it.seekToFirst();
     }
-
     const endingBound = options.reverse ? lowerBound : upperBound;
     if (endingBound != undefined) {
       this.endingBoundIsOpen = this.isReversed ? lowerBoundIsOpen : upperBoundIsOpen;
@@ -101,7 +87,7 @@ class ExpoLevelIterator extends _abstractLevel.AbstractIterator {
       // self.endingSliceStorage = NULL
     }
   }
-  async *[_Symbol$iterator]() {
+  async *[Symbol.iterator]() {
     try {
       let item;
       while ((item = await this.next()) !== undefined) {
@@ -124,13 +110,13 @@ class ExpoLevelIterator extends _abstractLevel.AbstractIterator {
   // so simply yielding a non-empty array signifies non-end
   _next(callback) {
     if (this.busy) {
-      callback(new _moduleError.default('Iterator is busy', {
-        code: 'LEVEL_ITERATOR_BUSY'
+      callback(new _moduleError.default("Iterator is busy", {
+        code: "LEVEL_ITERATOR_BUSY"
       }));
       return;
     } else if (!this.valid) {
-      callback(new _moduleError.default('Iterator is not open', {
-        code: 'LEVEL_ITERATOR_NOT_OPEN'
+      callback(new _moduleError.default("Iterator is not open", {
+        code: "LEVEL_ITERATOR_NOT_OPEN"
       }));
       return;
     }
@@ -228,10 +214,11 @@ class ExpoLevelIterator extends _abstractLevel.AbstractIterator {
 }
 exports.ExpoLevelIterator = ExpoLevelIterator;
 class ExpoLevel extends _abstractLevel.AbstractLevel {
+  _openIterators = new Set();
   constructor(location, options) {
     super({
       encodings: {
-        "view": true
+        view: true
       },
       seek: true,
       streams: false,
@@ -240,9 +227,6 @@ class ExpoLevel extends _abstractLevel.AbstractLevel {
       permanence: true,
       snapshots: false
     }, options);
-    _defineProperty(this, "_db", void 0);
-    _defineProperty(this, "location", void 0);
-    _defineProperty(this, "_openIterators", new Set());
     this.location = location;
   }
   async _open(options, callback) {
@@ -257,7 +241,7 @@ class ExpoLevel extends _abstractLevel.AbstractLevel {
         const info = await fs.getInfoAsync(realLocation);
         if (info.exists) {
           throw {
-            message: 'File already exists'
+            message: "File already exists"
           };
         }
       }
@@ -265,21 +249,21 @@ class ExpoLevel extends _abstractLevel.AbstractLevel {
       this.nextTick(callback, null);
     } catch (e) {
       const msg = e.message;
-      if (msg.includes('does not exist')) {
+      if (msg.includes("does not exist")) {
         const err = new _moduleError.default(msg, {
-          code: 'LEVEL_DATABASE_NOT_OPEN'
+          code: "LEVEL_DATABASE_NOT_OPEN"
         });
         // console.log('msg has does not exist');
         this.nextTick(callback, err);
-      } else if (msg.includes('exists')) {
+      } else if (msg.includes("exists")) {
         const err = new _moduleError.default(msg, {
-          code: 'LEVEL_DATABASE_NOT_OPEN'
+          code: "LEVEL_DATABASE_NOT_OPEN"
         });
         // console.log('msg has already exists');
         this.nextTick(callback, err);
         // this.nextTick(callback, e);
       } else {
-        console.log('open error', 'type', typeof e, e.code, e.message);
+        console.log("open error", "type", typeof e, e.code, e.message);
         throw e;
       }
     }
@@ -307,7 +291,7 @@ class ExpoLevel extends _abstractLevel.AbstractLevel {
         if (value === null) {
           // not found
           callback(new _moduleError.default(`Key ${key} was not found`, {
-            code: 'LEVEL_NOT_FOUND'
+            code: "LEVEL_NOT_FOUND"
           }));
           return;
         }

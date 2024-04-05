@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React Native",
+  "compilerOptions": {
+    "isolatedModules": false,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noEmit": false
+  },
+  "extends": "expo/tsconfig.base",
+  "exclude": ["lib"],
+  "include": ["src/**/*"],
+}

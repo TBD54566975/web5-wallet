@@ -1,6 +1,6 @@
-import { AbstractBatchOperation, AbstractBatchOptions, AbstractClearOptions, AbstractDatabaseOptions, AbstractDelOptions, AbstractGetManyOptions, AbstractGetOptions, AbstractIterator, AbstractIteratorOptions, AbstractLevel, AbstractOpenOptions, AbstractPutOptions, AbstractSeekOptions, NodeCallback } from 'abstract-level';
-import { LevelDB, LevelDBIterator } from 'react-native-leveldb';
-import type { NextCallback } from 'abstract-level/types/abstract-iterator';
+import { AbstractBatchOperation, AbstractBatchOptions, AbstractClearOptions, AbstractDatabaseOptions, AbstractDelOptions, AbstractGetManyOptions, AbstractGetOptions, AbstractIterator, AbstractIteratorOptions, AbstractLevel, AbstractOpenOptions, AbstractPutOptions, AbstractSeekOptions, NodeCallback } from "abstract-level";
+import { LevelDB, LevelDBIterator } from "react-native-leveldb";
+import type { NextCallback } from "abstract-level/types/abstract-iterator";
 export declare class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, Uint8Array, Uint8Array> {
     it: LevelDBIterator;
     valid: boolean;
@@ -24,7 +24,7 @@ export declare class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<
     protected _close(callback: NodeCallback<void>): void;
     protected isEnded(): boolean;
 }
-export declare class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
+export declare class ExpoLevel<K, V> extends AbstractLevel<Uint8Array | string, K, V> {
     _db?: LevelDB;
     location: string;
     _openIterators: Set<ExpoLevelIterator<K, V>>;
@@ -39,3 +39,4 @@ export declare class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
     protected _iterator(options: AbstractIteratorOptions<Uint8Array, Uint8Array>): ExpoLevelIterator<K, V>;
     _clear(options: AbstractClearOptions<K>, callback: NodeCallback<void>): void;
 }
+//# sourceMappingURL=level.d.ts.map

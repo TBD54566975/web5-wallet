@@ -1,1 +1,1 @@
-{"version":3,"names":["ExpoLevel"],"sources":["index.ts"],"sourcesContent":["export { ExpoLevel } from './level';\n"],"mappings":"AAAA,SAASA,SAAS,QAAQ,SAAS"}
+{"version":3,"names":["ExpoLevel"],"sourceRoot":"../../src","sources":["index.ts"],"mappings":"AAAA,SAASA,SAAS,QAAQ,SAAS","ignoreList":[]}

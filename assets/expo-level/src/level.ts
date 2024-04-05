@@ -12,14 +12,18 @@ import {
   AbstractOpenOptions,
   AbstractPutOptions,
   AbstractSeekOptions,
-  NodeCallback
-} from 'abstract-level';
-import {LevelDB, LevelDBIterator} from 'react-native-leveldb';
-import ModuleError from 'module-error';
-import type {NextCallback} from 'abstract-level/types/abstract-iterator';
+  NodeCallback,
+} from "abstract-level";
+import { LevelDB, LevelDBIterator } from "react-native-leveldb";
+import ModuleError from "module-error";
+import type { NextCallback } from "abstract-level/types/abstract-iterator";
 import * as fs from "expo-file-system";
 
-export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, Uint8Array, Uint8Array> {
+export class ExpoLevelIterator<K, V> extends AbstractIterator<
+  ExpoLevel<K, V>,
+  Uint8Array,
+  Uint8Array
+> {
   it: LevelDBIterator;
   valid: boolean = true;
   options: AbstractIteratorOptions<Uint8Array, Uint8Array>;
@@ -37,16 +41,19 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
 
   startedReading = false;
 
-  constructor(db: any, options: AbstractIteratorOptions<Uint8Array, Uint8Array>) {
+  constructor(
+    db: any,
+    options: AbstractIteratorOptions<Uint8Array, Uint8Array>
+  ) {
     super(db, options);
     const level = this.db._db!;
     // console.log('iterator options was', options);
     this.it = level.newIterator();
     this.options = options;
-    this.hasLimit = (options.limit != undefined) && (options.limit != -1);
+    this.hasLimit = options.limit != undefined && options.limit != -1;
     this.isReversed = options.reverse || false;
-    this.readsKeys = (options.keys != undefined ? options.keys : true);
-    this.readsValues = (options.values != undefined) ? options.values : true;
+    this.readsKeys = options.keys != undefined ? options.keys : true;
+    this.readsValues = options.values != undefined ? options.values : true;
 
     let lowerBound: Uint8Array | undefined;
     let upperBound: Uint8Array | undefined;
@@ -76,12 +83,18 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
     // }
     const startingBound = options.reverse ? upperBound : lowerBound;
     if (startingBound != undefined) {
-      this.startingBoundIsOpen = this.isReversed ? upperBoundIsOpen : lowerBoundIsOpen;
+      this.startingBoundIsOpen = this.isReversed
+        ? upperBoundIsOpen
+        : lowerBoundIsOpen;
       this.it.seek(toBuffer(startingBound));
       this.startingBound = startingBound;
       if (this.it.valid()) {
         const comparison = this.it.compareKey(toBuffer(startingBound));
-        if ((!(this.isReversed ? upperBoundIsOpen : lowerBoundIsOpen) && comparison == 0) || (this.isReversed && comparison > 0)) {
+        if (
+          (!(this.isReversed ? upperBoundIsOpen : lowerBoundIsOpen) &&
+            comparison == 0) ||
+          (this.isReversed && comparison > 0)
+        ) {
           this.isReversed ? this.it.prev() : this.it.next();
         }
       } else if (this.isReversed) {
@@ -100,7 +113,9 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
 
     const endingBound = options.reverse ? lowerBound : upperBound;
     if (endingBound != undefined) {
-      this.endingBoundIsOpen = this.isReversed ? lowerBoundIsOpen : upperBoundIsOpen;
+      this.endingBoundIsOpen = this.isReversed
+        ? lowerBoundIsOpen
+        : upperBoundIsOpen;
       this.endingBound = endingBound;
       // self.endingSliceStorage = ...
     } else {
@@ -109,15 +124,15 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
     }
   }
 
-  async* [Symbol.iterator]() {
+  async *[Symbol.iterator]() {
     try {
-      let item
+      let item;
 
-      while ((item = (await this.next())) !== undefined) {
-        yield item
+      while ((item = await this.next()) !== undefined) {
+        yield item;
       }
     } finally {
-      if (this.valid) await this.close()
+      if (this.valid) await this.close();
     }
   }
 
@@ -125,8 +140,12 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
     if (this.isEnded()) {
       return undefined;
     }
-    let key: ArrayBuffer | undefined = this.readsKeys ? this.it.keyBuf() : undefined;
-    let val: ArrayBuffer | undefined = this.readsValues ? this.it.valueBuf() : undefined;
+    let key: ArrayBuffer | undefined = this.readsKeys
+      ? this.it.keyBuf()
+      : undefined;
+    let val: ArrayBuffer | undefined = this.readsValues
+      ? this.it.valueBuf()
+      : undefined;
     return [key, val];
   }
 
@@ -134,10 +153,16 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
   // so simply yielding a non-empty array signifies non-end
   protected _next(callback: NextCallback<Uint8Array, Uint8Array>): void {
     if (this.busy) {
-      callback(new ModuleError('Iterator is busy', {code: 'LEVEL_ITERATOR_BUSY'}));
+      callback(
+        new ModuleError("Iterator is busy", { code: "LEVEL_ITERATOR_BUSY" })
+      );
       return;
     } else if (!this.valid) {
-      callback(new ModuleError('Iterator is not open', {code: 'LEVEL_ITERATOR_NOT_OPEN'}));
+      callback(
+        new ModuleError("Iterator is not open", {
+          code: "LEVEL_ITERATOR_NOT_OPEN",
+        })
+      );
       return;
     }
     // need to set busy to pass compliance
@@ -181,7 +206,10 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
     }
   }
 
-  protected _seek(target: Uint8Array, options: AbstractSeekOptions<Uint8Array>): void {
+  protected _seek(
+    target: Uint8Array,
+    options: AbstractSeekOptions<Uint8Array>
+  ): void {
     if (!this.valid) {
       return;
     }
@@ -223,14 +251,22 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
       return true;
     }
     if (this.endingBound != undefined) {
-      const comparison = this.it.compareKey(toBuffer(this.endingBound))
-      if ((comparison < 0 && this.isReversed) || (comparison > 0 && !this.isReversed) || (comparison == 0 && !this.endingBoundIsOpen)) {
+      const comparison = this.it.compareKey(toBuffer(this.endingBound));
+      if (
+        (comparison < 0 && this.isReversed) ||
+        (comparison > 0 && !this.isReversed) ||
+        (comparison == 0 && !this.endingBoundIsOpen)
+      ) {
         return true;
       }
     }
     if (this.startingBound != undefined) {
       const comparison = this.it.compareKey(toBuffer(this.startingBound));
-      if ((comparison > 0 && this.isReversed) || (comparison < 0 && !this.isReversed) || (comparison == 0 && !this.startingBoundIsOpen)) {
+      if (
+        (comparison > 0 && this.isReversed) ||
+        (comparison < 0 && !this.isReversed) ||
+        (comparison == 0 && !this.startingBoundIsOpen)
+      ) {
         return true;
       }
     }
@@ -238,8 +274,7 @@ export class ExpoLevelIterator<K, V> extends AbstractIterator<ExpoLevel<K, V>, U
   }
 }
 
-
-export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
+export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array | string, K, V> {
   _db?: LevelDB;
   location: string;
   _openIterators: Set<ExpoLevelIterator<K, V>> = new Set();
@@ -248,51 +283,55 @@ export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
     location: string,
     options?: AbstractDatabaseOptions<K, V> | undefined
   ) {
-    super({
-      encodings: {
-        "view": true
+    super(
+      {
+        encodings: {
+          view: true,
+        },
+        seek: true,
+        streams: false,
+        createIfMissing: true,
+        errorIfExists: true,
+        permanence: true,
+        snapshots: false,
       },
-      seek: true,
-      streams: false,
-      createIfMissing: true,
-      errorIfExists: true,
-      permanence: true,
-      snapshots: false,
-    }, options);
+      options
+    );
 
     this.location = location;
   }
 
-  protected async _open(options: AbstractOpenOptions, callback: NodeCallback<void>): Promise<void> {
-    const {
-      createIfMissing = true, errorIfExists = false
-    } = options;
+  protected async _open(
+    options: AbstractOpenOptions,
+    callback: NodeCallback<void>
+  ): Promise<void> {
+    const { createIfMissing = true, errorIfExists = false } = options;
     try {
       if (errorIfExists) {
         // sometimes the LevelDB cannot report error for errorIfExists
         const realLocation = fs.documentDirectory + this.location;
-        const info = await fs.getInfoAsync(realLocation)
+        const info = await fs.getInfoAsync(realLocation);
 
         if (info.exists) {
-          throw {message: 'File already exists'};
+          throw { message: "File already exists" };
         }
       }
 
       this._db = new LevelDB(this.location, createIfMissing, errorIfExists);
       this.nextTick(callback, null);
     } catch (e: any) {
-      const msg = ((e as any).message as string);
-      if (msg.includes('does not exist')) {
-        const err = new ModuleError(msg, {code: 'LEVEL_DATABASE_NOT_OPEN'})
+      const msg = (e as any).message as string;
+      if (msg.includes("does not exist")) {
+        const err = new ModuleError(msg, { code: "LEVEL_DATABASE_NOT_OPEN" });
         // console.log('msg has does not exist');
         this.nextTick(callback, err);
-      } else if (msg.includes('exists')) {
-        const err = new ModuleError(msg, {code: 'LEVEL_DATABASE_NOT_OPEN'})
+      } else if (msg.includes("exists")) {
+        const err = new ModuleError(msg, { code: "LEVEL_DATABASE_NOT_OPEN" });
         // console.log('msg has already exists');
         this.nextTick(callback, err);
         // this.nextTick(callback, e);
       } else {
-        console.log('open error', 'type', typeof e, e.code, e.message);
+        console.log("open error", "type", typeof e, e.code, e.message);
         throw e;
       }
     }
@@ -323,15 +362,20 @@ export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
     this.nextTick(() => {
       try {
         const value = this._db!.getBuf(toBuffer(key));
-        if (value === null) { // not found
-          callback(new ModuleError(`Key ${key} was not found`, {code: 'LEVEL_NOT_FOUND'}));
+        if (value === null) {
+          // not found
+          callback(
+            new ModuleError(`Key ${key} was not found`, {
+              code: "LEVEL_NOT_FOUND",
+            })
+          );
           return;
         }
         callback(null, fromBuffer(value));
       } catch (e) {
         callback(error(e));
       }
-    })
+    });
   }
 
   protected _getMany(
@@ -343,7 +387,8 @@ export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
       try {
         const values = keys.map((key) => {
           const value = this._db!.getBuf(toBuffer(key));
-          if (value === null) { // not found
+          if (value === null) {
+            // not found
             return undefined;
           } else {
             return fromBuffer(value);
@@ -373,7 +418,9 @@ export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
   }
 
   protected _del(
-    key: Uint8Array, options: AbstractDelOptions<K>, callback: NodeCallback<void>
+    key: Uint8Array,
+    options: AbstractDelOptions<K>,
+    callback: NodeCallback<void>
   ): void {
     this.nextTick(() => {
       try {
@@ -412,7 +459,9 @@ export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
     });
   }
 
-  protected _iterator(options: AbstractIteratorOptions<Uint8Array, Uint8Array>) {
+  protected _iterator(
+    options: AbstractIteratorOptions<Uint8Array, Uint8Array>
+  ) {
     const it = new ExpoLevelIterator<K, V>(this, options);
     this._openIterators.add(it);
     return it;
@@ -421,7 +470,7 @@ export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
   // Hopefully can do this better later with native implementaion?
   _clear(options: AbstractClearOptions<K>, callback: NodeCallback<void>) {
     const _clear_inner = async () => {
-      const it = this.iterator({...options, values: false});
+      const it = this.iterator({ ...options, values: false });
       try {
         const keys: Uint8Array[] = [];
         while (true) {
@@ -438,13 +487,15 @@ export class ExpoLevel<K, V> extends AbstractLevel<Uint8Array, K, V> {
       } finally {
         await it.close();
       }
-    }
+    };
 
-    _clear_inner().then(() => {
-      callback(undefined)
-    }).catch((e) => {
-      callback(error(e))
-    });
+    _clear_inner()
+      .then(() => {
+        callback(undefined);
+      })
+      .catch((e) => {
+        callback(error(e));
+      });
   }
 }
 
