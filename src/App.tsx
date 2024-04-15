@@ -8,10 +8,9 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { AppNavigator } from "./navigation/AppNavigator";
 import { DefaultTheme } from "./theme/colors";
 import { Deeplink } from "./features/app/deeplink";
-import { queryClient } from "./features/app/store";
+import { queryClient } from "./features/app/queryclient";
 import { Loader } from "./components/Loader";
 import { credentialStoreActions } from "./features/credentials/atoms";
-
 credentialStoreActions.initDemoVC();
 
 export const App = () => {

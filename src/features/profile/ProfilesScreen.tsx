@@ -1,34 +1,29 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import type { ManagedIdentity } from "@web5/agent";
 import { Loader } from "../../components/Loader";
 import { Tappable } from "../../components/Tappable";
 import { SPACE } from "../../theme/layouts";
 import type { TabNavigatorProps } from "../../types/navigation";
 import { formatDID } from "../../utils/formatters";
-import { useIdentityListQuery } from "../identity/hooks";
 import { useProfilesQuery } from "./hooks";
 import { Button } from "../../components/Button";
+import type { Profile } from "../../types/models";
 
 type Props = TabNavigatorProps<"ProfilesScreen">;
 
 export const ProfilesScreen = ({ navigation }: Props) => {
-  const { data: allIdentities, isLoading: isLoadingIdentities } =
-    useIdentityListQuery();
+  const profileQueries = useProfilesQuery();
+  const isLoading = profileQueries.some((result) => result.isLoading);
 
-  // TODO: abstract to RQ
-  const profileQueries = useProfilesQuery(allIdentities ?? []);
-  const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
-
-  const navigateToProfile = (identity: ManagedIdentity) => {
-    navigation.navigate("ProfileDetailScreen", { identity });
+  const navigateToProfile = (profile: Profile) => {
+    navigation.navigate("ProfileDetailScreen", { profile });
   };
 
   const navigateToAddProfile = () => {
     navigation.navigate("AddProfileScreen");
   };
 
-  if (isLoadingIdentities || isLoadingProfiles) {
+  if (isLoading) {
     return <Loader />;
   }
 
@@ -36,18 +31,18 @@ export const ProfilesScreen = ({ navigation }: Props) => {
     <View style={styles.wrapper}>
       <ScrollView>
         <View style={styles.container}>
-          {profileQueries.map(({ data: profile }) =>
-            profile ? (
+          {profileQueries.map(({ data: profile }) => {
+            return profile ? (
               <Tappable
                 key={profile.did}
                 iconName="hash"
-                heading={profile.name}
+                heading={profile.displayName}
                 subtitle={profile.displayName}
                 body={formatDID(profile.did)}
                 onPress={() => navigateToProfile(profile)}
               />
-            ) : null
-          )}
+            ) : null;
+          })}
           <Button
             kind="primary"
             onPress={navigateToAddProfile}

@@ -5,7 +5,7 @@ import { Avatar, type AvatarProps } from "./Avatar";
 import { ColorTheme } from "../theme/colors";
 
 export type ItemBodyProps = {
-  heading: string;
+  heading?: string;
   subtitle?: string;
   body?: string;
   headingSize?: keyof typeof Typography;

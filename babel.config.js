@@ -10,8 +10,8 @@ module.exports = function (api) {
         "module-resolver",
         {
           alias: {
-            crypto: "react-native-quick-crypto",
-            "node:crypto": "react-native-quick-crypto",
+            crypto: "@tbd54566975/react-native-quick-crypto",
+            "node:crypto": "@tbd54566975/react-native-quick-crypto",
             stream: "stream-browserify",
             buffer: "@craftzdog/react-native-buffer",
             "bn.js": "react-native-bignumber",

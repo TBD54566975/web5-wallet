@@ -1,6 +1,5 @@
 import React, { type Dispatch, type SetStateAction, useEffect } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useIdentityListQuery } from "../../identity/hooks";
 import { useProfilesQuery } from "../hooks";
 import type { Profile } from "../../../types/models";
 import { SPACE } from "../../../theme/layouts";
@@ -15,12 +14,8 @@ type Props = {
 };
 export type CheckList = (Profile & { checked: boolean })[];
 export const ProfileSelectChecklist = ({ checkList, setCheckList }: Props) => {
-  // TODO: these queries need more abstraction
-  const { data: allIdentities, isLoading: isLoadingIdentities } =
-    useIdentityListQuery();
-  const profileQueries = useProfilesQuery(allIdentities ?? []);
-  const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
-  const isLoading = isLoadingIdentities || isLoadingProfiles;
+  const profileQueries = useProfilesQuery();
+  const isLoading = profileQueries.some((result) => result.isLoading);
 
   const deriveChecklistState = () => {
     if (!isLoading) {
@@ -70,7 +65,7 @@ export const ProfileSelectChecklist = ({ checkList, setCheckList }: Props) => {
               <Avatar iconName={"person"} />
               <View>
                 <Text style={Typography.heading5}>{profile.displayName}</Text>
-                <Text>{profile.name}</Text>
+                <Text>{profile.displayName}</Text>
               </View>
               <Checkbox checked={profile.checked} style={styles.checkbox} />
             </View>

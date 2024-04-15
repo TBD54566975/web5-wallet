@@ -24,67 +24,71 @@ export const Button = (
 ) => {
   const { kind, style, text, icon, disabled, ...pressableProps } = props;
 
-  const getButtonColor = () => {
-    if (disabled) {
-      return ColorTheme.MUTED;
-    }
-
-    switch (kind) {
-      case "primary":
-        return ColorTheme.PRIMARY;
-      case "secondary":
-        return ColorTheme.GRAY_50;
-      case "destructive":
-        return ColorTheme.DANGER;
-      default:
-        return ColorTheme.PRIMARY;
-    }
-  };
-
-  const getTextColor = () => {
-    if (disabled) {
-      return ColorTheme.REDUCED;
-    }
-
-    switch (kind) {
-      case "destructive":
-        return ColorTheme.DEFAULT_CONTRAST;
-      default:
-        return ColorTheme.DEFAULT;
-    }
-  };
-
-  const buttonStyle = (): StyleProp<ViewStyle> => {
-    return {
-      backgroundColor: getButtonColor(),
-      borderRadius: 999,
-      padding: SPACE.SMALL,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-      ...ObjectUtils.safeSpread(style),
-    };
-  };
-
-  const textStyle = (): StyleProp<TextStyle> => {
-    return {
-      ...Typography.body3,
-      color: getTextColor(),
-    };
-  };
-
   return (
     <TouchableOpacity
       {...pressableProps}
       disabled={disabled}
-      style={buttonStyle()}
+      style={buttonStyle(style, disabled, kind)}
     >
       <>
-        <Text style={textStyle()}>{text}</Text>
+        <Text style={textStyle(disabled, kind)}>{text}</Text>
         {!!icon && <Octicons name={icon} style={styles.icon} />}
       </>
     </TouchableOpacity>
   );
+};
+
+const getTextColor = (disabled?: boolean, kind?: string) => {
+  if (disabled) {
+    return ColorTheme.REDUCED;
+  }
+
+  switch (kind) {
+    case "destructive":
+      return ColorTheme.DEFAULT_CONTRAST;
+    default:
+      return ColorTheme.DEFAULT;
+  }
+};
+
+const textStyle = (disabled?: boolean, kind?: string): StyleProp<TextStyle> => {
+  return {
+    ...Typography.body3,
+    color: getTextColor(disabled, kind),
+  };
+};
+
+const buttonStyle = (
+  style: StyleProp<ViewStyle>,
+  disabled?: boolean,
+  kind?: string
+): StyleProp<ViewStyle> => {
+  return {
+    backgroundColor: getButtonColor(disabled, kind),
+    borderRadius: 999,
+    padding: SPACE.SMALL,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    ...ObjectUtils.safeSpread(style),
+  };
+};
+
+const getButtonColor = (disabled?: boolean, kind?: string) => {
+  if (disabled) {
+    return ColorTheme.MUTED;
+  }
+
+  switch (kind) {
+    case "primary":
+      return ColorTheme.PRIMARY;
+    case "secondary":
+      return ColorTheme.GRAY_50;
+    case "destructive":
+      return ColorTheme.DANGER;
+    default:
+      return ColorTheme.PRIMARY;
+  }
 };
 
 const styles = StyleSheet.create({

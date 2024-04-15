@@ -10,9 +10,9 @@ import { useMount } from "../../hooks/useMount";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
 import { Deeplink } from "../app/deeplink";
-import { BiometricLogin } from "../auth/biometric-login";
-import { IdentityAgentManager } from "./IdentityAgentManager";
-import { defaultIdentities } from "./default-identities";
+import { BiometricLogin } from "./biometric-login";
+import { IdentityAgentManager } from "../identity/IdentityAgentManager";
+import { defaultIdentities } from "../identity/default-identities";
 import type { AppNavigatorProps } from "../../types/navigation";
 
 type Props = AppNavigatorProps<"CreateWalletScreen">;
@@ -21,7 +21,7 @@ export const CreateWalletScreen = ({ navigation, route }: Props) => {
   useMount(() => {
     const createWallet = async () => {
       try {
-        await IdentityAgentManager.startAgent(route.params.passphrase);
+        await IdentityAgentManager.initialize(route.params.passphrase);
 
         const defaultIdentityCreatePromises = defaultIdentities.map(
           (identity) => {

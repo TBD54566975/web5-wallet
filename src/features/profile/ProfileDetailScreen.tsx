@@ -9,17 +9,14 @@ import { Typography } from "../../theme/typography";
 import type { AppNavigatorProps } from "../../types/navigation";
 import { formatDID, formatDate } from "../../utils/formatters";
 import { mockConnections } from "../connect/mocks";
-import { useProfileQuery } from "./hooks";
 
 const tabLabels = ["About", "Connections", "Activity"];
 
 type Props = AppNavigatorProps<"ProfileDetailScreen">;
 export const ProfileDetailScreen = ({ navigation, route }: Props) => {
-  const { identity } = route.params;
+  const { profile } = route.params;
 
   const [activeTab, setActiveTab] = useState(tabLabels[0]);
-  const { data: profile, isLoading: isLoadingProfile } =
-    useProfileQuery(identity);
 
   const navigateToReviewConnection = () => {
     navigation.navigate("ReviewConnectionScreen");
@@ -28,7 +25,7 @@ export const ProfileDetailScreen = ({ navigation, route }: Props) => {
   return (
     <MenuPageLayout
       headerItem={{
-        heading: identity.name,
+        heading: profile.displayName,
         iconName: "hash",
         badgeName: "feed-person",
       }}
@@ -42,11 +39,14 @@ export const ProfileDetailScreen = ({ navigation, route }: Props) => {
     >
       <View style={styles.row}>
         {activeTab === tabLabels[0] &&
-          (isLoadingProfile || !profile ? (
+          (!profile ? (
             <Loader />
           ) : (
             <>
-              <LabelValueItem label="Profile label" value={profile.name} />
+              <LabelValueItem
+                label="Profile label"
+                value={profile?.displayName ?? ""}
+              />
               <LabelValueItem
                 label="Public display name"
                 value={profile?.displayName ?? "Not Available"}
@@ -61,8 +61,8 @@ export const ProfileDetailScreen = ({ navigation, route }: Props) => {
         {activeTab === tabLabels[1] && (
           <>
             <Text style={Typography.body4}>
-              <Text style={Typography.body2}>{identity.name}</Text> is connected
-              to the following apps and services.
+              <Text style={Typography.body2}>{profile.displayName}</Text> is
+              connected to the following apps and services.
             </Text>
 
             {mockConnections?.map((connection, index) => (

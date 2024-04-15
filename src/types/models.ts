@@ -1,4 +1,3 @@
-import type { ManagedIdentity } from "@web5/agent";
 import type Octicons from "@expo/vector-icons/Octicons";
 import type { PermissionsRequestOptions } from "@tbd54566975/dwn-sdk-js";
 import type { ProfileProtocol } from "../features/profile/protocol/profile-protocol";
@@ -20,7 +19,7 @@ export type MockConnection = {
   id: string;
 };
 
-export type Profile = ManagedIdentity & Partial<ProfileProtocol>;
+export type Profile = ProfileProtocol;
 
 export type ConnectRequest = {
   did: string;

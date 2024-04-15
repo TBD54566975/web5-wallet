@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Jwt } from "@web5/credentials";
-import { type PortableDid } from "@web5/dids";
 import {
   type CheckList,
   ProfileSelectChecklist,
 } from "../profile/components/ProfileSelectChecklist";
 import { Typography } from "../../theme/typography";
 import { Button } from "../../components/Button";
-import { getItem } from "expo-secure-store";
 import { webviewRef } from "./webviewRef";
 import { SPACE } from "../../theme/layouts";
+import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 
 type ProfileSelectSheetProps = {
   onCancel: () => void;
@@ -25,23 +24,22 @@ export const ProfileSelectSheet = ({ onCancel }: ProfileSelectSheetProps) => {
   const buildDidResponseMessage = async () => {
     // TODO: after Frank updates KMS get the real key and sign
     const didJwtPromises = checkedItems.map((item) => {
-      const didString = getItem(item.name);
+      const web5 = IdentityAgentManager.web5(item.did);
 
-      if (didString) {
-        const portableDid: PortableDid = JSON.parse(didString);
+      // sign with the agentDid until we need something different
+      const bearerDid = web5.agent.agentDid;
 
-        // 12 byte nonce
-        // const nonce = crypto.randomBytes(12);
-        // const nu8a = new Uint8Array(nonce);
-        // const hexString = Buffer.from(nu8a).toString("hex");
-        return Jwt.sign({
-          signerDid: portableDid,
-          payload: {
-            iss: portableDid.did,
-            sub: portableDid.did,
-          },
-        });
-      }
+      // 12 byte nonce
+      // const nonce = crypto.randomBytes(12);
+      // const nu8a = new Uint8Array(nonce);
+      // const hexString = Buffer.from(nu8a).toString("hex");
+      return Jwt.sign({
+        signerDid: bearerDid,
+        payload: {
+          iss: bearerDid.uri,
+          sub: bearerDid.uri,
+        },
+      });
     });
 
     const didJwts = await Promise.all(didJwtPromises);

@@ -6,7 +6,6 @@ import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
 import type { ConnectRequest } from "../../types/models";
 import type { AppNavigatorProps } from "../../types/navigation";
-import { useIdentityListQuery } from "../identity/hooks";
 import { useProfilesQuery } from "../profile/hooks";
 import { ConnectSuite } from "./connect-suite";
 import { Button } from "../../components/Button";
@@ -22,12 +21,8 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const [checkList, setCheckList] = useState<CheckList>([]);
 
   // TODO: these queries need more abstraction
-  const { data: allIdentities, isLoading: isLoadingIdentities } =
-    useIdentityListQuery();
-
-  const profileQueries = useProfilesQuery(allIdentities ?? []);
-
-  const isLoadingProfiles = profileQueries.some((result) => result.isLoading);
+  const profileQueries = useProfilesQuery();
+  const isLoading = profileQueries.some((result) => result.isLoading);
 
   const onPressClose = () => {
     navigation.popToTop();
@@ -64,7 +59,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
     setDecryptedConnectionRequest(decryptedConnectionRequest);
   });
 
-  if (isLoadingIdentities || isLoadingProfiles) {
+  if (isLoading) {
     return <Loader />;
   }
 

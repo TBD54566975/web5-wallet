@@ -19,7 +19,7 @@ import { AddCredentialDetailScreen } from "../features/credentials/AddCredential
 import { AddCredentialOptionsScreen } from "../features/credentials/AddCredentialOptionsScreen";
 import { AddCredentialsScreen } from "../features/credentials/AddCredentialsScreen";
 import { CredentialDetailScreen } from "../features/credentials/CredentialDetailScreen";
-import { CreateWalletScreen } from "../features/identity/CreateWalletScreen";
+import { CreateWalletScreen } from "../features/auth/CreateWalletScreen";
 import { AddProfileScreen } from "../features/profile/AddProfileScreen";
 import { CreateProfilesScreen } from "../features/profile/CreateProfilesScreen";
 import { ProfileDetailScreen } from "../features/profile/ProfileDetailScreen";

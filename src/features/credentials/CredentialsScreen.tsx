@@ -11,7 +11,7 @@ type Props = TabNavigatorProps<"CredentialsScreen">;
 export const CredentialsScreen = ({ navigation }: Props) => {
   const navigateToItem = (credential: ItemProps) => {
     navigation.navigate("CredentialDetailScreen", {
-      heading: credential.heading,
+      heading: credential.heading ?? "",
       subtitle: credential.subtitle ?? "",
       iconName: credential.iconName ?? "hash",
     });

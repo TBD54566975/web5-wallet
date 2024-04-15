@@ -5,8 +5,7 @@ import type {
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import type Octicons from "@expo/vector-icons/Octicons";
-import type { ManagedIdentity } from "@web5/agent";
-import type { MockCredential } from "./models";
+import type { MockCredential, Profile } from "./models";
 
 export type AppNavigatorInterface = {
   WelcomeScreen: undefined;
@@ -15,7 +14,7 @@ export type AppNavigatorInterface = {
   CreateWalletScreen: { passphrase: string };
   EnterPassphraseScreen: undefined;
   Tabs: NavigatorScreenParams<TabNavigatorInterface>;
-  ProfileDetailScreen: { identity: ManagedIdentity };
+  ProfileDetailScreen: { profile: Profile };
   CredentialDetailScreen: {
     heading: string;
     subtitle: string;
@@ -40,7 +39,15 @@ export type AppNavigatorInterface = {
   WebviewCredentialsScreen: {
     url: string;
   };
-  OIDCScreen: undefined;
+  OIDCScreen: {
+    client_id: string;
+    client_metadata: string;
+    nonce: string;
+    response_mode: "direct_post";
+    response_type: "id_token vp_token";
+    response_uri: string;
+    scope: "openid";
+  };
 };
 
 export type TabNavigatorInterface = {

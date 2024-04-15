@@ -6,7 +6,14 @@
       "name": "Debug Expo app",
       "projectRoot": "${workspaceFolder}",
       "bundlerPort": "8081",
-      "bundlerHost": "127.0.0.1"
+      "bundlerHost": "127.0.0.1",
+      // "skipFiles": [
+      //   "${workspaceFolder}/<node_internals>/**",
+      //   "${workspaceFolder}/node_modules/react/**",
+      //   "${workspaceFolder}/node_modules/react-native/**",
+      //   "${workspaceFolder}/node_modules/metro-runtime/**",
+      //   "${workspaceFolder}/node_modules/@babel/**"
+      // ]
     }
   ]
 }

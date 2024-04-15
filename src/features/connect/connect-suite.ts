@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { xchacha20_poly1305 } from "@noble/ciphers/chacha";
+import { xchacha20poly1305 } from "@noble/ciphers/chacha";
 import { edwardsToMontgomeryPub, x25519 } from "@noble/curves/ed25519";
 import { createJsonRpcRequest } from "@web5/agent";
 import { base58btc } from "multiformats/bases/base58";
@@ -202,7 +202,7 @@ const decryptConnectionRequest = (
   connectKey: Uint8Array,
   connectNonce: Uint8Array
 ) => {
-  const cipher = xchacha20_poly1305(connectKey, connectNonce);
+  const cipher = xchacha20poly1305(connectKey, connectNonce);
   const decryptedConnectRequestU8A = cipher.decrypt(cipherText);
   const decryptedConnectRequest = new TextDecoder().decode(
     decryptedConnectRequestU8A
@@ -282,7 +282,7 @@ const getMockConnectionRequest = () => {
     21, 22, 23,
   ]);
 
-  const cipher = xchacha20_poly1305(connectKey, mockNonce);
+  const cipher = xchacha20poly1305(connectKey, mockNonce);
 
   const mockConnectionRequestU8A = new TextEncoder().encode(
     JSON.stringify(mockConnectionRequest)

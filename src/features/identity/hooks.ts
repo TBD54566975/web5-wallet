@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryClient } from "../app/store";
+import { queryClient } from "../app/queryclient";
 import { IdentityAgentManager } from "./IdentityAgentManager";
 
 export const useIdentityListQuery = () => {
