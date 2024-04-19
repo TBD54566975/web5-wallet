@@ -65,3 +65,6 @@ src/reference
 # fastlane 
 **/fastlane/report.xml
 **/fastlane/README.md
+
+# VSCode local history
+.history
