@@ -18,7 +18,7 @@ import {
   type ProfileProtocol,
 } from "../profile/protocol/profile-protocol";
 import { DidDht, DidJwk, DidResolverCacheLevel } from "@web5/dids";
-import { ExpoLevelStore } from "../app/expo-level-store";
+import { LevelKeyValueStore } from "../app/expo-level-store";
 import { ReactNativeLevelDBAsync } from "@shamilovtim/react-native-leveldb-async";
 
 // Singleton
@@ -35,7 +35,7 @@ const initAgent = async () => {
 
   const agentVault = new HdIdentityVault({
     keyDerivationWorkFactor: 210_000,
-    store: new ExpoLevelStore("DWN_IDENTITYVAULT"),
+    store: new LevelKeyValueStore("DWN_IDENTITYVAULT"),
   });
 
   const didApi = new AgentDidApi({

@@ -1,7 +1,7 @@
 import type { KeyValueStore } from "@web5/common";
 import { ReactNativeLevelDBAsync } from "@shamilovtim/react-native-leveldb-async";
 
-export class ExpoLevelStore implements KeyValueStore<string, any> {
+export class LevelKeyValueStore implements KeyValueStore<string, any> {
   private store: ReactNativeLevelDBAsync<string, string>;
 
   constructor(location: string) {
