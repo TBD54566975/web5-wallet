@@ -2,16 +2,6 @@ import "@tbd54566975/web5-react-native-polyfills";
 import "./src/utils/globals";
 import "react-native-gesture-handler";
 import { AppRegistry, LogBox } from "react-native";
-import { polyfillBlob } from "./blob-polyfill";
-import { Crypto } from "@peculiar/webcrypto";
-
-if (!global.structuredClone) {
-  global.structuredClone = require("realistic-structured-clone");
-}
-
-polyfillBlob();
-
-global.crypto.subtle = new Crypto().subtle;
 
 if (__DEV__) {
   LogBox.ignoreLogs([

@@ -17,10 +17,10 @@ import {
   profileProtocol,
   type ProfileProtocol,
 } from "../profile/protocol/profile-protocol";
-import { BearerDid, DidDht, DidJwk, DidResolverCacheLevel } from "@web5/dids";
-import { ExpoLevel } from "expo-level";
+import { DidDht, DidJwk, DidResolverCacheLevel } from "@web5/dids";
 import { ExpoLevelStore } from "../app/expo-level-store";
-BearerDid;
+import { ReactNativeLevelDBAsync } from "@shamilovtim/react-native-leveldb-async";
+
 // Singleton
 let agent: Web5IdentityAgent;
 let isStarted = false;
@@ -42,13 +42,13 @@ const initAgent = async () => {
     didMethods: [DidDht, DidJwk],
     // resolverCache: new DidResolverCacheMemory(),
     resolverCache: new DidResolverCacheLevel({
-      db: new ExpoLevel("DWN_RESOLVERCACHE"),
+      db: new ReactNativeLevelDBAsync("DWN_RESOLVERCACHE"),
     }),
     store: new DwnDidStore(),
   });
 
   const syncEngine = new SyncEngineLevel({
-    db: new ExpoLevel("DWN_SYNCSTORE"),
+    db: new ReactNativeLevelDBAsync("DWN_SYNCSTORE"),
   });
 
   const syncApi = new AgentSyncApi({ syncEngine });
@@ -60,18 +60,18 @@ const initAgent = async () => {
       dataStore: new DataStoreLevel({
         blockstoreLocation: "DWN_DATASTORE",
         createLevelDatabase: (location, options?) =>
-          Promise.resolve(new ExpoLevel(location, options)),
+          Promise.resolve(new ReactNativeLevelDBAsync(location, options)),
       }),
       messageStore: new MessageStoreLevel({
         blockstoreLocation: "DWN_MESSAGESTORE",
         indexLocation: "DWN_MESSAGEINDEX",
         createLevelDatabase: (location, options?) =>
-          Promise.resolve(new ExpoLevel(location, options)),
+          Promise.resolve(new ReactNativeLevelDBAsync(location, options)),
       }),
       eventLog: new EventLogLevel({
         location: "DWN_EVENTLOG",
         createLevelDatabase: (location, options?) =>
-          Promise.resolve(new ExpoLevel(location, options)),
+          Promise.resolve(new ReactNativeLevelDBAsync(location, options)),
       }),
     }),
   });
@@ -94,8 +94,6 @@ const isAgentStarted = () => {
 
 const startAgent = async (password: string) => {
   await agent.start({ password });
-  console.log("agentdid");
-  console.log(agent.agentDid.document);
   await startSync();
   isStarted = true;
 };
@@ -103,8 +101,6 @@ const startAgent = async (password: string) => {
 const startSync = async () => {
   // Register all DIDs under management, as well as the agent's master DID
   const managedIdentities = await agent.identity.list();
-  console.log("managedDids");
-  console.log(managedIdentities.map((foo) => foo.did.document));
   const didsToRegister = [
     agent.agentDid,
     ...managedIdentities.map((i) => i.did),
@@ -125,6 +121,7 @@ const createIdentity = async (name: string, displayName: string) => {
   const serviceEndpointNodes = await getTechPreviewDwnEndpoints();
 
   // Generate a new Identity for the end-user.
+
   const identity = await agent.identity.create({
     didMethod: "dht",
     metadata: { name },
