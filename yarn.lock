@@ -2482,10 +2482,10 @@
     uuid "8.3.2"
     varint "6.0.0"
 
-"@tbd54566975/web5-react-native-metro-config@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@tbd54566975/web5-react-native-metro-config/-/web5-react-native-metro-config-1.0.2.tgz#9811e6b6427d711bab7bf479fcd78bf4e53e5901"
-  integrity sha512-DD2TGw6FpiQRFqd28PoU7cTM15it0aL1AX6W+jHTC0o8U5vJNCKV0E/l+Ib6LAQlsUboyf5cRodcBpOr5Ts7xQ==
+"@tbd54566975/web5-react-native-metro-config@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@tbd54566975/web5-react-native-metro-config/-/web5-react-native-metro-config-1.0.3.tgz#d4de5d8f5d5b9eb6357ecd59d751bf6f49b29729"
+  integrity sha512-uRPS2PcH8veqTg6oZ4n1CgowspqRO3GkCos8Z/NOO/U7927uopm0s80L1Uy5CbBYGkvN2+/QiQ3eo1mR4b3B/Q==
 
 "@tbd54566975/web5-react-native-polyfills@^1.1.2":
   version "1.1.2"

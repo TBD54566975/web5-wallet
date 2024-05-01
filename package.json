@@ -31,7 +31,7 @@
     "@react-navigation/native-stack": "6.9.26",
     "@shamilovtim/react-native-leveldb-async": "^1.0.0",
     "@tanstack/react-query": "^5.32.0",
-    "@tbd54566975/web5-react-native-metro-config": "^1.0.2",
+    "@tbd54566975/web5-react-native-metro-config": "^1.0.3",
     "@tbd54566975/web5-react-native-polyfills": "^1.1.2",
     "@th3rdwave/react-navigation-bottom-sheet": "^0.2.7",
     "@types/uuid": "^9.0.8",
