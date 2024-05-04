@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { ObjectUtils } from "../utils/object";
-import Octicons from "@expo/vector-icons/Octicons";
+import { Octicons } from "@expo/vector-icons";
 import { ColorTheme } from "../theme/colors";
 import { SPACE } from "../theme/layouts";
 import { Typography } from "../theme/typography";

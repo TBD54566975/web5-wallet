@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
+import { Octicons } from "@expo/vector-icons";
 import { type ItemProps, Item } from "./Item";
 import { Checkbox } from "./Checkbox";
 

@@ -8,7 +8,7 @@ import { SPACE } from "../../../theme/layouts";
 import { Item } from "../../../components/Item";
 import { BottomSheet } from "../../../components/BottomSheet";
 import { ColorTheme } from "../../../theme/colors";
-import Octicons from "@expo/vector-icons/Octicons";
+import { Octicons } from "@expo/vector-icons";
 import { CredentialApplicationSuccessSheet } from "../CredentialApplicationSuccessSheet";
 import { ProfilesConfirmSheet } from "../ProfilesConfirmSheet";
 import { ProfileSelectSheet } from "../ProfileSelectSheet";

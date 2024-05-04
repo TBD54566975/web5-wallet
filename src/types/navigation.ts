@@ -4,7 +4,7 @@ import type {
 } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import type Octicons from "@expo/vector-icons/Octicons";
+import type { Octicons } from "@expo/vector-icons";
 import type { MockCredential, Profile } from "./models";
 
 export type AppNavigatorInterface = {

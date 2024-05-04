@@ -1,6 +1,6 @@
 import React from "react";
 import { type ImageURISource, StyleSheet, View, Image } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
+import { Octicons } from "@expo/vector-icons";
 import { ColorTheme } from "../theme/colors";
 
 export type AvatarProps = {

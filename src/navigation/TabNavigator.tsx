@@ -3,7 +3,7 @@ import {
   type BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
-import Octicons from "@expo/vector-icons/Octicons";
+import { Octicons } from "@expo/vector-icons";
 import { ColorTheme } from "../theme/colors";
 import { SPACE } from "../theme/layouts";
 import { Typography } from "../theme/typography";

@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
+import { Octicons } from "@expo/vector-icons";
 import { Avatar } from "../../components/Avatar";
 import { ColorTheme } from "../../theme/colors";
 import { SPACE } from "../../theme/layouts";

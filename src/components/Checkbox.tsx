@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { StyleSheet, View, type ViewStyle } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
+import { Octicons } from "@expo/vector-icons";
 import { SPACE } from "../theme/layouts";
 
 type Props = { style?: ViewStyle; checked: boolean; size?: number };

@@ -1,4 +1,4 @@
-import type Octicons from "@expo/vector-icons/Octicons";
+import type { Octicons } from "@expo/vector-icons";
 import type { PermissionsRequestOptions } from "@tbd54566975/dwn-sdk-js";
 import type { ProfileProtocol } from "../features/profile/protocol/profile-protocol";
 
