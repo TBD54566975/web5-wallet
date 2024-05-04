@@ -3,12 +3,6 @@ import "./src/utils/globals";
 import "react-native-gesture-handler";
 import { AppRegistry, LogBox } from "react-native";
 
-if (global.__turboModuleProxy) {
-  console.log("New Architecture is enabled");
-} else {
-  console.log("New Architecture is not enabled");
-}
-
 if (__DEV__) {
   LogBox.ignoreLogs([
     "`useBottomSheetDynamicSnapPoints` will be deprecated",
