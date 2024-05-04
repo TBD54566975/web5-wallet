@@ -6,20 +6,21 @@ Built with React Native and Expo
 
 Note that most things are not installed using Homewbrew. Homebrew is nice for personal projects but doesn't scale well for teams.
 
+Prerequisites:
 - nvm (installed not using homebrew)
 - rvm (installed not using homebrew)
 - ruby-3.2.2 installed inside of rvm and selected
-- node v18.16.0 installed inside of nvm and selected
-- npm v9.x.x installed inside of node v18.16.0 and selected
-- yarn v1.x.x (installed into the node version via corepack)
+- node v20.9.0 installed inside of nvm and selected
+- `corepack enable` run for your node version
 - watchman (via homebrew)
 
+Install steps:
 1. Install nvm (if you don't have it)
-2. Install Node v18.16.0 into nvm, select it, and make it the default selected node version if helpful
-3. Run `corepack enable` (if necessary) 
-4. Run `yarn install` to install node modules
+2. Install Node v20.9.0 into nvm, select it, and if helpful to you make it the default version
+3. Run `corepack enable` (if necessary to turn on corepack on your machine) 
+4. Run `corepack up` to install node modules
 5. Install rvm (if you don't have it)
-6. Install ruby-3.2.2 into rvm, select it, and make it default if helpful
+6. Install ruby-3.2.2 into rvm, select it, and if helpful to you make it the default version
 7. `cd ios` and bundle install
 8. `cd android` and bundle install
 9. In the root folder run `yarn pods` to install pods
@@ -48,14 +49,14 @@ The application can be debugged through VSCode
 
 - `which rvm` should be `/Users/{USER}/.rvm/bin/rvm`
 
-- `which node` should be `/Users/{USER}/.nvm/versions/node/v18.16.0/bin/node`
+- `which node` should be `/Users/{USER}/.nvm/versions/node/v20.9.0/bin/node`
 
-- `which npm` should be `/Users/{USER}/.nvm/versions/node/v18.16.0/bin/npm`
+- `which npm` should be `/Users/{USER}/.nvm/versions/node/v20.9.0/bin/npm`
 
-- `nvm list` should include `->     v18.16.0`
+- `nvm list` should include `->     v20.9.0`
 
 - `rvm list` should include `=* ruby-3.2.2 [ arm64 ]`
 
 ## Further troubleshooting install
 
-- Run `npx expo-env-info@latest`
+- Run `npx expo-env-info@latest` and send that info to a maintainer or post it in an issue

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "buildNumber": "15",
   "main": "index.js",
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "yarn@4.2.1+sha256.15ce76682a8cd2090257b883cd69c637925b29573f9573e8403ec227d5ab6815",
   "scripts": {
     "start": "watchman watch-del-all; rm -rf $TMPDIR/react-*; rm -rf $TMPDIR/react-native-packager-cache-*; rm -rf $TMPDIR/metro-cache; rm -rf $TMPDIR/haste-map-react-native-packager-*;expo start --clear",
     "android:release": "cd android && ./gradlew :app:bundleRelease && open app/build/outputs/bundle/release/;cd ..",
