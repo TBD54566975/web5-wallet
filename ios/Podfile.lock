@@ -11,7 +11,7 @@ PODS:
   - EXImageLoader (4.7.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (51.0.0-preview.14):
+  - Expo (51.0.2):
     - ExpoModulesCore
   - ExpoAsset (10.0.6):
     - ExpoModulesCore
@@ -23,7 +23,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLocalAuthentication (14.0.1):
     - ExpoModulesCore
-  - ExpoModulesCore (1.12.8):
+  - ExpoModulesCore (1.12.10):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1058,12 +1058,29 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-quick-crypto (0.7.0-rc.4):
+  - react-native-quick-crypto (0.7.0-rc.5):
+    - DoubleConversion
+    - glog
+    - hermes-engine
     - OpenSSL-Universal
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
     - React
-    - React-callinvoker
+    - React-Codegen
     - React-Core
-    - ReactCommon
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - react-native-safe-area-context (4.10.1):
     - DoubleConversion
     - glog
@@ -1130,7 +1147,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-webview (13.8.7):
+  - react-native-webview (13.10.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1380,7 +1397,7 @@ PODS:
     - React-logger (= 0.74.1)
     - React-perflogger (= 0.74.1)
     - React-utils (= 0.74.1)
-  - RNGestureHandler (2.16.1):
+  - RNGestureHandler (2.16.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1403,7 +1420,7 @@ PODS:
     - Yoga
   - RNInAppBrowser (3.7.0):
     - React-Core
-  - RNReanimated (3.10.0):
+  - RNReanimated (3.11.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1730,13 +1747,13 @@ SPEC CHECKSUMS:
   EXBarCodeScanner: e2dd9b42c1b522a2adc9202b1dfbc64cb34456d1
   EXConstants: 9a008dbf262550884e6280dea95b81b51f65ea6f
   EXImageLoader: ab589d67d6c5f2c33572afea9917304418566334
-  Expo: 5c1516e626d56a32ef5a4363d0d8bae15c5f39e4
+  Expo: a615f2b4d9412683c7c63ce20b376a3ab0c8af83
   ExpoAsset: 9b7433ecc5f1b608ccbb823492e062bde944abd2
   ExpoFileSystem: 80bfe850b1f9922c16905822ecbf97acd711dc51
   ExpoFont: 331cf28d549edc7b6300d3be19302fc5069d9bb1
   ExpoKeepAwake: f3a7b0ff4b4911957264dad8cb584ef688326a22
   ExpoLocalAuthentication: 9e02a56a4cf9868f0052656a93d4c94101a42ed7
-  ExpoModulesCore: c4ae97129fffb5a84ec367aa519fc4f402f1f776
+  ExpoModulesCore: 00313a5d81b010b03fc78bab8e8e3594d4d53d19
   ExpoSecureStore: 5f6b712785986b54d95a92bd365aabb82a52088e
   EXSplashScreen: 4e1d5c1b3371f7e72c1f158f04bbba6eb61dbd93
   FBLazyVector: 898d14d17bf19e2435cafd9ea2a1033efe445709
@@ -1773,9 +1790,9 @@ SPEC CHECKSUMS:
   react-native-keyboard-controller: 5d6d9c50ed4bbe9984abf642ec988a2581bb0ba8
   react-native-leveldb: 58443b7aa78ebe9de0760610894ff03c86d162b7
   react-native-quick-base64: 792444648d6f046fdd8c207140cb654c51f6cbce
-  react-native-quick-crypto: 416e74d9a364587b3b79972e0f0d7f2c653c7fb3
+  react-native-quick-crypto: 85bf9eab9f22c813618f22c4edc0c83c365508f6
   react-native-safe-area-context: 7f54ad0a774de306ab790c70d9d950321e5c5449
-  react-native-webview: 8a6392b52dc38c499b45f28ccbb34c9fe833da17
+  react-native-webview: 764476f03a30bf41e44208f5b4ce728a066c6e8a
   React-nativeconfig: b0073a590774e8b35192fead188a36d1dca23dec
   React-NativeModulesApple: df46ff3e3de5b842b30b4ca8a6caae6d7c8ab09f
   React-perflogger: 3d31e0d1e8ad891e43a09ac70b7b17a79773003a
@@ -1799,9 +1816,9 @@ SPEC CHECKSUMS:
   React-runtimescheduler: e2152ed146b6a35c07386fc2ac4827b27e6aad12
   React-utils: 3285151c9d1e3a28a9586571fc81d521678c196d
   ReactCommon: f42444e384d82ab89184aed5d6f3142748b54768
-  RNGestureHandler: 07b0babf8a26ea79729ae5c1990f8807e098970b
+  RNGestureHandler: 156548e18203327173a764c6932a3f52e90cb9cd
   RNInAppBrowser: e36d6935517101ccba0e875bac8ad7b0cb655364
-  RNReanimated: 413d65dcedfe93624bbfb755c63020f1e57c7990
+  RNReanimated: 2f33b2f8c79c456ce3858a7cd2e07460eb5f61e0
   RNScreens: 63fe8222c172a79f5c30dd1aefaeb369c6eb57b6
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 348f8b538c3ed4423eb58a8e5730feec50bce372

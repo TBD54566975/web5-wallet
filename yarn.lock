@@ -1275,9 +1275,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/cli@npm:0.18.8":
-  version: 0.18.8
-  resolution: "@expo/cli@npm:0.18.8"
+"@expo/cli@npm:0.18.10":
+  version: 0.18.10
+  resolution: "@expo/cli@npm:0.18.10"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
     "@expo/code-signing-certificates": "npm:0.0.5"
@@ -1357,7 +1357,7 @@ __metadata:
     ws: "npm:^8.12.1"
   bin:
     expo-internal: build/bin/cli
-  checksum: 10c0/412dd944e7b11671aff02dae000afd45b22e92d9f97bea04199da68022311deb7aa85de8475b7db5f7969ae38c7573229c4d8f9125b65195a2c0f1d978ee83b2
+  checksum: 10c0/9a2abb68b0a61f170dab2b01332878b9ec2f2b20bd829437212fb7cccbfe73841722c2f7f2951db53177df73c463f3e0b68caa23fbcb3d570af4101ffd15af01
   languageName: node
   linkType: hard
 
@@ -2693,21 +2693,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.32.1":
-  version: 5.32.1
-  resolution: "@tanstack/query-core@npm:5.32.1"
-  checksum: 10c0/2ae228c6bc6e5415c7345785c9b2680811e42aaf5b0183612546127ba67ccfe26adda5271845a6d40137c642f73e23909feb357e1e2c2423b4caf3a2d82868dc
+"@tanstack/query-core@npm:5.35.5":
+  version: 5.35.5
+  resolution: "@tanstack/query-core@npm:5.35.5"
+  checksum: 10c0/9c201a7ba2883f6fbab1b229311b249191780bccf46998232ec1e49e43fb4fc605caf37a9a8c8807f5a7c5ea9147925ce77d66357173b313994b2d33fc7c28d0
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.32.1":
-  version: 5.32.1
-  resolution: "@tanstack/react-query@npm:5.32.1"
+"@tanstack/react-query@npm:^5.35.5":
+  version: 5.35.5
+  resolution: "@tanstack/react-query@npm:5.35.5"
   dependencies:
-    "@tanstack/query-core": "npm:5.32.1"
+    "@tanstack/query-core": "npm:5.35.5"
   peerDependencies:
     react: ^18.0.0
-  checksum: 10c0/fdf5fb746a8e6b4954c4f7e83709bb871d6ff4d936d0b5adfc4b6b18953e0250179a8e39e7df9cdfc0915362a24f3d1309f01ef2c31128d5ff4272666f77461a
+  checksum: 10c0/171c3192edfb2bbe7d79908fa0f035774453fc55d1f5917c9ede9b7d93cc2b61f5e9a822559e89798af9fc2274b581fc9b5ec1a2dd204dc79d6e54439d85f410
   languageName: node
   linkType: hard
 
@@ -5810,12 +5810,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-modules-core@npm:1.12.8":
-  version: 1.12.8
-  resolution: "expo-modules-core@npm:1.12.8"
+"expo-modules-core@npm:1.12.10":
+  version: 1.12.10
+  resolution: "expo-modules-core@npm:1.12.10"
   dependencies:
     invariant: "npm:^2.2.4"
-  checksum: 10c0/05330b06f2daac449ea309252ca72aba086a4b6e50311d86710234a94f676f26d07d9394619b5aed7fbf3936a60b536af9d3de96c021607ad91fa0100004a5ed
+  checksum: 10c0/e31465c902825692c11725a1ce38660ff6ea7fdb1875c5f6e87b0cc9df84816061947c6678e894b914702320df605c975ba329e28f5edff26455b24deeb34bae
   languageName: node
   linkType: hard
 
@@ -5846,12 +5846,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:51.0.0-preview.14":
-  version: 51.0.0-preview.14
-  resolution: "expo@npm:51.0.0-preview.14"
+"expo@npm:51.0.2":
+  version: 51.0.2
+  resolution: "expo@npm:51.0.2"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
-    "@expo/cli": "npm:0.18.8"
+    "@expo/cli": "npm:0.18.10"
     "@expo/config": "npm:9.0.1"
     "@expo/config-plugins": "npm:8.0.4"
     "@expo/metro-config": "npm:0.18.3"
@@ -5862,12 +5862,12 @@ __metadata:
     expo-font: "npm:~12.0.4"
     expo-keep-awake: "npm:~13.0.1"
     expo-modules-autolinking: "npm:1.11.1"
-    expo-modules-core: "npm:1.12.8"
+    expo-modules-core: "npm:1.12.10"
     fbemitter: "npm:^3.0.0"
     whatwg-url-without-unicode: "npm:8.0.0-3"
   bin:
     expo: bin/cli
-  checksum: 10c0/f29a36c8c16206b13912b8b86a42c54c0d6b932160cf412faea10055d88fb8e4ab55ed4074979c42d0304b79bf1f81da789d42d1c87554a1715ff810a7833ec0
+  checksum: 10c0/b2b718bca39df46f48097642f168f97661c1197a068871a297b751578a81ca04b597096eb26a3d80c531103e72f99b38795beedfff022beb8150c389591bccb9
   languageName: node
   linkType: hard
 
@@ -9986,9 +9986,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:^2.16.1":
-  version: 2.16.1
-  resolution: "react-native-gesture-handler@npm:2.16.1"
+"react-native-gesture-handler@npm:^2.16.2":
+  version: 2.16.2
+  resolution: "react-native-gesture-handler@npm:2.16.2"
   dependencies:
     "@egjs/hammerjs": "npm:^2.0.17"
     hoist-non-react-statics: "npm:^3.3.0"
@@ -9998,7 +9998,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/fea9cc67b645ec77f26c61b10edf379adf3084d4280ea76c7986cf1b175c2957c53fa4b880d0a67232fd6cdc260057e3b97752ccb028c1d635b8db87a79bad27
+  checksum: 10c0/cd31794870edc51bc7051bf22893b19cebda5754c2fbd381f72e6ae6a718c26c5cf6966ad2f80e15e3a3217d09cc3e2e1637132f70bf44aacf62ea15a7636c98
   languageName: node
   linkType: hard
 
@@ -10047,23 +10047,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-quick-crypto@npm:^0.7.0-rc.4":
-  version: 0.7.0-rc.4
-  resolution: "react-native-quick-crypto@npm:0.7.0-rc.4"
+"react-native-quick-crypto@npm:0.7.0-rc.5":
+  version: 0.7.0-rc.5
+  resolution: "react-native-quick-crypto@npm:0.7.0-rc.5"
   dependencies:
     "@craftzdog/react-native-buffer": "npm:^6.0.5"
     events: "npm:^3.3.0"
-    react-native-quick-base64: "npm:^2.1.2"
     readable-stream: "npm:^4.5.2"
     string_decoder: "npm:^1.3.0"
     util: "npm:^0.12.5"
-  checksum: 10c0/8569b5465995f98b66f2df4e281cab204b1e6d1f52406bf894928427970c89e8a5ef18a3cb095d35f9e4a863d06c3104e820a6c0fc378ded5d44a0f0b5ad68fc
+  checksum: 10c0/3ca7d53c84b255d51a5d74074b0d57564ac76f5443863df4874545e118dac45d93eb8f68df93e480b3992786644fc3fb65a0700d2f8f6d3c29dbb1ed54e9182f
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:^3.10.0":
-  version: 3.10.0
-  resolution: "react-native-reanimated@npm:3.10.0"
+"react-native-reanimated@npm:^3.11.0":
+  version: 3.11.0
+  resolution: "react-native-reanimated@npm:3.11.0"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.0.0-0"
@@ -10077,7 +10076,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/8d90006f3e178e7e1d6c430432b0208df8c1eb290222bde26f535307594e53a6f6ac3fece02e69d6f3fa97dc29d2cb5fd235274c8a6aaa0f1a1b09dcc546002f
+  checksum: 10c0/e41047ae2bf1abe760a6ed1b24300c4064028230800898405b7b414a9d4bcc5aabbc250ddeffa945f103d7629e1cb50e031956fcd197f1ccd18da5059a4203b1
   languageName: node
   linkType: hard
 
@@ -10115,16 +10114,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-webview@npm:^13.8.7":
-  version: 13.8.7
-  resolution: "react-native-webview@npm:13.8.7"
+"react-native-webview@npm:^13.10.0":
+  version: 13.10.0
+  resolution: "react-native-webview@npm:13.10.0"
   dependencies:
     escape-string-regexp: "npm:2.0.0"
     invariant: "npm:2.2.4"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/311775ed4edb9c6083cd2c12ebb6f9950b74a350ec31c9022d3961a5c92ee4c29e49037de22e1f717e49cf80dfd6408d72e2d73b4c305ff38ac3ae5fbc12324e
+  checksum: 10c0/4acd933acee0c19a230dd6bc729ebee56015db13337600fd253023100f9a03e73f399846f3624ca0fd6cd3a35a8160ceae90b78f15f8328e03f328c273ef16e8
   languageName: node
   linkType: hard
 
@@ -12230,7 +12229,7 @@ __metadata:
     "@react-navigation/native": "npm:6.1.17"
     "@react-navigation/native-stack": "npm:6.9.26"
     "@shamilovtim/react-native-leveldb-async": "npm:^1.0.0"
-    "@tanstack/react-query": "npm:^5.32.1"
+    "@tanstack/react-query": "npm:^5.35.5"
     "@tbd54566975/web5-react-native-metro-config": "npm:^1.0.3"
     "@tbd54566975/web5-react-native-polyfills": "npm:^2.0.0"
     "@th3rdwave/react-navigation-bottom-sheet": "npm:^0.2.7"
@@ -12253,7 +12252,7 @@ __metadata:
     eslint-plugin-react-etc: "npm:2.0.1"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     eslint-plugin-react-native: "npm:4.1.0"
-    expo: "npm:51.0.0-preview.14"
+    expo: "npm:51.0.2"
     expo-barcode-scanner: "npm:~13.0.1"
     expo-local-authentication: "npm:~14.0.1"
     expo-secure-store: "npm:~13.0.1"
@@ -12265,16 +12264,16 @@ __metadata:
     react-native: "npm:^0.74.1"
     react-native-bignumber: "shamilovtim/react-native-bignumber#patch-1"
     react-native-blob-jsi-helper: "npm:0.3.1"
-    react-native-gesture-handler: "npm:^2.16.1"
+    react-native-gesture-handler: "npm:^2.16.2"
     react-native-inappbrowser-reborn: "npm:^3.7.0"
     react-native-keyboard-controller: "npm:^1.11.7"
     react-native-leveldb: "npm:3.3.5"
     react-native-quick-base64: "npm:^2.1.2"
-    react-native-quick-crypto: "npm:^0.7.0-rc.4"
-    react-native-reanimated: "npm:^3.10.0"
+    react-native-quick-crypto: "npm:0.7.0-rc.5"
+    react-native-reanimated: "npm:^3.11.0"
     react-native-safe-area-context: "npm:^4.10.1"
     react-native-screens: "npm:^3.31.1"
-    react-native-webview: "npm:^13.8.7"
+    react-native-webview: "npm:^13.10.0"
     typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft

@@ -9,23 +9,24 @@ Note that most things are not installed using Homewbrew. Homebrew is nice for pe
 Prerequisites:
 - nvm (installed not using homebrew)
 - rvm (installed not using homebrew)
-- ruby-3.2.2 installed inside of rvm and selected
-- node v20.9.0 installed inside of nvm and selected
-- `corepack enable` run for your node version
-- watchman (via homebrew)
+- using rvm, install ruby-3.2.2 and select it
+- using nvm, install node v20.9.0 and select it
+- `corepack enable` turned on
+- watchman (`brew install watchman`)
 
 Install steps:
 1. Install nvm (if you don't have it)
 2. Install Node v20.9.0 into nvm, select it, and if helpful to you make it the default version
-3. Run `corepack enable` (if necessary to turn on corepack on your machine) 
-4. Run `corepack up` to install node modules
-5. Install rvm (if you don't have it)
-6. Install ruby-3.2.2 into rvm, select it, and if helpful to you make it the default version
-7. `cd ios` and bundle install
-8. `cd android` and bundle install
-9. In the root folder run `yarn pods` to install pods
-10. Install XCode with the latest SDK if necessary
-11. Install Android Studio with the latest SDK if necessary
+3. Run `corepack enable` (if necessary to turn on corepack for this node version if you haven't already turned it on) 
+4. Run `corepack install` to install `yarn` pkg manager
+5. Run `yarn` to install `node_modules`
+6. Install rvm (if you don't have it)
+7. Install ruby-3.2.2 into rvm, select it, and if helpful to you make it the default version
+8. `cd ios` and bundle install
+9. `cd android` and bundle install
+10. In the root folder run `yarn pods` to install pods
+11. Install XCode with the latest SDK if necessary
+12. Install Android Studio with the latest SDK if necessary
 
 The project should now be ready to run. 
 
