@@ -50,15 +50,13 @@ export const AppNavigator = () => {
   }
 
   return (
-    <Stack.Navigator
-      screenOptions={headerHidden}
-      initialRouteName={initialRoute}
-    >
+    <Stack.Navigator screenOptions={defaults} initialRouteName={initialRoute}>
       {/* Onboarding */}
       <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
       <Stack.Screen
         name="CreateProfilesScreen"
         component={CreateProfilesScreen}
+        options={defaultAnimation}
       />
       <Stack.Screen
         name="CreatePassphraseScreen"
@@ -137,6 +135,10 @@ export const AppNavigator = () => {
   );
 };
 
+const defaultAnimation: NativeStackNavigationOptions = {
+  animation: "slide_from_right",
+};
+
 const fadeFromBottom: NativeStackNavigationOptions = {
   animation: "fade_from_bottom",
 };
@@ -145,8 +147,9 @@ const slideFromBottom: NativeStackNavigationOptions = {
   animation: "slide_from_bottom",
 };
 
-const headerHidden: NativeStackNavigationOptions = {
+const defaults: NativeStackNavigationOptions = {
   headerShown: false,
+  animation: "slide_from_right",
 };
 
 const authedGroupOptions: NativeStackNavigationOptions = {

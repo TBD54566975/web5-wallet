@@ -11,13 +11,13 @@ PODS:
   - EXImageLoader (4.7.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (51.0.2):
+  - Expo (51.0.5):
     - ExpoModulesCore
   - ExpoAsset (10.0.6):
     - ExpoModulesCore
   - ExpoFileSystem (17.0.1):
     - ExpoModulesCore
-  - ExpoFont (12.0.4):
+  - ExpoFont (12.0.5):
     - ExpoModulesCore
   - ExpoKeepAwake (13.0.1):
     - ExpoModulesCore
@@ -1005,16 +1005,10 @@ PODS:
   - React-Mapbuffer (0.74.1):
     - glog
     - React-debug
-  - react-native-bignumber (0.2.2):
-    - OpenSSL-Universal (~> 1.1.180)
-    - React
-    - React-callinvoker
-    - React-Core
-    - ReactCommon/turbomodule/core
   - react-native-blob-jsi-helper (0.3.1):
     - React
     - React-Core
-  - react-native-keyboard-controller (1.11.7):
+  - react-native-keyboard-controller (1.12.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1037,27 +1031,6 @@ PODS:
     - Yoga
   - react-native-leveldb (3.3.5):
     - React-Core
-  - react-native-quick-base64 (2.1.2):
-    - DoubleConversion
-    - glog
-    - hermes-engine
-    - RCT-Folly (= 2024.01.01.00)
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Codegen
-    - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-rendererdebug
-    - React-utils
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - Yoga
   - react-native-quick-crypto (0.7.0-rc.5):
     - DoubleConversion
     - glog
@@ -1147,7 +1120,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-webview (13.10.0):
+  - react-native-webview (13.10.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1539,11 +1512,9 @@ DEPENDENCIES:
   - React-jsitracing (from `../node_modules/react-native/ReactCommon/hermes/executor/`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
-  - react-native-bignumber (from `../node_modules/react-native-bignumber`)
   - react-native-blob-jsi-helper (from `../node_modules/react-native-blob-jsi-helper`)
   - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
   - react-native-leveldb (from `../node_modules/react-native-leveldb`)
-  - react-native-quick-base64 (from `../node_modules/react-native-quick-base64`)
   - react-native-quick-crypto (from `../node_modules/react-native-quick-crypto`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
@@ -1668,16 +1639,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
-  react-native-bignumber:
-    :path: "../node_modules/react-native-bignumber"
   react-native-blob-jsi-helper:
     :path: "../node_modules/react-native-blob-jsi-helper"
   react-native-keyboard-controller:
     :path: "../node_modules/react-native-keyboard-controller"
   react-native-leveldb:
     :path: "../node_modules/react-native-leveldb"
-  react-native-quick-base64:
-    :path: "../node_modules/react-native-quick-base64"
   react-native-quick-crypto:
     :path: "../node_modules/react-native-quick-crypto"
   react-native-safe-area-context:
@@ -1747,10 +1714,10 @@ SPEC CHECKSUMS:
   EXBarCodeScanner: e2dd9b42c1b522a2adc9202b1dfbc64cb34456d1
   EXConstants: 9a008dbf262550884e6280dea95b81b51f65ea6f
   EXImageLoader: ab589d67d6c5f2c33572afea9917304418566334
-  Expo: a615f2b4d9412683c7c63ce20b376a3ab0c8af83
+  Expo: a3177f18e97260de9ec29802d28d29c130871e94
   ExpoAsset: 9b7433ecc5f1b608ccbb823492e062bde944abd2
   ExpoFileSystem: 80bfe850b1f9922c16905822ecbf97acd711dc51
-  ExpoFont: 331cf28d549edc7b6300d3be19302fc5069d9bb1
+  ExpoFont: 690b76008be824e47907f200cb0764870108dfd1
   ExpoKeepAwake: f3a7b0ff4b4911957264dad8cb584ef688326a22
   ExpoLocalAuthentication: 9e02a56a4cf9868f0052656a93d4c94101a42ed7
   ExpoModulesCore: 00313a5d81b010b03fc78bab8e8e3594d4d53d19
@@ -1785,14 +1752,12 @@ SPEC CHECKSUMS:
   React-jsitracing: 233d1a798fe0ff33b8e630b8f00f62c4a8115fbc
   React-logger: 7e7403a2b14c97f847d90763af76b84b152b6fce
   React-Mapbuffer: 11029dcd47c5c9e057a4092ab9c2a8d10a496a33
-  react-native-bignumber: fba6066eba2f2a77762f5c8c7122a8fa1c8772af
   react-native-blob-jsi-helper: 13c10135af4614dbc0712afba5960784cd44f043
-  react-native-keyboard-controller: 5d6d9c50ed4bbe9984abf642ec988a2581bb0ba8
+  react-native-keyboard-controller: 21458cb5fb04310cbe976bf5edb538f8382905f1
   react-native-leveldb: 58443b7aa78ebe9de0760610894ff03c86d162b7
-  react-native-quick-base64: 792444648d6f046fdd8c207140cb654c51f6cbce
   react-native-quick-crypto: 85bf9eab9f22c813618f22c4edc0c83c365508f6
   react-native-safe-area-context: 7f54ad0a774de306ab790c70d9d950321e5c5449
-  react-native-webview: 764476f03a30bf41e44208f5b4ce728a066c6e8a
+  react-native-webview: caaa2085cb3faff7700ed43d5362cd8a7d0f2934
   React-nativeconfig: b0073a590774e8b35192fead188a36d1dca23dec
   React-NativeModulesApple: df46ff3e3de5b842b30b4ca8a6caae6d7c8ab09f
   React-perflogger: 3d31e0d1e8ad891e43a09ac70b7b17a79773003a
