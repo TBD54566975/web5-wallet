@@ -5,13 +5,6 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"-@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "-@npm:0.0.1"
-  checksum: 10c0/44df0e3afd0dc4196efc879e7d5095028cf7367c9a7ea95ce59d39f15e653022e4af0320d34f359db4571d1530363dfc21393ef2f7e0cf84c8ddd5e6569e3b83
-  languageName: node
-  linkType: hard
-
 "@0no-co/graphql.web@npm:^1.0.5":
   version: 1.0.7
   resolution: "@0no-co/graphql.web@npm:1.0.7"
@@ -12191,7 +12184,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web5wallet@workspace:."
   dependencies:
-    "-": "npm:^0.0.1"
     "@babel/core": "npm:^7.24.5"
     "@babel/plugin-proposal-nullish-coalescing-operator": "npm:7.18.6"
     "@babel/plugin-proposal-optional-chaining": "npm:7.21.0"
