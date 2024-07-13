@@ -4,21 +4,24 @@ import { Loader } from "../../components/Loader";
 import { useMount } from "../../hooks/useMount";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import type { ConnectRequest } from "../../types/models";
 import type { AppNavigatorProps } from "../../types/navigation";
 import { useProfilesQuery } from "../profile/hooks";
-import { ConnectSuite } from "./connect-suite";
+import { ProviderWalletConnect } from "./connect-suite";
 import { Button } from "../../components/Button";
 import {
   type CheckList,
   ProfileSelectChecklist,
 } from "../profile/components/ProfileSelectChecklist";
+import { type HybridAuthRequest, Oidc } from "@web5/agent";
 
 type Props = AppNavigatorProps<"ConnectProfileSelectScreen">;
 export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const [decryptedConnectionRequest, setDecryptedConnectionRequest] =
-    useState<ConnectRequest>();
+    useState<HybridAuthRequest>();
   const [checkList, setCheckList] = useState<CheckList>([]);
+
+  // passed by the QR code
+  const { request_uri, client_did, code_challenge } = route.params;
 
   // TODO: these queries need more abstraction
   const profileQueries = useProfilesQuery();
@@ -34,7 +37,8 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
         .filter((box) => box.checked)
         .map((did) => did.did);
 
-      await ConnectSuite.submitConnection(
+      await ProviderWalletConnect.submitAuthResponse(
+        client_did,
         decryptedConnectionRequest,
         selectedDids
       );
@@ -48,16 +52,15 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
    * in order to decrypt the connection request. The connection request will be used
    * to generate grants for each selected DID.
    */
-  useMount(() => {
-    const { nonce, temporaryDid, url } = route.params;
-    const decryptedConnectionRequest = ConnectSuite.initConnect(
-      temporaryDid,
-      nonce,
-      url
+  const connect = async () => {
+    const decryptedConnectionRequest = await Oidc.getAuthRequest(
+      request_uri,
+      code_challenge
     );
-
     setDecryptedConnectionRequest(decryptedConnectionRequest);
-  });
+  };
+
+  useMount(() => void connect());
 
   if (isLoading) {
     return <Loader />;

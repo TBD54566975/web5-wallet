@@ -52,31 +52,31 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
     const { query } = queryString.parseUrl(qrContent);
 
     if (
-      typeof query.temporaryDid !== "string" ||
-      typeof query.url !== "string" ||
-      typeof query.nonce !== "string"
+      typeof query.client_did !== "string" ||
+      typeof query.request_uri !== "string" ||
+      typeof query.code_challenge !== "string"
     ) {
       throw new Error(
         "Received a malformed QR code. Please try scanning again."
       );
     }
 
-    const temporaryDid = query.temporaryDid;
-    const url = query.url;
-    const nonce = query.nonce;
+    const client_did = query.client_did;
+    const request_uri = query.request_uri;
+    const code_challenge = query.code_challenge;
 
-    return { temporaryDid, nonce, url };
+    return { client_did, request_uri, code_challenge };
   };
 
   // test util to mock a valid scan
-  // useMount(() => {
-  //   setTimeout(() => {
-  //     const mockQRContent =
-  //       "web5://connect?nonce=%5B0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%2C16%2C17%2C18%2C19%2C20%2C21%2C22%2C23%5D&temporaryDid=did%3Akey%3Az6MknCyPKLhv92CoHZsqJF1XHE6fchHKJfoqh26GAsCwUewD&url=http%3A%2F%2Ffoobar.com%2Fdwn%2F";
+  useMount(() => {
+    setTimeout(() => {
+      const mockQRContent =
+        "web5://connect/?nonce=DplNeqpfBoWO0U63pZrfqLYUQwXngx7C&request_uri=http%3A%2F%2Flocalhost%3A8080%2Fconnect%2Fauthorize%2Faed11a62-cb13-48e3-8807-47db2ee3776b.jwt&client_did=did%3Adht%3Auk57yf8rr7p77hq4sdpecbrksu87dju7zobk41gffup6fjde9rko&code_challenge=BRugXj8tfoVQam7jN57H8WVT6OQ9PGmg_9KRKTV1I5g";
 
-  //     onQRCodeScanned({ data: mockQRContent } as any);
-  //   }, 3000);
-  // });
+      onQRCodeScanned({ data: mockQRContent } as any);
+    }, 3000);
+  });
 
   if (hasPermission) {
     return (
