@@ -1503,14 +1503,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/cli@npm:0.18.22":
-  version: 0.18.22
-  resolution: "@expo/cli@npm:0.18.22"
+"@expo/cli@npm:0.18.25":
+  version: 0.18.25
+  resolution: "@expo/cli@npm:0.18.25"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
     "@expo/code-signing-certificates": "npm:0.0.5"
     "@expo/config": "npm:~9.0.0-beta.0"
-    "@expo/config-plugins": "npm:~8.0.0-beta.0"
+    "@expo/config-plugins": "npm:~8.0.8"
     "@expo/devcert": "npm:^1.0.0"
     "@expo/env": "npm:~0.3.0"
     "@expo/image-utils": "npm:^0.5.0"
@@ -1519,7 +1519,7 @@ __metadata:
     "@expo/osascript": "npm:^2.0.31"
     "@expo/package-manager": "npm:^1.5.0"
     "@expo/plist": "npm:^0.1.0"
-    "@expo/prebuild-config": "npm:7.0.7"
+    "@expo/prebuild-config": "npm:7.0.8"
     "@expo/rudder-sdk-node": "npm:1.1.1"
     "@expo/spawn-async": "npm:^1.7.2"
     "@expo/xcpretty": "npm:^4.3.0"
@@ -1586,7 +1586,7 @@ __metadata:
     ws: "npm:^8.12.1"
   bin:
     expo-internal: build/bin/cli
-  checksum: 10c0/e579223526d28f7248d8ec5469792f6e470fc9e147b0f34152cb7e871604ab4caba2cd90f951b27a1151c226479b67b5f910925d5c76eef71fce1ad32cc01ab7
+  checksum: 10c0/2a82a25eb1d5172bf183ef34d5105dba268f34e48258690bf01d89d3376a18d51b1d45aa9ab06c345a48b9f6235b1f6b492e94792abdfed832905145ec17d22b
   languageName: node
   linkType: hard
 
@@ -1600,9 +1600,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/config-plugins@npm:8.0.7":
-  version: 8.0.7
-  resolution: "@expo/config-plugins@npm:8.0.7"
+"@expo/config-plugins@npm:8.0.8, @expo/config-plugins@npm:~8.0.8":
+  version: 8.0.8
+  resolution: "@expo/config-plugins@npm:8.0.8"
   dependencies:
     "@expo/config-types": "npm:^51.0.0-unreleased"
     "@expo/json-file": "npm:~8.3.0"
@@ -1619,7 +1619,7 @@ __metadata:
     slugify: "npm:^1.6.6"
     xcode: "npm:^3.0.1"
     xml2js: "npm:0.6.0"
-  checksum: 10c0/9e92039cc61d1a5835125cc3d41f0a95c2f3dc284c5342b8137a58ecf2d9115ed428760b4f218e0005ddd355923ffa8d1a2f77ba6c55d4faa14bfeffb663f1c4
+  checksum: 10c0/4d403ce9df0cd694cd30f1a914c4e4529c529e9b5f572ddc3cdf88f80d4c47a8ba8336da78ae3f9c67966a7fa1e02d87ea2dff95102a0a337004d118ebc32d63
   languageName: node
   linkType: hard
 
@@ -1653,7 +1653,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/config@npm:9.0.1, @expo/config@npm:~9.0.0-beta.0":
+"@expo/config@npm:9.0.3":
+  version: 9.0.3
+  resolution: "@expo/config@npm:9.0.3"
+  dependencies:
+    "@babel/code-frame": "npm:~7.10.4"
+    "@expo/config-plugins": "npm:~8.0.8"
+    "@expo/config-types": "npm:^51.0.0-unreleased"
+    "@expo/json-file": "npm:^8.3.0"
+    getenv: "npm:^1.0.0"
+    glob: "npm:7.1.6"
+    require-from-string: "npm:^2.0.2"
+    resolve-from: "npm:^5.0.0"
+    semver: "npm:^7.6.0"
+    slugify: "npm:^1.3.4"
+    sucrase: "npm:3.34.0"
+  checksum: 10c0/e28975a7c64ed6e68530420045c24edc5258b3d57a8eca37d3c8c35bde9c07c83cc822b10c37438591c1459fb5b7c58598bfb60bbbe838231b1d3519d645a201
+  languageName: node
+  linkType: hard
+
+"@expo/config@npm:~9.0.0-beta.0":
   version: 9.0.1
   resolution: "@expo/config@npm:9.0.1"
   dependencies:
@@ -1849,12 +1868,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/prebuild-config@npm:7.0.7":
-  version: 7.0.7
-  resolution: "@expo/prebuild-config@npm:7.0.7"
+"@expo/prebuild-config@npm:7.0.8":
+  version: 7.0.8
+  resolution: "@expo/prebuild-config@npm:7.0.8"
   dependencies:
     "@expo/config": "npm:~9.0.0-beta.0"
-    "@expo/config-plugins": "npm:~8.0.0-beta.0"
+    "@expo/config-plugins": "npm:~8.0.8"
     "@expo/config-types": "npm:^51.0.0-unreleased"
     "@expo/image-utils": "npm:^0.5.0"
     "@expo/json-file": "npm:^8.3.0"
@@ -1866,7 +1885,7 @@ __metadata:
     xml2js: "npm:0.6.0"
   peerDependencies:
     expo-modules-autolinking: ">=0.8.1"
-  checksum: 10c0/968172b3b1f24b2c6d4df7b41244228c1a75273097aec1cf127762eea8200f1ee465eb20be2021553185ca414f82f79e99e4acd4d8dac6ca15ea126f740ff9b3
+  checksum: 10c0/aca22d101c0662abb7a7a02a05214a340c8b342569df71eb0b08328d4889a90ee495542c8f955538be2f8bc6b07a85dad63c6e6d13c7156b6b300a77ae0da124
   languageName: node
   linkType: hard
 
@@ -2208,7 +2227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/ciphers@npm:0.4.1":
+"@noble/ciphers@npm:0.4.1, @noble/ciphers@npm:^0.4.1":
   version: 0.4.1
   resolution: "@noble/ciphers@npm:0.4.1"
   checksum: 10c0/b5d87c56382484511a50bd41891eb013e41587c10c867cdc1d9cd322860a8d831d9196c53bb1d8cab82043bfe3a4e4097e5e641a309ee3d129ae8c65c587acf4
@@ -2868,6 +2887,44 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sd-jwt/decode@npm:0.6.1, @sd-jwt/decode@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "@sd-jwt/decode@npm:0.6.1"
+  dependencies:
+    "@sd-jwt/types": "npm:0.6.1"
+    "@sd-jwt/utils": "npm:0.6.1"
+  checksum: 10c0/3496e84cadecf09f3a178d7573c0a2311ec43cd01c5c04edb7bbe231ee1636aa78e745151743c0d022b4ff70bc509770364bc203f632625c9d24f37bc305daf0
+  languageName: node
+  linkType: hard
+
+"@sd-jwt/present@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "@sd-jwt/present@npm:0.6.1"
+  dependencies:
+    "@sd-jwt/decode": "npm:0.6.1"
+    "@sd-jwt/types": "npm:0.6.1"
+    "@sd-jwt/utils": "npm:0.6.1"
+  checksum: 10c0/36b6c6a7e16059e9644fdcc80ac44b9ae43d3ce4a8fc5f5aeddcc0aa0e8c2834c7b182bb431435dd47ba70e5e7bf039a19172ffc607c4c2a5ea7377423afaeef
+  languageName: node
+  linkType: hard
+
+"@sd-jwt/types@npm:0.6.1, @sd-jwt/types@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "@sd-jwt/types@npm:0.6.1"
+  checksum: 10c0/3584d996c4d1410b768b9088be3a530a6b2ac67c2e7726692ff8f40aae8d3d9302ee29d8b8acc9b8a3a4d617f1ec50fdf7b50390e2dcdfb55f93f226e4a5319e
+  languageName: node
+  linkType: hard
+
+"@sd-jwt/utils@npm:0.6.1":
+  version: 0.6.1
+  resolution: "@sd-jwt/utils@npm:0.6.1"
+  dependencies:
+    "@sd-jwt/types": "npm:0.6.1"
+    js-base64: "npm:^3.7.6"
+  checksum: 10c0/b5856331a62954c0a85bb638b63cda3a7c276edbb1fd25fdcb141d59c79e7ed4f6be8b6244f860fc7746c6d2c830a80662f670f881351bca49619acc19da083c
+  languageName: node
+  linkType: hard
+
 "@segment/loosely-validate-event@npm:^2.0.0":
   version: 2.0.0
   resolution: "@segment/loosely-validate-event@npm:2.0.0"
@@ -2940,59 +2997,64 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sphereon/pex-models@npm:^2.0.3":
+"@sphereon/pex-models@npm:^2.2.4":
   version: 2.2.4
   resolution: "@sphereon/pex-models@npm:2.2.4"
   checksum: 10c0/c55b23d41c2b426b6f25fe7114e03e651580cd4e643b49034e010f8d62f67ef7338e22e18a866e4e2c7134f615e66d8c6ce6b4199be8e8cab211cfbfb6b5a2c0
   languageName: node
   linkType: hard
 
-"@sphereon/pex@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@sphereon/pex@npm:2.1.0"
+"@sphereon/pex@npm:3.3.3":
+  version: 3.3.3
+  resolution: "@sphereon/pex@npm:3.3.3"
   dependencies:
     "@astronautlabs/jsonpath": "npm:^1.1.2"
-    "@sphereon/pex-models": "npm:^2.0.3"
-    "@sphereon/ssi-types": "npm:^0.13.0"
+    "@sd-jwt/decode": "npm:^0.6.1"
+    "@sd-jwt/present": "npm:^0.6.1"
+    "@sd-jwt/types": "npm:^0.6.1"
+    "@sphereon/pex-models": "npm:^2.2.4"
+    "@sphereon/ssi-types": "npm:0.22.0"
     ajv: "npm:^8.12.0"
     ajv-formats: "npm:^2.1.1"
     jwt-decode: "npm:^3.1.2"
-    nanoid: "npm:^3.3.6"
-    string.prototype.matchall: "npm:^4.0.8"
-  checksum: 10c0/28a3c77949a0c1a3ccc3010525902aea6888c03f65d3675030c31007528ffb068af547f5cfdd840af8c4341641e721375294368b47d76e89b1bc9f7a7f1a0cf3
+    nanoid: "npm:^3.3.7"
+    string.prototype.matchall: "npm:^4.0.10"
+    uint8arrays: "npm:^3.1.1"
+  checksum: 10c0/5342c9a10e3f10313e3333461eec0460cc0555c295fcc9cdc6ac07b19e090d0435126f2ad79e1ed291e865944eece72e303f5aa667f6286bbb05e87f6e55ffde
   languageName: node
   linkType: hard
 
-"@sphereon/ssi-types@npm:^0.13.0":
-  version: 0.13.0
-  resolution: "@sphereon/ssi-types@npm:0.13.0"
+"@sphereon/ssi-types@npm:0.22.0":
+  version: 0.22.0
+  resolution: "@sphereon/ssi-types@npm:0.22.0"
   dependencies:
+    "@sd-jwt/decode": "npm:^0.6.1"
     jwt-decode: "npm:^3.1.2"
-  checksum: 10c0/87bc10bfa1d637de094534de10dc53ef1c5baf7da9cc7d2318d052bf06cd644cd1482931472023f6c85d8a93f802b0e198a0864b89564cd43901ac4a78777411
+  checksum: 10c0/5f32c9b552be8a48fabf40f5f17edc1261e95c4371cafc9ee510f54c9e651f71bab260d8240fc55c95784cd027a444dea95c1b7281549dbf70bfedc2add4a437
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.50.1":
-  version: 5.50.1
-  resolution: "@tanstack/query-core@npm:5.50.1"
-  checksum: 10c0/4690750e70638fbfbcb686262f129c45e06314126bc651701f9cd57a77bd05cb9dad30b68cad960c35c790982750c294c9c340d25cb8a9a0916576d2e27569c0
+"@tanstack/query-core@npm:5.51.1":
+  version: 5.51.1
+  resolution: "@tanstack/query-core@npm:5.51.1"
+  checksum: 10c0/c973965a35fc98ba8e4495f8a50752eb047b7cf2648b8575266ad74708aa219b95f14ea186f341e1f1521cbe586ffd86e0296c91d12e61c23fc4c9e6386cfdf2
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.50.1":
-  version: 5.50.1
-  resolution: "@tanstack/react-query@npm:5.50.1"
+"@tanstack/react-query@npm:^5.51.1":
+  version: 5.51.1
+  resolution: "@tanstack/react-query@npm:5.51.1"
   dependencies:
-    "@tanstack/query-core": "npm:5.50.1"
+    "@tanstack/query-core": "npm:5.51.1"
   peerDependencies:
     react: ^18.0.0
-  checksum: 10c0/ccf33245bc4f83c20b93a629e64edd9976a4d397ee51ee442326955a387345ff2b2a3813955faef6d08fde732eebb40557944df8335d50838094b703e79f35f9
+  checksum: 10c0/08b54812a41ae363e00f090f3b2ff4bf3e4a920b5b46489d26cc4f6cc95021bf91248b0b19f514039eb3b625eb7d720dc851877a6655abd6686b0a898a87db3d
   languageName: node
   linkType: hard
 
-"@tbd54566975/dwn-sdk-js@npm:0.3.5":
-  version: 0.3.5
-  resolution: "@tbd54566975/dwn-sdk-js@npm:0.3.5"
+"@tbd54566975/dwn-sdk-js@npm:0.4.0":
+  version: 0.4.0
+  resolution: "@tbd54566975/dwn-sdk-js@npm:0.4.0"
   dependencies:
     "@ipld/dag-cbor": "npm:9.0.3"
     "@js-temporal/polyfill": "npm:0.4.4"
@@ -3019,7 +3081,40 @@ __metadata:
     ulidx: "npm:2.1.0"
     uuid: "npm:8.3.2"
     varint: "npm:6.0.0"
-  checksum: 10c0/b4197ad259658462c321c884cfcee18f58323627b5709c5c0a812f21059b5ee89a92f1d2bea7e5c94a7cb56ed9c13a01f763cc9e9e9bdee9593f7be095db5379
+  checksum: 10c0/f05306b247e86eb95c2d4ab0adb3a5a2738a03971eb76350249306d954108a518c69f3762659b47fc7053c87c9648acd351c40765f877dce2c75cb9acaeb2d69
+  languageName: node
+  linkType: hard
+
+"@tbd54566975/dwn-sdk-js@npm:^0.3.5":
+  version: 0.3.10
+  resolution: "@tbd54566975/dwn-sdk-js@npm:0.3.10"
+  dependencies:
+    "@ipld/dag-cbor": "npm:9.0.3"
+    "@js-temporal/polyfill": "npm:0.4.4"
+    "@noble/ciphers": "npm:0.5.3"
+    "@noble/ed25519": "npm:2.0.0"
+    "@noble/secp256k1": "npm:2.0.0"
+    "@web5/dids": "npm:1.1.0"
+    abstract-level: "npm:1.0.3"
+    ajv: "npm:8.12.0"
+    blockstore-core: "npm:4.2.0"
+    cross-fetch: "npm:4.0.0"
+    eciesjs: "npm:0.4.5"
+    interface-blockstore: "npm:5.2.3"
+    interface-store: "npm:5.1.2"
+    ipfs-unixfs-exporter: "npm:13.1.5"
+    ipfs-unixfs-importer: "npm:15.1.5"
+    level: "npm:8.0.0"
+    lodash: "npm:4.17.21"
+    lru-cache: "npm:9.1.2"
+    ms: "npm:2.1.3"
+    multiformats: "npm:11.0.2"
+    randombytes: "npm:2.1.0"
+    readable-stream: "npm:4.5.2"
+    ulidx: "npm:2.1.0"
+    uuid: "npm:8.3.2"
+    varint: "npm:6.0.0"
+  checksum: 10c0/c21e178a741e7a0d25c617729850a63f91696bcaeb4ddfdc4eb808dfa6fdc5a67dd3b80733d3926d06ed7bddf49e3df9d399491fe765f27ad701e9a6588f583b
   languageName: node
   linkType: hard
 
@@ -3432,13 +3527,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web5/agent@npm:0.3.8, @web5/agent@npm:^0.3.8":
+"@web5/agent@file:../agent::locator=%40web5%2Fapi%40file%3A..%2Fweb5-js%2Fpackages%2Fapi%23..%2Fweb5-js%2Fpackages%2Fapi%3A%3Ahash%3Dccd9f6%26locator%3Dweb5wallet%2540workspace%253A.":
   version: 0.3.8
-  resolution: "@web5/agent@npm:0.3.8"
+  resolution: "@web5/agent@file:../agent#../agent::hash=702040&locator=%40web5%2Fapi%40file%3A..%2Fweb5-js%2Fpackages%2Fapi%23..%2Fweb5-js%2Fpackages%2Fapi%3A%3Ahash%3Dccd9f6%26locator%3Dweb5wallet%2540workspace%253A."
   dependencies:
     "@noble/ciphers": "npm:0.4.1"
     "@scure/bip39": "npm:1.2.2"
-    "@tbd54566975/dwn-sdk-js": "npm:0.3.5"
+    "@tbd54566975/dwn-sdk-js": "npm:0.4.0"
     "@web5/common": "npm:1.0.0"
     "@web5/crypto": "npm:1.0.0"
     "@web5/dids": "npm:1.1.0"
@@ -3449,20 +3544,95 @@ __metadata:
     ms: "npm:2.1.3"
     readable-web-to-node-stream: "npm:3.0.2"
     ulidx: "npm:2.1.0"
-  checksum: 10c0/8c17f22885c5555a6129f6d35d3422c2efdec7f3fc06597ece6aaeb2dadac08c694e375565c3867b6c2f34353656bcfd8c610501b686def02b91489970c01e7f
+  checksum: 10c0/2c4d3074c7651fa14da258524723562e413fd77f316ff70287c78cc3d8af0115494233f7f63cbecd1fc88a7a75711ec8fa619c5d1bba42577b9312d98f757ec6
   languageName: node
   linkType: hard
 
-"@web5/api@npm:^0.9.4":
-  version: 0.9.4
-  resolution: "@web5/api@npm:0.9.4"
+"@web5/agent@file:../agent::locator=%40web5%2Fidentity-agent%40file%3A..%2Fweb5-js%2Fpackages%2Fidentity-agent%23..%2Fweb5-js%2Fpackages%2Fidentity-agent%3A%3Ahash%3D2195b3%26locator%3Dweb5wallet%2540workspace%253A.":
+  version: 0.3.8
+  resolution: "@web5/agent@file:../agent#../agent::hash=702040&locator=%40web5%2Fidentity-agent%40file%3A..%2Fweb5-js%2Fpackages%2Fidentity-agent%23..%2Fweb5-js%2Fpackages%2Fidentity-agent%3A%3Ahash%3D2195b3%26locator%3Dweb5wallet%2540workspace%253A."
   dependencies:
-    "@web5/agent": "npm:0.3.8"
+    "@noble/ciphers": "npm:0.4.1"
+    "@scure/bip39": "npm:1.2.2"
+    "@tbd54566975/dwn-sdk-js": "npm:0.4.0"
     "@web5/common": "npm:1.0.0"
     "@web5/crypto": "npm:1.0.0"
     "@web5/dids": "npm:1.1.0"
-    "@web5/user-agent": "npm:0.3.8"
-  checksum: 10c0/526322be926f937afd9783128872bd328b1556d76059d1c5b9a800c4a7d290ae98db399529a12ae68644acd423409b36f505dbb0f027d3d08a69cdd8b52a7443
+    abstract-level: "npm:1.0.4"
+    ed25519-keygen: "npm:0.4.11"
+    isomorphic-ws: "npm:^5.0.0"
+    level: "npm:8.0.0"
+    ms: "npm:2.1.3"
+    readable-web-to-node-stream: "npm:3.0.2"
+    ulidx: "npm:2.1.0"
+  checksum: 10c0/2c4d3074c7651fa14da258524723562e413fd77f316ff70287c78cc3d8af0115494233f7f63cbecd1fc88a7a75711ec8fa619c5d1bba42577b9312d98f757ec6
+  languageName: node
+  linkType: hard
+
+"@web5/agent@file:../agent::locator=%40web5%2Fuser-agent%40file%3A..%2Fuser-agent%23..%2Fuser-agent%3A%3Ahash%3D3704ac%26locator%3D%2540web5%252Fapi%2540file%253A..%252Fweb5-js%252Fpackages%252Fapi%2523..%252Fweb5-js%252Fpackages%252Fapi%253A%253Ahash%253Dccd9f6%2526locator%253Dweb5wallet%252540workspace%25253A.":
+  version: 0.3.8
+  resolution: "@web5/agent@file:../agent#../agent::hash=702040&locator=%40web5%2Fuser-agent%40file%3A..%2Fuser-agent%23..%2Fuser-agent%3A%3Ahash%3D3704ac%26locator%3D%2540web5%252Fapi%2540file%253A..%252Fweb5-js%252Fpackages%252Fapi%2523..%252Fweb5-js%252Fpackages%252Fapi%253A%253Ahash%253Dccd9f6%2526locator%253Dweb5wallet%252540workspace%25253A."
+  dependencies:
+    "@noble/ciphers": "npm:0.4.1"
+    "@scure/bip39": "npm:1.2.2"
+    "@tbd54566975/dwn-sdk-js": "npm:0.4.0"
+    "@web5/common": "npm:1.0.0"
+    "@web5/crypto": "npm:1.0.0"
+    "@web5/dids": "npm:1.1.0"
+    abstract-level: "npm:1.0.4"
+    ed25519-keygen: "npm:0.4.11"
+    isomorphic-ws: "npm:^5.0.0"
+    level: "npm:8.0.0"
+    ms: "npm:2.1.3"
+    readable-web-to-node-stream: "npm:3.0.2"
+    ulidx: "npm:2.1.0"
+  checksum: 10c0/2c4d3074c7651fa14da258524723562e413fd77f316ff70287c78cc3d8af0115494233f7f63cbecd1fc88a7a75711ec8fa619c5d1bba42577b9312d98f757ec6
+  languageName: node
+  linkType: hard
+
+"@web5/agent@file:../web5-js/packages/agent::locator=web5wallet%40workspace%3A.":
+  version: 0.3.8
+  resolution: "@web5/agent@file:../web5-js/packages/agent#../web5-js/packages/agent::hash=702040&locator=web5wallet%40workspace%3A."
+  dependencies:
+    "@noble/ciphers": "npm:0.4.1"
+    "@scure/bip39": "npm:1.2.2"
+    "@tbd54566975/dwn-sdk-js": "npm:0.4.0"
+    "@web5/common": "npm:1.0.0"
+    "@web5/crypto": "npm:1.0.0"
+    "@web5/dids": "npm:1.1.0"
+    abstract-level: "npm:1.0.4"
+    ed25519-keygen: "npm:0.4.11"
+    isomorphic-ws: "npm:^5.0.0"
+    level: "npm:8.0.0"
+    ms: "npm:2.1.3"
+    readable-web-to-node-stream: "npm:3.0.2"
+    ulidx: "npm:2.1.0"
+  checksum: 10c0/2c4d3074c7651fa14da258524723562e413fd77f316ff70287c78cc3d8af0115494233f7f63cbecd1fc88a7a75711ec8fa619c5d1bba42577b9312d98f757ec6
+  languageName: node
+  linkType: hard
+
+"@web5/api@file:../web5-js/packages/api::locator=web5wallet%40workspace%3A.":
+  version: 0.9.4
+  resolution: "@web5/api@file:../web5-js/packages/api#../web5-js/packages/api::hash=ccd9f6&locator=web5wallet%40workspace%3A."
+  dependencies:
+    "@web5/agent": "file:../agent"
+    "@web5/common": "npm:1.0.0"
+    "@web5/crypto": "npm:1.0.0"
+    "@web5/dids": "npm:1.1.0"
+    "@web5/user-agent": "file:../user-agent"
+  checksum: 10c0/aa8dc7764cd293106c16b142b0780c09113fde56fb1c805a39538b4773212f897d4a8bec71e50f8fd9de8c4a1aaa9228166eabbfae9e714d3fa90bad427ea0bd
+  languageName: node
+  linkType: hard
+
+"@web5/common@file:../web5-js/packages/common::locator=web5wallet%40workspace%3A.":
+  version: 1.0.1
+  resolution: "@web5/common@file:../web5-js/packages/common#../web5-js/packages/common::hash=bf5be4&locator=web5wallet%40workspace%3A."
+  dependencies:
+    "@isaacs/ttlcache": "npm:1.4.1"
+    level: "npm:8.0.1"
+    multiformats: "npm:13.1.0"
+    readable-stream: "npm:4.5.2"
+  checksum: 10c0/c02bf07d3c2c1189738708d8fe81c2b83db856943707fc56342ff571b514e1e57db02deaad238a0f4cc227f4e635234c73764b50b7e8911f27effa506b908ae9
   languageName: node
   linkType: hard
 
@@ -3478,7 +3648,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web5/common@npm:1.0.1, @web5/common@npm:^1.0.1":
+"@web5/common@npm:1.0.1":
   version: 1.0.1
   resolution: "@web5/common@npm:1.0.1"
   dependencies:
@@ -3490,16 +3660,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web5/credentials@npm:^1.0.3":
+"@web5/credentials@file:../web5-js/packages/credentials::locator=web5wallet%40workspace%3A.":
   version: 1.0.3
-  resolution: "@web5/credentials@npm:1.0.3"
+  resolution: "@web5/credentials@file:../web5-js/packages/credentials#../web5-js/packages/credentials::hash=b80089&locator=web5wallet%40workspace%3A."
   dependencies:
-    "@sphereon/pex": "npm:2.1.0"
+    "@sphereon/pex": "npm:3.3.3"
     "@web5/common": "npm:1.0.1"
     "@web5/crypto": "npm:1.0.1"
     "@web5/dids": "npm:1.1.1"
     pako: "npm:^2.1.0"
-  checksum: 10c0/981c96cd94bc8e9560613b4dfdf2c314ab41df75d40e61f07b5c81b44d20507dcc451a2d4784374b407f39a52b08c82d4c1e1c8f609feed0e2fe7d4370971b83
+  checksum: 10c0/39394a1ad03fe83e32a58f8c18193e67037fa2e124beb5a5889f690f1ffed2a20d59eb97ccdab1ba62643a57525cbbf97f0f2765c2c4427dbabf67a58b370126
+  languageName: node
+  linkType: hard
+
+"@web5/crypto@file:../web5-js/packages/crypto::locator=web5wallet%40workspace%3A.":
+  version: 1.0.1
+  resolution: "@web5/crypto@file:../web5-js/packages/crypto#../web5-js/packages/crypto::hash=8a188a&locator=web5wallet%40workspace%3A."
+  dependencies:
+    "@noble/ciphers": "npm:0.4.1"
+    "@noble/curves": "npm:1.3.0"
+    "@noble/hashes": "npm:1.4.0"
+    "@web5/common": "npm:1.0.1"
+  checksum: 10c0/e93ec30f3949811ff72f323810143c72c299caca5374963ca11fa69ce97c3fc83f57e416de9ff709c1f9a0259cb678c160084b37635848af43f8721036ed7876
   languageName: node
   linkType: hard
 
@@ -3515,7 +3697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web5/crypto@npm:1.0.1, @web5/crypto@npm:^1.0.1":
+"@web5/crypto@npm:1.0.1":
   version: 1.0.1
   resolution: "@web5/crypto@npm:1.0.1"
   dependencies:
@@ -3524,6 +3706,23 @@ __metadata:
     "@noble/hashes": "npm:1.4.0"
     "@web5/common": "npm:1.0.0"
   checksum: 10c0/12281da14720abfe0f41ea4d38d53eb444059a975b56dbcf1b4436a21b6ddfe28bff951f810e0cd0a9101bf9a3b2eeb8bf43c50efd5a1d6977cf8c6210d87148
+  languageName: node
+  linkType: hard
+
+"@web5/dids@file:../web5-js/packages/dids::locator=web5wallet%40workspace%3A.":
+  version: 1.1.1
+  resolution: "@web5/dids@file:../web5-js/packages/dids#../web5-js/packages/dids::hash=fb2bd0&locator=web5wallet%40workspace%3A."
+  dependencies:
+    "@decentralized-identity/ion-sdk": "npm:1.0.4"
+    "@dnsquery/dns-packet": "npm:6.1.1"
+    "@web5/common": "npm:1.0.0"
+    "@web5/crypto": "npm:1.0.1"
+    abstract-level: "npm:1.0.4"
+    bencode: "npm:4.0.0"
+    buffer: "npm:6.0.3"
+    level: "npm:8.0.1"
+    ms: "npm:2.1.3"
+  checksum: 10c0/827fc00204884471de2b5991ed27e746bbeebc129ef48f8c37de50bd7a4d7171a2fac132a41d52519ee4e5503f8df684564beeaf2a2730421f6c93e9fce37f26
   languageName: node
   linkType: hard
 
@@ -3544,7 +3743,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web5/dids@npm:1.1.1, @web5/dids@npm:^1.1.1":
+"@web5/dids@npm:1.1.1":
   version: 1.1.1
   resolution: "@web5/dids@npm:1.1.1"
   dependencies:
@@ -3561,27 +3760,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web5/identity-agent@npm:^0.3.8":
+"@web5/identity-agent@file:../web5-js/packages/identity-agent::locator=web5wallet%40workspace%3A.":
   version: 0.3.8
-  resolution: "@web5/identity-agent@npm:0.3.8"
+  resolution: "@web5/identity-agent@file:../web5-js/packages/identity-agent#../web5-js/packages/identity-agent::hash=2195b3&locator=web5wallet%40workspace%3A."
   dependencies:
-    "@web5/agent": "npm:0.3.8"
+    "@web5/agent": "file:../agent"
     "@web5/common": "npm:1.0.0"
     "@web5/crypto": "npm:1.0.0"
     "@web5/dids": "npm:1.1.0"
-  checksum: 10c0/47b0f109472a24d17555a7961c0146942e493aa15e2bd497d460bf85dac14ed26e09d46c9ae82c634e523c8df7315a0cd14e3a346567457e10eca8acc09dbfa5
+  checksum: 10c0/bdf3935e5dd8b082862d417428c7f6e4ab1943ddbbe90f8c37c472781f170fb4a9f1658d350d6509f065960324085d0edfb6f2225cdf0ce12a794a4b2339fcdc
   languageName: node
   linkType: hard
 
-"@web5/user-agent@npm:0.3.8":
+"@web5/user-agent@file:../user-agent::locator=%40web5%2Fapi%40file%3A..%2Fweb5-js%2Fpackages%2Fapi%23..%2Fweb5-js%2Fpackages%2Fapi%3A%3Ahash%3Dccd9f6%26locator%3Dweb5wallet%2540workspace%253A.":
   version: 0.3.8
-  resolution: "@web5/user-agent@npm:0.3.8"
+  resolution: "@web5/user-agent@file:../user-agent#../user-agent::hash=3704ac&locator=%40web5%2Fapi%40file%3A..%2Fweb5-js%2Fpackages%2Fapi%23..%2Fweb5-js%2Fpackages%2Fapi%3A%3Ahash%3Dccd9f6%26locator%3Dweb5wallet%2540workspace%253A."
   dependencies:
-    "@web5/agent": "npm:0.3.8"
+    "@web5/agent": "file:../agent"
     "@web5/common": "npm:1.0.0"
     "@web5/crypto": "npm:1.0.0"
     "@web5/dids": "npm:1.1.0"
-  checksum: 10c0/d9ef37e9e791fd5f15f25008c34b1b54462c3fa2df890d147fb0e20462a21e8d25c495ba96a765030aaae2ca91f7978da88426392570696df09eac018645b271
+  checksum: 10c0/106f8532c0720db55d8a326329e566c5c1c53c5fe27e74ce6ca3658420786c487e71dcad9f90bc3c3bbc123b8aa87f83f01b4b122937fb7f2ed3cdf5a50fda2d
   languageName: node
   linkType: hard
 
@@ -5982,14 +6181,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-font@npm:~12.0.7":
-  version: 12.0.7
-  resolution: "expo-font@npm:12.0.7"
+"expo-font@npm:~12.0.8":
+  version: 12.0.8
+  resolution: "expo-font@npm:12.0.8"
   dependencies:
     fontfaceobserver: "npm:^2.1.0"
   peerDependencies:
     expo: "*"
-  checksum: 10c0/2c4e3471a95d472272b8f6e5e94dc6d3b8125a3ce10c2f5d6f15edd81e422024d340c28a1166416aa25ecc3b14ecad324792a12f43dd14ca7bbc23371fd13d05
+  checksum: 10c0/d69dba312b956c945dff7f740d0aa495cdedd08345e697eec7a42d08a01f830ca4c66f97953ffa7f6029d98f34cc437029be57dbf507e078ae868e03f094c5e0
   languageName: node
   linkType: hard
 
@@ -6037,12 +6236,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-modules-core@npm:1.12.18":
-  version: 1.12.18
-  resolution: "expo-modules-core@npm:1.12.18"
+"expo-modules-core@npm:1.12.19":
+  version: 1.12.19
+  resolution: "expo-modules-core@npm:1.12.19"
   dependencies:
     invariant: "npm:^2.2.4"
-  checksum: 10c0/924d55d660d0f0ea40363b317c4eea7b67be6e0dfa8befd35395ec33502277a4c0ca34bb7701793bda14ba744f648708e9f896d6fa653c546d66fbaaae04a7e9
+  checksum: 10c0/4b37c195599c63d94d57711d3846b1bb8368969f0e8ea1b79071beb7a4ec6cea5689346864d2c3fe9a0c947025ebd3db9dcef8ab421b55171655b2622afffe50
   languageName: node
   linkType: hard
 
@@ -6073,28 +6272,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^51.0.18":
-  version: 51.0.18
-  resolution: "expo@npm:51.0.18"
+"expo@npm:^51.0.20":
+  version: 51.0.20
+  resolution: "expo@npm:51.0.20"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
-    "@expo/cli": "npm:0.18.22"
-    "@expo/config": "npm:9.0.1"
-    "@expo/config-plugins": "npm:8.0.7"
+    "@expo/cli": "npm:0.18.25"
+    "@expo/config": "npm:9.0.3"
+    "@expo/config-plugins": "npm:8.0.8"
     "@expo/metro-config": "npm:0.18.8"
     "@expo/vector-icons": "npm:^14.0.0"
     babel-preset-expo: "npm:~11.0.12"
     expo-asset: "npm:~10.0.10"
     expo-file-system: "npm:~17.0.1"
-    expo-font: "npm:~12.0.7"
+    expo-font: "npm:~12.0.8"
     expo-keep-awake: "npm:~13.0.2"
     expo-modules-autolinking: "npm:1.11.1"
-    expo-modules-core: "npm:1.12.18"
+    expo-modules-core: "npm:1.12.19"
     fbemitter: "npm:^3.0.0"
     whatwg-url-without-unicode: "npm:8.0.0-3"
   bin:
     expo: bin/cli
-  checksum: 10c0/14f68ab4904b38e27f28da75814795ace15d024e50ad02f88fc5c0f6931c91af836c6c9d8e8d2dcd0f79768bdc7d987cd5e873b8dbcd9c9084ef7989c8a4ab6b
+  checksum: 10c0/e00413623287ca6188e2d3df477d6bb32cef8bb7568bfda81e0354608fc1b0e67263a3f50dfb4022eee3242b750b7b0802aa9d0165682348aff17f9d4b18fd46
   languageName: node
   linkType: hard
 
@@ -7849,6 +8048,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-base64@npm:^3.7.6":
+  version: 3.7.7
+  resolution: "js-base64@npm:3.7.7"
+  checksum: 10c0/3c905a7e78b601e4751b5e710edd0d6d045ce2d23eb84c9df03515371e1b291edc72808dc91e081cb9855aef6758292a2407006f4608ec3705373dd8baf2f80f
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -9025,6 +9231,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"multiformats@npm:^9.4.2":
+  version: 9.9.0
+  resolution: "multiformats@npm:9.9.0"
+  checksum: 10c0/1fdb34fd2fb085142665e8bd402570659b50a5fae5994027e1df3add9e1ce1283ed1e0c2584a5c63ac0a58e871b8ee9665c4a99ca36ce71032617449d48aa975
+  languageName: node
+  linkType: hard
+
 "murmurhash3js-revisited@npm:^3.0.0":
   version: 3.0.0
   resolution: "murmurhash3js-revisited@npm:3.0.0"
@@ -9054,7 +9267,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.23, nanoid@npm:^3.3.1, nanoid@npm:^3.3.6, nanoid@npm:^3.3.7":
+"nanoid@npm:^3.1.23, nanoid@npm:^3.3.1, nanoid@npm:^3.3.7":
   version: 3.3.7
   resolution: "nanoid@npm:3.3.7"
   bin:
@@ -10205,14 +10418,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-keyboard-controller@npm:^1.12.5":
-  version: 1.12.5
-  resolution: "react-native-keyboard-controller@npm:1.12.5"
+"react-native-keyboard-controller@npm:^1.12.6":
+  version: 1.12.6
+  resolution: "react-native-keyboard-controller@npm:1.12.6"
   peerDependencies:
     react: "*"
     react-native: "*"
-    react-native-reanimated: ">=2.3.0"
-  checksum: 10c0/e5d0731bc10ad5c68e0da082bb3016fbfaca16bf68278d7e00cf73dfc914bdb1c0a2b22cdb7055f8b52d9d932ec21201fbcd0ebc3b0f0d6872b43948deed06b5
+    react-native-reanimated: ">=2.11.0"
+  checksum: 10c0/54677bb8e41ebb7a00f5360a2d4cc60b0746f6e9de3a1ef2eeef14632c13c4c729e013fdf419b8676072e944940d59c66b0daaf3be2c3efbf00168765f055032
   languageName: node
   linkType: hard
 
@@ -10251,9 +10464,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:^3.13.0":
-  version: 3.13.0
-  resolution: "react-native-reanimated@npm:3.13.0"
+"react-native-reanimated@npm:^3.14.0":
+  version: 3.14.0
+  resolution: "react-native-reanimated@npm:3.14.0"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.0.0-0"
@@ -10267,7 +10480,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/1ed00c96f357866974d56c5bc7696b692c012400072a680e09c275c6574bdfc16c44f51b896d3c61d6425b1125f39e0b7e20b52407ef8a7f00c11d56e4ebaa9d
+  checksum: 10c0/a62ba3e4475c474bc7359d5175f192e86bbe86378a61041247b81beec6e93b4806cd8a5a8a61d1458d56eeef991803e5a128db69d260fa53d78050216b17d014
   languageName: node
   linkType: hard
 
@@ -11346,7 +11559,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string.prototype.matchall@npm:^4.0.11, string.prototype.matchall@npm:^4.0.8":
+"string.prototype.matchall@npm:^4.0.10, string.prototype.matchall@npm:^4.0.11":
   version: 4.0.11
   resolution: "string.prototype.matchall@npm:4.0.11"
   dependencies:
@@ -12059,6 +12272,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uint8arrays@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "uint8arrays@npm:3.1.1"
+  dependencies:
+    multiformats: "npm:^9.4.2"
+  checksum: 10c0/9946668e04f29b46bbb73cca3d190f63a2fbfe5452f8e6551ef4257d9d597b72da48fa895c15ef2ef772808a5335b3305f69da5f13a09f8c2924896b409565ff
+  languageName: node
+  linkType: hard
+
 "uint8arrays@npm:^4.0.2":
   version: 4.0.10
   resolution: "uint8arrays@npm:4.0.10"
@@ -12371,24 +12593,26 @@ __metadata:
     "@craftzdog/react-native-buffer": "npm:6.0.5"
     "@expo/vector-icons": "npm:^14.0.2"
     "@gorhom/bottom-sheet": "npm:^4.6.3"
+    "@noble/ciphers": "npm:^0.4.1"
     "@react-navigation/bottom-tabs": "npm:^6.6.0"
     "@react-navigation/native": "npm:6.1.17"
     "@react-navigation/native-stack": "npm:^6.10.0"
     "@shamilovtim/react-native-leveldb-async": "npm:^1.0.0"
-    "@tanstack/react-query": "npm:^5.50.1"
+    "@tanstack/react-query": "npm:^5.51.1"
+    "@tbd54566975/dwn-sdk-js": "npm:^0.3.5"
     "@tbd54566975/web5-react-native-metro-config": "npm:^1.0.3"
     "@tbd54566975/web5-react-native-polyfills": "npm:^2.0.0"
     "@types/react": "npm:^18.2.79"
     "@types/uuid": "npm:^9.0.8"
     "@typescript-eslint/eslint-plugin": "npm:^7.16.0"
     "@typescript-eslint/parser": "npm:^7.16.0"
-    "@web5/agent": "npm:^0.3.8"
-    "@web5/api": "npm:^0.9.4"
-    "@web5/common": "npm:^1.0.1"
-    "@web5/credentials": "npm:^1.0.3"
-    "@web5/crypto": "npm:^1.0.1"
-    "@web5/dids": "npm:^1.1.1"
-    "@web5/identity-agent": "npm:^0.3.8"
+    "@web5/agent": "file:../web5-js/packages/agent"
+    "@web5/api": "file:../web5-js/packages/api"
+    "@web5/common": "file:../web5-js/packages/common"
+    "@web5/credentials": "file:../web5-js/packages/credentials"
+    "@web5/crypto": "file:../web5-js/packages/crypto"
+    "@web5/dids": "file:../web5-js/packages/dids"
+    "@web5/identity-agent": "file:../web5-js/packages/identity-agent"
     babel-plugin-module-resolver: "npm:^5.0.2"
     eslint: "npm:8.57.0"
     eslint-import-resolver-typescript: "npm:3.6.1"
@@ -12397,7 +12621,7 @@ __metadata:
     eslint-plugin-react-etc: "npm:2.0.1"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     eslint-plugin-react-native: "npm:4.1.0"
-    expo: "npm:^51.0.18"
+    expo: "npm:^51.0.20"
     expo-barcode-scanner: "npm:~13.0.1"
     expo-local-authentication: "npm:~14.0.1"
     expo-secure-store: "npm:^13.0.2"
@@ -12405,15 +12629,16 @@ __metadata:
     expo-status-bar: "npm:~1.12.1"
     patch-package: "npm:8.0.0"
     postinstall-postinstall: "npm:2.1.0"
+    query-string: "npm:^7.1.3"
     react: "npm:18.2.0"
     react-native: "npm:^0.74.3"
     react-native-blob-jsi-helper: "npm:0.3.1"
     react-native-gesture-handler: "npm:^2.17.1"
     react-native-inappbrowser-reborn: "npm:^3.7.0"
-    react-native-keyboard-controller: "npm:^1.12.5"
+    react-native-keyboard-controller: "npm:^1.12.6"
     react-native-leveldb: "npm:3.3.5"
     react-native-quick-crypto: "npm:^0.7.1"
-    react-native-reanimated: "npm:^3.13.0"
+    react-native-reanimated: "npm:^3.14.0"
     react-native-safe-area-context: "npm:^4.10.8"
     react-native-screens: "npm:^3.32.0"
     react-native-webview: "npm:^13.10.5"

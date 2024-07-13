@@ -172,6 +172,7 @@ module.exports = {
     TextEncoder: true,
     NOOP: true,
     ErrorUtils: true,
+    crypto: true,
   },
   overrides: [
     {

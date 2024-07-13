@@ -11,6 +11,7 @@ import {
   MessageStoreLevel,
   DataStoreLevel,
   EventLogLevel,
+  ResumableTaskStoreLevel,
 } from "@tbd54566975/dwn-sdk-js";
 import { getTechPreviewDwnEndpoints, Web5 } from "@web5/api";
 import {
@@ -73,6 +74,11 @@ const initAgent = async () => {
       }),
       eventLog: new EventLogLevel({
         location: "DWN_EVENTLOG",
+        createLevelDatabase: (location, options?) =>
+          Promise.resolve(new ReactNativeLevelDBAsync(location, options)),
+      }),
+      resumableTaskStore: new ResumableTaskStoreLevel({
+        location: "DWN_RESUMABLETASKSTORE",
         createLevelDatabase: (location, options?) =>
           Promise.resolve(new ReactNativeLevelDBAsync(location, options)),
       }),
@@ -196,8 +202,11 @@ const initialize = async (password: string) => {
   await startAgent(password);
 };
 
+const getAgent = () => agent;
+
 export const IdentityAgentManager = {
   initAgent,
+  getAgent,
   initialize,
   isFirstLaunch,
   isAgentStarted,
