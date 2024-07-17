@@ -11,10 +11,6 @@ const submitAuthResponse = async (
   authRequest: HybridAuthRequest,
   selectedDids: string[]
 ) => {
-  // const agent = IdentityAgentManager.getAgent();
-
-  // create an ephemeral DID for future use by the recipient and for ECDH
-  // TODO: is it ok to use the same DID for ECDH and for permanent client delegated use?
   const ephemeralDid = await DidDht.create();
   const ephemeralDidExported = await ephemeralDid.export();
 
