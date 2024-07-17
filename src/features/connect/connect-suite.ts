@@ -4,11 +4,11 @@ import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 import { Convert } from "@web5/common";
 import { DidDht } from "@web5/dids";
 // eslint-disable-next-line import/named
-import { Oidc, type HybridAuthRequest } from "@web5/agent";
+import { Oidc, type Web5ConnectAuthRequest } from "@web5/agent";
 
 const submitAuthResponse = async (
   client_did: string,
-  authRequest: HybridAuthRequest,
+  authRequest: Web5ConnectAuthRequest,
   selectedDids: string[]
 ) => {
   const ephemeralDid = await DidDht.create();
@@ -48,7 +48,7 @@ const submitAuthResponse = async (
       sub: ephemeralDid.uri,
       aud: authRequest.redirect_uri,
       nonce: authRequest.nonce,
-      delegation_grants: dwnGrantMessages,
+      delegatedGrants: dwnGrantMessages,
       privateKeyJwks: ephemeralDidExported.privateKeys!,
     });
 

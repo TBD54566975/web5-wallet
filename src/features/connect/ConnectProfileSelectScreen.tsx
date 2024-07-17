@@ -12,12 +12,12 @@ import {
   type CheckList,
   ProfileSelectChecklist,
 } from "../profile/components/ProfileSelectChecklist";
-import { type HybridAuthRequest, Oidc } from "@web5/agent";
+import { type Web5ConnectAuthRequest, Oidc } from "@web5/agent";
 
 type Props = AppNavigatorProps<"ConnectProfileSelectScreen">;
 export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const [decryptedConnectionRequest, setDecryptedConnectionRequest] =
-    useState<HybridAuthRequest>();
+    useState<Web5ConnectAuthRequest>();
   const [checkList, setCheckList] = useState<CheckList>([]);
 
   // passed by the QR code
