@@ -11,13 +11,13 @@ PODS:
   - EXImageLoader (4.7.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (51.0.20):
+  - Expo (51.0.21):
     - ExpoModulesCore
   - ExpoAsset (10.0.10):
     - ExpoModulesCore
   - ExpoFileSystem (17.0.1):
     - ExpoModulesCore
-  - ExpoFont (12.0.8):
+  - ExpoFont (12.0.9):
     - ExpoModulesCore
   - ExpoKeepAwake (13.0.2):
     - ExpoModulesCore
@@ -1383,18 +1383,18 @@ PODS:
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - "EXBarCodeScanner (from `../node_modules/.pnpm/expo-barcode-scanner@13.0.1_expo@51.0.20/node_modules/expo-barcode-scanner/ios`)"
-  - "EXConstants (from `../node_modules/.pnpm/expo-constants@16.0.2_expo@51.0.20/node_modules/expo-constants/ios`)"
-  - "EXImageLoader (from `../node_modules/.pnpm/expo-image-loader@4.7.0_expo@51.0.20/node_modules/expo-image-loader/ios`)"
-  - "Expo (from `../node_modules/.pnpm/expo@51.0.20_@babel+core@7.24.8_@babel+preset-env@7.24.8/node_modules/expo`)"
-  - "ExpoAsset (from `../node_modules/.pnpm/expo-asset@10.0.10_expo@51.0.20/node_modules/expo-asset/ios`)"
-  - "ExpoFileSystem (from `../node_modules/.pnpm/expo-file-system@17.0.1_expo@51.0.20/node_modules/expo-file-system/ios`)"
-  - "ExpoFont (from `../node_modules/.pnpm/expo-font@12.0.8_expo@51.0.20/node_modules/expo-font/ios`)"
-  - "ExpoKeepAwake (from `../node_modules/.pnpm/expo-keep-awake@13.0.2_expo@51.0.20/node_modules/expo-keep-awake/ios`)"
-  - "ExpoLocalAuthentication (from `../node_modules/.pnpm/expo-local-authentication@14.0.1_expo@51.0.20/node_modules/expo-local-authentication/ios`)"
-  - "ExpoModulesCore (from `../node_modules/.pnpm/expo-modules-core@1.12.19/node_modules/expo-modules-core`)"
-  - "ExpoSecureStore (from `../node_modules/.pnpm/expo-secure-store@13.0.2_expo@51.0.20/node_modules/expo-secure-store/ios`)"
-  - "EXSplashScreen (from `../node_modules/.pnpm/expo-splash-screen@0.27.5_expo-modules-autolinking@1.11.1_expo@51.0.20/node_modules/expo-splash-screen/ios`)"
+  - EXBarCodeScanner (from `../node_modules/expo-barcode-scanner/ios`)
+  - EXConstants (from `../node_modules/expo-constants/ios`)
+  - EXImageLoader (from `../node_modules/expo-image-loader/ios`)
+  - Expo (from `../node_modules/expo`)
+  - ExpoAsset (from `../node_modules/expo-asset/ios`)
+  - ExpoFileSystem (from `../node_modules/expo-file-system/ios`)
+  - ExpoFont (from `../node_modules/expo-font/ios`)
+  - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
+  - ExpoLocalAuthentication (from `../node_modules/expo-local-authentication/ios`)
+  - ExpoModulesCore (from `../node_modules/expo-modules-core`)
+  - ExpoSecureStore (from `../node_modules/expo-secure-store/ios`)
+  - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -1472,29 +1472,29 @@ EXTERNAL SOURCES:
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXBarCodeScanner:
-    :path: "../node_modules/.pnpm/expo-barcode-scanner@13.0.1_expo@51.0.20/node_modules/expo-barcode-scanner/ios"
+    :path: "../node_modules/expo-barcode-scanner/ios"
   EXConstants:
-    :path: "../node_modules/.pnpm/expo-constants@16.0.2_expo@51.0.20/node_modules/expo-constants/ios"
+    :path: "../node_modules/expo-constants/ios"
   EXImageLoader:
-    :path: "../node_modules/.pnpm/expo-image-loader@4.7.0_expo@51.0.20/node_modules/expo-image-loader/ios"
+    :path: "../node_modules/expo-image-loader/ios"
   Expo:
-    :path: "../node_modules/.pnpm/expo@51.0.20_@babel+core@7.24.8_@babel+preset-env@7.24.8/node_modules/expo"
+    :path: "../node_modules/expo"
   ExpoAsset:
-    :path: "../node_modules/.pnpm/expo-asset@10.0.10_expo@51.0.20/node_modules/expo-asset/ios"
+    :path: "../node_modules/expo-asset/ios"
   ExpoFileSystem:
-    :path: "../node_modules/.pnpm/expo-file-system@17.0.1_expo@51.0.20/node_modules/expo-file-system/ios"
+    :path: "../node_modules/expo-file-system/ios"
   ExpoFont:
-    :path: "../node_modules/.pnpm/expo-font@12.0.8_expo@51.0.20/node_modules/expo-font/ios"
+    :path: "../node_modules/expo-font/ios"
   ExpoKeepAwake:
-    :path: "../node_modules/.pnpm/expo-keep-awake@13.0.2_expo@51.0.20/node_modules/expo-keep-awake/ios"
+    :path: "../node_modules/expo-keep-awake/ios"
   ExpoLocalAuthentication:
-    :path: "../node_modules/.pnpm/expo-local-authentication@14.0.1_expo@51.0.20/node_modules/expo-local-authentication/ios"
+    :path: "../node_modules/expo-local-authentication/ios"
   ExpoModulesCore:
-    :path: "../node_modules/.pnpm/expo-modules-core@1.12.19/node_modules/expo-modules-core"
+    :path: "../node_modules/expo-modules-core"
   ExpoSecureStore:
-    :path: "../node_modules/.pnpm/expo-secure-store@13.0.2_expo@51.0.20/node_modules/expo-secure-store/ios"
+    :path: "../node_modules/expo-secure-store/ios"
   EXSplashScreen:
-    :path: "../node_modules/.pnpm/expo-splash-screen@0.27.5_expo-modules-autolinking@1.11.1_expo@51.0.20/node_modules/expo-splash-screen/ios"
+    :path: "../node_modules/expo-splash-screen/ios"
   FBLazyVector:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   fmt:
@@ -1627,10 +1627,10 @@ SPEC CHECKSUMS:
   EXBarCodeScanner: e2dd9b42c1b522a2adc9202b1dfbc64cb34456d1
   EXConstants: 409690fbfd5afea964e5e9d6c4eb2c2b59222c59
   EXImageLoader: ab589d67d6c5f2c33572afea9917304418566334
-  Expo: 0cab4b4dc73f263c0d4297e993686973725adb7f
+  Expo: 6ff8c293719c5e5d23204e3f5fc9f472b5d0fd32
   ExpoAsset: 323700f291684f110fb55f0d4022a3362ea9f875
   ExpoFileSystem: 80bfe850b1f9922c16905822ecbf97acd711dc51
-  ExpoFont: b3630aff6bfb29ae3c261412f0796813a522cca9
+  ExpoFont: e7f2275c10ca8573c991e007329ad6bf98086485
   ExpoKeepAwake: 3b8815d9dd1d419ee474df004021c69fdd316d08
   ExpoLocalAuthentication: 9e02a56a4cf9868f0052656a93d4c94101a42ed7
   ExpoModulesCore: 734c1802786b23c9598f4d15273753a779969368
@@ -1696,7 +1696,7 @@ SPEC CHECKSUMS:
   ReactCommon: f00e436b3925a7ae44dfa294b43ef360fbd8ccc4
   RNGestureHandler: 8dbcccada4a7e702e7dec9338c251b1cf393c960
   RNInAppBrowser: e36d6935517101ccba0e875bac8ad7b0cb655364
-  RNReanimated: b9ab4c3660c2f494c57469cf34f84b764d38fef3
+  RNReanimated: f4ff116e33e0afc3d127f70efe928847c7c66355
   RNScreens: 5aeecbb09aa7285379b6e9f3c8a3c859bb16401c
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 04f1db30bb810187397fa4c37dd1868a27af229c

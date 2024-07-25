@@ -52,7 +52,6 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
     const { query } = queryString.parseUrl(qrContent);
 
     if (
-      typeof query.client_did !== "string" ||
       typeof query.request_uri !== "string" ||
       typeof query.code_challenge !== "string"
     ) {
@@ -61,18 +60,17 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
       );
     }
 
-    const client_did = query.client_did;
     const request_uri = query.request_uri;
     const code_challenge = query.code_challenge;
 
-    return { client_did, request_uri, code_challenge };
+    return { request_uri, code_challenge };
   };
 
   // test util to mock a valid scan
   useMount(() => {
     setTimeout(() => {
       const mockQRContent =
-        "web5://connect/?nonce=DplNeqpfBoWO0U63pZrfqLYUQwXngx7C&request_uri=http%3A%2F%2Flocalhost%3A8080%2Fconnect%2Fauthorize%2Faed11a62-cb13-48e3-8807-47db2ee3776b.jwt&client_did=did%3Adht%3Auk57yf8rr7p77hq4sdpecbrksu87dju7zobk41gffup6fjde9rko&code_challenge=BRugXj8tfoVQam7jN57H8WVT6OQ9PGmg_9KRKTV1I5g";
+        "http://localhost:8080/?request_uri=http%3A%2F%2Flocalhost%3A8080%2Fconnect%2Fauthorize%2F100de51e-f1aa-401b-bdda-923a88ade6d3.jwt&code_challenge=Tf3T4cuZ3LyKf67G_PyPL6fT-U5nDFX3KgbEeNVIqHE";
 
       onQRCodeScanned({ data: mockQRContent } as any);
     }, 3000);

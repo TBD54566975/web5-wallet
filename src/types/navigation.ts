@@ -30,7 +30,6 @@ export type AppNavigatorInterface = {
   };
   ReviewConnectionScreen: undefined;
   ConnectProfileSelectScreen: {
-    client_did: string;
     request_uri: string;
     code_challenge: string;
   };

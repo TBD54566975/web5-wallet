@@ -7,7 +7,6 @@ import { DidDht } from "@web5/dids";
 import { Oidc, type Web5ConnectAuthRequest } from "@web5/agent";
 
 const submitAuthResponse = async (
-  client_did: string,
   authRequest: Web5ConnectAuthRequest,
   selectedDids: string[]
 ) => {
@@ -57,7 +56,7 @@ const submitAuthResponse = async (
       did: ephemeralDid,
       data: responseObject,
     });
-    const clientDid = await DidDht.resolve(client_did);
+    const clientDid = await DidDht.resolve(authRequest.client_id);
     const sharedKey = await Oidc.deriveSharedKey(
       ephemeralDid,
       clientDid?.didDocument!

@@ -21,7 +21,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const [checkList, setCheckList] = useState<CheckList>([]);
 
   // passed by the QR code
-  const { request_uri, client_did, code_challenge } = route.params;
+  const { request_uri, code_challenge } = route.params;
 
   // TODO: these queries need more abstraction
   const profileQueries = useProfilesQuery();
@@ -38,7 +38,6 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
         .map((did) => did.did);
 
       await ProviderWalletConnect.submitAuthResponse(
-        client_did,
         decryptedConnectionRequest,
         selectedDids
       );
