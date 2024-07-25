@@ -13,7 +13,7 @@ import {
   EventLogLevel,
   ResumableTaskStoreLevel,
 } from "@tbd54566975/dwn-sdk-js";
-import { getTechPreviewDwnEndpoints, Web5 } from "@web5/api";
+import { Web5 } from "@web5/api";
 import {
   profileProtocol,
   type ProfileProtocol,
@@ -127,8 +127,6 @@ const startSync = async () => {
 };
 
 const createIdentity = async (name: string, displayName: string) => {
-  const serviceEndpointNodes = await getTechPreviewDwnEndpoints();
-
   // Generate a new Identity for the end-user.
 
   const identity = await agent.identity.create({
@@ -139,7 +137,7 @@ const createIdentity = async (name: string, displayName: string) => {
         {
           id: "dwn",
           type: "DecentralizedWebNode",
-          serviceEndpoint: serviceEndpointNodes,
+          serviceEndpoint: ["https://dwn.tbddev.org/beta"],
           enc: "#enc",
           sig: "#sig",
         },
