@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, Text, View, StyleSheet } from "react-native";
-import {
-  BarCodeScanner,
-  type BarCodeScannerResult,
-} from "expo-barcode-scanner";
+import { CameraView, Camera } from "expo-camera";
 import queryString from "query-string";
 import { useMount } from "../../hooks/useMount";
 import { SPACE } from "../../theme/layouts";
@@ -17,7 +14,7 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
 
   useMount(() => {
     const checkCameraPermissions = async () => {
-      const { status } = await BarCodeScanner.getPermissionsAsync();
+      const { status } = await Camera.getCameraPermissionsAsync();
 
       if (status === "granted") {
         setHasPermission(true);
@@ -28,14 +25,14 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
   });
 
   const requestCameraPermissions = async () => {
-    const { status } = await BarCodeScanner.requestPermissionsAsync();
+    const { status } = await Camera.requestCameraPermissionsAsync();
 
     if (status !== "undetermined") {
       setHasPermission(status === "granted");
     }
   };
 
-  const onQRCodeScanned = ({ data }: BarCodeScannerResult) => {
+  const onQRCodeScanned = ({ data }: { type: string; data: string }) => {
     setIsScanned(true);
 
     try {
@@ -70,17 +67,20 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
   useMount(() => {
     setTimeout(() => {
       const mockQRContent =
-        "http://localhost:8080/?request_uri=http%3A%2F%2Flocalhost%3A8080%2Fconnect%2Fauthorize%2F100de51e-f1aa-401b-bdda-923a88ade6d3.jwt&code_challenge=Tf3T4cuZ3LyKf67G_PyPL6fT-U5nDFX3KgbEeNVIqHE";
+        "http://localhost:8080/?request_uri=http%3A%2F%2Flocalhost%3A8080%2Fconnect%2Fauthorize%2F286822fa-307c-4c49-92c5-5a79b165ac51.jwt&code_challenge=xcq0cJ-OZmEGewIOt4vPPLc2KogcjamRej66zbGDWmI";
 
-      onQRCodeScanned({ data: mockQRContent } as any);
+      onQRCodeScanned({ type: "qr", data: mockQRContent });
     }, 3000);
   });
 
   if (hasPermission) {
     return (
       <>
-        <BarCodeScanner
-          onBarCodeScanned={isScanned ? undefined : onQRCodeScanned}
+        <CameraView
+          onBarcodeScanned={isScanned ? undefined : onQRCodeScanned}
+          barcodeScannerSettings={{
+            barcodeTypes: ["qr"],
+          }}
           style={styles.scanner}
         />
         <View style={styles.overlay}>

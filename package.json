@@ -48,7 +48,7 @@
     "@web5/dids": "link:../web5-js/packages/dids",
     "@web5/identity-agent": "link:../web5-js/packages/identity-agent",
     "expo": "^51.0.20",
-    "expo-barcode-scanner": "~13.0.1",
+    "expo-camera": "^15.0.14",
     "expo-local-authentication": "~14.0.1",
     "expo-secure-store": "^13.0.2",
     "expo-splash-screen": "^0.27.5",

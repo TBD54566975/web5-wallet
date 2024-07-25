@@ -5519,14 +5519,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-barcode-scanner@npm:~13.0.1":
-  version: 13.0.1
-  resolution: "expo-barcode-scanner@npm:13.0.1"
+"expo-camera@npm:^15.0.14":
+  version: 15.0.14
+  resolution: "expo-camera@npm:15.0.14"
   dependencies:
-    expo-image-loader: "npm:~4.7.0"
+    invariant: "npm:^2.2.4"
   peerDependencies:
     expo: "*"
-  checksum: 10c0/a3b55a9f725957f9fad3fdee7afd7053cbcb0c246fb9487b5f9412b23caeb39d18e82cee80d2f747f5f3d631d695d0f6828af7194be5cb00d80f0a3240a4f5cc
+  checksum: 10c0/3ac515d1201b1ff255dbfaaf15f1df7bd269dac5f9eaffc825c6e67b6700fd10663f5877840271b4be973a732e42388c44c5d8e78af5766e710829664b2a2ddf
   languageName: node
   linkType: hard
 
@@ -5559,15 +5559,6 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 10c0/9c7b63b3a3ee89bfcdbc1704451019b956b451208f0eca3bb1e57b53dd5dcdfb4d080d423583b92f864889a2a5d7624985c0e5103c54b36b8daf813471696b41
-  languageName: node
-  linkType: hard
-
-"expo-image-loader@npm:~4.7.0":
-  version: 4.7.0
-  resolution: "expo-image-loader@npm:4.7.0"
-  peerDependencies:
-    expo: "*"
-  checksum: 10c0/7db9df154f1b44e9877361e0707715503eaaf2b18968b6aecb6b0205612cf40bfd99ab8c6e6d7de3a5abd35267e9636963d5050e082af063d8e527763d597eb1
   languageName: node
   linkType: hard
 
@@ -11887,7 +11878,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^4.6.2"
     eslint-plugin-react-native: "npm:4.1.0"
     expo: "npm:^51.0.20"
-    expo-barcode-scanner: "npm:~13.0.1"
+    expo-camera: "npm:^15.0.14"
     expo-local-authentication: "npm:~14.0.1"
     expo-secure-store: "npm:^13.0.2"
     expo-splash-screen: "npm:^0.27.5"
