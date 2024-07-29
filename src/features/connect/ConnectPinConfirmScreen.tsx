@@ -4,7 +4,7 @@ import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
 import { Button } from "../../components/Button";
 
-export const ConnectPinConfirmScreen = () => {
+export const ConnectPinConfirmScreen = ({ navigation }: any) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <ScrollView contentContainerStyle={styles.scrollview}>
@@ -14,7 +14,13 @@ export const ConnectPinConfirmScreen = () => {
           </Text>
           <Text style={styles.pin}>0103</Text>
           <View style={styles.footer}>
-            <Button kind="primary" onPress={() => {}} text="Close" />
+            <Button
+              kind="primary"
+              onPress={() => {
+                navigation.popToTop();
+              }}
+              text="Close"
+            />
           </View>
         </View>
       </ScrollView>
