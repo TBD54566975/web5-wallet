@@ -6,13 +6,14 @@ import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
 import type { AppNavigatorProps } from "../../types/navigation";
 import { useProfilesQuery } from "../profile/hooks";
-import { ProviderWalletConnect } from "./connect-suite";
 import { Button } from "../../components/Button";
 import {
   type CheckList,
   ProfileSelectChecklist,
 } from "../profile/components/ProfileSelectChecklist";
-import { type Web5ConnectAuthRequest, Oidc } from "@web5/agent";
+import { type Web5ConnectAuthRequest } from "@web5/agent";
+import { IdentityAgentManager } from "../identity/IdentityAgentManager";
+import { Oidc } from "@web5/agent";
 
 type Props = AppNavigatorProps<"ConnectProfileSelectScreen">;
 export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
@@ -37,9 +38,12 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
         .filter((box) => box.checked)
         .map((did) => did.did);
 
-      await ProviderWalletConnect.submitAuthResponse(
+      const dwn = IdentityAgentManager.getAgent().dwn;
+
+      await Oidc.submitAuthResponse(
         decryptedConnectionRequest,
-        selectedDids
+        selectedDids,
+        dwn
       );
 
       navigation.navigate("ConnectPinConfirmScreen");

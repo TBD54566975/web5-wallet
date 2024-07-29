@@ -67,7 +67,7 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
   useMount(() => {
     setTimeout(() => {
       const mockQRContent =
-        "http://localhost:8080/?request_uri=http%3A%2F%2Flocalhost%3A8080%2Fconnect%2Fauthorize%2F286822fa-307c-4c49-92c5-5a79b165ac51.jwt&code_challenge=xcq0cJ-OZmEGewIOt4vPPLc2KogcjamRej66zbGDWmI";
+        "http://localhost:8080/?request_uri=http%3A%2F%2Flocalhost%3A8080%2Fconnect%2Fauthorize%2Fe33befcd-b7f4-4e5c-b45b-80a232eb4bac.jwt&code_challenge=plKs8URn3eaqYMLpozKIMx0VGmxwllx0jIy5kXBOUNk";
 
       onQRCodeScanned({ type: "qr", data: mockQRContent });
     }, 3000);
