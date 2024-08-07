@@ -34,7 +34,7 @@ export type AppNavigatorInterface = {
     code_challenge: string;
   };
   ConnectQRScanScreen: undefined;
-  ConnectPinConfirmScreen: undefined;
+  ConnectPinConfirmScreen: { pin: string };
   WebviewCredentialsScreen: {
     url: string;
   };

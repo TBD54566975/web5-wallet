@@ -64,14 +64,14 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
   };
 
   // test util to mock a valid scan
-  useMount(() => {
-    setTimeout(() => {
-      const mockQRContent =
-        "http://localhost:8080/?request_uri=http%3A%2F%2Flocalhost%3A8080%2Fconnect%2Fauthorize%2Fe33befcd-b7f4-4e5c-b45b-80a232eb4bac.jwt&code_challenge=plKs8URn3eaqYMLpozKIMx0VGmxwllx0jIy5kXBOUNk";
+  // useMount(() => {
+  //   setTimeout(() => {
+  //     const mockQRContent =
+  //       "web5://connect?request_uri=http%3A%2F%2Flocalhost%3A5050%2Fconnect%2Fauthorize%2F51a56558-4fb7-4cd4-abba-c4d54b431a15.jwt&code_challenge=mm1npD0-5Cpy4KQTz6QiNtH4BxNKYY03jKoq1cnFPCs";
 
-      onQRCodeScanned({ type: "qr", data: mockQRContent });
-    }, 3000);
-  });
+  //     onQRCodeScanned({ type: "qr", data: mockQRContent });
+  //   }, 3000);
+  // });
 
   if (hasPermission) {
     return (

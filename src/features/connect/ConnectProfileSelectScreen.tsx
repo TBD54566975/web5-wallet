@@ -14,6 +14,7 @@ import {
 import { type Web5ConnectAuthRequest } from "@web5/agent";
 import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 import { Oidc } from "@web5/agent";
+import { CryptoUtils } from "@web5/crypto";
 
 type Props = AppNavigatorProps<"ConnectProfileSelectScreen">;
 export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
@@ -40,13 +41,15 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
 
       const dwn = IdentityAgentManager.getAgent().dwn;
 
+      const pin = CryptoUtils.randomPin({ length: 4 });
       await Oidc.submitAuthResponse(
-        decryptedConnectionRequest,
         selectedDids,
+        decryptedConnectionRequest,
+        pin,
         dwn
       );
 
-      navigation.navigate("ConnectPinConfirmScreen");
+      navigation.navigate("ConnectPinConfirmScreen", { pin });
     }
   };
 
@@ -74,12 +77,12 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
       <ScrollView contentContainerStyle={styles.scrollview}>
         <View style={styles.container}>
           <Text style={Typography.heading3}>
-            Choose the profiles you’d like to connect to Dwitter
+            Choose the profiles you’d like to connect to Fllw
           </Text>
           <View style={styles.body}>
             <View style={styles.column}>
               <Text style={Typography.paragraph2}>
-                Youll be able to use the profiles you select below in Dwitter.
+                Youll be able to use the profiles you select below in Fllw.
               </Text>
               <ProfileSelectChecklist
                 checkList={checkList}
@@ -89,12 +92,18 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
             <View style={styles.column}>
               <Text style={Typography.heading3}>Permissions requested</Text>
               <Text style={Typography.paragraph2}>
-                Make sure you trust Dwitter. For each of the profiles you
-                selected, Dwitter will be able to:
+                Make sure you trust Fllw. For each of the profiles you selected,
+                Fllw will be able to:
               </Text>
               <View>
                 <Text style={Typography.heading6}>
-                  • View and edit your profile
+                  • Read to the Fllw protocol
+                </Text>
+                <Text style={Typography.heading6}>
+                  • Write to the Fllw protocol
+                </Text>
+                <Text style={Typography.heading6}>
+                  • Delete to the Fllw protocol
                 </Text>
               </View>
             </View>
