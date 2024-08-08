@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-leveldb/android/build.gradle b/node_modules/react-native-leveldb/android/build.gradle
+index 4d233b7..2fb8e6f 100644
+--- a/node_modules/react-native-leveldb/android/build.gradle
++++ b/node_modules/react-native-leveldb/android/build.gradle
+@@ -69,7 +69,7 @@ android {
+     buildConfigField 'boolean', 'IS_NEW_ARCHITECTURE_ENABLED', isNewArchitectureEnabled().toString()
+     externalNativeBuild {
+       cmake {
+-        cppFlags '-O2 -frtti -fexceptions -Wall -Wno-unused-variable -fstack-protector-all'
++        cppFlags '-O2 -frtti -fexceptions -fstack-protector-all'
+         arguments '-DANDROID_STL=c++_shared'
+         abiFilters(*reactNativeArchitectures())
+       }
