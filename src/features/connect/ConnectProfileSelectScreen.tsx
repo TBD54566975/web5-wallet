@@ -4,28 +4,33 @@ import { Loader } from "../../components/Loader";
 import { useMount } from "../../hooks/useMount";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import type { ConnectRequest } from "../../types/models";
 import type { AppNavigatorProps } from "../../types/navigation";
 import { useProfilesQuery } from "../profile/hooks";
-import { ConnectSuite } from "./connect-suite";
 import { Button } from "../../components/Button";
 import {
   type CheckList,
   ProfileSelectChecklist,
 } from "../profile/components/ProfileSelectChecklist";
+import { type Web5ConnectAuthRequest } from "@web5/agent";
+import { IdentityAgentManager } from "../identity/IdentityAgentManager";
+import { Oidc } from "@web5/agent";
+import { CryptoUtils } from "@web5/crypto";
 
 type Props = AppNavigatorProps<"ConnectProfileSelectScreen">;
 export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const [decryptedConnectionRequest, setDecryptedConnectionRequest] =
-    useState<ConnectRequest>();
+    useState<Web5ConnectAuthRequest>();
   const [checkList, setCheckList] = useState<CheckList>([]);
+
+  // passed by the QR code
+  const { request_uri, code_challenge } = route.params;
 
   // TODO: these queries need more abstraction
   const profileQueries = useProfilesQuery();
   const isLoading = profileQueries.some((result) => result.isLoading);
 
   const onPressClose = () => {
-    navigation.popToTop();
+    navigation.replace("Tabs", { screen: "DiscoverScreen" });
   };
 
   const onPressSubmit = async () => {
@@ -34,12 +39,17 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
         .filter((box) => box.checked)
         .map((did) => did.did);
 
-      await ConnectSuite.submitConnection(
+      const dwn = IdentityAgentManager.getAgent().dwn;
+
+      const pin = CryptoUtils.randomPin({ length: 4 });
+      await Oidc.submitAuthResponse(
+        selectedDids,
         decryptedConnectionRequest,
-        selectedDids
+        pin,
+        dwn
       );
 
-      navigation.navigate("ConnectPinConfirmScreen");
+      navigation.navigate("ConnectPinConfirmScreen", { pin });
     }
   };
 
@@ -48,16 +58,15 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
    * in order to decrypt the connection request. The connection request will be used
    * to generate grants for each selected DID.
    */
-  useMount(() => {
-    const { nonce, temporaryDid, url } = route.params;
-    const decryptedConnectionRequest = ConnectSuite.initConnect(
-      temporaryDid,
-      nonce,
-      url
+  const connect = async () => {
+    const decryptedConnectionRequest = await Oidc.getAuthRequest(
+      request_uri,
+      code_challenge
     );
-
     setDecryptedConnectionRequest(decryptedConnectionRequest);
-  });
+  };
+
+  useMount(() => void connect());
 
   if (isLoading) {
     return <Loader />;
@@ -68,12 +77,12 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
       <ScrollView contentContainerStyle={styles.scrollview}>
         <View style={styles.container}>
           <Text style={Typography.heading3}>
-            Choose the profiles you’d like to connect to Dwitter
+            Choose the profile you’d like to connect to Fllw
           </Text>
           <View style={styles.body}>
             <View style={styles.column}>
               <Text style={Typography.paragraph2}>
-                Youll be able to use the profiles you select below in Dwitter.
+                Youll be able to use the profile you select below in Fllw.
               </Text>
               <ProfileSelectChecklist
                 checkList={checkList}
@@ -83,12 +92,17 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
             <View style={styles.column}>
               <Text style={Typography.heading3}>Permissions requested</Text>
               <Text style={Typography.paragraph2}>
-                Make sure you trust Dwitter. For each of the profiles you
-                selected, Dwitter will be able to:
+                Make sure you trust Fllw. Fllw will be able to:
               </Text>
               <View>
                 <Text style={Typography.heading6}>
-                  • View and edit your profile
+                  • Read to the Fllw protocol
+                </Text>
+                <Text style={Typography.heading6}>
+                  • Write to the Fllw protocol
+                </Text>
+                <Text style={Typography.heading6}>
+                  • Delete to the Fllw protocol
                 </Text>
               </View>
             </View>

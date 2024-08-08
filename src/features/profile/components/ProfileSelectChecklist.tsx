@@ -65,7 +65,7 @@ export const ProfileSelectChecklist = ({ checkList, setCheckList }: Props) => {
               <Avatar iconName={"person"} />
               <View>
                 <Text style={Typography.heading5}>{profile.displayName}</Text>
-                <Text>{profile.displayName}</Text>
+                <Text>{profile.name}</Text>
               </View>
               <Checkbox checked={profile.checked} style={styles.checkbox} />
             </View>

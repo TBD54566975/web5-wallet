@@ -1,8 +1,19 @@
 {
   "title": "Profile",
+  "description": "A web5 identity",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
-    "displayName": { "type": "string" }
-  }
+    "protocol": { "type": "string" },
+    "displayName": { "type": "string" },
+    "published": { "type": "boolean" },
+    "types": {
+      "type": "object",
+      "properties": {
+        "schema": "http://profile-protocol.xyz/schema/profile",
+        "dataFormats": ["application/json"]
+      }
+    }
+  },
+  "structure": { "type": "object" }
 }

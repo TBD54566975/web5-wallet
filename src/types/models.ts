@@ -1,5 +1,4 @@
 import type { Octicons } from "@expo/vector-icons";
-import type { PermissionsRequestOptions } from "@tbd54566975/dwn-sdk-js";
 import type { ProfileProtocol } from "../features/profile/protocol/profile-protocol";
 
 // Most data models will change over time as real protocols and data gets used rather than mocks
@@ -20,14 +19,3 @@ export type MockConnection = {
 };
 
 export type Profile = ProfileProtocol;
-
-export type ConnectRequest = {
-  did: string;
-  origin: string;
-  permissionRequests: ConnectRequestPermission[];
-};
-
-export type ConnectRequestPermission = Omit<
-  PermissionsRequestOptions,
-  "grantedBy" | "grantedFor" | "grantedTo" | "authorizationSigner"
->;
