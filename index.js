@@ -8,6 +8,7 @@ if (__DEV__) {
     "`useBottomSheetDynamicSnapPoints` will be deprecated",
     "Provided value to SecureStore is larger than 2048 bytes. An attempt to store such a value will throw an error in SDK 35.",
     "BarCodeScanner has been deprecated",
+    "Sync failed: Error: Failed to dereference",
   ]);
 }
 

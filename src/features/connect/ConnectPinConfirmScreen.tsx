@@ -19,7 +19,7 @@ export const ConnectPinConfirmScreen = ({ navigation, route }: Props) => {
             <Button
               kind="primary"
               onPress={() => {
-                navigation.popToTop();
+                navigation.replace("Tabs", { screen: "DiscoverScreen" });
               }}
               text="Close"
             />

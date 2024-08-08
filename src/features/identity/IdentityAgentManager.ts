@@ -171,6 +171,7 @@ const createIdentity = async (name: string, displayName: string) => {
   const profile: ProfileProtocol = {
     did: identity.did.uri,
     displayName,
+    name,
   };
   await web5.dwn.records.write({
     data: profile,

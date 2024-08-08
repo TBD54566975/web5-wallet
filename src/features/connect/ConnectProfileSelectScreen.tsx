@@ -30,7 +30,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const isLoading = profileQueries.some((result) => result.isLoading);
 
   const onPressClose = () => {
-    navigation.popToTop();
+    navigation.replace("Tabs", { screen: "DiscoverScreen" });
   };
 
   const onPressSubmit = async () => {
@@ -77,12 +77,12 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
       <ScrollView contentContainerStyle={styles.scrollview}>
         <View style={styles.container}>
           <Text style={Typography.heading3}>
-            Choose the profiles you’d like to connect to Fllw
+            Choose the profile you’d like to connect to Fllw
           </Text>
           <View style={styles.body}>
             <View style={styles.column}>
               <Text style={Typography.paragraph2}>
-                Youll be able to use the profiles you select below in Fllw.
+                Youll be able to use the profile you select below in Fllw.
               </Text>
               <ProfileSelectChecklist
                 checkList={checkList}
@@ -92,8 +92,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
             <View style={styles.column}>
               <Text style={Typography.heading3}>Permissions requested</Text>
               <Text style={Typography.paragraph2}>
-                Make sure you trust Fllw. For each of the profiles you selected,
-                Fllw will be able to:
+                Make sure you trust Fllw. Fllw will be able to:
               </Text>
               <View>
                 <Text style={Typography.heading6}>
