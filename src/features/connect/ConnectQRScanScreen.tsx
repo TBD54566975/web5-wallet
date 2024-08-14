@@ -50,7 +50,7 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
 
     if (
       typeof query.request_uri !== "string" ||
-      typeof query.code_challenge !== "string"
+      typeof query.encryption_key !== "string"
     ) {
       throw new Error(
         "Received a malformed QR code. Please try scanning again."
@@ -58,9 +58,9 @@ export const ConnectQRScanScreen = ({ navigation }: Props) => {
     }
 
     const request_uri = query.request_uri;
-    const code_challenge = query.code_challenge;
+    const encryption_key = query.encryption_key;
 
-    return { request_uri, code_challenge };
+    return { request_uri, encryption_key };
   };
 
   // test util to mock a valid scan

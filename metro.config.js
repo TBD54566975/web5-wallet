@@ -25,5 +25,5 @@ const withWeb5Monorepo = (config) => {
   return config;
 };
 
-// module.exports = withWeb5Monorepo(merged);
-module.exports = merged;
+module.exports = withWeb5Monorepo(merged);
+// module.exports = merged;

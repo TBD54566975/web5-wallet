@@ -31,7 +31,7 @@ export type AppNavigatorInterface = {
   ReviewConnectionScreen: undefined;
   ConnectProfileSelectScreen: {
     request_uri: string;
-    code_challenge: string;
+    encryption_key: string;
   };
   ConnectQRScanScreen: undefined;
   ConnectPinConfirmScreen: { pin: string };
