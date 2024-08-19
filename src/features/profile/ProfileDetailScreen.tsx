@@ -25,7 +25,7 @@ export const ProfileDetailScreen = ({ navigation, route }: Props) => {
   return (
     <MenuPageLayout
       headerItem={{
-        heading: profile.displayName,
+        heading: profile.name,
         iconName: "hash",
         badgeName: "feed-person",
       }}
@@ -43,14 +43,7 @@ export const ProfileDetailScreen = ({ navigation, route }: Props) => {
             <Loader />
           ) : (
             <>
-              <LabelValueItem
-                label="Profile label"
-                value={profile?.displayName ?? ""}
-              />
-              <LabelValueItem
-                label="Public display name"
-                value={profile?.displayName ?? "Not Available"}
-              />
+              <LabelValueItem label="Profile" value={profile?.name ?? ""} />
               <LabelValueItem label="DID" value={formatDID(profile.did)} />
               <LabelValueItem
                 label="Created on"
@@ -61,8 +54,8 @@ export const ProfileDetailScreen = ({ navigation, route }: Props) => {
         {activeTab === tabLabels[1] && (
           <>
             <Text style={Typography.body4}>
-              <Text style={Typography.body2}>{profile.displayName}</Text> is
-              connected to the following apps and services.
+              <Text style={Typography.body2}>{profile.name}</Text> is connected
+              to the following apps and services.
             </Text>
 
             {mockConnections?.map((connection, index) => (

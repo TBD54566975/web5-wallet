@@ -36,8 +36,7 @@ export const ProfilesScreen = ({ navigation }: Props) => {
               <Tappable
                 key={profile.did}
                 iconName="hash"
-                heading={profile.displayName}
-                subtitle={profile.name}
+                heading={profile.name}
                 body={formatDID(profile.did)}
                 onPress={() => navigateToProfile(profile)}
               />

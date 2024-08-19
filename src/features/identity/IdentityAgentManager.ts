@@ -126,7 +126,7 @@ const startSync = async () => {
   });
 };
 
-const createIdentity = async (name: string, displayName: string) => {
+const createIdentity = async (name: string) => {
   // Generate a new Identity for the end-user.
 
   const identity = await agent.identity.create({
@@ -170,7 +170,6 @@ const createIdentity = async (name: string, displayName: string) => {
   // Write the profile
   const profile: ProfileProtocol = {
     did: identity.did.uri,
-    displayName,
     name,
   };
   await web5.dwn.records.write({

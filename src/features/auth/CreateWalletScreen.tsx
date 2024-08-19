@@ -12,7 +12,6 @@ import { Typography } from "../../theme/typography";
 import { Deeplink } from "../app/deeplink";
 import { BiometricLogin } from "./biometric-login";
 import { IdentityAgentManager } from "../identity/IdentityAgentManager";
-import { defaultIdentities } from "../identity/default-identities";
 import type { AppNavigatorProps } from "../../types/navigation";
 
 type Props = AppNavigatorProps<"CreateWalletScreen">;
@@ -22,16 +21,7 @@ export const CreateWalletScreen = ({ navigation, route }: Props) => {
     const createWallet = async () => {
       try {
         await IdentityAgentManager.initialize(route.params.passphrase);
-
-        const defaultIdentityCreatePromises = defaultIdentities.map(
-          (identity) => {
-            return IdentityAgentManager.createIdentity(
-              identity.name,
-              identity.displayName
-            );
-          }
-        );
-        await Promise.all(defaultIdentityCreatePromises);
+        await IdentityAgentManager.createIdentity(route.params.profileName);
         // User just created a brand new wallet. Clear any stored biometric login
         // data that may be stored locally on device.
         await BiometricLogin.clearStoredPassphrase();

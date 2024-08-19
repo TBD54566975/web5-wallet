@@ -12,7 +12,6 @@ import type { AppNavigatorProps } from "../../types/navigation";
 type Props = AppNavigatorProps<"AddProfileScreen">;
 export const AddProfileScreen = ({ navigation }: Props) => {
   const [profileName, setProfileName] = useState("");
-  const [displayName, setDisplayName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
   const addProfile = async () => {
@@ -22,7 +21,7 @@ export const AddProfileScreen = ({ navigation }: Props) => {
 
     setIsProcessing(true);
     try {
-      await IdentityAgentManager.createIdentity(profileName, displayName);
+      await IdentityAgentManager.createIdentity(profileName);
       await invalidateIdentityList();
       navigation.goBack();
     } catch (error) {
@@ -37,18 +36,10 @@ export const AddProfileScreen = ({ navigation }: Props) => {
       <View style={styles.container}>
         <Text style={Typography.heading3}>Add a new profile</Text>
         <Input
+          label="Add a profile name"
           onChangeText={setProfileName}
           value={profileName}
           placeholder={"My new profile"}
-          nativeID="profileName"
-          label="Add a profile name"
-        />
-        <Input
-          onChangeText={setDisplayName}
-          value={displayName}
-          placeholder={"My display name"}
-          nativeID="displayName"
-          label="Set your display name"
         />
         {isProcessing ? (
           <ActivityIndicator />

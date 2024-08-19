@@ -77,7 +77,6 @@ export const EnterPassphraseScreen = ({ navigation }: Props) => {
           <Text style={Typography.heading1}>Enter your passphrase</Text>
           <Input
             label=""
-            nativeID="passphrase"
             placeholder={"Passphrase"}
             value={passphrase}
             onChangeText={setPassphrase}

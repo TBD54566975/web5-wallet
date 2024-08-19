@@ -1,26 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
-import { Item } from "../../components/Item";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import { defaultIdentities } from "../identity/default-identities";
 import { Button } from "../../components/Button";
 import type { AppNavigatorProps } from "../../types/navigation";
+import { Input } from "../../components/Input";
 
 type Props = AppNavigatorProps<"CreateProfilesScreen">;
 
 export const CreateProfilesScreen = ({ navigation }: Props) => {
+  const [profileName, setProfileName] = useState<string>("");
+
   const onNextTapped = () => {
-    navigation.navigate("CreatePassphraseScreen");
+    navigation.navigate("CreatePassphraseScreen", { profileName });
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text style={Typography.heading3}>
-          We&apos;ll create 2 profiles for you to get started
-        </Text>
-      </View>
       <View>
         <Text style={Typography.paragraph2}>
           A profile is a version of yourself online. When you connect to an app,
@@ -34,15 +30,16 @@ export const CreateProfilesScreen = ({ navigation }: Props) => {
           You can always create, delete, and edit profiles later.
         </Text>
       </View>
-      {defaultIdentities.map((identityProps, index) => (
-        <View key={index}>
-          <Item
-            heading={identityProps.name}
-            subtitle={identityProps.displayName}
-            iconName={identityProps.icon}
-          />
-        </View>
-      ))}
+      <View>
+        <Text style={Typography.paragraph2}>Name your profile:</Text>
+        <Input
+          label=""
+          value={profileName}
+          onChangeText={setProfileName}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
       <Button kind="primary" onPress={onNextTapped} text="Next" />
     </SafeAreaView>
   );
@@ -52,7 +49,6 @@ const styles = StyleSheet.create({
   container: {
     margin: SPACE.BASE,
     flex: 1,
-    justifyContent: "center",
     gap: SPACE.LARGE,
   },
 });

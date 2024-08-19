@@ -78,8 +78,7 @@ export const ProfileSelectChecklist = ({
               {/* https://github.com/TBD54566975/web5-wallet/issues/145 */}
               <Avatar iconName={"person"} />
               <View>
-                <Text style={Typography.heading5}>{profile.displayName}</Text>
-                <Text>{profile.name}</Text>
+                <Text style={Typography.heading5}>{profile.name}</Text>
               </View>
               <Checkbox checked={profile.checked} style={styles.checkbox} />
             </View>
