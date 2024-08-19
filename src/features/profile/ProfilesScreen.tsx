@@ -37,7 +37,7 @@ export const ProfilesScreen = ({ navigation }: Props) => {
                 key={profile.did}
                 iconName="hash"
                 heading={profile.displayName}
-                subtitle={profile.displayName}
+                subtitle={profile.name}
                 body={formatDID(profile.did)}
                 onPress={() => navigateToProfile(profile)}
               />

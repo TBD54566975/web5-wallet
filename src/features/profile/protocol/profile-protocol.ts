@@ -1,4 +1,5 @@
 export type ProfileProtocol = {
+  name: string;
   displayName: string;
   did: string;
 };

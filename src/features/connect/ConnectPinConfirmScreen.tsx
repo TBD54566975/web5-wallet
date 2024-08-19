@@ -3,21 +3,23 @@ import { SafeAreaView, View, StyleSheet, ScrollView, Text } from "react-native";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
 import { Button } from "../../components/Button";
+import type { AppNavigatorProps } from "../../types/navigation";
 
-export const ConnectPinConfirmScreen = ({ navigation }: any) => {
+type Props = AppNavigatorProps<"ConnectPinConfirmScreen">;
+export const ConnectPinConfirmScreen = ({ navigation, route }: Props) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <ScrollView contentContainerStyle={styles.scrollview}>
         <View style={styles.container}>
           <Text style={Typography.heading3}>
-            Almost done! Go back to Dwitter and enter this pin:
+            Almost done! Go back to Fllw and enter this pin:
           </Text>
-          <Text style={styles.pin}>0103</Text>
+          <Text style={styles.pin}>{route.params.pin}</Text>
           <View style={styles.footer}>
             <Button
               kind="primary"
               onPress={() => {
-                navigation.popToTop();
+                navigation.replace("Tabs", { screen: "DiscoverScreen" });
               }}
               text="Close"
             />
