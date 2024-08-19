@@ -56,11 +56,7 @@ export const AppNavigator = () => {
       <Stack.Screen
         name="CreateProfilesScreen"
         component={CreateProfilesScreen}
-        options={{
-          title: "Create profile",
-          headerShown: true,
-          headerLargeTitle: true,
-        }}
+        options={createProfilesScreenOptions}
       />
       <Stack.Screen
         name="CreatePassphraseScreen"
@@ -137,6 +133,12 @@ export const AppNavigator = () => {
       </Stack.Group>
     </Stack.Navigator>
   );
+};
+
+const createProfilesScreenOptions: NativeStackNavigationOptions = {
+  title: "Create profile",
+  headerShown: true,
+  headerLargeTitle: true,
 };
 
 const fadeFromBottom: NativeStackNavigationOptions = {
