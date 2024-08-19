@@ -16,7 +16,6 @@ export const ReviewConnectionScreen = () => {
     },
     profile: {
       name: "Social profile",
-      displayName: "Alex Aardvark",
       icon: "hash" as const,
       id: "did:ion:123456789012345678901234567890",
     },
@@ -29,7 +28,6 @@ export const ReviewConnectionScreen = () => {
           <View style={styles.row}>
             <Item
               heading={profile.name}
-              subtitle={profile.displayName}
               body={formatDID(profile.id)}
               iconName={profile.icon}
               badgeName={"feed-person"}

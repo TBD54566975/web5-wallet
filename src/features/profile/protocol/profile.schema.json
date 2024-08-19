@@ -5,7 +5,6 @@
   "type": "object",
   "properties": {
     "protocol": { "type": "string" },
-    "displayName": { "type": "string" },
     "published": { "type": "boolean" },
     "types": {
       "type": "object",

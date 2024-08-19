@@ -23,7 +23,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const [checkList, setCheckList] = useState<CheckList>([]);
 
   // passed by the QR code
-  const { request_uri, code_challenge } = route.params;
+  const { request_uri, encryption_key } = route.params;
 
   // TODO: these queries need more abstraction
   const profileQueries = useProfilesQuery();
@@ -33,17 +33,15 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
     navigation.replace("Tabs", { screen: "DiscoverScreen" });
   };
 
-  const onPressSubmit = async () => {
-    if (decryptedConnectionRequest) {
-      const selectedDids = checkList
-        .filter((box) => box.checked)
-        .map((did) => did.did);
+  const selectedDid = checkList.find((box) => box.checked);
 
+  const onPressSubmit = async () => {
+    if (decryptedConnectionRequest && selectedDid) {
       const dwn = IdentityAgentManager.getAgent().dwn;
 
       const pin = CryptoUtils.randomPin({ length: 4 });
       await Oidc.submitAuthResponse(
-        selectedDids,
+        selectedDid.did,
         decryptedConnectionRequest,
         pin,
         dwn
@@ -61,7 +59,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const connect = async () => {
     const decryptedConnectionRequest = await Oidc.getAuthRequest(
       request_uri,
-      code_challenge
+      encryption_key
     );
     setDecryptedConnectionRequest(decryptedConnectionRequest);
   };
@@ -87,6 +85,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
               <ProfileSelectChecklist
                 checkList={checkList}
                 setCheckList={setCheckList}
+                exclusive={true}
               />
             </View>
             <View style={styles.column}>

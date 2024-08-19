@@ -11,9 +11,14 @@ import { Loader } from "../../../components/Loader";
 type Props = {
   checkList: CheckList;
   setCheckList: Dispatch<SetStateAction<CheckList>>;
+  exclusive?: boolean;
 };
 export type CheckList = (Profile & { checked: boolean })[];
-export const ProfileSelectChecklist = ({ checkList, setCheckList }: Props) => {
+export const ProfileSelectChecklist = ({
+  checkList,
+  setCheckList,
+  exclusive = false,
+}: Props) => {
   const profileQueries = useProfilesQuery();
   const isLoading = profileQueries.some((result) => result.isLoading);
 
@@ -52,7 +57,16 @@ export const ProfileSelectChecklist = ({ checkList, setCheckList }: Props) => {
             key={index}
             onPress={() => {
               setCheckList((current) => {
-                current[index].checked = !current[index].checked;
+                const isChecked = current[index].checked;
+
+                // set all to unchecked first
+                if (exclusive) {
+                  for (const item of current) {
+                    item.checked = false;
+                  }
+                }
+
+                current[index].checked = !isChecked;
 
                 // immutably set the current state
                 return [...current];
@@ -64,8 +78,7 @@ export const ProfileSelectChecklist = ({ checkList, setCheckList }: Props) => {
               {/* https://github.com/TBD54566975/web5-wallet/issues/145 */}
               <Avatar iconName={"person"} />
               <View>
-                <Text style={Typography.heading5}>{profile.displayName}</Text>
-                <Text>{profile.name}</Text>
+                <Text style={Typography.heading5}>{profile.name}</Text>
               </View>
               <Checkbox checked={profile.checked} style={styles.checkbox} />
             </View>

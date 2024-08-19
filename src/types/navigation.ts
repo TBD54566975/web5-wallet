@@ -9,9 +9,9 @@ import type { MockCredential, Profile } from "./models";
 
 export type AppNavigatorInterface = {
   WelcomeScreen: undefined;
-  CreatePassphraseScreen: undefined;
   CreateProfilesScreen: undefined;
-  CreateWalletScreen: { passphrase: string };
+  CreatePassphraseScreen: { profileName: string };
+  CreateWalletScreen: { profileName: string; passphrase: string };
   EnterPassphraseScreen: undefined;
   Tabs: NavigatorScreenParams<TabNavigatorInterface>;
   ProfileDetailScreen: { profile: Profile };
@@ -31,7 +31,7 @@ export type AppNavigatorInterface = {
   ReviewConnectionScreen: undefined;
   ConnectProfileSelectScreen: {
     request_uri: string;
-    code_challenge: string;
+    encryption_key: string;
   };
   ConnectQRScanScreen: undefined;
   ConnectPinConfirmScreen: { pin: string };

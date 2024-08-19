@@ -56,7 +56,7 @@ export const AppNavigator = () => {
       <Stack.Screen
         name="CreateProfilesScreen"
         component={CreateProfilesScreen}
-        options={defaultAnimation}
+        options={createProfilesScreenOptions}
       />
       <Stack.Screen
         name="CreatePassphraseScreen"
@@ -135,8 +135,10 @@ export const AppNavigator = () => {
   );
 };
 
-const defaultAnimation: NativeStackNavigationOptions = {
-  animation: "slide_from_right",
+const createProfilesScreenOptions: NativeStackNavigationOptions = {
+  title: "Create profile",
+  headerShown: true,
+  headerLargeTitle: true,
 };
 
 const fadeFromBottom: NativeStackNavigationOptions = {

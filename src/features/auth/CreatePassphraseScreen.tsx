@@ -12,13 +12,16 @@ const MIN_PASSPHRASE_LENGTH = 3;
 
 type Props = AppNavigatorProps<"CreatePassphraseScreen">;
 
-export const CreatePassphraseScreen = ({ navigation }: Props) => {
+export const CreatePassphraseScreen = ({ navigation, route }: Props) => {
   const [passphrase, setPassphrase] = useState<string>("");
 
   const isPassphraseValid = passphrase?.length >= MIN_PASSPHRASE_LENGTH;
 
   const nextTapped = () => {
-    navigation.navigate("CreateWalletScreen", { passphrase });
+    navigation.navigate("CreateWalletScreen", {
+      passphrase,
+      profileName: route.params.profileName,
+    });
   };
 
   return (
@@ -36,7 +39,6 @@ export const CreatePassphraseScreen = ({ navigation }: Props) => {
           </Text>
           <Input
             label=""
-            nativeID="passphrase"
             placeholder={"Passphrase"}
             value={passphrase}
             onChangeText={setPassphrase}
