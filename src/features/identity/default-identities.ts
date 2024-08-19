@@ -9,12 +9,12 @@ type NewIdentityProps = {
 export const defaultIdentities: NewIdentityProps[] = [
   {
     name: "Social",
-    displayName: "Alex Aardvark",
+    displayName: "Timothy Shamilov",
     icon: "hash",
   },
   {
     name: "Professional",
-    displayName: "Bo Jangles",
+    displayName: "Timothy Shamilov",
     icon: "briefcase",
   },
 ];
