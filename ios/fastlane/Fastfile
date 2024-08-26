@@ -15,6 +15,7 @@ platform :ios do
     configure_build
     build_and_upload
     slack_build_info
+    # update_versions
   end
 
   lane :configure_build do
@@ -29,9 +30,6 @@ platform :ios do
       readonly: true,
       git_url: ENV['MATCH_GIT_URL']
     )
-
-    increment_version_number(version_number: short_version)
-    increment_build_number(build_number: build_number)
 
     update_info_plist(
       plist_path: 'web5wallet/Info.plist',
@@ -96,8 +94,19 @@ platform :ios do
     slack(
       slack_url: ENV['TBDWALLET_SLACK_URL'],
       message: "Published iOS release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{build_number}) to Testflight",
-      channel: '#tbd-wallet-engineering',
+      channel: '#tbd-wallet-engineering-discuss',
       default_payloads: []
     )
   end
+
+  # lane :update_versions do
+  #   increment_version_number(
+  #     version_number: short_version,
+  #     xcodeproj: '..'
+  #   )
+  #   increment_build_number(
+  #     build_number: build_number,
+  #     xcodeproj: '..'
+  #   )
+  # end
 end
