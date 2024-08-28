@@ -19,8 +19,6 @@ platform :android do
 
   desc 'Update gradle properties and build binary'
   lane :build_binary do |_options|
-    android_set_version_code(version_code: build_number)
-
     keystore_absolute_path = File.expand_path(ENV['TBDWALLET_ANDROID_KEYSTORE_FILENAME'], __dir__)
 
     gradle_properties = {
@@ -33,6 +31,9 @@ platform :android do
       'android.injected.signing.key.alias' => ENV['TBDWALLET_ANDROID_KEY_ALIAS'],
       'android.injected.signing.key.password' => ENV['TBDWALLET_ANDROID_KEY_PASSWORD']
     }
+
+    android_set_version_code(version_code: build_number)
+    android_set_version_name(version_name: short_version)
 
     gradle(
       task: 'bundle',
@@ -55,13 +56,15 @@ platform :android do
       package_name: ENV['TBDWALLET_ANDROID_APPLICATION_ID'],
       json_key_data: ENV['TBDWALLET_ANDROID_GPLAY_SERVICE_ACCOUNT']
     )
+    sh('git add app/build.gradle')
+    sh("git commit -m '[skip ci] android version bump'")
   end
 
   lane :slack_build_info do
     slack(
       slack_url: ENV['TBDWALLET_SLACK_URL'],
-      message: "Published Android internal testing release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{android_get_version_code})",
-      channel: '#tbd-wallet-engineering',
+      message: "Published Android internal testing release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{android_get_version_code}) to Google Play Store",
+      channel: '#tbd-wallet-engineering-discuss',
       default_payloads: []
     )
   end
