@@ -11,7 +11,7 @@ import {
   type CheckList,
   ProfileSelectChecklist,
 } from "../profile/components/ProfileSelectChecklist";
-import { AgentPermissionsApi, type Web5ConnectAuthRequest } from "@web5/agent";
+import { type Web5ConnectAuthRequest } from "@web5/agent";
 import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 import { Oidc } from "@web5/agent";
 import { CryptoUtils } from "@web5/crypto";
@@ -38,16 +38,13 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   const onPressSubmit = async () => {
     if (decryptedConnectionRequest && selectedDid) {
       const agent = IdentityAgentManager.getAgent();
-      const dwn = agent.dwn;
-      const permissionApi = new AgentPermissionsApi({ agent });
 
       const pin = CryptoUtils.randomPin({ length: 4 });
       await Oidc.submitAuthResponse(
         selectedDid.did,
         decryptedConnectionRequest,
         pin,
-        dwn,
-        permissionApi
+        agent
       );
 
       navigation.navigate("ConnectPinConfirmScreen", { pin });
