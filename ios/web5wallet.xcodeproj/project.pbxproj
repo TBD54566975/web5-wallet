@@ -413,7 +413,7 @@
 				CODE_SIGN_ENTITLEMENTS = web5wallet/web5wallet.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = EYF346PHUG;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -454,7 +454,7 @@
 				CODE_SIGN_ENTITLEMENTS = web5wallet/web5wallet.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = EYF346PHUG;
 				INFOPLIST_FILE = web5wallet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Web5 Wallet";
