@@ -1,7 +1,7 @@
 {
   "name": "web5wallet",
-  "version": "0.0.1",
-  "buildNumber": "16",
+  "version": "0.0.2",
+  "buildNumber": "20",
   "main": "index.js",
   "packageManager": "yarn@4.2.2+sha256.1aa43a5304405be7a7cb9cb5de7b97de9c4e8ddd3273e4dad00d6ae3eb39f0ef",
   "scripts": {
