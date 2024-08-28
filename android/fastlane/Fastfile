@@ -56,14 +56,14 @@ platform :android do
       package_name: ENV['TBDWALLET_ANDROID_APPLICATION_ID'],
       json_key_data: ENV['TBDWALLET_ANDROID_GPLAY_SERVICE_ACCOUNT']
     )
-    sh('git add app/build.gradle')
+    sh('git add ../app/build.gradle')
     sh("git commit -m '[skip ci] android version bump'")
   end
 
   lane :slack_build_info do
     slack(
       slack_url: ENV['TBDWALLET_SLACK_URL'],
-      message: "Published Android internal testing release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{android_get_version_code}) to Google Play Store",
+      message: "Published Android release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{android_get_version_code}) to Google Play Store",
       channel: '#tbd-wallet-engineering-discuss',
       default_payloads: []
     )
