@@ -10,9 +10,12 @@ type Props = AppNavigatorProps<"CreateProfilesScreen">;
 
 export const CreateProfilesScreen = ({ navigation }: Props) => {
   const [profileName, setProfileName] = useState<string>("");
+  const [dwnEndpoint, setDwnEndpoint] = useState<string>(
+    "http://dwn.tbddev.org/beta"
+  );
 
   const onNextTapped = () => {
-    navigation.navigate("CreatePassphraseScreen", { profileName });
+    navigation.navigate("CreatePassphraseScreen", { profileName, dwnEndpoint });
   };
 
   return (
@@ -36,6 +39,16 @@ export const CreateProfilesScreen = ({ navigation }: Props) => {
           label=""
           value={profileName}
           onChangeText={setProfileName}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
+      <View>
+        <Text style={Typography.paragraph2}>Dwn Endpoint:</Text>
+        <Input
+          label="Dwn Endpoint"
+          value={dwnEndpoint}
+          onChangeText={setDwnEndpoint}
           autoCapitalize="none"
           autoCorrect={false}
         />

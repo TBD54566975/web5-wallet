@@ -15,8 +15,8 @@ export const useAddIdentityMutation = () => {
   const { goBack } = useNavigation();
 
   return useMutation({
-    mutationFn: async ({ profileName }: { profileName: string }) => {
-      await IdentityAgentManager.createIdentity(profileName);
+    mutationFn: async ({ profileName, dwnEndpoint }: { profileName: string, dwnEndpoint: string }) => {
+      await IdentityAgentManager.createIdentity(profileName, dwnEndpoint);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["identityList"] });

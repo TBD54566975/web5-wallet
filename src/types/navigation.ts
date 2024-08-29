@@ -10,8 +10,12 @@ import type { MockCredential, Profile } from "./models";
 export type AppNavigatorInterface = {
   WelcomeScreen: undefined;
   CreateProfilesScreen: undefined;
-  CreatePassphraseScreen: { profileName: string };
-  CreateWalletScreen: { profileName: string; passphrase: string };
+  CreatePassphraseScreen: { profileName: string; dwnEndpoint: string };
+  CreateWalletScreen: {
+    profileName: string;
+    dwnEndpoint: string;
+    passphrase: string;
+  };
   EnterPassphraseScreen: undefined;
   Tabs: NavigatorScreenParams<TabNavigatorInterface>;
   ProfileDetailScreen: { profile: Profile };

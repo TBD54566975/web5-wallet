@@ -9,10 +9,12 @@ import { useAddIdentityMutation } from "../identity/hooks";
 
 export const AddProfileScreen = () => {
   const [profileName, setProfileName] = useState("");
+  const [dwnEndpoint, setDwnEndpoint] = useState("https://dwn.tbddev.org/beta");
+
   const addIdentityMutation = useAddIdentityMutation();
 
   const addProfile = () => {
-    addIdentityMutation.mutate({ profileName });
+    addIdentityMutation.mutate({ profileName, dwnEndpoint });
   };
 
   return (
@@ -24,6 +26,12 @@ export const AddProfileScreen = () => {
           onChangeText={setProfileName}
           value={profileName}
           placeholder={"My new profile"}
+        />
+        <Input
+          label="Dwn Endpoint"
+          onChangeText={setDwnEndpoint}
+          value={dwnEndpoint}
+          placeholder={"https://dwn.tbddev.org/beta"}
         />
         {addIdentityMutation.isPending ? (
           <ActivityIndicator />

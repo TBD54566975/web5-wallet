@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { SafeAreaView, Text, View, StyleSheet, ScrollView } from "react-native";
 import { Loader } from "../../components/Loader";
 import { useMount } from "../../hooks/useMount";
@@ -11,7 +11,7 @@ import {
   type CheckList,
   ProfileSelectChecklist,
 } from "../profile/components/ProfileSelectChecklist";
-import { type Web5ConnectAuthRequest } from "@web5/agent";
+import type { Web5ConnectAuthRequest } from "@web5/agent";
 import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 import { Oidc } from "@web5/agent";
 import { CryptoUtils } from "@web5/crypto";
@@ -34,6 +34,13 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
   };
 
   const selectedDid = checkList.find((box) => box.checked);
+
+  const permissionRequests = useMemo(() => {
+    if (decryptedConnectionRequest) {
+      return decryptedConnectionRequest.permissionRequests;
+    }
+    return [];
+  }, [decryptedConnectionRequest]);
 
   const onPressSubmit = async () => {
     if (decryptedConnectionRequest && selectedDid) {
@@ -93,17 +100,20 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
               <Text style={Typography.paragraph2}>
                 Make sure you trust Fllw. Fllw will be able to:
               </Text>
-              <View>
-                <Text style={Typography.heading6}>
-                  • Read to the Fllw protocol
-                </Text>
-                <Text style={Typography.heading6}>
-                  • Write to the Fllw protocol
-                </Text>
-                <Text style={Typography.heading6}>
-                  • Delete to the Fllw protocol
-                </Text>
-              </View>
+              {permissionRequests.map((request) => (
+                <View key={request.protocolDefinition.protocol}>
+                  <Text style={Typography.heading6}>
+                    • {request.protocolDefinition.protocol}
+                  </Text>
+                  <Text style={Typography.heading6}>
+                    {request.permissionScopes
+                      .map((scope) => {
+                        return `${scope.method} ${scope.interface}`;
+                      })
+                      .join(", ")}
+                  </Text>
+                </View>
+              ))}
             </View>
           </View>
           <View style={styles.footer}>
