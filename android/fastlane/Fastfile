@@ -64,7 +64,7 @@ platform :android do
     slack(
       slack_url: ENV['TBDWALLET_SLACK_URL'],
       message: "Published Android release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{android_get_version_code}) to Google Play Store",
-      channel: '#tbd-wallet-engineering-discuss',
+      channel: '#tbd-wallet-eng',
       default_payloads: []
     )
   end

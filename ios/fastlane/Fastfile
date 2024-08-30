@@ -111,7 +111,7 @@ platform :ios do
     slack(
       slack_url: ENV['TBDWALLET_SLACK_URL'],
       message: "Published iOS release #{ENV['TBDWALLET_BUILD_TYPE']} #{short_version} (#{build_number}) to Testflight",
-      channel: '#tbd-wallet-engineering-discuss',
+      channel: '#tbd-wallet-eng',
       default_payloads: []
     )
   end
