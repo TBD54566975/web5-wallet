@@ -90,7 +90,17 @@
   },
   "expo": {
     "install": {
-      "exclude": ["expo", "expo-camera", "react-native-gesture-handler", "react-native-reanimated", "react-native-safe-area-context", "react-native-screens", "react-native-webview", "@types/react", "typescript"]
+      "exclude": [
+        "expo",
+        "expo-camera",
+        "react-native-gesture-handler",
+        "react-native-reanimated",
+        "react-native-safe-area-context",
+        "react-native-screens",
+        "react-native-webview",
+        "@types/react",
+        "typescript"
+      ]
     }
   },
   "private": true
