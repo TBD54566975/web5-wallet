@@ -10,11 +10,11 @@ import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 const keychainItemKey = "userPassphrase";
 const keychainService = "website.tbd.wallet.web5.biometriclogin";
 
-const isSupported = async (): Promise<boolean> => {
+const isSupported = async () => {
   return await isEnrolledAsync();
 };
 
-const login = async (): Promise<boolean> => {
+const login = async () => {
   if (!(await isSupported())) {
     return false;
   }

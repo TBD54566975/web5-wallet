@@ -33,7 +33,7 @@ export const useProfilesQuery = () => {
   });
 };
 
-const fetchProfile = async (did: string): Promise<Profile> => {
+const fetchProfile = async (did: string) => {
   const web5 = IdentityAgentManager.web5(did);
   const queryResult = await web5.dwn.records.query({
     message: {

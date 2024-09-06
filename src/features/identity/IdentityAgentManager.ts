@@ -191,7 +191,7 @@ const listIdentities = () => {
   return agent.identity.list();
 };
 
-const web5 = (didUri: string): Web5 => {
+const web5 = (didUri: string) => {
   return new Web5({ agent, connectedDid: didUri });
 };
 
