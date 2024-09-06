@@ -4,31 +4,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Input } from "../../components/Input";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
-import { IdentityAgentManager } from "../identity/IdentityAgentManager";
 import { Button } from "../../components/Button";
-import { queryClient } from "../app/queryclient";
-import type { AppNavigatorProps } from "../../types/navigation";
+import { useAddIdentityMutation } from "../identity/hooks";
 
-type Props = AppNavigatorProps<"AddProfileScreen">;
-export const AddProfileScreen = ({ navigation }: Props) => {
+export const AddProfileScreen = () => {
   const [profileName, setProfileName] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
+  const addIdentityMutation = useAddIdentityMutation();
 
-  const addProfile = async () => {
-    if (isProcessing) {
-      return;
-    }
-
-    setIsProcessing(true);
-    try {
-      await IdentityAgentManager.createIdentity(profileName);
-      await queryClient.invalidateQueries({ queryKey: ["identityList"] });
-      navigation.goBack();
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setIsProcessing(false);
-    }
+  const addProfile = () => {
+    addIdentityMutation.mutate({ profileName });
   };
 
   return (
@@ -41,7 +25,7 @@ export const AddProfileScreen = ({ navigation }: Props) => {
           value={profileName}
           placeholder={"My new profile"}
         />
-        {isProcessing ? (
+        {addIdentityMutation.isPending ? (
           <ActivityIndicator />
         ) : (
           <Button kind="primary" onPress={addProfile} text="Save" />
