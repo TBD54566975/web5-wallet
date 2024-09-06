@@ -7,6 +7,7 @@ Built with React Native and Expo
 Note that most things are not installed using Homewbrew. Homebrew is nice for personal projects but doesn't scale well for teams.
 
 Installation prerequisites:
+
 - `nvm` (Node Version Manager) - install NOT using `homebrew`:
 
   `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash`
@@ -37,12 +38,15 @@ Installation prerequisites:
 
   `brew install watchman`
 
+- This project uses the web5-js repo symlinked locally. You must clone the web5-js repo into a sibling folder next to this repo. Afterwards, install and build the web5-js repo.
+
 Installation steps:
+
 1. Run `corepack enable` to turn on `corepack` for this node version if you haven't already turned it on.
 
-1. Run `corepack install` to install `yarn` pkg manager
+2. Run `corepack install` to install `yarn` pkg manager
 
-1. Run `yarn` to install `node_modules`
+3. Run `yarn` to install `node_modules`
 
    Note, if you encounter the following error:
 
@@ -52,15 +56,15 @@ Installation steps:
 
    Check to see if you are running a VPN that blocks this URL, if so, disable the VPN and try again.
 
-1. From root repo directory, run:
+4. From root repo directory, run:
 
    `cd ios` then `bundle install`
 
-1. From root repo directory, run:
+5. From root repo directory, run:
 
    `cd android` the `bundle install`
 
-1. In the root repo directory run `yarn pods` to install CocoaPods
+6. In the root repo directory run `yarn pods` to install CocoaPods
 
    Note: if you encounter the error below:
 
@@ -72,9 +76,9 @@ Installation steps:
 
    `pod update hermes-engine --no-repo-update`
 
-1. Install XCode with the latest SDK if necessary
+7. Install XCode with the latest SDK if necessary
 
-1. Install Android Studio with the latest SDK if necessary
+8. Install Android Studio with the latest SDK if necessary
 
 The project should now be ready to run.
 
