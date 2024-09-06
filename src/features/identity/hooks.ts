@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryClient } from "../app/queryclient";
 import { IdentityAgentManager } from "./IdentityAgentManager";
 
 export const useIdentityListQuery = () => {
@@ -8,8 +7,4 @@ export const useIdentityListQuery = () => {
     queryFn: IdentityAgentManager.listIdentities,
     staleTime: 3600000,
   });
-};
-
-export const invalidateIdentityList = async () => {
-  await queryClient.invalidateQueries({ queryKey: ["identityList"] });
 };

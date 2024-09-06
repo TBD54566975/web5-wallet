@@ -5,8 +5,8 @@ import { Input } from "../../components/Input";
 import { SPACE } from "../../theme/layouts";
 import { Typography } from "../../theme/typography";
 import { IdentityAgentManager } from "../identity/IdentityAgentManager";
-import { invalidateIdentityList } from "../identity/hooks";
 import { Button } from "../../components/Button";
+import { queryClient } from "../app/queryclient";
 import type { AppNavigatorProps } from "../../types/navigation";
 
 type Props = AppNavigatorProps<"AddProfileScreen">;
@@ -22,7 +22,7 @@ export const AddProfileScreen = ({ navigation }: Props) => {
     setIsProcessing(true);
     try {
       await IdentityAgentManager.createIdentity(profileName);
-      await invalidateIdentityList();
+      await queryClient.invalidateQueries({ queryKey: ["identityList"] });
       navigation.goBack();
     } catch (error) {
       console.error("Error:", error);
