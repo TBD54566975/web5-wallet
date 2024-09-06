@@ -76,21 +76,13 @@ Installation steps:
 
 1. Install Android Studio with the latest SDK if necessary
 
-The project should now be ready to run. 
+The project should now be ready to run.
+
+First start the Metro Bundler:
+
+`yarn start`
 
 To Run iOS: Inside the `ios` folder, open the `.xcworkspace` and run the build (click the "play" button).
-
-- Note: if you see the following error in a red box when emulator starts:
-
-  ```
-  No bundle URL present.
-
-  Make sure you're running a packager server or have included a .jsbundle file in your application bundle.
-  ```
-
-  It means the Metro Bundler (JavaScript server that comes with React Native) is not running, you will need to start it manually then reload the app in the emulator:
-
-  `npx react-native start`
 
 To Run Android: Open the `android` folder in Android Studio and run the build.
 
