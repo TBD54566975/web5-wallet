@@ -9,7 +9,6 @@
     "android:release": "cd android && ./gradlew :app:bundleRelease && open app/build/outputs/bundle/release/;cd ..",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "pods": "cd ios; bundle exec pod install;cd ..",
     "clean": "rm -rf node_modules/; yarn cache clean; yarn install; watchman watch-del-all; rm -rf $TMPDIR/react-*; rm -rf $TMPDIR/react-native-packager-cache-*; rm -rf $TMPDIR/metro-cache; rm -rf $TMPDIR/haste-map-react-native-packager-*",
