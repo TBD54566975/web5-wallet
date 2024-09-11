@@ -20,6 +20,7 @@ export const ProfilesScreen = ({ navigation }: Props) => {
   };
 
   const navigateToAddProfile = () => {
+    console.log("Navigating to AddProfileScreen...");
     navigation.navigate("AddProfileScreen");
   };
 

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { SafeAreaView, Text, View, StyleSheet, ScrollView } from "react-native";
 import { Loader } from "../../components/Loader";
 import { useMount } from "../../hooks/useMount";
@@ -35,13 +35,6 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
 
   const selectedDid = checkList.find((box) => box.checked);
 
-  const permissionRequests = useMemo(() => {
-    if (decryptedConnectionRequest) {
-      return decryptedConnectionRequest.permissionRequests;
-    }
-    return [];
-  }, [decryptedConnectionRequest]);
-
   const onPressSubmit = async () => {
     if (decryptedConnectionRequest && selectedDid) {
       const agent = IdentityAgentManager.getAgent();
@@ -64,6 +57,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
    * to generate grants for each selected DID.
    */
   const connect = async () => {
+    console.log('Fetching request from Auth Request URI:', request_uri);
     const decryptedConnectionRequest = await Oidc.getAuthRequest(
       request_uri,
       encryption_key
@@ -100,20 +94,23 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
               <Text style={Typography.paragraph2}>
                 Make sure you trust Fllw. Fllw will be able to:
               </Text>
-              {permissionRequests.map((request) => (
-                <View key={request.protocolDefinition.protocol}>
-                  <Text style={Typography.heading6}>
-                    • {request.protocolDefinition.protocol}
-                  </Text>
-                  <Text style={Typography.heading6}>
-                    {request.permissionScopes
-                      .map((scope) => {
-                        return `${scope.method} ${scope.interface}`;
-                      })
-                      .join(", ")}
-                  </Text>
-                </View>
-              ))}
+              {
+                // TODO: better handling for when decryptedConnectionRequest is `undefined` 
+                (decryptedConnectionRequest?.permissionRequests || []).map((request) => (
+                  <View key={request.protocolDefinition.protocol}>
+                    <Text style={Typography.heading6}>
+                      • {request.protocolDefinition.protocol}
+                    </Text>
+                    <Text style={Typography.heading6}>
+                      {request.permissionScopes
+                        .map((scope) => {
+                          return `${scope.method} ${scope.interface}`;
+                        })
+                        .join(", ")}
+                    </Text>
+                  </View>
+                ))
+              }
             </View>
           </View>
           <View style={styles.footer}>
