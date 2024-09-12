@@ -57,7 +57,6 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
    * to generate grants for each selected DID.
    */
   const connect = async () => {
-    console.log('Fetching request from Auth Request URI:', request_uri);
     const decryptedConnectionRequest = await Oidc.getAuthRequest(
       request_uri,
       encryption_key
