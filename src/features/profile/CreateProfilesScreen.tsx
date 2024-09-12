@@ -11,7 +11,7 @@ type Props = AppNavigatorProps<"CreateProfilesScreen">;
 export const CreateProfilesScreen = ({ navigation }: Props) => {
   const [profileName, setProfileName] = useState<string>("");
   const [dwnEndpoint, setDwnEndpoint] = useState<string>(
-    "http://dwn.tbddev.org/beta"
+    "https://dwn.tbddev.org/beta"
   );
 
   const onNextTapped = () => {
