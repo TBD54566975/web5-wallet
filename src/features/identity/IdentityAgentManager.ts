@@ -103,32 +103,15 @@ const isAgentStarted = () => {
 
 const startAgent = async (password: string) => {
   await agent.start({ password });
-  await startSync();
-  isStarted = true;
-};
-
-const startSync = async () => {
-  // Register all DIDs under management, as well as the agent's master DID
-  const managedIdentities = await agent.identity.list();
-  const didsToRegister = [
-    agent.agentDid,
-    ...managedIdentities.map((i) => i.did),
-  ];
-
-  await Promise.all(
-    didsToRegister.map((did) => agent.sync.registerIdentity({ did: did.uri }))
-  );
-
   // TODO: Once selective sync is enabled, only sync for records that the mobile identity agent
   // cares about. We DO NOT want to sync every record the user has in their DWN to their mobile device.
   agent.sync.startSync({ interval: String(120_000) }).catch((error) => {
     console.error(`Sync failed: ${error}`);
   });
+  isStarted = true;
 };
 
 const createIdentity = async (name: string) => {
-  // Generate a new Identity for the end-user.
-
   const identity = await agent.identity.create({
     didMethod: "dht",
     metadata: { name },
