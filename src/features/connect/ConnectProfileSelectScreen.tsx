@@ -95,8 +95,7 @@ export const ConnectProfileSelectScreen = ({ navigation, route }: Props) => {
                 Make sure you trust Fllw. Fllw will be able to:
               </Text>
               {
-                // TODO: better handling for when decryptedConnectionRequest is `undefined` 
-                (decryptedConnectionRequest?.permissionRequests || []).map((request) => (
+                decryptedConnectionRequest?.permissionRequests?.map((request) => (
                   <View key={request.protocolDefinition.protocol}>
                     <Text style={Typography.heading6}>
                       • {request.protocolDefinition.protocol}
