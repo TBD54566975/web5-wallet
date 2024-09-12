@@ -2709,9 +2709,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tbd54566975/dwn-sdk-js@npm:^0.4.5":
-  version: 0.4.5
-  resolution: "@tbd54566975/dwn-sdk-js@npm:0.4.5"
+"@tbd54566975/dwn-sdk-js@npm:^0.4.7":
+  version: 0.4.7
+  resolution: "@tbd54566975/dwn-sdk-js@npm:0.4.7"
   dependencies:
     "@ipld/dag-cbor": "npm:9.0.3"
     "@js-temporal/polyfill": "npm:0.4.4"
@@ -2740,7 +2740,7 @@ __metadata:
     ulidx: "npm:2.1.0"
     uuid: "npm:8.3.2"
     varint: "npm:6.0.0"
-  checksum: 10c0/3f72a95f4571bc9aafa85ccfa2b9139b09a1b65a30e9ec6e3f8ad1bae23bdcbce1424ffa12fcb5869805c4eb453fa04bce09fd58011d74b7d79c88e07e3ba9dd
+  checksum: 10c0/29fd505d7035ae7ceb7a69f05ba16845291317ce658e5eb9fb78c377a40b22099d7aa70b2dd2326aa757c3fcf0eb06f0e973d02ee5eecf2576dc0aba8d9110f6
   languageName: node
   linkType: hard
 
@@ -11876,7 +11876,7 @@ __metadata:
     "@rnx-kit/metro-resolver-symlinks": "npm:^0.1.36"
     "@shamilovtim/react-native-leveldb-async": "npm:^1.0.0"
     "@tanstack/react-query": "npm:^5.51.23"
-    "@tbd54566975/dwn-sdk-js": "npm:^0.4.5"
+    "@tbd54566975/dwn-sdk-js": "npm:^0.4.7"
     "@tbd54566975/web5-react-native-metro-config": "npm:^1.0.3"
     "@tbd54566975/web5-react-native-polyfills": "npm:^2.0.0"
     "@types/react": "npm:^18.2.79"
