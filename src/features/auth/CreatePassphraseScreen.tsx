@@ -21,6 +21,7 @@ export const CreatePassphraseScreen = ({ navigation, route }: Props) => {
     navigation.navigate("CreateWalletScreen", {
       passphrase,
       profileName: route.params.profileName,
+      dwnEndpoint: route.params.dwnEndpoint,
     });
   };
 

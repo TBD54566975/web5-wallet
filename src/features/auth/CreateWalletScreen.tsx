@@ -21,7 +21,10 @@ export const CreateWalletScreen = ({ navigation, route }: Props) => {
     const createWallet = async () => {
       try {
         await IdentityAgentManager.initialize(route.params.passphrase);
-        await IdentityAgentManager.createIdentity(route.params.profileName);
+        await IdentityAgentManager.createIdentity(
+          route.params.profileName,
+          route.params.dwnEndpoint
+        );
         // User just created a brand new wallet. Clear any stored biometric login
         // data that may be stored locally on device.
         await BiometricLogin.clearStoredPassphrase();

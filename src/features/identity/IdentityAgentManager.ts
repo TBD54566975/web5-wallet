@@ -111,7 +111,9 @@ const startAgent = async (password: string) => {
   isStarted = true;
 };
 
-const createIdentity = async (name: string) => {
+const createIdentity = async (name: string, dwnEndpoint: string) => {
+  // Generate a new Identity for the end-user.
+
   const identity = await agent.identity.create({
     didMethod: "dht",
     metadata: { name },
@@ -120,7 +122,7 @@ const createIdentity = async (name: string) => {
         {
           id: "dwn",
           type: "DecentralizedWebNode",
-          serviceEndpoint: ["https://dwn.tbddev.org/beta"],
+          serviceEndpoint: [dwnEndpoint],
           enc: "#enc",
           sig: "#sig",
         },
