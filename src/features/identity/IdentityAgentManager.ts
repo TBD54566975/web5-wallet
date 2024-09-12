@@ -6,6 +6,7 @@ import {
   SyncEngineLevel,
   AgentDwnApi,
   DwnDidStore,
+  AgentDidResolverCache,
 } from "@web5/agent";
 import {
   MessageStoreLevel,
@@ -45,7 +46,7 @@ const initAgent = async () => {
   const didApi = new AgentDidApi({
     didMethods: [DidDht, DidJwk],
     // resolverCache: new DidResolverCacheMemory(),
-    resolverCache: new DidResolverCacheLevel({
+    resolverCache: new AgentDidResolverCache({
       db: new ReactNativeLevelDBAsync("DWN_RESOLVERCACHE"),
     }),
     store: new DwnDidStore(),
