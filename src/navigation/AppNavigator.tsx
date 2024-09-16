@@ -29,9 +29,8 @@ import { OIDCScreen } from "../features/idc/oidc/OIDCScreen";
 const Stack = createNativeStackNavigator<AppNavigatorInterface>();
 
 export const AppNavigator = () => {
-  const [initialRoute, setInitialRoute] = useState<
-    keyof AppNavigatorInterface | undefined
-  >(undefined);
+  const [initialRoute, setInitialRoute] =
+    useState<keyof AppNavigatorInterface>();
 
   useEffect(() => {
     const computeInitialRoute = async () => {
