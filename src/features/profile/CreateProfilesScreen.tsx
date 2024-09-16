@@ -11,7 +11,7 @@ type Props = AppNavigatorProps<"CreateProfilesScreen">;
 export const CreateProfilesScreen = ({ navigation }: Props) => {
   const [profileName, setProfileName] = useState<string>("");
   const [dwnEndpoint, setDwnEndpoint] = useState<string>(
-    "https://dwn.tbddev.org/beta"
+    "https://dwn.tbddev.org/latest"
   );
 
   const onNextTapped = () => {
@@ -46,7 +46,7 @@ export const CreateProfilesScreen = ({ navigation }: Props) => {
       <View>
         <Text style={Typography.paragraph2}>Dwn Endpoint:</Text>
         <Input
-          label="Dwn Endpoint"
+          label=""
           value={dwnEndpoint}
           onChangeText={setDwnEndpoint}
           autoCapitalize="none"
