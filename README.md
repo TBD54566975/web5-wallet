@@ -18,11 +18,11 @@ Installation prerequisites:
 
   `\curl -sSL https://get.rvm.io | bash -s stable`
 
-- `node` v20.9.0 and select it - install using `nvm`:
+- `node` v20.15.1 and select it - install using `nvm`:
 
-  `nvm install 20.9.0`
+  `nvm install 20.15.1`
 
-  `nvm use 20.9.0` - installing should already switch to the desired version, but run this if `node -v` shows a wrong version
+  `nvm use 20.15.1` - installing should already switch to the desired version, but run this if `node -v` shows a wrong version
 
 - `ruby` v3.2.2 and select it - install using `rvm`:
 
@@ -117,11 +117,11 @@ Then you can launch the debugger by triggering the Dev Menu in the app (e.g. by 
 
 - `which rvm` should be `/Users/{USER}/.rvm/bin/rvm`
 
-- `which node` should be `/Users/{USER}/.nvm/versions/node/v20.9.0/bin/node`
+- `which node` should be `/Users/{USER}/.nvm/versions/node/v20.15.1/bin/node`
 
-- `which npm` should be `/Users/{USER}/.nvm/versions/node/v20.9.0/bin/npm`
+- `which npm` should be `/Users/{USER}/.nvm/versions/node/v20.15.1/bin/npm`
 
-- `nvm list` should include `->     v20.9.0`
+- `nvm list` should include `->     v20.15.1`
 
 - `rvm list` should include `=* ruby-3.2.2 [ arm64 ]`
 
