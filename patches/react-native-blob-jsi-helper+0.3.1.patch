@@ -14,3 +14,18 @@ index 1f05fe2..faf7534 100644
  
          jboolean isCopy = true;
          jbyte* bytes = env->GetByteArrayElements(boxedBytes, &isCopy);
+diff --git a/node_modules/react-native-blob-jsi-helper/react-native-blob-jsi-helper.podspec b/node_modules/react-native-blob-jsi-helper/react-native-blob-jsi-helper.podspec
+index 53ec31f..de11092 100644
+--- a/node_modules/react-native-blob-jsi-helper/react-native-blob-jsi-helper.podspec
++++ b/node_modules/react-native-blob-jsi-helper/react-native-blob-jsi-helper.podspec
+@@ -13,6 +13,10 @@ Pod::Spec.new do |s|
+   s.platforms    = { :ios => "10.0" }
+   s.source       = { :git => "https://github.com/mrousavy/react-native-blob-jsi-helper.git", :tag => "#{s.version}" }
+ 
++  s.pod_target_xcconfig = {
++    "CLANG_CXX_LANGUAGE_STANDARD" => "c++17",
++  }
++
+   s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,cpp}"
+ 
+   s.dependency "React-Core"
