@@ -19,7 +19,7 @@ import {
   profileProtocol,
   type ProfileProtocol,
 } from "../profile/protocol/profile-protocol";
-import { DidDht, DidJwk, DidResolverCacheLevel } from "@web5/dids";
+import { DidDht, DidJwk } from "@web5/dids";
 import { ReactNativeLevelDBAsync } from "@shamilovtim/react-native-leveldb-async";
 import { LevelStore } from "@web5/common";
 
@@ -142,8 +142,6 @@ const createIdentity = async (name: string, dwnEndpoint: string) => {
       ],
     },
   });
-
-  await agent.identity.manage({ portableIdentity: await identity.export() });
 
   // Install the profile protocol in the DWN, for the newly created identity tenant
   const web5 = new Web5({ agent, connectedDid: identity.did.uri });
